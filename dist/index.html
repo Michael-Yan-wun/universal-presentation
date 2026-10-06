@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="慧穩科技 10 週年。從邊緣運算到 AI Agent，探索每一塊智慧積木，見證全新 WinEdge Ultra。">
+  <title>From Edge to Agent — 慧穩科技 10 週年</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23080b12'/%3E%3Cpath d='M12 19l9 30h8l4-17 4 17h8l9-30h-9l-4 19-4-19h-8l-4 19-4-19z' fill='%23ff8148'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css?v=learning-life-1">
+</head>
+<body>
+  <div id="universe" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true"></div>
+  <header class="header">
+    <button class="brand" data-chapter="0" aria-label="慧穩科技，回到開場"><img class="brand-logo" src="./assets/aiwin-logo.png" alt="AIWin — Be your iPartner!" width="336" height="449"><span class="brand-name">慧穩科技<small>FROM EDGE TO AGENT</small></span></button>
+    <div class="anniversary"><span class="anniversary-number">10<span>TH</span></span><span>ANNIVERSARY<br>十年積累・智慧新章</span></div>
+  <span id="growth-state" aria-live="polite"></span></header>
+  <main id="experience" data-chapter="0" data-kind="intro" tabindex="-1">
+    <div id="scene" aria-label="可旋轉的 3D 產品積木場景"></div>
+    <div id="model-labels"></div>
+    <div class="scene-atmosphere" aria-hidden="true"></div>
+    <div id="scene-fallback" hidden>此裝置暫時無法顯示 3D；你仍可瀏覽所有篇章、產品與案例。</div>
+    <section class="story" id="story" aria-live="polite" aria-atomic="true">
+      <p class="eyebrow"><span class="eyebrow-line"></span>2016 — 2026 / A DECADE IN THE MAKING</p>
+      <h1>From Edge<br>to <em>Agent.</em></h1>
+      <div class="story-copy"><h2>十年經驗，積累成功。</h2><p>從感知世界，到學會理解與行動。<br>每一個真實的問題，都讓我們再長大一點。</p></div>
+      <div class="story-actions"><button class="primary-button" data-chapter="1">一探究竟 <span>↗</span></button><span class="journey-note">BUILT FROM EXPERIENCE.<br>READY FOR WHAT'S NEXT.</span></div>
+    </section>
+    <div class="scene-topline"><span>+</span><span id="scene-caption">A WORLD WAITING TO BE BUILT</span><span id="scene-index">CHAPTER 00</span></div>
+    <div id="stage-detail"></div>
+    <div id="birth-track" class="birth-track" aria-label="產品誕生順序" hidden></div>
+    <div class="scene-bottomline"><span id="scene-hint">拖曳探索下一個可能</span><button id="explode-button" hidden aria-pressed="false">展開城堡 ↗</button></div>
+    <div id="reveal-overlay" aria-hidden="true"></div>
+    <div id="fusion-copy" hidden aria-live="polite"></div>
+    <aside id="presenter-notes" hidden><span>講者提示 · 同畫面顯示</span><p id="note-text"></p></aside>
+  </main>
+  <footer class="footer">
+    <div class="chapter-count"><span id="current-count">00</span><span>/</span><span id="total-count">10</span></div>
+    <nav class="chapter-nav" aria-label="故事章節">
+      <button data-chapter="0" class="active" aria-current="step">序章</button>
+      <button data-chapter="1">感知世界</button>
+      <button data-chapter="2">實戰與學習</button>
+      <button data-chapter="3">數據規律</button>
+      <button data-chapter="4">知識與行動</button>
+      <button data-chapter="5">協作成形</button>
+      <button data-chapter="6">One more thing ✦</button>
+      <button data-chapter="7">智慧城堡</button>
+      <button data-chapter="8">組合實績</button>
+    </nav>
+    <div class="step-controls"><button id="previous" aria-label="上一幕" disabled>←</button><button id="next" aria-label="下一幕">→</button></div>
+  </footer>
+  <div class="keyboard-help"><span>← → 切換篇章　·　空白鍵推進</span><span><kbd>N</kbd> 講者提示</span><span id="motion-status">互動體驗</span></div>
+  <dialog id="case-dialog" aria-labelledby="case-heading"><div id="case-content"></div><button id="close-case" aria-label="關閉案例">×</button></dialog>
+  <dialog id="vision-player" aria-labelledby="vision-film-title"></dialog>
+  <div id="toast" role="status"></div>
+  <script type="module" src="./app.js?v=learning-life-1"></script>
+</body>
+</html>

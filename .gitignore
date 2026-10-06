@@ -1,0 +1,8 @@
+.DS_Store
+.sites-runtime/
+node_modules/
+.env*
+!.env.example
+
+# Local source deck; only selected exported media belong in the website.
+/AIWin_WinHub.AI_完整Pitch_v5_20260821.pptx
