@@ -83,6 +83,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   const agentBrick=brick(groups.case,{id:'ecosystem',name:'AI Agent',sub:'DOMAIN INTELLIGENCE',color:palette.stone,cols:4,rows:2,h:1.25});comboBricks.push(agentBrick);
   const caseBrain=makeBrain(groups.case,'#c2d3e7',.8);caseBrain.position.set(5.8,3.7,0);
   let introClock=null;
+  let openingOccluded=false;
   let chapter=0,kind='intro',age=0,exploded=false,inspect=false,angle=0,angleGoal=0,drag=false,downX=0,downY=0,lastX=0,distance=0,last=0,raf,aspect=1,fusion=0,companyLayout='stage';
   const target=new THREE.Vector3(),look=new THREE.Vector3(),camGoal=new THREE.Vector3();
   function resize(){const r=container.getBoundingClientRect();if(r.width<=0||r.height<=0)return;aspect=r.width/r.height;renderer.setSize(r.width,r.height,false);camera.aspect=aspect;camera.updateProjectionMatrix()}
@@ -109,7 +110,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   function setExploded(on){exploded=on;castleCore.forEach((o,i)=>{o.goal.copy(o.home);if(on){o.goal.y+=[.15,.35,.35,.7][i];o.goal.x+=[0,-.5,.5,0][i]}});foundation.forEach(o=>o.goal.copy(o.home))}
   function setInspect(on){inspect=on}
   function setFusion(p){fusion=p;const collapse=THREE.MathUtils.smoothstep(p,.12,.65);n.goal.set(-3.6*(1-collapse),-.9+Math.sin(collapse*Math.PI)*.5,0);vv.goal.set(3.6*(1-collapse),-.9-Math.sin(collapse*Math.PI)*.3,0);n.g.rotation.y=collapse*Math.PI*2;vv.g.rotation.y=-collapse*Math.PI*2;n.g.visible=vv.g.visible=p<.65;unified.g.visible=p>=.65;unified.targetScale=p<.65?.6:1.02+.15*THREE.MathUtils.smoothstep(p,.65,1);ultraModules.forEach((o,i)=>{o.g.visible=p>.68;const k=THREE.MathUtils.smoothstep(p,.68,1);o.goal.set((i-1)*3.25,-3.5+(1-k)*2,.3);o.targetScale=.82;o.g.rotation.y=(1-k)*(i-1)*1.2})}
-  function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden||kind==='closing'||kind==='chronicle'){last=ms;return;}const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
+  function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden||openingOccluded||kind==='closing'||kind==='chronicle'){last=ms;return;}const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
     domainRig.position.y+=((exploded?.7:0)-domainRig.position.y)*e;
     const view=stageView(kind,aspect,{phase:productJourney.phase(),exploded,inspect,companyLayout});
     if(kind==='history'){historyWall.update(age,reduced,dt);camera.position.copy(historyWall.cameraPosition);target.copy(historyWall.cameraTarget);camera.lookAt(target);rig.rotation.y=0;}else{
@@ -130,5 +131,5 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     const r=container.getBoundingClientRect(),lr=labelLayer.getBoundingClientRect();labels.forEach(l=>{l.el.hidden=kind!==l.scope||!visible(l.group)||(l.scope==='history'&&!historyWall.labelsVisible())||(l.scope==='product'&&!productJourney.labelsVisible());if(l.el.hidden)return;v.copy(l.anchor);l.group.localToWorld(v);v.project(camera);l.el.style.left=`${(v.x*.5+.5)*r.width+r.left-lr.left}px`;l.el.style.top=`${(-v.y*.5+.5)*r.height+r.top-lr.top}px`});
   }
   camera.position.set(5,6,24);setChapter(0);raf=requestAnimationFrame(animate);
-  return {setIntroTime(time){introClock=time;if(time>=20){age=4;introClock=null;}},setChapter,setExploded,setInspect,setFusion,setCompanyLayout(id){companyLayout=id;angleGoal=0;companyScene.setLayout(id);},senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();anniversary.dispose();companyScene.dispose();historyWall.dispose();renderer.dispose()}};
+  return {setOpeningOccluded(value){openingOccluded=value;},setIntroTime(time){introClock=time;if(time>=20){age=4;introClock=null;}},setChapter,setExploded,setInspect,setFusion,setCompanyLayout(id){companyLayout=id;angleGoal=0;companyScene.setLayout(id);},senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();anniversary.dispose();companyScene.dispose();historyWall.dispose();renderer.dispose()}};
 }

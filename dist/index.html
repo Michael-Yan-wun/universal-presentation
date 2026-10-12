@@ -13,24 +13,22 @@
   <link rel="stylesheet" href="./product-colors.css?v=product-colors-3">
   <link rel="stylesheet" href="./text-color-preview.css?v=brand-text-5">
   <link rel="stylesheet" href="./company-history.css?v=heritage-growth-17">
-  <link rel="stylesheet" href="./opening.css?v=header-without-logo-13">
+  <link rel="stylesheet" href="./opening.css?v=opening-recovery-25">
+  <link rel="stylesheet" href="./opening-effects.css?v=glass-cool-24">
 </head>
 <body>
   <div id="cosmic-background" aria-hidden="true"></div>
   <div class="ambient" aria-hidden="true"></div>
   <div id="opening-cinema" aria-hidden="true" hidden>
     <div class="opening-film"><canvas></canvas></div>
-    <div class="opening-brand-light"></div>
     <div id="opening-brand">
-      <div class="opening-brand-aura"></div>
       <img src="./assets/aiwin-logo.png" alt="" width="336" height="449" decoding="async">
-      <div class="opening-brand-sweep"><span></span></div>
-      <div class="opening-brand-sparks"></div>
     </div>
   </div>
   <button id="opening-skip" hidden>略過開場<span>ESC ↗</span></button>
+  <div id="opening-effects-toolbar" hidden aria-label="開場 Logo 特效預覽"></div>
   <header class="header">
-    <button class="brand" data-chapter="0" aria-label="慧穩科技，回到開場"><span class="brand-name">慧穩科技<small>FROM EDGE TO AGENT</small></span></button>
+    <button class="brand" data-chapter="0" aria-label="慧穩科技，回到開場"><img id="cover-brand-logo" src="./assets/aiwin-logo.png" alt="" width="336" height="449" decoding="async"><span class="brand-name">慧穩科技<small>FROM EDGE TO AGENT</small></span></button>
     <div class="anniversary"><span class="anniversary-number">10<span>TH</span></span><span>ANNIVERSARY<br>十年積累・智慧新章</span></div>
   <span id="growth-state" aria-live="polite"></span></header>
   <div id="company-design-toolbar"></div>
@@ -86,6 +84,6 @@
   <dialog id="case-dialog" aria-labelledby="case-heading"><div id="case-content"></div><button id="close-case" aria-label="關閉案例">×</button></dialog>
   <dialog id="vision-player" aria-labelledby="vision-film-title"></dialog>
   <div id="toast" role="status"></div>
-  <script type="module" src="./app.js?v=heritage-growth-18"></script>
+  <script type="module" src="./app.js?v=opening-recovery-25"></script>
 </body>
 </html>

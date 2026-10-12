@@ -1,4 +1,5 @@
 import * as THREE from './vendor/three.module.js';
+import { openingCues as cues } from './opening-cues.js?v=refined-logo-22';
 
 const smooth=(a,b,t)=>THREE.MathUtils.smoothstep(t,a,b);
 
@@ -162,12 +163,16 @@ export function createOpeningFilm(canvas) {
     apertureUniforms.time.value=t;aperture.visible=t<2.35;
 
     const approach=smooth(6.,8.6,t),unit=28*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));
-    earth.visible=t>6.;earth.position.set((.04+aspect*.59*approach)*unit,(-.1-.57*approach)*unit,-28);
-    earth.scale.setScalar((.006+1.02*Math.pow(approach,2.2))*unit);
+    // A narrow preview panel needs a lower horizon so the brand stays on dark sky.
+    const compact=1-smooth(1.1,1.45,aspect);
+    earth.visible=t>6.;earth.position.set((.04+aspect*.59*approach)*unit,(-.1-(.57+.33*compact)*approach)*unit,-28);
+    earth.scale.setScalar((.006+(1.02-.42*compact)*Math.pow(approach,2.2))*unit);
     globe.rotation.y=2.1+Math.max(0,t-6.)*.045;
     const sunUnit=14*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));
     sun.position.set((-.05+aspect*.94*approach)*sunUnit,(.51-.23*approach)*sunUnit,-14);
-    sun.scale.setScalar(1.5*sunUnit);sun.material.uniforms.opacity.value=smooth(5.9,6.8,t)*2.1;
+    sun.scale.setScalar(1.5*sunUnit);sun.material.uniforms.opacity.value=smooth(5.9,6.8,t)*2.1*(1-smooth(cues.sunEnd-.6,cues.sunEnd,t));
+    canvas.dataset.filmPhase=t<5.9?'flight':t<cues.sunEnd?'sunrise':'settled';
+    canvas.dataset.sunOpacity=sun.material.uniforms.opacity.value.toFixed(3);
     renderer.render(scene,camera);
   }
   return {ready:Promise.all(pending),resize,render,dispose(){

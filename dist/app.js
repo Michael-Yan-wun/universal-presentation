@@ -1,12 +1,12 @@
 import { companyHistory, companyHistoryHTML } from './company-history.js?v=heritage-growth-17';
 import { animateCompanyHistory } from './company-history-motion.js?v=heritage-growth-18';
 import { applyBrandTypography } from './text-color-preview.js?v=brand-text-5';
-import { createOpening } from './opening.js?v=shorter-flight-14';
+import { createOpening } from './opening.js?v=opening-recovery-25';
 import { productColors, palette, productInk } from './product-colors.js?v=product-colors-1';
 import { companyHTML, companyStageHTML, companyProductHTML, companyLayouts, companyPreviewHTML, animateCompanyIntro } from './company.js?v=company-lockup-6';
 import { createCosmicBackground } from './cosmic-background.js?v=cosmic-final-1';
 import { historyOverview, historyUI, historyRoomAction, createVisionPlayer } from './history-ui.js?v=company-history-15';
-import { createScene } from './scene.js?v=company-history-15';
+import { createScene } from './scene.js?v=opening-recovery-25';
 import {growthHTML,senseHTML,journeyUI} from './narrative-ui.js?v=company-history-15';
 import { chapters, products, cases, agents, icons, chapterFor, growthStages, senseRoutes, resolveChapterRoute } from './content.js?v=company-history-15';
 const $=s=>document.querySelector(s),root=$('#experience'),story=$('#story'),dialog=$('#case-dialog'),detail=$('#stage-detail'),fusion=$('#fusion-copy');
@@ -22,7 +22,7 @@ if(!companyLayouts.some(item=>item.id===companyLayout))companyLayout='stage';
 root.dataset.companyLayout=companyLayout;
 let companyHistoryPage=0;
 let chapter=0,productState=null,scene,presentation=false,notes=false,revealState='ready',revealRAF=0,toastTimer,inspected=false;
-const opening=createOpening({onTime:time=>scene?.setIntroTime(time)});
+const opening=createOpening({onTime:time=>scene?.setIntroTime(time),onOcclusion:hidden=>scene?.setOpeningOccluded(hidden)});
 const eyebrow=text=>`<p class="eyebrow"><span class="eyebrow-line"></span>${text}</p>`;
 const icon=id=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${icons[id]}"/></svg>`;
 function toast(text){$('#toast').textContent=text;$('#toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('visible'),2600)}
