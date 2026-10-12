@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import {createFieldKit} from './field-kit.js?v=learning-life-1';
 import {createLearningLife} from './learning-life.js?v=learning-life-1';
-import { historyCases, visionCases, palette } from './content.js?v=learning-life-1';
+import { historyCases, visionCases, palette } from './content.js?v=company-history-15';
 
 // A presenter-controlled journey. The moat is reserved until all disciplines have stories.
 export function createHistoryWall({group, brick, renderer, geometry, addLabel, onStage}) {
@@ -58,7 +58,7 @@ export function createHistoryWall({group, brick, renderer, geometry, addLabel, o
   visionCases.forEach((c,i)=>{
     const pos=[(i-2)*4.45,-.05,Math.abs(i-2)>1?.5:-.8];
     const stand=managed(room,{cols:3,rows:3,h:.45,color:'#23384e',pos:[pos[0],-2.48,pos[2]]});
-    const o=managed(room,{id:'history-case-'+i,cols:3,rows:2,h:2.25,color:['#3159ac','#3b63ab','#294d8c','#5376ae','#365992'][i],pos});screen(o,c);
+    const o=managed(room,{id:'history-case-'+i,cols:3,rows:2,h:2.25,color:palette.vision,pos});screen(o,c);
     const label=addLabel(o.g,V(0,-1.75,1.2),c.title,'history-case-'+i,palette.vision,'vision-case-label','history');
     label.innerHTML=`<small>0${i+1} / ${c.category}</small><strong>${c.title}</strong><span>${c.industry} · ${c.ability}</span>`;
     label.setAttribute('aria-label','探索'+c.title);

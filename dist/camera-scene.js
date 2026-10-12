@@ -1,5 +1,6 @@
+import { palette } from './product-colors.js?v=product-colors-1';
 import * as THREE from './vendor/three.module.js';
-import {cameraStage as layout} from './stage-layout.js?v=learning-life-1';
+import {cameraStage as layout} from './stage-layout.js?v=company-stage-2';
 import {createEdgeHost} from './edge-host.js?v=learning-life-1';
 import {createCameraModel} from './camera-models.js?v=learning-life-1';
 
@@ -33,7 +34,7 @@ export function createCameraScene({parent,brick,addLabel}){
   for(let j=0;j<3;j++)for(const [path,delay]of[[curve,i*.8],[returnCurve,4.4]]){const bead=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),new THREE.MeshBasicMaterial({color:delay===4.4?'#e4c69a':'#c9e8f5'}));group.add(bead);beads.push({bead,curve:path,offset:j/3,delay})}
   sources.push({g,target,model,delay:i*.8});
  });
- const host=createEdgeHost({parent:group,brick,addLabel,id:'visual',name:'WinEdge-V',color:'#436887',pos:[0,layout.outputY,.4]});
+ const host=createEdgeHost({parent:group,brick,addLabel,id:'visual',name:'WinEdge-V',color:palette.visual,pos:[0,layout.outputY,.4]});
  return {group,update(time,reduced){
   group.visible=true;const t=reduced?8:time;eye.scale.setScalar(.64+.56*ease(clamp(t/1.2)));eye.position.y=layout.eyeY+.25-.25*ease(clamp(t/1.2));iris.rotation.z=reduced?0:time*.09;
   sources.forEach(({g,target,model,delay})=>{const progress=clamp((t-1.8-delay)/1.55),p=ease(progress);g.visible=p>0;g.position.lerpVectors(V(0,layout.eyeY-1.3,-.5),target,p);g.scale.setScalar(.15+.85*p);g.rotation.y=(1-p)*.5;model.update(progress,time,reduced)});

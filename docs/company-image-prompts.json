@@ -1,0 +1,36 @@
+{
+  "mode": "built-in image_gen; transparent_background: true",
+  "date": "2026-10-08",
+  "assets": [
+    {
+      "id": "winhub",
+      "source": "/Users/laura/Desktop/行銷部門/ 行銷素材/智造進化論手冊/WinHub.png",
+      "generated": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-b64a045c-296a-4fba-956d-c8c983558d8f.png",
+      "prompt": "Use case: background-extraction. Edit target: the attached WinHub.png marketing composite. Extract ONLY the central cyan WinHub brand symbol and the exact wordmark 'WinHub.AI' below it as one clean transparent PNG lockup. Preserve the original cyan metallic gradient, exact symbol silhouette, typography, capitalization, dot and proportions. Remove all four computer monitors, every product label, all background, ALL circular rings and orbit lines, glow circles and other decoration. Do not invent or redesign the logo. Center the extracted lockup tightly with 5% transparent padding. Genuine alpha transparency everywhere outside the symbol and wordmark. This is an existing brand identity cutout for a website."
+    },
+    {
+      "id": "aiwinops",
+      "source": "/Users/laura/Desktop/行銷部門/ 行銷素材/智造進化論手冊/AIWinOps空白.png",
+      "generated": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-3bd8ebb9-b9aa-4aaf-b1c3-ed36a1ec397e.png",
+      "prompt": "Use case: background-extraction. Edit target: the attached AIWinOps空白.png. Extract ONLY the full silver desktop computer monitor including the black bezel, the cherry fruit image shown on its screen, and its silver support stand. Remove the white background, thin colored border, top colored banner and arrow icon, all surrounding layout and empty space. Preserve the exact monitor front view, original screen pixels/content, colors, scale proportions and edges as closely as possible. Do not redesign, paraphrase, replace or invent anything inside the screen; no additional text or graphics. Center the whole isolated computer with a tight 5% transparent margin. Real alpha transparent background, clean antialiased cutout, no checkerboard pattern, no opaque white rectangle, no external shadow. Website product asset."
+    },
+    {
+      "id": "numops",
+      "source": "/Users/laura/Desktop/行銷部門/ 行銷素材/智造進化論手冊/NumOps空白.png",
+      "generated": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-8cd9f1d4-2f8b-4fdd-aedd-36eae59f88f8.png",
+      "prompt": "Use case: background-extraction. Edit target: the attached NumOps空白.png. Extract ONLY the full silver desktop computer monitor including the black bezel, the white scatter plot and blue line chart interface shown on its screen, and its silver support stand. Remove the white background, thin colored border, top colored banner and arrow icon, all surrounding layout and empty space. Preserve the exact monitor front view, original screen pixels/content, colors, scale proportions and edges as closely as possible. Do not redesign, paraphrase, replace or invent anything inside the screen; no additional text or graphics. Center the whole isolated computer with a tight 5% transparent margin. Real alpha transparent background, clean antialiased cutout, no checkerboard pattern, no opaque white rectangle, no external shadow. Website product asset."
+    },
+    {
+      "id": "winchat",
+      "source": "/Users/laura/Desktop/行銷部門/ 行銷素材/智造進化論手冊/WinChat空白.png",
+      "generated": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-3cf4cf65-6b9f-4e3e-87eb-2eec5a71cdec.png",
+      "prompt": "Use case: background-extraction. Edit target: the attached WinChat空白.png. Extract ONLY the full silver desktop computer monitor including the black bezel, the white and blue WinChat software interface with KPI Data Assistant shown on its screen, and its silver support stand. Remove the white background, thin colored border, top colored banner and arrow icon, all surrounding layout and empty space. Preserve the exact monitor front view, original screen pixels/content, colors, scale proportions and edges as closely as possible. Do not redesign, paraphrase, replace or invent anything inside the screen; no additional text or graphics. Center the whole isolated computer with a tight 5% transparent margin. Real alpha transparent background, clean antialiased cutout, no checkerboard pattern, no opaque white rectangle, no external shadow. Website product asset."
+    },
+    {
+      "id": "winedge",
+      "source": "/Users/laura/Desktop/行銷部門/ 行銷素材/智造進化論手冊/WinEdge空白.png",
+      "generated": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-cde7d16d-eead-4191-8760-204572363622.png",
+      "prompt": "Use case: background-extraction. Edit target: the attached WinEdge空白.png. Extract ONLY the full silver desktop computer monitor including the black bezel, the dark node graph workflow software interface shown on its screen, and its silver support stand. Remove the white background, thin colored border, top colored banner and arrow icon, all surrounding layout and empty space. Preserve the exact monitor front view, original screen pixels/content, colors, scale proportions and edges as closely as possible. Do not redesign, paraphrase, replace or invent anything inside the screen; no additional text or graphics. Center the whole isolated computer with a tight 5% transparent margin. Real alpha transparent background, clean antialiased cutout, no checkerboard pattern, no opaque white rectangle, no external shadow. Website product asset."
+    }
+  ]
+}

@@ -1,5 +1,6 @@
+import { palette } from './product-colors.js?v=product-colors-1';
 import * as THREE from './vendor/three.module.js';
-import {createSenseScene} from './sense-scene.js?v=learning-life-1';
+import {createSenseScene} from './sense-scene.js?v=product-colors-1';
 export function createGrowthScene({early,body,brick,addLabel,onSenseStage}){
  const rigs=[],links=[];const V=(x,y,z)=>new THREE.Vector3(x,y,z);
  function human(parent,isChild){
@@ -18,7 +19,7 @@ export function createGrowthScene({early,body,brick,addLabel,onSenseStage}){
   rigs.push({g,brain,neural,isChild});return {g,headY,height};
  }
  const senses=createSenseScene({group:early,brick,addLabel,onStage:onSenseStage});human(body,false);
- const map=[['vision','AIWinOps',-4.8,1.55,'#3159ac'],['analytics','NumOps',4.8,1.55,'#257f8a'],['chat','WinChat',0,4.65,'#c9623c'],['visual','WinEdge-V',-4.8,-1.25,'#436887'],['numeric','WinEdge-N',4.8,-1.25,'#367961']];
+ const map=[['vision','AIWinOps',-4.8,1.55,palette.vision],['analytics','NumOps',4.8,1.55,palette.analytics],['chat','WinChat',0,4.65,palette.chat],['visual','WinEdge-V',-4.8,-1.25,palette.visual],['numeric','WinEdge-N',4.8,-1.25,palette.numeric]];
  map.forEach(([id,name,x,y,color],i)=>{const o=brick(body,{id,name,color,cols:3,rows:2,h:.74,pos:[x,y,.5],scale:.92});o.growthScale=.92;o.targetScale=.92;addLabel(o.g,V(0,id==='chat'?1.35:-1.50,.4),['學會看懂','學會規律','記憶 × 任務 × 技能','影像感知','數據感知'][i],id,color,'growth-label','body');
   const end=id==='chat'?V(0,2.95,0):V(x<0?-.45:.45,y>0?1.7:.3,.15),start=V(x,y,.3),curve=new THREE.CatmullRomCurve3([start,start.clone().lerp(end,.5).add(V(0,.4,-.2)),end]);
   body.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(32)),new THREE.LineBasicMaterial({color,transparent:true,opacity:.65})));

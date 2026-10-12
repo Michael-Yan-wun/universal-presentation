@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-08",
+  "mode": "built-in image_gen; transparent_background: false",
+  "request": "Move the former Earth Dawn interior to the cover; replace the interior with a simpler galaxy background; remove the lunar option.",
+  "activeAssets": {
+    "cover": "dist/assets/cosmic-backgrounds/earth-v1.webp",
+    "interior": "dist/assets/cosmic-backgrounds/earth-interior-v2.webp",
+    "closing": "dist/assets/cosmic-backgrounds/earth-closing-v1.webp"
+  },
+  "generatedInterior": {
+    "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-eefa8b25-9b32-42f6-b8a6-555aeddb0546.png",
+    "png": "dist/assets/cosmic-backgrounds/earth-interior-v2.png",
+    "webp": "dist/assets/cosmic-backgrounds/earth-interior-v2.webp",
+    "prompt": "Generate ONE finished 16:9 landscape background asset for the INTERIOR CONTENT SLIDES of a premium enterprise AI keynote presentation, coordinated with an Earth-at-dawn cover. Image-only: NO text, letters, numbers, logos, interface, borders, cards, devices, platforms or watermark. The user wants a SIGNIFICANTLY SIMPLER background. Refined minimal deep navy-black outer space. A very faint and distant silvery-blue Milky Way dust veil is visible ONLY in the extreme rightmost 12% and bottom-right corner, dissolving gracefully into pure dark navy. About 88% of the entire frame is almost empty dark negative space. Keep x0-80% entirely clean: no clouds, no broad gradients, no bright dots, no light streaks, no distracting texture. Also preserve a dark calm area behind content at x52-90%, y10-82%. The galaxy should be barely perceptible, low-contrast and low-detail, with only 15 to 25 microscopic very dim stars near the far right edge and bottom edge. No bright galactic core, no dense stars, no large nebula, no aurora, no swirls, no moon, no lunar surface, no Earth, no planets, no horizon, no grid. Astronomical realism with extremely restrained scale and brightness, not an abstract texture. Palette: near-black midnight navy #030914, faint desaturated blue-gray #18283B at outer edge only. Quiet, sophisticated enterprise background intended to keep text, charts and product images as the first visual focus. Crisp tiny stars, no noise or grain, no blur haze across content. Edge-to-edge image. A clean quiet backdrop, with only a whisper of distant galaxy at the far right."
+  }
+}

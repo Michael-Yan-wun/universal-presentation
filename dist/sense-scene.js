@@ -1,7 +1,8 @@
+import { palette } from './product-colors.js?v=product-colors-1';
 import * as THREE from './vendor/three.module.js';
-import {createCameraScene} from './camera-scene.js?v=learning-life-1';
+import {createCameraScene} from './camera-scene.js?v=product-colors-1';
 import {createEdgeHost} from './edge-host.js?v=learning-life-1';
-import {createDataScene} from './data-scene.js?v=learning-life-1';
+import {createDataScene} from './data-scene.js?v=product-colors-1';
 import {createRobotSeed} from './robot-seed.js?v=learning-life-1';
 
 // An articulated young robot makes emerging intelligence tangible.
@@ -67,7 +68,7 @@ export function createSenseScene({group:parent,brick,addLabel,onStage=()=>{}}){
  sourceSpecs.forEach(source);
  const overviewHosts=[];
  for(const [i,id]of['visual','numeric'].entries()){
-  const host=createEdgeHost({parent:group,brick,addLabel,id,name:i?'WinEdge-N':'WinEdge-V',color:i?'#367961':'#436887',pos:[i?3.05:-3.05,-3.23,.6]});overviewHosts.push(host);
+  const host=createEdgeHost({parent:group,brick,addLabel,id,name:i?'WinEdge-N':'WinEdge-V',color:i?palette.numeric:palette.visual,pos:[i?3.05:-3.05,-3.23,.6]});overviewHosts.push(host);
   const curve=new THREE.CatmullRomCurve3([V(i?.5:-.5,.15,.3),V(i?1.25:-1.25,-1.9,1.1),V(i?3.05:-3.05,-2.20,.6)]);
   group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(45)),new THREE.LineBasicMaterial({color:'#d6b483',transparent:true,opacity:.38,depthWrite:false})));
   for(let j=0;j<3;j++){const bead=new THREE.Mesh(new THREE.SphereGeometry(.05,10,8),new THREE.MeshBasicMaterial({color:'#e1c89e'}));group.add(bead);streams.push({bead,curve,offset:j/3})}

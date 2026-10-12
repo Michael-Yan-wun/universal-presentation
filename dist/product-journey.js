@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three.module.js';
-import {journeyStage as layout} from './stage-layout.js?v=learning-life-1';
-import {products} from './content.js?v=learning-life-1';
+import {journeyStage as layout} from './stage-layout.js?v=company-stage-2';
+import {products} from './content.js?v=company-history-15';
 import {createFieldKit} from './field-kit.js?v=learning-life-1';
 export const productStories={
  analytics:{title:'經驗多了，<br>開始找出規律。',bridge:'像在學校學會推理，把訊號與經驗整理成方法。',topics:[
@@ -14,7 +14,7 @@ export const productStories={
 };
 export function createProductJourney({group,brick,addLabel,onStage}){
  const roots={},V=(...a)=>new THREE.Vector3(...a),ease=t=>1-Math.pow(1-t,3),clamp=t=>Math.max(0,Math.min(1,t));let id='analytics',phase='overview',selected=-1,clock=0,from=[],visited=new Set();
- for(const p of products.filter(p=>productStories[p.id])){const root=new THREE.Group();group.add(root);const pieces=productStories[p.id].topics.map((t,i)=>{const o=brick(root,{id:'journey-'+i,name:t.tag,color:p.color,cols:3,rows:2,h:1.15,pos:[(i-1)*layout.spread,layout.overviewY,0],scale:layout.overviewScale});o.journeyManaged=true;const label=addLabel(o.g,V(0,-1.58,1),t.title,'journey-'+i,p.color,'journey-label','product');return {o,label}});const born=brick(root,{id:p.id,name:p.name,sub:p.role,color:p.color,cols:5,rows:3,h:1.45,pos:[0,layout.bornY,0]});born.journeyManaged=true;const kit=createFieldKit(root,{scale:.77,input:['numeric','analytics'].includes(p.id)?'sensor':'camera'});kit.group.position.z=-2;roots[p.id]={root,pieces,born,kit}}
+ for(const p of products.filter(p=>productStories[p.id])){const root=new THREE.Group();group.add(root);const pieces=productStories[p.id].topics.map((t,i)=>{const o=brick(root,{id:'journey-'+i,name:t.tag,color:p.color,cols:3,rows:2,h:1.15,pos:[(i-1)*layout.spread,layout.overviewY,0],scale:layout.overviewScale});o.journeyManaged=true;const label=addLabel(o.g,V(0,-1.58,1),t.title,'journey-'+i,p.uiColor,'journey-label','product');return {o,label}});const born=brick(root,{id:p.id,name:p.name,sub:p.role,color:p.color,cols:5,rows:3,h:1.45,pos:[0,layout.bornY,0]});born.journeyManaged=true;const kit=createFieldKit(root,{scale:.77,input:['numeric','analytics'].includes(p.id)?'sensor':'camera'});kit.group.position.z=-2;roots[p.id]={root,pieces,born,kit}}
  const state=()=>({id,phase,selected,visited:[...visited],canFuse:visited.size===3});const notify=()=>onStage(state());const change=p=>{phase=p;clock=0;notify()};
  function reset(product){id=product;phase='overview';clock=0;selected=-1;visited=new Set();for(const[k,v]of Object.entries(roots))v.root.visible=k===id;const r=roots[id];r.born.g.visible=false;r.kit.group.visible=false;r.pieces.forEach(({o})=>{o.g.visible=true;o.g.position.copy(o.home);o.g.rotation.set(0,0,0);o.g.scale.setScalar(layout.overviewScale)});notify()}
  function action(type,index){const r=roots[id];if(type==='select'&&['overview','focus'].includes(phase)&&index>=0&&index<3){from=r.pieces.map(({o})=>o.g.position.clone());selected=index;change('selecting');return true}if(type==='next'){if(phase==='overview')return action('select',0);if(phase==='focus'){if(selected<2)return action('select',selected+1);if(visited.size<3)return action('select',[0,1,2].find(i=>!visited.has(i)));from=r.pieces.map(({o})=>o.g.position.clone());change('fusing');return true}}if(type==='back'&&phase==='focus'){if(selected>0)return action('select',selected-1);reset(id);return true}if(type==='restart'){reset(id);return true}return false}

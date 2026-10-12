@@ -1,0 +1,110 @@
+/* A quiet, editorial timeline on the approved Deep Galaxy interior. */
+#experience[data-kind=chronicle] :is(#scene,#model-labels,.scene-atmosphere,.scene-topline,.scene-bottomline,#scene-fallback) { display:none; }
+#experience[data-kind=chronicle] .chronicle-story { left:5.5%; top:3%; width:89%; max-width:none; height:94%; display:flex; flex-direction:column; pointer-events:auto; }
+.heritage-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:30px; flex:none; }
+.heritage-kicker { margin:0 0 14px; font-size:10px; font-weight:500; letter-spacing:.2em; color:var(--type-secondary,#fff); opacity:.72; }
+.heritage-heading h1 { margin:0; font-size:clamp(34px,3.6vw,60px); line-height:1.15; letter-spacing:.06em; font-weight:550; }
+#experience[data-kind=chronicle] .heritage-heading h1 em { color:var(--type-primary,#f08200); }
+.heritage-intent { margin:0 0 3px; text-align:right; color:var(--type-secondary,#fff); font-size:clamp(13px,1.15vw,18px); line-height:1.8; letter-spacing:.04em; }
+.heritage-phases { display:flex; align-items:stretch; gap:38px; margin-top:27px; border-bottom:1px solid #ffffff24; flex:none; }
+.heritage-phases button { position:relative; display:flex; gap:14px; align-items:center; padding:0 0 14px; color:var(--type-secondary,#fff); opacity:.58; text-align:left; transition:opacity .2s; }
+.heritage-phases button::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:2px; background:var(--type-primary,#f08200); transform:scaleX(0); transform-origin:left; transition:transform .3s; }
+.heritage-phases button[aria-pressed=true],.heritage-phases button:hover { opacity:1; }
+.heritage-phases button[aria-pressed=true]::after { transform:scaleX(1); }
+.heritage-phases button span { font-size:14px; font-variant-numeric:tabular-nums; letter-spacing:.02em; }
+.heritage-phases button[aria-pressed=true] span { color:var(--type-primary,#f08200); }
+.heritage-phases button strong { font-size:12px; font-weight:450; letter-spacing:.04em; }
+.heritage-page-count { display:flex; gap:12px; align-items:baseline; margin-left:auto; font-size:18px; color:var(--type-primary,#f08200); }
+.heritage-page-count i { color:var(--type-secondary,#fff); opacity:.5; font-style:normal; font-size:10px; }
+.heritage-panel { position:relative; flex:1; min-height:0; display:flex; flex-direction:column; }
+.heritage-milestones { position:relative; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(18px,2.2vw,38px); margin:29px 0 0; padding:0; list-style:none; flex:1; }
+.heritage-milestones::before { content:''; position:absolute; top:50px; left:39px; right:0; height:1px; background:linear-gradient(90deg,#ffffff42,#ffffff24 80%,transparent); }
+.heritage-milestone { position:relative; min-width:0; padding-top:62px; }
+.heritage-year { height:38px; display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.heritage-year time { color:var(--type-primary,#f08200); font-size:clamp(32px,3.15vw,52px); font-weight:450; letter-spacing:-.04em; font-variant-numeric:tabular-nums; }
+.heritage-year svg { width:25px; height:25px; flex:none; color:var(--type-secondary,#fff); opacity:.65; stroke-width:1.15; }
+.heritage-node { display:block; position:absolute; z-index:1; top:47px; left:36px; width:7px; height:7px; border-radius:50%; border:1px solid var(--type-primary,#f08200); background:#101622; box-shadow:0 0 0 5px #070e1a; transition:background .4s,box-shadow .4s; }
+.heritage-milestone h2 { min-height:3em; margin:10px 0 13px; color:var(--type-secondary,#fff); font-size:clamp(15px,1.35vw,23px); font-weight:550; line-height:1.5; letter-spacing:.01em; }
+.heritage-platform { color:var(--type-platform,#65d7ea); white-space:nowrap; }
+.heritage-milestone ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+.heritage-milestone ul li { position:relative; padding-left:10px; font-size:clamp(12px,.98vw,16px); color:var(--type-secondary,#fff); opacity:.84; line-height:1.7; overflow-wrap:anywhere; }
+.heritage-milestone ul li::before { content:''; position:absolute; left:0; top:.78em; width:3px; height:3px; border-radius:50%; background:#ffffff80; }
+.heritage-caption { display:flex; align-items:center; gap:19px; margin-top:20px; padding-top:15px; border-top:1px solid #ffffff1c; flex:none; }
+.heritage-caption>span { color:var(--type-primary,#f08200); font-size:12px; white-space:nowrap; letter-spacing:.03em; }
+.heritage-caption p { color:var(--type-secondary,#fff); font-size:12px; margin:0; line-height:1.7; opacity:.83; }
+.heritage-caption small { margin-left:auto; font-size:10px; white-space:nowrap; letter-spacing:.08em; color:#ffffff80; }
+/* A crisp, articulated silhouette walks above the dates, never across the copy. */
+.heritage-walkway { display:none; position:absolute; inset:0; width:100%; height:100%; overflow:visible; z-index:2; pointer-events:none; }
+.heritage-panel:is([data-walk=running],[data-walk=complete]) .heritage-walkway { display:block; }
+.heritage-walkway path { fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.heritage-progress { stroke:#f5ac4f; stroke-width:1.2; filter:drop-shadow(0 0 4px #f0820066); }
+.heritage-footprints { fill:#ffc57a; }
+.heritage-traveler { opacity:0; filter:drop-shadow(0 0 5px #f0f5ff28); }
+.heritage-ground-light { fill:#f08200; opacity:.22; filter:blur(3px); }
+.heritage-walkway .heritage-jacket { fill:url(#heritage-jacket); stroke:#ffffff60; stroke-width:.5; }
+.heritage-head { fill:#fff0da; }
+.heritage-eye { fill:#263242; }
+.heritage-smile { stroke:#594436; stroke-width:.85; }
+.heritage-hair { stroke:#fff0da; stroke-width:1.6; }
+.heritage-collar { stroke:#ccd8e7; stroke-width:4; }
+.heritage-limb { stroke-width:5.4; }
+.heritage-front-leg { stroke:#dce5ef; }
+.heritage-back-leg { stroke:#6e849d; }
+.heritage-front-arm { stroke:#eaf1fa; stroke-width:4; }
+.heritage-back-arm { stroke:#8ea3bc; stroke-width:4; }
+.heritage-shoe { stroke:#f3ae59; stroke-width:3; }
+.heritage-arrival-stars { stroke:#ffca82; stroke-width:1; fill:#ffca82; opacity:0; }
+.heritage-joy-ray { stroke:#ffc26c; stroke-width:1.3; opacity:0; }
+.heritage-panel[data-walk] .heritage-year,.heritage-panel[data-walk] .heritage-milestone h2,.heritage-panel[data-walk] .heritage-milestone>ul { transition:opacity .55s,transform .6s cubic-bezier(.16,1,.3,1); }
+.heritage-panel[data-walk=running] .heritage-milestone:not(.is-reached) .heritage-year { opacity:.42; }
+.heritage-panel[data-walk=running] .heritage-milestone:not(.is-reached) :is(h2,ul) { opacity:.28; transform:translateY(7px); }
+.heritage-milestone.is-reached .heritage-node { background:#ffb760; box-shadow:0 0 0 4px #070e1a,0 0 14px #f0820050; }
+.heritage-milestone.is-current .heritage-node { background:#fff3df; box-shadow:0 0 0 4px #070e1a,0 0 20px #f08200b3; }
+.heritage-milestone.is-current .heritage-year time { animation:heritage-year-light 1s ease-out both; }
+.heritage-milestone.is-current .heritage-year svg { opacity:1; filter:drop-shadow(0 0 5px #ffffff40); }
+.heritage-milestone.is-current .heritage-node::after { content:''; position:absolute; width:48px; height:58px; left:50%; bottom:-14px; transform:translateX(-50%); background:radial-gradient(ellipse,#f082003d,transparent 68%); animation:heritage-arrive 1s ease-out both; pointer-events:none; }
+@keyframes heritage-arrive { from { opacity:1; transform:translateX(-50%) scale(.5); } to { opacity:0; transform:translateX(-50%) scale(1.6); } }
+@keyframes heritage-year-light { from { text-shadow:0 0 22px #f082008c; } to { text-shadow:0 0 0 transparent; } }
+@media(max-height:800px) and (min-width:801px) {
+  #experience[data-kind=chronicle] .chronicle-story { top:2%; height:96%; }
+  .heritage-kicker { margin-bottom:10px; }
+  .heritage-heading h1 { font-size:36px; }
+  .heritage-phases { margin-top:20px; }
+  .heritage-milestones { margin-top:22px; }
+  .heritage-milestone h2 { margin-top:7px; margin-bottom:10px; font-size:16px; }
+  .heritage-milestone ul { gap:6px; }
+  .heritage-milestone ul li { font-size:12px; line-height:1.65; }
+  .heritage-caption { margin-top:12px; padding-top:10px; }
+}
+@media(max-width:800px) {
+  #experience[data-kind=chronicle] { height:auto; min-height:0; padding:0 0 32px; }
+  #experience[data-kind=chronicle] .chronicle-story { position:relative; inset:auto; width:86%; height:auto; margin:23px 7% 0; }
+  .heritage-heading { align-items:flex-start; gap:12px; }
+  .heritage-heading h1 { font-size:36px; }
+  .heritage-kicker { font-size:8px; letter-spacing:.12em; }
+  .heritage-intent { font-size:11px; margin-top:19px; }
+  .heritage-phases { gap:22px; margin-top:25px; }
+  .heritage-phases button { flex:1; display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
+  .heritage-phases button span { font-size:13px; }
+  .heritage-phases button strong { font-size:11px; }
+  .heritage-page-count { display:none; }
+  .heritage-milestones { display:block; margin:28px 0 0; }
+  .heritage-milestones::before { top:6px; bottom:18px; left:3px; width:1px; height:auto; right:auto; background:linear-gradient(#f08200a6,#ffffff24); animation:none; }
+  .heritage-milestone { padding:0 0 30px 29px; }
+  .heritage-milestone:last-child { padding-bottom:0; }
+  .heritage-year { height:auto; justify-content:flex-start; gap:20px; }
+  .heritage-year time { font-size:32px; }
+  .heritage-year svg { width:21px; height:21px; }
+  .heritage-node { position:absolute; left:0; top:10px; margin:0; }
+  .heritage-milestone h2 { min-height:0; margin:12px 0 9px; font-size:18px; }
+  .heritage-milestone h2 br { display:none; }
+  .heritage-milestone ul { gap:5px; }
+  .heritage-milestone ul li { font-size:14px; }
+  .heritage-caption { margin-top:30px; align-items:flex-start; flex-direction:column; gap:9px; }
+  .heritage-caption small { margin-left:0; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .heritage-milestone.is-current .heritage-year time { animation:none; }
+  .heritage-milestone.is-current .heritage-node::after { animation:none; display:none; }
+  .heritage-phases button,.heritage-phases button::after,.heritage-panel[data-walk] .heritage-year,.heritage-panel[data-walk] .heritage-milestone h2,.heritage-panel[data-walk] .heritage-milestone>ul { transition:none; }
+}

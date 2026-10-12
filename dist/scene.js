@@ -1,10 +1,11 @@
+import { createCompanyScene } from './company.js?v=company-lockup-6';
 import * as THREE from './vendor/three.module.js';
-import {stageView} from './stage-layout.js?v=learning-life-1';
-import { products, chapters, agents, palette } from './content.js?v=learning-life-1';
-import { createHistoryWall } from './history-wall.js?v=learning-life-1';
-import {createGrowthScene} from './growth-scene.js?v=learning-life-1';
-import {createProductJourney} from './product-journey.js?v=learning-life-1';
-import { createAnniversary } from './anniversary.js?v=ambient-1';
+import {stageView} from './stage-layout.js?v=cosmic-preview-1';
+import { products, chapters, agents, palette } from './content.js?v=company-history-15';
+import { createHistoryWall } from './history-wall.js?v=company-history-15';
+import {createGrowthScene} from './growth-scene.js?v=product-colors-1';
+import {createProductJourney} from './product-journey.js?v=company-history-15';
+import { createAnniversary } from './anniversary.js?v=cosmic-opening-1';
 
 export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>{},onProductStage=()=>{},onSenseStage=()=>{}) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -24,7 +25,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(70,70),new THREE.ShadowMaterial({opacity:.3}));floor.rotation.x=-Math.PI/2;floor.position.y=-3.9;floor.receiveShadow=true;scene.add(floor);
   const grid=new THREE.GridHelper(28,28,0x394657,0x202a38);grid.position.y=-3.91;grid.material.transparent=true;grid.material.opacity=.23;scene.add(grid);
   const ring=new THREE.Mesh(new THREE.RingGeometry(6.8,6.812,160),new THREE.MeshBasicMaterial({color:0x758296,transparent:true,opacity:.2,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=-3.87;scene.add(ring);
-  const groups={};for(const id of ['intro','growth','history','products','body','reveal','castle','case']){groups[id]=new THREE.Group();rig.add(groups[id])}
+  const groups={};for(const id of ['intro','company','growth','history','products','body','reveal','castle','case']){groups[id]=new THREE.Group();rig.add(groups[id])}
   const mats=new Map(),geos=new Map(),bricks=[],hits=[],labels=[],brains=[];
   const temp=new THREE.Object3D(),v=new THREE.Vector3();
   const anniversary=createAnniversary(renderer);
@@ -46,8 +47,9 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   const ten=[],goldPalette=['#f3b93d','#f9cc68','#c88920','#dfa02a','#ebb137'];
   groups.intro.scale.setScalar(1);groups.intro.position.set(-.5,-1.8,0);
   const digits=[[-3.8,[[1,0],[0,1],[1,1],[1,2],[1,3],[1,4],[1,5],[0,6],[1,6],[2,6]]],[-.45,[[.5,1],[1.5,1],[2.5,1],[0,2],[3,2],[0,3],[3,3],[0,4],[3,4],[0,5],[3,5],[0,6],[1,6],[2,6],[3,6]]]];
-  digits.forEach(([off,cells],digit)=>cells.forEach(([x,y],i)=>{const o=brick(groups.intro,{cols:1,rows:2,h:.7,color:goldPalette[(i*3+digit)%goldPalette.length],finish:'gold',pos:[off+x*1.05,2.04-y*.73,0]});o.introDelay=(6-y)*.065;ten.push(o)}));
+  digits.forEach(([off,cells],digit)=>cells.forEach(([x,y],i)=>{const o=brick(groups.intro,{cols:1,rows:2,h:.7,color:goldPalette[(i*3+digit)%goldPalette.length],finish:'gold',pos:[off+x*1.05,2.04-y*.73,0]});o.introDelay=(6-y)*.12+digit*.13;o.introManaged=true;o.introStart=o.home.clone().add(new THREE.Vector3((x-1.5)*.65,2.5+digit*.4,-2.8));o.introTwist=(i%2?1:-1)*.18;ten.push(o)}));
   anniversary.station(groups.intro,geometry);
+  const companyScene=createCompanyScene({group:groups.company,brick,addLabel,hits});
   const historyWall=createHistoryWall({group:groups.history,brick,renderer,geometry,addLabel,onStage:onHistoryStage});
   const growth=createGrowthScene({early:groups.growth,body:groups.body,brick,addLabel,onSenseStage});
   const productJourney=createProductJourney({group:groups.products,brick,addLabel,onStage:onProductStage});
@@ -80,19 +82,22 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   const comboBricks=products.map(p=>brick(groups.case,{id:p.id,name:p.name,sub:p.role,color:p.color,cols:4,rows:2,h:1.25}));
   const agentBrick=brick(groups.case,{id:'ecosystem',name:'AI Agent',sub:'DOMAIN INTELLIGENCE',color:palette.stone,cols:4,rows:2,h:1.25});comboBricks.push(agentBrick);
   const caseBrain=makeBrain(groups.case,'#c2d3e7',.8);caseBrain.position.set(5.8,3.7,0);
-  let chapter=0,kind='intro',age=0,exploded=false,inspect=false,angle=0,angleGoal=0,drag=false,downX=0,downY=0,lastX=0,distance=0,last=0,raf,aspect=1,fusion=0;
+  let introClock=null;
+  let chapter=0,kind='intro',age=0,exploded=false,inspect=false,angle=0,angleGoal=0,drag=false,downX=0,downY=0,lastX=0,distance=0,last=0,raf,aspect=1,fusion=0,companyLayout='stage';
   const target=new THREE.Vector3(),look=new THREE.Vector3(),camGoal=new THREE.Vector3();
-  function resize(){const r=container.getBoundingClientRect();aspect=r.width/r.height;renderer.setSize(r.width,r.height,false);camera.aspect=aspect;camera.updateProjectionMatrix()}
+  function resize(){const r=container.getBoundingClientRect();if(r.width<=0||r.height<=0)return;aspect=r.width/r.height;renderer.setSize(r.width,r.height,false);camera.aspect=aspect;camera.updateProjectionMatrix()}
   const observer=new ResizeObserver(resize);observer.observe(container);resize();
   function visible(obj){for(let p=obj;p;p=p.parent)if(!p.visible)return false;return true}
   const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
   function pick(e){const r=container.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(pointer,camera);return ray.intersectObjects(hits).find(h=>visible(h.object))?.object.userData.id}
   container.addEventListener('pointerdown',e=>{drag=true;downX=lastX=e.clientX;downY=e.clientY;distance=0;container.setPointerCapture(e.pointerId)});
-  container.addEventListener('pointermove',e=>{if(drag){distance=Math.max(distance,Math.hypot(e.clientX-downX,e.clientY-downY));if(kind!=='history')angleGoal+=(e.clientX-lastX)*.005;lastX=e.clientX}else container.style.cursor=pick(e)?'pointer':'grab'});
+  container.addEventListener('pointermove',e=>{if(drag){distance=Math.max(distance,Math.hypot(e.clientX-downX,e.clientY-downY));if(kind!=='history'&&kind!=='company')angleGoal+=(e.clientX-lastX)*.005;lastX=e.clientX}else{const id=pick(e);container.style.cursor=id?'pointer':kind==='company'?'default':'grab';if(kind==='company')companyScene.setHovered(id)}});
   container.addEventListener('pointerup',e=>{if(drag&&distance<6){const id=pick(e);if(id)onSelect(id)}drag=false});container.addEventListener('pointercancel',()=>drag=false);
-  function setChapter(index){if(kind==='history'&&chapters[index].kind!=='history'){camera.position.set(5,6,24);target.set(0,0,0)}chapter=index;kind=chapters[index].kind;age=0;angleGoal=0;inspect=false;fusion=0;exploded=false;for(const [id,g]of Object.entries(groups))g.visible=id===(kind==='product'?'products':kind);for(const o of bricks){o.goal.copy(o.home);o.targetScale=o.growthScale||1}groups.intro.visible=kind==='intro';
-    grid.visible=ring.visible=floor.visible=kind!=='intro'&&kind!=='history';key.position.set(...(kind==='intro'?[4,10,-3]:[-6,12,10]));key.intensity=kind==='intro'?4.1:3.2;
-    if(kind==='intro'){ten.forEach((o,i)=>{o.g.position.copy(o.home).add(new THREE.Vector3((i%3-1)*.5,7+(i%4)*.6,-1.3));o.targetScale=1})}
+  container.addEventListener('pointerleave',()=>companyScene.setHovered(null));
+  function setChapter(index){if(kind==='history'&&chapters[index].kind!=='history'){camera.position.set(5,6,24);target.set(0,0,0)}chapter=index;kind=chapters[index].kind;age=0;introClock=null;angleGoal=0;inspect=false;fusion=0;exploded=false;for(const [id,g]of Object.entries(groups))g.visible=id===(kind==='product'?'products':kind);for(const o of bricks){o.goal.copy(o.home);o.targetScale=o.growthScale||1}groups.intro.visible=kind==='intro';
+    grid.visible=ring.visible=floor.visible=kind!=='intro'&&kind!=='history'&&kind!=='company'&&kind!=='closing'&&kind!=='chronicle';key.position.set(...(kind==='intro'?[4,10,-3]:[-6,12,10]));key.intensity=kind==='intro'?4.1:3.2;
+    if(kind==='intro'){angle=0;ten.forEach(o=>{o.g.position.copy(reduced?o.home:o.introStart);o.g.rotation.set(0,reduced?0:o.introTwist,0);o.targetScale=1});const view=stageView(kind,aspect);camera.position.set(view.x+(reduced?0:3),view.y+(reduced?0:1.5),view.z+(reduced?0:4));target.set(0,view.targetY,0);}
+    if(kind==='company'){companyScene.reset();angle=0;const view=stageView(kind,aspect,{companyLayout});camera.position.set(view.x+(reduced?0:1.8),view.y+(reduced?0:.65),view.z+(reduced?0:1.5));target.set(0,view.targetY,0);}
     if(kind==='history')historyWall.restart();
     if(kind==='growth')growth.reset();
     if(kind==='product')productJourney.reset(chapters[index].product.id);
@@ -104,19 +109,26 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   function setExploded(on){exploded=on;castleCore.forEach((o,i)=>{o.goal.copy(o.home);if(on){o.goal.y+=[.15,.35,.35,.7][i];o.goal.x+=[0,-.5,.5,0][i]}});foundation.forEach(o=>o.goal.copy(o.home))}
   function setInspect(on){inspect=on}
   function setFusion(p){fusion=p;const collapse=THREE.MathUtils.smoothstep(p,.12,.65);n.goal.set(-3.6*(1-collapse),-.9+Math.sin(collapse*Math.PI)*.5,0);vv.goal.set(3.6*(1-collapse),-.9-Math.sin(collapse*Math.PI)*.3,0);n.g.rotation.y=collapse*Math.PI*2;vv.g.rotation.y=-collapse*Math.PI*2;n.g.visible=vv.g.visible=p<.65;unified.g.visible=p>=.65;unified.targetScale=p<.65?.6:1.02+.15*THREE.MathUtils.smoothstep(p,.65,1);ultraModules.forEach((o,i)=>{o.g.visible=p>.68;const k=THREE.MathUtils.smoothstep(p,.68,1);o.goal.set((i-1)*3.25,-3.5+(1-k)*2,.3);o.targetScale=.82;o.g.rotation.y=(1-k)*(i-1)*1.2})}
-  function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden)return;const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
+  function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden||kind==='closing'||kind==='chronicle'){last=ms;return;}const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
     domainRig.position.y+=((exploded?.7:0)-domainRig.position.y)*e;
-    const view=stageView(kind,aspect,{phase:productJourney.phase(),exploded,inspect});
+    const view=stageView(kind,aspect,{phase:productJourney.phase(),exploded,inspect,companyLayout});
     if(kind==='history'){historyWall.update(age,reduced,dt);camera.position.copy(historyWall.cameraPosition);target.copy(historyWall.cameraTarget);camera.lookAt(target);rig.rotation.y=0;}else{
-    camGoal.set(view.x,view.y,view.z);camera.position.lerp(camGoal,e);look.set(0,view.targetY,0);target.lerp(look,e);camera.lookAt(target);angle+=(angleGoal-angle)*e;rig.rotation.y=angle+(reduced?0:Math.sin(t*.2)*(kind==='intro'?.012:.035));}
-    for(const o of bricks){if(!visible(o.g)||o.historyManaged||o.journeyManaged||o.senseManaged||!reduced&&kind==='intro'&&age<o.introDelay)continue;o.g.position.lerp(o.goal,e);o.g.scale.lerp(v.setScalar(o.targetScale),e)}
+    const introTime=introClock??age;const openingDolly=kind==='intro'&&!reduced?1-THREE.MathUtils.smootherstep(introTime,0,3.5):0;
+    const dolly=kind==='company'&&companyLayout==='stage'&&!reduced?companyScene.entrance():0;
+    camGoal.set(view.x+1.8*dolly+3*openingDolly,view.y+.65*dolly+1.5*openingDolly,view.z+1.5*dolly+4*openingDolly);camera.position.lerp(camGoal,e);look.set(0,view.targetY,0);target.lerp(look,e);camera.lookAt(target);angle+=(angleGoal-angle)*e;rig.rotation.y=angle+(reduced||kind==='company'?0:Math.sin(t*.2)*(kind==='intro'?.012:.035));}
+    for(const o of bricks){if(!visible(o.g)||o.historyManaged||o.companyManaged||o.journeyManaged||o.senseManaged||o.introManaged)continue;o.g.position.lerp(o.goal,e);o.g.scale.lerp(v.setScalar(o.targetScale),e)}
     if(!reduced){brains.forEach(({brain,nodes},i)=>{if(visible(brain)){brain.rotation.y=Math.sin(t*.45+i)*.18;nodes.material.opacity=.65+.35*Math.sin(t*1.6+i)}});connections.forEach(({curve,bead,offset})=>bead.position.copy(curve.getPoint((t*.24+offset)%1)))}
-    if(kind==='intro')anniversary.update(age,!reduced);
+    if(kind==='company')companyScene.update(age,reduced);
+    if(kind==='intro'){
+      const introTime=introClock??age;
+      ten.forEach(o=>{const p=reduced?1:THREE.MathUtils.clamp((introTime-o.introDelay)/1.65,0,1),ease=1-Math.pow(1-p,4);o.g.position.lerpVectors(o.introStart,o.home,ease);o.g.rotation.y=o.introTwist*(1-ease);});
+      anniversary.update(introTime,!reduced);
+    }
     if(kind==='growth'||kind==='body')growth.update(kind,age,reduced);
     if(kind==='product')productJourney.update(age,reduced,dt);
     renderer.render(scene,camera);
     const r=container.getBoundingClientRect(),lr=labelLayer.getBoundingClientRect();labels.forEach(l=>{l.el.hidden=kind!==l.scope||!visible(l.group)||(l.scope==='history'&&!historyWall.labelsVisible())||(l.scope==='product'&&!productJourney.labelsVisible());if(l.el.hidden)return;v.copy(l.anchor);l.group.localToWorld(v);v.project(camera);l.el.style.left=`${(v.x*.5+.5)*r.width+r.left-lr.left}px`;l.el.style.top=`${(-v.y*.5+.5)*r.height+r.top-lr.top}px`});
   }
   camera.position.set(5,6,24);setChapter(0);raf=requestAnimationFrame(animate);
-  return {setChapter,setExploded,setInspect,setFusion,senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();anniversary.dispose();historyWall.dispose();renderer.dispose()}};
+  return {setIntroTime(time){introClock=time;if(time>=20){age=4;introClock=null;}},setChapter,setExploded,setInspect,setFusion,setCompanyLayout(id){companyLayout=id;angleGoal=0;companyScene.setLayout(id);},senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();anniversary.dispose();companyScene.dispose();historyWall.dispose();renderer.dispose()}};
 }

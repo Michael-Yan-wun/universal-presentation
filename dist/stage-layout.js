@@ -2,8 +2,9 @@
 export const cameraStage={eyeY:4.55,spread:4.65,modelScale:1.38,outputY:-3.05};
 export const journeyStage={spread:4.8,overviewY:.8,overviewScale:1.10,focusY:1.75,focusScale:1.72,bornY:1.20,bornScale:1.36};
 
-export function stageView(kind,aspect,{phase='overview',exploded=false,inspect=false}={}){
+export function stageView(kind,aspect,{phase='overview',exploded=false,inspect=false,companyLayout='stage'}={}){
  const views={
+  company:companyLayout==='steps'?{x:2,y:5.7,z:20.7,targetY:-.6}:companyLayout==='orbit'?{x:.4,y:3.6,z:20.4,targetY:0}:{x:.6,y:5.6,z:18.5,targetY:.1},
   growth:{x:1.25,y:2.55,z:20.8,targetY:.45},
   product:{x:2.25,y:3.65,z:21.2,targetY:.70},
   body:{x:1.6,y:3.7,z:21.8,targetY:.8},

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-08",
+  "mode": "built-in image_gen; transparent_background: false",
+  "request": "Simplify the interior backgrounds for the second and third themes, preserving their distinct color identities.",
+  "assets": [
+    {
+      "theme": "galaxy",
+      "page": "interior",
+      "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-7a891a05-27c6-4a4e-b55b-56256d86b372.png",
+      "png": "dist/assets/cosmic-backgrounds/galaxy-interior-v2.png",
+      "webp": "dist/assets/cosmic-backgrounds/galaxy-interior-v2.webp",
+      "prompt": "Generate ONE finished 16:9 landscape BACKGROUND ONLY for an interior page of a premium enterprise AI presentation. Theme: DEEP GALACTIC VISTA, refined midnight navy and silver-blue, sophisticated quiet astronomy. The user explicitly asks for a much simpler interior background: remove at least 70% of visual density compared with a dramatic Milky Way hero image. Leave 85% of the canvas nearly empty dark navy-black (#030914). ALL left 70% must be uninterrupted quiet dark negative space for large heading, body copy, charts and numbers. Center-right x52-91%, y8-80% must also stay calm behind a company logo and product screenshots. Show a faint distant galactic dust veil ONLY along the far right edge and lowest bottom-right margin, a very slim gently receding band with precise but extremely subtle detail, desaturated silvery-blue #1B2B42. Small sparse stars, no more than a few dozen pinpricks, dim and mainly at outer edges. NO bright galactic core, white blobs, dense star clusters, obvious arcs around the center, planets, Earth, moon, horizon, aurora curtains, broad clouds, neon, streaks, grids, grain or visual noise. The galaxy must be low contrast yet just recognizable at the extreme perimeter, not a focal object. Crisp restrained astronomical realism, not generic abstract gradient wallpaper. This is a real background asset; absolutely no text, letters, numbers, logos, UI, cards, borders, computers, stage, platform or watermark. Full bleed, subtly continuous dark edges. Strong enterprise readability, quiet spatial depth."
+    },
+    {
+      "theme": "aurora",
+      "page": "interior",
+      "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-ad4c36ca-835d-4052-86cc-fa49364256bf.png",
+      "png": "dist/assets/cosmic-backgrounds/aurora-interior-v2.png",
+      "webp": "dist/assets/cosmic-backgrounds/aurora-interior-v2.webp",
+      "prompt": "Generate ONE finished 16:9 landscape BACKGROUND ONLY for an interior page of a luxury enterprise AI keynote. Theme: AURORA STAR SEA, extremely restrained deep midnight navy with a faint teal-blue atmospheric trace and a tiny muted violet undertone. The user asks to SIMPLIFY a decorative aurora nebula background substantially. Keep 85% of the canvas as almost empty, smooth deep navy-black (#030914), especially ALL x0-72% and the whole central content area. The actual page overlays left headline/body copy and right company logo/product monitors: preserve calm dark negative space at x52-92%, y8-82% too. Only at the extreme right edge x94-100% and bottom-right corner y88-100%, include ONE broad faint translucent teal gas wisp, softly entering from outside frame and dissolving before it approaches any content. A minimal photographic hint of cosmic gas, desaturated teal #15333C with a whisper of deep muted violet only at the bottom edge. The wisp must be very low contrast, relaxed, no tightly curling forms, no multiple ribbons, no portal, no ring, no massive nebula cloud. Very few tiny dim stars near edges, no bright dots. No planets, Earth, moon, horizon, grid, streaks, neon glow, grain, clusters, decorative sparkles, center gradient or central halo. Sophisticated calm technology feeling, astronomical atmosphere, not an abstract gradient graphic. No text, letters, numbers, typography, logos, UI, cards, borders, devices, stage, pedestal or watermark. Edge-to-edge image, crisp but barely visible detail only at the far edge, clean generous reading space."
+    }
+  ]
+}

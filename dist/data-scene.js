@@ -1,3 +1,4 @@
+import { palette } from './product-colors.js?v=product-colors-1';
 import * as THREE from './vendor/three.module.js';
 import {createEdgeHost} from './edge-host.js?v=learning-life-1';
 
@@ -48,7 +49,7 @@ export function createDataScene({parent,brick,addLabel}){
  const traceGeometry=new THREE.BufferGeometry();
  const linePoints=[];for(let j=0;j<3;j++)for(let i=0;i<79;i++){for(const n of[i,i+1])linePoints.push((n/79-.5)*4.3,(j-1)*.30+Math.sin(n*.24+j)*.15,0)}
  traceGeometry.setAttribute('position',new THREE.Float32BufferAttribute(linePoints,3));const waves=new THREE.LineSegments(traceGeometry,new THREE.LineBasicMaterial({color:'#a8d1c0',transparent:true,opacity:.65}));traces.add(waves);
- const host=createEdgeHost({parent:group,brick,addLabel,id:'numeric',name:'WinEdge-N',color:'#367961'});
+ const host=createEdgeHost({parent:group,brick,addLabel,id:'numeric',name:'WinEdge-N',color:palette.numeric});
  return {group,update(time,reduced){
   group.visible=true;const t=reduced?8:time;
   traces.scale.setScalar(.65+.35*ease(clamp(t/1.0)));traces.rotation.z=reduced?0:Math.sin(time*.25)*.022;

@@ -12,8 +12,6 @@ body{isolation:isolate;background:#020817}#universe{position:fixed;inset:0;z-ind
 @media(min-width:801px){#experience[data-kind=intro] .sculpture-caption{left:38%;right:22%}}
 /* Reference composition: grounded gold sculpture, station deck and Earth sunrise. */
 @media(min-width:801px){#experience[data-kind=intro]{overflow:hidden}#experience[data-kind=intro] #scene{left:15%;right:-25%;top:-15px;bottom:-25px}#experience[data-kind=intro] .sculpture-caption{left:auto;right:5.5%;bottom:0;text-align:right}#experience[data-kind=intro] .sculpture-caption>span{font-size:10px;letter-spacing:1.4px;color:#d3dce7}#experience[data-kind=intro] .scene-topline>span:not(#scene-index),#experience[data-kind=intro] .scene-bottomline{display:none}#experience[data-kind=intro] .story{top:10%;max-width:660px}}
-/* Official AIWin lockup supplied by the user; preserve its original aspect ratio. */
-.brand-logo{display:block;width:auto;height:78px;object-fit:contain;flex:none}
 
 /* Vision chapter: travel into a brick, hold in the case room, then form a product. */
 #experience[data-kind=history]{overflow:clip}
@@ -28,7 +26,7 @@ body{isolation:isolate;background:#020817}#universe{position:fixed;inset:0;z-ind
 #experience[data-kind=history] .scene-topline>span:not(#scene-index){display:none}
 .history-domains{display:flex;flex-direction:column;gap:8px;margin:24px 0;max-width:460px;pointer-events:auto}
 .history-domains button{display:flex;align-items:center;gap:13px;text-align:left;border-bottom:1px solid #adc9ee24;padding:12px 0;color:#9cacbf}
-.history-domains i{height:9px;width:9px;border-radius:2px;background:#3159ac}
+.history-domains i{height:9px;width:9px;border-radius:2px;background:var(--aiwinops)}
 .history-domains button>span{font-size:11px;color:#8799b3}
 .history-domains strong{font-weight:500;font-size:18px}
 .history-domains small{margin-left:auto;font-size:11px;color:#8799b3}

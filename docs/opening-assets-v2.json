@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-08",
+  "reference": "https://www.pinterest.com/pin/1088463803728450352/",
+  "referenceUse": "Visual sequence and mood only. Original video is not embedded or redistributed.",
+  "generator": "Built-in image_gen.imagegen",
+  "assets": [
+    {
+      "file": "docs/design-archive/opening-v2/nebula-filaments-v2.png",
+      "size": [
+        1672,
+        941
+      ],
+      "prompt": "Crisp cinematic deep-space nebula plate, landscape 16:9. Naturally irregular, intricately filamented silver-white interstellar dust across a black starfield, smoky umber and muted violet-gray clouds, sharp stars, controlled highlights. Wide horizontal composition, near-black edges. No spiral galaxy, rings, planets, hand, text, blur, bokeh or overexposed white patches. Requested 3840x2160; actual output recorded in size."
+    },
+    {
+      "file": "docs/design-archive/opening-v2/crystal-hand-v2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "transparent": true,
+      "prompt": "Photoreal CGI right hand and forearm isolated on true transparent alpha. Back/three-quarter view, wrist enters bottom-right. Index and thumb form a C-shaped pinch with a small empty gap; three other fingers remain naturally separated. Polished smoked crystal / liquid chrome, pearlescent violet, champagne highlights, silver edges, sharp contour and anatomy. No sphere, nebula, stars, text, rings or background. Requested 2048x2048; actual output recorded in size."
+    }
+  ],
+  "existingTextures": [
+    "dist/assets/universe/earth-day.jpg",
+    "dist/assets/universe/earth-night.png"
+  ],
+  "existingTextureCredits": "dist/assets/universe/CREDITS.md",
+  "rendering": "Two-times viewport resolution capped at 8294400 pixels. Texture source resolution remains as listed; no upscaling claim.",
+  "status": "Archived 2026-10-09. Hand and nebula removed from the opening at user request; no runtime use."
+}

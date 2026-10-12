@@ -31,7 +31,9 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 | 區塊 | 已實作內容 |
 | --- | --- |
-| 開場 | 金色積木「10」落下組裝、太空站地板、倒影、旋轉地球、星空與流星 |
+| 開場 | 金色積木「10」落下組裝、太空站地板、倒影、地球曙光背景 |
+| 公司介紹 | AIWin Logo、150+ 專案、30+ 產業、6 項國家專利、海外市場與 WinHub.AI 四項產品展示舞台 |
+| 公司沿革 | 2016–2025 十個年份，分為扎根與產品化、平台與國際化兩段；可點年份區間或用原有箭頭切換 |
 | 感知世界 | 小機器人、六種感知入口、眼睛展開 Basler / IP / USB 相機；影像匯入 WinEdge-V，Modbus / MC Protocol / Database 匯入 WinEdge-N；兩者搭載 Edge 硬體 |
 | 十年專案與學習 | 「有了感知，開始學習」；同一個機器人接收積木光流、知識節點亮起；深入 Vision 後探索五個實際案例影片及硬體流程 |
 | AIWinOps 誕生 | 五案完成後，呈現整理、標註、訓練與驗證；全部專案積木形成龍捲風，融合誕生 AIWinOps，再連回部署硬體 |
@@ -39,27 +41,39 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 | 協作與新品 | 產品連成完整智慧身體；One more thing 揭曉 WinEdge Ultra 與 VISION / DATA / EXTEND 模組 |
 | 城堡與實績 | 實體積木底座、完整產品城堡、五個領域大腦，以及 Wafer Map、烤箱溫控、企業知識三組應用 |
 
+| 封底 | 地球曙光地平線、「下一個十年，與你同行」、品牌收尾 |
+
 **目前的範圍：** Vision 已有完整「五案影片 → 每案硬體 → 學習 → 融合」流程。十年總覽的 Data、LLM 按鈕目前開啟案例說明；後續 NumOps、WinChat 使用各自的三段能力流程，尚未擴成與 Vision 相同的五案影片流程。手機不是本案驗收範圍。
 
 ## 故事線與章節入口
 
-首頁左下方顯示 `00 / 10`，表示章節編號 0–10，合計 **11 個章節**。感知、案例及產品章節內還有由講者推進的子階段。
+首頁左下方顯示 `00 / 12`，表示章節編號 0–12，合計 **13 個章節**。感知、案例及產品章節內還有由講者推進的子階段。
 
 | 編號 | 章節 | 網址片段 | 重點 |
 | --- | --- | --- | --- |
 | 00 | 序章 | `#intro` | From Edge to Agent、金色積木 10 |
-| 01 | 感知世界 | `#first-contact` | 初生機器人 → 影像入口 → 數據入口 |
-| 02 | 實戰與學習 | `#decade` | 十年專案是成長課堂；案例累積成 AIWinOps |
-| 03 | 數據規律 | `#analytics` | 情境、模式與專家規則、現場驗證 → NumOps |
-| 04 | 知識與行動 | `#chat` | RAG 記憶、Agent 任務、Skill 方法 → WinChat |
-| 05 | 協作成形 | `#connected-intelligence` | 感官、學習、神經與肢體共同運作 |
-| 06 | One more thing | `#one-more-thing` | WinEdge-N + WinEdge-V → WinEdge Ultra |
-| 07 | 智慧城堡 | `#castle` | 現場、產品、WinChat 與五個 Domain AI 大腦 |
-| 08 | Wafer Map | `#inspection` | AIWinOps + WinEdge-V |
-| 09 | 智慧烤箱 | `#temperature` | NumOps + WinEdge-N |
-| 10 | 企業知識 | `#knowledge` | WinChat + AI Agent |
+| 01 | 公司介紹 | `#company` | 企業 AI 導入專家、交付實績、海外市場、WinHub.AI 四大能力 |
+| 02 | 感知世界 | `#first-contact` | 初生機器人 → 影像入口 → 數據入口 |
+| 03 | 實戰與學習 | `#decade` | 十年專案是成長課堂；案例累積成 AIWinOps |
+| 04 | 數據規律 | `#analytics` | 情境、模式與專家規則、現場驗證 → NumOps |
+| 05 | 知識與行動 | `#chat` | RAG 記憶、Agent 任務、Skill 方法 → WinChat |
+| 06 | 協作成形 | `#connected-intelligence` | 感官、學習、神經與肢體共同運作 |
+| 07 | One more thing | `#one-more-thing` | WinEdge-N + WinEdge-V → WinEdge Ultra |
+| 08 | 智慧城堡 | `#castle` | 現場、產品、WinChat 與五個 Domain AI 大腦 |
+| 09 | Wafer Map | `#inspection` | AIWinOps + WinEdge-V |
+| 10 | 智慧烤箱 | `#temperature` | NumOps + WinEdge-N |
+| 11 | 企業知識 | `#knowledge` | WinChat + AI Agent |
+| 12 | 封底 | `#closing` | 下一個十年，與你同行 |
+
+公司介紹提供三款版型預覽：開啟 [版型比較](http://127.0.0.1:8765/?company-layout=stage#company)，用右上角切換「環形展台」、「懸浮星軌」與「進化階梯」。網址參數 `company-layout=stage|orbit|steps` 保留選擇；一般網址不顯示比較工具列。
+
+公司介紹後新增 [公司沿革](http://127.0.0.1:8765/#company-history)。先呈現 2016–2020，再按 → 顯示 2021–2025；再次按 → 接到感知世界，按 ← 可依序返回。也可點頁面上方的年份區間直接切換。
 
 例如直接開啟 [學習章節](http://127.0.0.1:8765/#decade)。舊入口 `#visual`、`#numeric` 仍有效，分別對應「感知世界」中的影像與數據段，不會新增重複章節。
+
+正式背景已套用使用者選定的混搭：**封面與封底使用地球曙光，所有內頁使用精簡版深空銀河**。一般網址即可顯示，不需查詢參數；背景比較工具已移除。舊背景預覽網址會轉入相應的正式章節並清除背景參數。封底接在企業知識實績之後，可由章節列、`End` 或 [封底網址](http://127.0.0.1:8765/#closing) 直接進入；底部箭頭返回前一幕。
+
+文字配色提供四套實頁比較：開啟 [文字配色預覽](http://127.0.0.1:8765/?text-theme=platinum#company)，以右上角切換鉑銀極簡、冰藍科技、青玉未來、星紫雅白。`text-theme=platinum|ice|jade|violet` 只控制文字預覽；章節切換與重新整理會保留選擇，宇宙背景和產品四色固定。一般無此參數的網址保留目前正式版。
 
 人的成長是演講比喻，順序不代表產品上市時間。學習光流、知識節點、硬體模型與連線是概念展示；WinEdge Ultra 名稱與定位依本次演講產品規劃呈現。
 
@@ -73,7 +87,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 | `P` | 切換演講模式，停用滾輪切幕，空白鍵直接推進 |
 | `F` | 切換瀏覽器全螢幕，需瀏覽器支援 |
 | `N` | 顯示／隱藏講者提示；提示出現在同一畫面，**會一起投影** |
-| `Home` / `End` | 開場／最後一個實績 |
+| `Home` / `End` | 開場／封底 |
 | 下方章節名稱 | 直接切換章節；重新進入互動章節會重設該輪完成狀態 |
 | 點選積木／案例／領域大腦 | 進入重點、影片或情境；可互動的場景支援拖曳旋轉 |
 | `Esc` | 關閉案例視窗 |
@@ -103,11 +117,14 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 └── dist/                        # 原始網站檔案；直接由 HTTP 伺服器提供
     ├── index.html / style.css    # 頁面骨架、首頁文字與版面
     ├── app.js                    # 鍵盤、章節、彈窗、互動狀態與揭曉
+    ├── company.js / company.css # 公司介紹文案、Logo 與四大能力積木
+    ├── company-history.js / .css # 公司沿革文案、兩段時間軸與響應式排版
     ├── content.js                # 產品、案例、章節、領域大腦、講者提示
     ├── scene.js                  # Three.js 場景、積木與共用渲染迴圈
     ├── stage-layout.js           # 桌面舞台構圖及模型間距
     ├── anniversary.js            # 金色 10、太空站地板與倒影
-    ├── universe.js               # 地球、星空、曙光、流星
+    ├── cosmic-background.js / .css # 正式背景配置、響應式裁切與封底樣式
+    ├── universe.js               # 舊版動態背景，保留原始碼但不載入
     ├── growth-scene.js           # 感知與完整智慧身體的場景銜接
     ├── sense-scene.js            # 感知全貌、影像與數據子階段
     ├── robot-seed.js             # 小機器人外殼、表情與關節動畫

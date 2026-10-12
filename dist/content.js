@@ -1,4 +1,5 @@
-export const palette = { vision:'#3159ac', analytics:'#257f8a', numeric:'#367961', visual:'#436887', chat:'#c9623c', unified:'#387f64', stone:'#66758c' };
+import { palette, productInk } from './product-colors.js?v=product-colors-1';
+export { palette };
 export const products = [
   {id:'vision',name:'AIWinOps',order:1,color:palette.vision,ink:'#ffffff',role:'AI VISION PLATFORM',verb:'看見',headline:'先讓 AI，看懂每一個細節。',description:'從影像辨識、瑕疵檢測到品質判讀，<br>把一次次的視覺專案經驗，沉澱成產品。',tags:['AI 影像辨識','AI＋AOI 瑕疵檢測','檢測與分類'],pipeline:['IMAGE','MODEL','INSIGHT'],caseId:'vision',caseTitle:'六類晶圓缺陷，從訓練到現場。',note:'第一塊：AIWinOps。從視覺檢測專案出發，把解過的影像問題沉澱為產品能力。官網列有高爾夫球、紡織、石化等應用；產品介紹順序依本次演講設定，不代表官網已確認的上市日期。'},
   {id:'analytics',name:'NumOps',order:2,color:palette.analytics,ink:'#ffffff',role:'DATA ANALYTICS PLATFORM',verb:'理解',headline:'再讓數據，說出下一步。',description:'當問題藏在訊號與趨勢裡，<br>用資料分析，將經驗轉成可理解的洞察。',tags:['AI 數據分析','預測性維護','製程最佳化'],pipeline:['DATA','ANALYZE','PREDICT'],caseId:'analytics',caseTitle:'從專家規則，走向現場溫控。',note:'第二塊：NumOps。資料與影像是不同的題目，於是將數據分析能力產品化。可提官網紀錄的工業風機維護預測、刀具數據分析與半導體空調節能分析，避免宣稱未提供的改善百分比。'},
@@ -44,17 +45,20 @@ const growthNotes={
  analytics:'將資料放回情境、分析模式與專家規則、回到現場驗證，三塊經驗融合成 NumOps。銜接 WinEdge-N，形成學習與回饋的迴路。',
  chat:'依序深入 RAG 的企業記憶、Agent 的任務協作、Skill 的可重用方法，三塊能力融合為 WinChat，再進入完整智慧身體。'
 };
-for(const p of products)Object.assign(p,growthCopy[p.id],{note:growthNotes[p.id]});
-const productChapter=id=>{const p=products.find(p=>p.id===id);return {slug:p.id,kind:'product',accent:p.color,label:p.name,product:p,stage:p.order<=2?'sense':p.order<=4?'learn':'think',note:p.note+' 本次以人的成長作為敘事比喻，產品介紹順序不等同上市年份。'}};
+for(const p of products)Object.assign(p,growthCopy[p.id],{note:growthNotes[p.id],uiColor:productInk[p.id]});
+const productChapter=id=>{const p=products.find(p=>p.id===id);return {slug:p.id,kind:'product',accent:p.uiColor,label:p.name,product:p,stage:p.order<=2?'sense':p.order<=4?'learn':'think',note:p.note+' 本次以人的成長作為敘事比喻，產品介紹順序不等同上市年份。'}};
 export const chapters = [
  {slug:'intro',kind:'intro',accent:'#dc946f',label:'開場',stage:'intro',note:'十年經驗，積累成功。如果公司的成長像一個人，我們如何從感知世界，走到理解、思考與行動？'},
+ {slug:'company',kind:'company',accent:'#eda76f',label:'公司介紹',stage:'company',note:'慧穩科技 AIWin 是企業 AI 導入專家，深耕智慧製造、半導體與企業 AI 應用。依本次提供的公司簡介，累積 150+ AI 落地案例、30+ 產業服務經驗與 6 項國家專利，並跨足越南、韓國、泰國市場。WinHub.AI 融合視覺辨識、數據分析、知識中樞與邊緣運算。從這些現場經驗出發，接下來用生命的成長，說明 AI 如何感知、學習與行動。'},
+ {slug:'company-history',kind:'chronicle',accent:'#f08200',label:'公司沿革',stage:'company-history',note:'依使用者提供的公司沿革資料，分為 2016–2020 扎根與產品化、2021–2025 平台與國際化。先從慧穩創立、跨域專案與專利，說到 AI SaaS 模式；再帶出 WinHub.AI、資本挹注、多模態平台與海外市場。年份沿用原資料，不將後續產品學習比喻視為上市年份。'},
  {slug:'first-contact',kind:'growth',accent:'#8cbbd7',label:'感知世界',stage:'sense',note:'像嬰兒第一次用眼睛與雙手接觸世界。感知不只有相機：鏡頭、光源與取像決定輸入的品質，串流與前處理整理畫面；感測器、PLC、資料庫與通訊帶回物理變化及設備脈絡。WinEdge-V 與 WinEdge-N 接收這些輸入，在現場串起流程、推論與回饋。接著依序展開影像入口與數據入口，兩塊 WinEdge 都由 Edge 硬體搭載；數據入口以 Modbus、MC Protocol、Database 接入，不再經過獨立三段式產品介紹。六個入口是概念說明，配置依現場而定。這是成長比喻，不是產品上市時間軸。'},
  {slug:'decade',kind:'history',accent:'#92a8c8',label:'從經驗中學習',stage:'experience',note:'承接前面的生命體：有了影像與數據的感知，就像孩子開始上學，在十年的不同專案中累積知識與判斷經驗。將現場資料依專案整理、標註，再反覆訓練與驗證，讓模型逐步學會判斷。先看五個影像案例影片，再逐案看硬體如何接收影像、在 WinEdge-V 上推論並輸出結果。五案完成後，全部經驗積木形成龍捲風，誕生 AIWinOps；硬體留下，連成現場蒐集、訓練、部署與回饋的迴路。完成後進入 NumOps，繼續學習數據中的規律。'},
  productChapter('analytics'),productChapter('chat'),
  {slug:'connected-intelligence',kind:'body',accent:'#a5c9d1',label:'協作成形',stage:'connect',note:'眼睛與觸覺接收資訊，AIWinOps 與 NumOps 學會規律，WinChat 串起記憶、任務與技能。設備與執行端像肢體，資料通道像神經。所有部位開始協作；但數據與影像還分開，為 One more thing 留下問題。'},
- {slug:'one-more-thing',kind:'reveal',accent:'#80b09a',label:'One more thing',stage:'evolve',note:'完整的身體，不會把看見的與感受到的分開。揭曉 WinEdge Ultra：整合 WinEdge-N 與 WinEdge-V，作為模組化擴充的新一代現場平台。名稱與定位依使用者本次確認，不加入未提供的硬體規格或效能承諾。'},
- {slug:'castle',kind:'castle',accent:'#80b09a',label:'智慧城堡',stage:'evolve',note:'WinEdge Ultra 統一現場入口，AIWinOps 與 NumOps 提供學習能力，WinChat 的 RAG、Agent、Skill 串起知識與行動，再依領域組成不同 AI 大腦。模組化的智慧身體，可以長出不同的專業組合。'},
- ...combinations.map(c=>({slug:c.id,kind:'case',accent:products.find(p=>p.id===c.products[0]).color,label:c.title,stage:'practice',combination:c,note:c.note}))
+ {slug:'one-more-thing',kind:'reveal',accent:productInk.unified,label:'One more thing',stage:'evolve',note:'完整的身體，不會把看見的與感受到的分開。揭曉 WinEdge Ultra：整合 WinEdge-N 與 WinEdge-V，作為模組化擴充的新一代現場平台。名稱與定位依使用者本次確認，不加入未提供的硬體規格或效能承諾。'},
+ {slug:'castle',kind:'castle',accent:productInk.unified,label:'智慧城堡',stage:'evolve',note:'WinEdge Ultra 統一現場入口，AIWinOps 與 NumOps 提供學習能力，WinChat 的 RAG、Agent、Skill 串起知識與行動，再依領域組成不同 AI 大腦。模組化的智慧身體，可以長出不同的專業組合。'},
+ ...combinations.map(c=>({slug:c.id,kind:'case',accent:products.find(p=>p.id===c.products[0]).uiColor,label:c.title,stage:'practice',combination:c,note:c.note})),
+ {slug:'closing',kind:'closing',accent:'#a8c4df',label:'封底',stage:'closing',note:'下一個十年，與你同行。感謝一路同行的夥伴；讓每一次累積，成為下一個智慧新章。'}
 ];
 export const senseRoutes={visual:'cameras',numeric:'data'};
 export const chapterFor=slug=>chapters.findIndex(c=>c.slug===(senseRoutes[slug]?'first-contact':slug));

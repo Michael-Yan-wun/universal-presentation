@@ -1,0 +1,36 @@
+/* The film dissolves into the approved Earth Dawn cover. */
+#opening-cinema { position:fixed; inset:0; z-index:30; pointer-events:none; overflow:hidden; }
+.opening-film { position:absolute; inset:0; background:#02040b; }
+#opening-cinema canvas { display:block; width:100%; height:100%; }
+.opening-film::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center,transparent 58%,#01030a40 100%); }
+/* Display the original orange and gray logo without recoloring. */
+.opening-brand-light { position:absolute; inset:0; z-index:2; opacity:0; background:radial-gradient(ellipse 28% 40% at 34% 45%,#ed780021,transparent 75%); }
+#opening-brand { position:absolute; z-index:3; left:34%; top:45%; width:clamp(210px,36vh,280px); opacity:0; transform:translate(-50%,-50%); transform-origin:center; will-change:transform,opacity; --brand-energy:0; --brand-sweep:0; --sweep-shift:-180%; }
+#opening-brand img { position:relative; z-index:2; display:block; width:100%; height:auto; }
+.opening-brand-aura { position:absolute; inset:0; z-index:0; background:#ef8200; mask:url('./assets/aiwin-logo.png') center/contain no-repeat; filter:blur(19px); opacity:calc(var(--brand-energy) * .55); }
+.opening-brand-sweep { position:absolute; inset:0; z-index:3; overflow:hidden; mask:url('./assets/aiwin-logo.png') center/contain no-repeat; opacity:var(--brand-sweep); }
+.opening-brand-sweep span { position:absolute; inset:-15% auto -15% 0; width:55%; background:linear-gradient(90deg,transparent,#ffa52b18 30%,#ffc572b3 50%,#ffa52b18 70%,transparent); transform:translateX(var(--sweep-shift)) skewX(-18deg); }
+.opening-brand-sparks { position:absolute; inset:0; z-index:4; }
+.opening-brand-spark { position:absolute; display:block; width:3px; height:3px; border-radius:50%; background:#ffb75a; box-shadow:0 0 9px #f08200; opacity:0; }
+.opening-brand-spark:nth-child(3n+1)::before,.opening-brand-spark:nth-child(3n+1)::after { content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:linear-gradient(90deg,transparent,#ffc675,transparent); width:22px; height:1px; }
+.opening-brand-spark:nth-child(3n+1)::after { transform:translate(-50%,-50%) rotate(90deg); width:14px; }
+#opening-skip { position:fixed; z-index:32; right:4.5%; bottom:37px; border:1px solid #b1c4e43b; border-radius:30px; padding:10px 16px; background:#030915b8; color:#c6d2e5; font-size:11px; letter-spacing:.06em; }
+#opening-skip span { margin-left:13px; font-size:9px; color:#a4b4cb; }
+#opening-skip:hover { background:#152338; color:white; }
+.intro-story.enter { animation:none; }
+.intro-title-line { display:block; overflow:hidden; padding-bottom:.09em; margin-bottom:-.09em; }
+.intro-title-line>span { display:block; }
+.opening-replay { pointer-events:auto; margin-top:19px; padding:4px 0; display:inline-flex; align-items:center; gap:8px; color:var(--type-muted,#9caec4); font-size:11px; letter-spacing:.06em; }
+.opening-replay span { font-size:16px; }
+.opening-replay:hover { color:var(--type-title,#eef3fc); }
+body[data-opening] .intro-story :is(.intro-title-line>span,.story-copy,.story-actions) { will-change:transform,opacity; }
+body[data-opening=cosmos] :is(.header,.footer,.keyboard-help) { visibility:hidden; }
+/* Clip the oversized scene without creating a scroll container that moves on replay focus. */
+@media(min-width:801px){#experience[data-kind=intro] { overflow:clip; }}
+@media(max-width:800px){
+  #opening-brand { left:50%; top:37%; width:min(52vw,32vh,240px); }
+  .opening-brand-light { background:radial-gradient(ellipse 60% 40% at 50% 37%,#ed780021,transparent 75%); }
+  #opening-skip { bottom:25px; right:6%; }
+  .opening-replay { margin-top:15px; }
+}
+@media(prefers-reduced-motion:reduce){#opening-cinema,#opening-skip { display:none!important; }}

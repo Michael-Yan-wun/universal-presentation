@@ -1,0 +1,30 @@
+[
+  {
+    "id": "earth",
+    "name": "地球曙光",
+    "generated": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-30a6a98b-15be-4b66-af3b-0687944a6e8c.png",
+    "png": "dist/assets/cosmic-backgrounds/earth-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/earth-v1.webp"
+  },
+  {
+    "id": "galaxy",
+    "name": "深空銀河",
+    "generated": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-d9a51a64-af4c-4df9-9d5e-be7454d57b37.png",
+    "png": "dist/assets/cosmic-backgrounds/galaxy-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/galaxy-v1.webp"
+  },
+  {
+    "id": "aurora",
+    "name": "極光星海",
+    "generated": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-8956eb92-5829-4df9-be99-1943ab1f6f29.png",
+    "png": "dist/assets/cosmic-backgrounds/aurora-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/aurora-v1.webp"
+  },
+  {
+    "id": "lunar",
+    "name": "月境鉑銀",
+    "generated": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-363b5d5f-c2c6-46bd-94d4-005246d2196f.png",
+    "png": "dist/assets/cosmic-backgrounds/lunar-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/lunar-v1.webp"
+  }
+]

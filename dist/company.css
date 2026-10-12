@@ -1,0 +1,191 @@
+/* The company introduction shares the keynote's stage, materials and controls. */
+body:has(#experience[data-kind=company]) #universe { opacity: .42; }
+#experience[data-kind=company] { overflow: clip; }
+#experience[data-kind=company] .company-story { left: 6%; top: 6%; width: 40%; max-width: 720px; }
+.company-story .eyebrow { color: #c5b39c; font-size: 11px; letter-spacing: 2px; margin-bottom: 25px; }
+.company-story h1 { font-size: clamp(40px, 3.65vw, 68px); letter-spacing: .025em; line-height: 1.2; margin-bottom: 23px; }
+.company-story h1>span { display: block; font-size: 1.42em; letter-spacing: -.035em; color: #f4d6ae; line-height: 1.13; }
+.company-story h1 em { color: #f29d5c; }
+.company-story .story-copy h2 { font-size: clamp(22px, 1.8vw, 32px); letter-spacing: .13em; color: #edf0f6; margin-bottom: 16px; }
+.company-story .story-copy p { font-size: clamp(14px, 1.08vw, 20px); line-height: 1.9; max-width: none; }
+.company-metrics { display: grid; grid-template-columns: 1.22fr 1.22fr 1fr; margin: 32px 0 0; padding: 23px 0; border-top: 1px solid #dab48440; border-bottom: 1px solid #dab48440; }
+.company-metrics>div { display: flex; flex-direction: column-reverse; align-items: flex-start; padding-left: 24px; border-left: 1px solid #a3b5c62e; }
+.company-metrics>div:first-child { border: 0; padding-left: 0; }
+.company-metrics dt { font-size: clamp(12px, .95vw, 17px); color: #c2cbd7; letter-spacing: .08em; margin-top: 10px; }
+.company-metrics dd { font-size: clamp(42px, 3.7vw, 70px); font-weight: 450; line-height: 1; letter-spacing: -.06em; color: #f3bd7b; margin: 0; }
+.company-metrics>div:nth-child(2) dd { color: #a9c8e6; }
+.company-metrics dd span { font-size: .58em; margin-left: 4px; vertical-align: .09em; }
+.company-markets { display: flex; align-items: center; gap: 24px; margin-top: 21px; }
+.company-markets>span { font-size: 12px; color: #92a6bb; letter-spacing: .08em; }
+.company-markets strong { font-weight: 450; font-size: clamp(15px, 1.2vw, 21px); letter-spacing: .1em; }
+.company-markets i { font-style: normal; color: #ba8b58; margin: 0 15px; }
+.company-identity { position: absolute; left: 56%; right: 10%; top: 2%; height: 47%; display: grid; place-items: center; pointer-events: none; }
+.company-identity img { position: relative; height: 120%; max-width: 100%; width: auto; aspect-ratio: 1; object-fit: contain; mix-blend-mode: screen; mask-image: radial-gradient(ellipse, #000 35%, #000b 55%, transparent 72%);  }
+#experience[data-kind=company] #scene { left: 49%; right: 3%; top: 47%; bottom: 9%; }
+#experience[data-kind=company] .scene-topline { left: 53%; right: 5.5%; }
+#experience[data-kind=company] .scene-topline>span:not(#scene-index) { display: none; }
+#experience[data-kind=company] .scene-bottomline { display: none; }
+.company-platform { position: absolute; left: 51%; right: 6%; bottom: 3%; text-align: center; pointer-events: none; }
+.company-platform h2 { margin: 0; font-size: clamp(23px, 1.9vw, 34px); font-weight: 500; letter-spacing: -.025em; color: #e4cfb4; }
+.company-platform h2 span { font-size: .58em; color: #bacbdd; letter-spacing: .1em; margin-left: 12px; font-weight: 400; }
+.company-platform ul { display: flex; justify-content: center; gap: 24px; list-style: none; padding: 0; margin: 17px 0 0; }
+.company-platform li { color: #b7c7d9; font-size: clamp(12px, .95vw, 16px); white-space: nowrap; }
+.company-platform li:before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 1px; background: var(--capability); }
+/* Make the additional navigation stop fit without reducing the main copy. */
+.chapter-nav { min-width: 0; overflow-x: auto; scrollbar-width: thin; }
+.chapter-nav button { flex-shrink: 0; }
+@media (min-width: 801px) and (max-height: 850px) {
+  #experience[data-kind=company] .company-story { top: 4%; }
+  .company-story .eyebrow { font-size: 9px; margin-bottom: 16px; }
+  .company-story h1 { font-size: 39px; margin-bottom: 16px; }
+  .company-story .story-copy h2 { font-size: 22px; margin-bottom: 10px; }
+  .company-story .story-copy p { font-size: 14px; line-height: 1.75; }
+  .company-metrics { margin-top: 21px; padding: 17px 0; }
+  .company-metrics dd { font-size: 43px; }
+  .company-metrics dt { margin-top: 8px; font-size: 12px; }
+  .company-markets { margin-top: 17px; gap: 18px; }
+  .company-markets strong { font-size: 15px; }
+  .company-markets i { margin: 0 10px; }
+  .company-platform>p { font-size: 8px; margin-bottom: 7px; }
+  .company-platform h2 { font-size: 25px; }
+  .company-platform ul { margin-top: 11px; gap: 15px; }
+  .company-platform li { font-size: 12px; }
+  .footer { gap: 20px; }
+}
+@media (max-width: 800px) {
+  #experience[data-kind=company] { min-height: 0; padding-bottom: 640px; }
+  #experience[data-kind=company] .company-story { position: relative; top: auto; left: auto; width: 86%; margin: 24px 7% 0; }
+  .company-story h1 { font-size: 42px; }
+  .company-story .eyebrow { font-size: 8px; letter-spacing: 1.1px; }
+  .company-story .story-copy h2 { font-size: 24px; }
+  .company-metrics { margin-top: 24px; padding: 20px 0; }
+  .company-metrics>div { padding-left: 16px; }
+  .company-metrics dd { font-size: 44px; }
+  .company-metrics dt { font-size: 11px; letter-spacing: 0; }
+  .company-markets { gap: 18px; }
+  .company-markets i { margin: 0 8px; }
+  .company-identity { left: 16%; right: 16%; top: auto; bottom: 325px; height: 275px; }
+  #experience[data-kind=company] #scene { left: 0; right: 0; top: auto; bottom: 95px; height: 255px; }
+  .company-platform { left: 6%; right: 6%; bottom: 28px; }
+  .company-platform>p { font-size: 8px; letter-spacing: .16em; }
+  .company-platform h2 { font-size: 25px; }
+  .company-platform ul { gap: 15px; margin-top: 13px; }
+  .company-platform li { font-size: 11px; }
+  .company-platform li:before { margin-right: 5px; }
+  #experience[data-kind=company] .scene-topline { display: none; }
+  .chapter-nav { scrollbar-width: none; }
+}
+
+/* Three live art-direction previews. The selector appears only on preview URLs. */
+.company-design-tools { position: fixed; top: 20px; right: 4.8%; z-index: 40; pointer-events: auto; }
+.company-design-tools>span { display: block; color: #a5b5c7; font-size: 10px; letter-spacing: .14em; margin-bottom: 8px; }
+.company-design-tools>div { display: flex; gap: 5px; }
+.company-design-tools button { display: flex; align-items: center; gap: 9px; padding: 9px 12px; border: 1px solid #9fbbd139; background: #0c1622c9; color: #a7bacd; border-radius: 3px; font-size: 12px; transition: background .25s, color .25s; }
+.company-design-tools small { font-size: 9px; opacity: .6; }
+.company-design-tools button[aria-pressed=true] { border-color: #eac38d87; color: #f2d3a7; background: #3d3023c9; }
+.company-design-tools button:hover { color: #fff1dc; border-color: #dabc8c; }
+body:has(#experience[data-kind=company]) #universe { opacity: .28; }
+.company-lighting { position: absolute; left: 49%; right: 2%; top: 0; height: 70%; pointer-events: none; overflow: hidden; mask-image: linear-gradient(transparent, #000 25%, #000 70%, transparent); }
+.company-lighting:before { content: ''; position: absolute; inset: 3% 5% 15%; background: radial-gradient(ellipse at 44% 35%,#ffdfad24,transparent 58%),radial-gradient(ellipse at 70% 40%,#b3d8ff1a,transparent 57%); filter: blur(16px); }
+.company-lighting i { position: absolute; left: 12%; top: -18%; width: 40%; height: 110%; transform: rotate(-29deg); background: radial-gradient(ellipse at 50% 35%,#fff1d12b, #e7be7416 37%,transparent 69%); filter: blur(16px); }
+.company-lighting i+i { left: auto; right: 10%; transform: rotate(29deg); background: radial-gradient(ellipse at 50% 35%,#e6f1ff32,#a0caff14 37%,transparent 69%); }
+.company-identity { top: -8%; height: 39%; left: 56%; right: 10%; }
+.company-identity img { position: absolute; left: 50%; top: 0; height: 170%; width: auto; max-width: none; translate: -50% 0; filter: brightness(1.42) saturate(1.35) drop-shadow(-9px -12px 15px #ffe3b037) drop-shadow(12px -8px 17px #afd8ff35); mask-image: radial-gradient(ellipse,#000 38%,#000e 52%,transparent 71%); }
+#experience[data-kind=company] #scene { left: 47%; right: 1%; top: 31%; bottom: 12%; }
+.company-platform { bottom: 2.8%; }
+#experience[data-kind=company] .scene-topline { top: 0; }
+#experience[data-company-layout=orbit] .company-lighting:before { background: radial-gradient(ellipse at 48% 39%,#86c9ff29,transparent 60%); }
+#experience[data-company-layout=orbit] .company-platform h2 { color: #d4e8fa; }
+#experience[data-company-layout=steps] .company-identity { left: 57%; right: 9%; }
+#experience[data-company-layout=steps] .company-platform { text-align: right; right: 8%; }
+#experience[data-company-layout=steps] .company-platform ul { justify-content: flex-end; }
+@media (min-width:801px) and (max-height:850px) {
+  .company-design-tools { top: 12px; }
+  .company-design-tools>span { font-size: 9px; margin-bottom: 6px; }
+  .company-design-tools button { font-size: 11px; padding: 8px 11px; }
+}
+@media (max-width:800px) {
+  .company-design-tools { top: 8px; right: 5%; }
+  .company-design-tools>span { display: none; }
+  .company-design-tools>div { flex-direction: column; gap: 3px; }
+  .company-design-tools button { padding: 5px 9px; font-size: 10px; }
+  .company-identity, #experience[data-company-layout=steps] .company-identity { left: 19%; right: 19%; top: auto; bottom: 360px; height: 240px; }
+  .company-lighting { left: 0; right: 0; top: auto; bottom: 180px; height: 480px; }
+  #experience[data-kind=company] #scene { top: auto; bottom: 85px; height: 320px; left: -7%; right: -7%; }
+  .company-platform, #experience[data-company-layout=steps] .company-platform { left: 5%; right: 5%; bottom: 23px; text-align: center; }
+  #experience[data-company-layout=steps] .company-platform ul { justify-content: center; }
+}
+
+/* Company above, product platform below: two distinct brand roles. */
+.company-identity { top: -6%; height: 32%; }
+#experience[data-kind=company] #scene { top: 27%; bottom: 14%; }
+.company-platform { bottom: calc(1.2% + 30px); }
+.company-platform-lockup { display: inline-flex; align-items: center; gap: 6px; pointer-events: auto; border: 0; background: none; padding: 0 10px; color: #d4e4ef; text-align: left; border-radius: 6px; }
+.company-platform-logo { display: block; width: 168px; height: 112px; object-fit: contain; filter: drop-shadow(0 0 15px #48dafa22); }
+/* Separate display windows preserve the original artwork while adding a small vertical gap. */
+.company-platform-logo { position: relative; flex-shrink: 0; }
+.company-platform-logo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; }
+.company-platform-symbol { clip-path: inset(0 0 35.5% 0); }
+.company-platform-wordmark { clip-path: inset(64.5% 0 0 0); transform: translateY(5px); }
+.company-platform-description { border-left: 1px solid #8ec5d733; padding-left: 23px; }
+.company-platform-lockup strong { display: block; font-size: clamp(16px,1.2vw,22px); font-weight: 450; letter-spacing: .14em; }
+.company-platform-lockup small { display: block; font-size: 11px; color: #a8bacd; margin-top: 10px; letter-spacing: .1em; }
+.company-platform-lockup b { color: #87d6e1; margin-left: 10px; font-weight: 400; }
+.company-platform-lockup:hover { background: #9accdf08; }
+.company-platform-lockup:focus-visible,.company-product-label:focus-visible { outline: 2px solid #b2e5ee; outline-offset: 4px; }
+.company-explore-hint { display: block; color: #93a3b8; font-size: 10px; letter-spacing: .12em; }
+.model-label.company-product-label { display: flex; flex-direction: column; align-items: center; gap: 4px; border: 0; border-radius: 3px; background: #0b14209e; padding: 7px 10px; box-shadow: none; min-width: 88px; text-align: center; pointer-events: auto; }
+.company-product-label strong { color: var(--label-color); font-size: clamp(12px,1.1vw,20px); font-weight: 550; letter-spacing: -.015em; }
+.company-product-label small { color: #c0ccd9; font-size: clamp(9px,.75vw,13px); font-weight: 400; letter-spacing: .04em; white-space: nowrap; }
+.company-product-label:hover { background: #253244; box-shadow: 0 0 18px #9eb6cf18; }
+.company-story.enter { animation: none; }
+.company-lighting i { transform-origin: 50% 0; animation: company-warm-beam 12s ease-in-out 2s infinite alternate; }
+.company-lighting i+i { animation-name: company-cool-beam; animation-duration: 14s; }
+.model-label.company-product-label { transition: background .25s, box-shadow .25s; }
+.model-label.company-product-label:disabled { pointer-events: none; }
+.company-product-label.is-highlighted { background: #253244; box-shadow: 0 0 24px #9eb6cf25; }
+@keyframes company-warm-beam { from { transform: rotate(-29deg) scaleX(1); } to { transform: rotate(-23deg) scaleX(1.12); } }
+@keyframes company-cool-beam { from { transform: rotate(29deg) scaleX(1); } to { transform: rotate(24deg) scaleX(1.10); } }
+@media (prefers-reduced-motion: reduce) {
+  .company-lighting i,.company-lighting i+i { animation: none; }
+  .model-label.company-product-label { transition: none; }
+}
+#case-dialog[data-company-product] { width: min(1050px,94vw); border-color: #70a6bf55; }
+.company-product-detail { padding: 35px 44px 24px; text-align: center; background: radial-gradient(ellipse at 50% 52%,#23405360,transparent 67%); }
+.company-product-heading .eyebrow { color: var(--product-ink); justify-content: center; font-size: 10px; letter-spacing: .18em; margin: 0 0 12px; }
+.company-product-heading h2 { font-size: 34px; margin: 0; font-weight: 500; color: var(--product-ink); }
+.company-product-heading h2 span { display: inline-block; font-size: 19px; color: #d6e0ec; font-weight: 400; margin-left: 20px; letter-spacing: .1em; }
+.company-product-heading>p:last-child { font-size: 13px; line-height: 1.8; color: #aabbd0; margin: 11px 0 18px; }
+.company-product-visual { height: min(43vh,390px); display: grid; place-items: center; }
+.company-product-visual img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.company-product-visual.is-overview { height: min(49vh,465px); }
+.company-product-visual.is-overview img { border-radius: 6px; }
+.company-product-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 22px 0 14px; }
+.company-product-tabs button { font-size: 12px; color: #b2c0d2; padding: 8px 15px; border: 1px solid #ffffff25; border-radius: 3px; }
+.company-product-tabs button[aria-pressed=true] { border-color: var(--product-ink); color: var(--product-ink); background: #ffffff06; }
+.company-original-link { color: #95aabd; font-size: 11px; text-decoration: none; border-bottom: 1px solid #95aabd55; padding-bottom: 2px; }
+@media (min-width:801px) and (max-height:850px) {
+  .company-platform-logo { width: 130px; height: 88px; }
+  .company-platform-description { padding-left: 17px; }
+  .company-platform-lockup strong { font-size: 16px; }
+  .company-platform-lockup small { font-size: 9px; margin-top: 7px; }
+  .company-explore-hint { font-size: 9px; }
+  .model-label.company-product-label { gap: 3px; min-width: 72px; padding: 5px 6px; }
+}
+@media (max-width:800px) {
+  .company-identity, #experience[data-company-layout=steps] .company-identity { top: auto; bottom: 368px; height: 185px; }
+  #experience[data-kind=company] #scene { top: auto; bottom: 133px; height: 310px; }
+  .company-platform { bottom: 40px; }
+  .company-platform-logo { width: 128px; height: 92px; }
+  .company-platform-description { padding-left: 15px; }
+  .company-platform-lockup small { font-size: 9px; }
+  .company-product-label strong { font-size: 10px; }
+  .company-product-label small { font-size: 7px; }
+  .model-label.company-product-label { min-width: 0; padding: 4px; gap: 2px; }
+  .company-product-detail { padding: 44px 18px 22px; }
+  .company-product-heading h2 { font-size: 28px; }
+  .company-product-heading h2 span { display: block; font-size: 17px; margin: 6px 0 0; }
+  .company-product-heading>p:last-child { font-size: 12px; }
+  .company-product-tabs { gap: 5px; }
+  .company-product-tabs button { padding: 7px 8px; font-size: 10px; }
+}

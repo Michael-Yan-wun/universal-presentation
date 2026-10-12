@@ -1,0 +1,42 @@
+/* Approved AIWin orange / white typography with a WinHub.AI platform accent. */
+body[data-text-theme] {
+  --type-title:var(--type-primary); --type-number:var(--type-primary);
+  --type-emphasis:var(--type-secondary); --type-body:var(--type-secondary);
+  --type-muted:var(--type-secondary); --type-line:var(--type-secondary);
+}
+body[data-text-theme] { --text:var(--type-title); --muted:var(--type-muted); color:var(--type-body); }
+body[data-text-theme] :is(.brand-name,.anniversary-number,.story h1,.story-copy h2,.company-markets strong,.company-platform-description strong,.cosmic-closing-copy h1,.cosmic-closing-brand strong,.case-description h2,.vision-room-heading h1,.vision-fusion-heading h1,.fusion-copy h1) { color:var(--type-title); }
+body[data-text-theme] :is(.story h1 em,.company-story h1>span,.company-story h1 em,.light-word,.vision-room-heading h1 em,.vision-fusion-heading h1 em,.one-more>span) { color:var(--type-emphasis); }
+body[data-text-theme] :is(.story-copy p,.company-metrics dt,.company-platform-description small,.cosmic-closing-tagline,.case-description p,.case-description li,.vision-room-heading>p,.vision-product-heading>p,.journey-points,.sense-channels p,.sense-bridge,.growth-mappings>div,.vision-film-copy p,.vision-film-copy ol,.company-product-heading>p:last-child,.company-product-overview span) { color:var(--type-body); }
+body[data-text-theme] :is(.eyebrow,.company-story .eyebrow,.brand-name small,.anniversary>span:last-child,.journey-note,.source-note,.case-kicker,.company-markets>span,.company-platform>p,.company-explore-hint,.scene-topline,.scene-bottomline,.sculpture-caption>span,.keyboard-help,.chapter-count,.cosmic-closing-kicker,.cosmic-closing-foot,.cosmic-closing-brand span,.metrics small,.journey-caption,.journey-evidence small,.case-footnote,.vision-product-heading h1>span,.final-tag,.vision-product-pipeline,.domain-title,.domain-title span) { color:var(--type-muted); }
+body[data-text-theme] :is(.company-metrics dd,.company-metrics>div:nth-child(2) dd,.company-metrics dd span,.metrics strong,.metrics strong span,.case-proof,#current-count) { color:var(--type-number); }
+body[data-text-theme] :is(.company-markets i,.pipeline div>span,.growth-mappings b,.journey-topics button>span,.journey-points span,.text-button:hover,.case-link:hover) { color:var(--type-emphasis); }
+body[data-text-theme] :is(.company-metrics,.footer) { border-color:color-mix(in srgb,var(--type-line) 55%,transparent); }
+body[data-text-theme] .eyebrow-line,
+body[data-text-theme] .chapter-nav button.active::after { background:var(--type-emphasis); }
+body[data-text-theme] :is(.chapter-nav button,.text-button,.step-controls button,.cosmic-closing-back) { color:var(--type-body); }
+body[data-text-theme] .chapter-nav button.active { color:var(--type-title); }
+body[data-text-theme] .chapter-nav button span { color:var(--type-emphasis); }
+body[data-text-theme] #experience:not([data-kind=product]):not([data-kind=history]):not([data-kind=growth]):not([data-kind=reveal]) .primary-button { background:#080b1280; color:var(--type-title); border-color:var(--type-primary); }
+body[data-text-theme] .vision-wordmark>span { background-image:linear-gradient(125deg,var(--type-line),var(--type-emphasis) 18%,var(--type-title) 26%,var(--type-body) 42%,var(--type-line) 52%,var(--type-title) 67%,var(--type-emphasis) 78%,var(--type-muted)); }
+
+/* General descriptions and supporting text use white. */
+body[data-text-theme] :is(.capabilities span,.castle-key small,.combination-flow small,.history-caption,.history-caption span,.history-caption p,.history-domains small,.history-domains button>span,.history-domains button.active small,.history-overview-caption>span,.history-route,.history-route .active,.history-transition,.history-transition p,.vision-case-label>small,.vision-case-label>span,.vision-case-index>span,.vision-case-description>small,.vision-case-description p,.case-source-button,.case-source-button>span,.vision-case-actions>small,.vision-steps button,.vision-capabilities,.vision-capabilities b,.vision-product-pipeline b,.vision-entry .vision-entry-kicker,.vision-entry .vision-entry-subtitle,.vision-room-footer small,.vision-room-footer p,.vision-fields,.vision-player-bar>span,.vision-player-close,.vision-film-credit,.vision-film-meta,.vision-film-copy li,.vision-film-copy li>span,.journey-topics b,.journey-birth p,.sense-channels>div>span,.company-product-label small,.company-platform-description b,.company-original-link,.company-product-tabs button,.case-description ol,.mode-button,#opening-skip,#opening-skip span) { color:var(--type-secondary); }
+body[data-text-theme] :is(.vision-case-label>strong,.vision-case-index,.vision-steps button.active,.vision-film-copy h3,.vision-play-retry,.vision-film-error,.sense-channels h3,.castle-key span,.combination-flow strong,.fusion-copy.revealed h1,#case-dialog,#vision-player,#close-case) { color:var(--type-title); }
+body[data-text-theme] :is(.growth-question,.industry-tag,.sense-learning-bridge,.fusion-formula span,.fusion-formula>b) { color:var(--type-secondary); }
+body[data-text-theme] #experience[data-sense-mode=data] .sense-bridge { color:var(--type-secondary); }
+body[data-text-theme] :is(.case-footnote,.vision-film-count) { color:var(--type-secondary)!important; }
+body[data-text-theme] #case-dialog .company-product-tabs button[aria-pressed=true] { color:var(--product-ink); }
+body[data-text-theme] :is(button,a):focus-visible { outline-color:var(--type-emphasis); }
+
+/* Keep product names and identifiers in the user's approved orange / blue / purple / teal. */
+body[data-text-theme] .product-story>h1:not(.chinese-heading):not(.journey-heading),
+body[data-text-theme] .product-story>h1:not(.chinese-heading):not(.journey-heading) em,
+body[data-text-theme] .vision-product-heading h1 { color:var(--accent); }
+body[data-text-theme] .company-product-heading :is(h2,.eyebrow) { color:var(--product-ink); }
+body[data-text-theme] .company-product-heading h2 span { color:var(--type-body); }
+
+/* The platform accent is reserved for WinHub.AI and its platform lockup. */
+body[data-text-theme] .company-platform :is(p,.company-platform-description strong,.company-platform-description b) { color:var(--type-platform); }
+body[data-text-theme] .company-platform-lockup:focus-visible { outline-color:var(--type-platform); }
+body[data-text-theme] #experience .company-platform-description b { color:var(--type-platform); }

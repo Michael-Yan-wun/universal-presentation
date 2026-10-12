@@ -1,0 +1,66 @@
+[
+  {
+    "id": "earth-cover",
+    "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-e7d766fb-d4fd-400e-a1bd-52d3df45a443.png",
+    "theme": "earth",
+    "page": "cover",
+    "png": "dist/assets/cosmic-backgrounds/earth-cover-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/earth-cover-v1.webp"
+  },
+  {
+    "id": "earth-closing",
+    "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-8cb91efd-e33d-43d6-86a4-3a88f86b595f.png",
+    "theme": "earth",
+    "page": "closing",
+    "png": "dist/assets/cosmic-backgrounds/earth-closing-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/earth-closing-v1.webp"
+  },
+  {
+    "id": "galaxy-cover",
+    "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-8ff3f6e1-bdd4-4be5-8886-f87aa6dbc5a4.png",
+    "theme": "galaxy",
+    "page": "cover",
+    "png": "dist/assets/cosmic-backgrounds/galaxy-cover-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/galaxy-cover-v1.webp"
+  },
+  {
+    "id": "galaxy-closing",
+    "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-bdd9a301-8720-4654-8fcf-ba33de479a8a.png",
+    "theme": "galaxy",
+    "page": "closing",
+    "png": "dist/assets/cosmic-backgrounds/galaxy-closing-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/galaxy-closing-v1.webp"
+  },
+  {
+    "id": "aurora-cover",
+    "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-e7c7ba29-62e3-48fb-a92b-356db1f9b5b8.png",
+    "theme": "aurora",
+    "page": "cover",
+    "png": "dist/assets/cosmic-backgrounds/aurora-cover-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/aurora-cover-v1.webp"
+  },
+  {
+    "id": "aurora-closing",
+    "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-0c3ecfa2-e7e0-475b-960c-ff200ba28dec.png",
+    "theme": "aurora",
+    "page": "closing",
+    "png": "dist/assets/cosmic-backgrounds/aurora-closing-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/aurora-closing-v1.webp"
+  },
+  {
+    "id": "lunar-cover",
+    "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-425ff91d-70d4-40f0-a03b-118396778cb1.png",
+    "theme": "lunar",
+    "page": "cover",
+    "png": "dist/assets/cosmic-backgrounds/lunar-cover-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/lunar-cover-v1.webp"
+  },
+  {
+    "id": "lunar-closing",
+    "source": "/Users/laura/.codex/generated_images/01a11946-4ec9-7f33-8e18-b04845aa9d51/exec-81d4dc63-39f5-4500-9e3f-dacc74d85ebc.png",
+    "theme": "lunar",
+    "page": "closing",
+    "png": "dist/assets/cosmic-backgrounds/lunar-closing-v1.png",
+    "webp": "dist/assets/cosmic-backgrounds/lunar-closing-v1.webp"
+  }
+]
