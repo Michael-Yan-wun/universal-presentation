@@ -2,7 +2,7 @@
 
 **From Edge to Agent — 十年經驗，積累成功。**
 
-慧穩科技十週年活動使用的互動式 3D 演講網站。以「生命體的成長」串起感知、專案學習、知識與行動；以積木呈現產品能力，最後揭曉整合影像與數據、可模組化擴充的 **WinEdge Ultra**。
+慧穩科技十週年活動使用的互動式 3D 演講網站。以「生命體的成長」串起感知、專案學習、知識與行動；以積木呈現產品能力，最後揭曉整合影像與數據、可模組化擴充的 **WinEdge**。
 
 - [正式展示網站](https://winedge-anniversary-experience.yanwun1214.chatgpt.site/)
 - 使用情境：桌面、16:9 投影、講者手動推進。
@@ -38,32 +38,32 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 | 十年專案與學習 | 「有了感知，開始學習」；同一個機器人接收積木光流、知識節點亮起；深入 Vision 後探索五個實際案例影片及硬體流程 |
 | AIWinOps 誕生 | 五案完成後，呈現整理、標註、訓練與驗證；全部專案積木形成龍捲風，融合誕生 AIWinOps，再連回部署硬體 |
 | NumOps / WinChat | 各有三塊能力積木與逐段重點；完成該輪內容後融合為產品；WinChat 以 RAG、Agent、Skill 組成 |
-| 協作與新品 | 產品連成完整智慧身體；One more thing 揭曉 WinEdge Ultra 與 VISION / DATA / EXTEND 模組 |
+| 協作與新品 | 產品連成完整智慧身體；WinEdge 積木搭載實體 Edge 主機，八個能力場景逐段發表，最後聚合成中央產品的便當圖 |
 | 城堡與實績 | 實體積木底座、完整產品城堡、五個領域大腦，以及 Wafer Map、烤箱溫控、企業知識三組應用 |
-
 | 封底 | 地球曙光地平線、「下一個十年，與你同行」、品牌收尾 |
 
 **目前的範圍：** Vision 已有完整「五案影片 → 每案硬體 → 學習 → 融合」流程。十年總覽的 Data、LLM 按鈕目前開啟案例說明；後續 NumOps、WinChat 使用各自的三段能力流程，尚未擴成與 Vision 相同的五案影片流程。手機不是本案驗收範圍。
 
 ## 故事線與章節入口
 
-首頁左下方顯示 `00 / 12`，表示章節編號 0–12，合計 **13 個章節**。感知、案例及產品章節內還有由講者推進的子階段。
+首頁左下方顯示 `00 / 13`，表示章節編號 0–13，合計 **14 個章節**。感知、案例及產品章節內還有由講者推進的子階段。
 
 | 編號 | 章節 | 網址片段 | 重點 |
 | --- | --- | --- | --- |
 | 00 | 序章 | `#intro` | From Edge to Agent、金色積木 10 |
 | 01 | 公司介紹 | `#company` | 企業 AI 導入專家、交付實績、海外市場、WinHub.AI 四大能力 |
-| 02 | 感知世界 | `#first-contact` | 初生機器人 → 影像入口 → 數據入口 |
-| 03 | 實戰與學習 | `#decade` | 十年專案是成長課堂；案例累積成 AIWinOps |
-| 04 | 數據規律 | `#analytics` | 情境、模式與專家規則、現場驗證 → NumOps |
-| 05 | 知識與行動 | `#chat` | RAG 記憶、Agent 任務、Skill 方法 → WinChat |
-| 06 | 協作成形 | `#connected-intelligence` | 感官、學習、神經與肢體共同運作 |
-| 07 | One more thing | `#one-more-thing` | WinEdge-N + WinEdge-V → WinEdge Ultra |
-| 08 | 智慧城堡 | `#castle` | 現場、產品、WinChat 與五個 Domain AI 大腦 |
-| 09 | Wafer Map | `#inspection` | AIWinOps + WinEdge-V |
-| 10 | 智慧烤箱 | `#temperature` | NumOps + WinEdge-N |
-| 11 | 企業知識 | `#knowledge` | WinChat + AI Agent |
-| 12 | 封底 | `#closing` | 下一個十年，與你同行 |
+| 02 | 公司沿革 | `#company-history` | 2016–2020、2021–2025 兩段時間軸 |
+| 03 | 感知世界 | `#first-contact` | 初生機器人 → 影像入口 → 數據入口 |
+| 04 | 實戰與學習 | `#decade` | 十年專案是成長課堂；案例累積成 AIWinOps |
+| 05 | 數據規律 | `#analytics` | 情境、模式與專家規則、現場驗證 → NumOps |
+| 06 | 知識與行動 | `#chat` | RAG 記憶、Agent 任務、Skill 方法 → WinChat |
+| 07 | 協作成形 | `#connected-intelligence` | 感官、學習、神經與肢體共同運作 |
+| 08 | WinEdge 新品 | `#winedge` | 新品主視覺 → 八項能力 → 中央 WinEdge 便當圖 |
+| 09 | 智慧城堡 | `#castle` | 現場、產品、WinChat 與五個 Domain AI 大腦 |
+| 10 | Wafer Map | `#inspection` | AIWinOps + WinEdge-V |
+| 11 | 智慧烤箱 | `#temperature` | NumOps + WinEdge-N |
+| 12 | 企業知識 | `#knowledge` | WinChat + AI Agent |
+| 13 | 封底 | `#closing` | 下一個十年，與你同行 |
 
 公司介紹提供三款版型預覽：開啟 [版型比較](http://127.0.0.1:8765/?company-layout=stage#company)，用右上角切換「環形展台」、「懸浮星軌」與「進化階梯」。網址參數 `company-layout=stage|orbit|steps` 保留選擇；一般網址不顯示比較工具列。
 
@@ -75,7 +75,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 文字配色提供四套實頁比較：開啟 [文字配色預覽](http://127.0.0.1:8765/?text-theme=platinum#company)，以右上角切換鉑銀極簡、冰藍科技、青玉未來、星紫雅白。`text-theme=platinum|ice|jade|violet` 只控制文字預覽；章節切換與重新整理會保留選擇，宇宙背景和產品四色固定。一般無此參數的網址保留目前正式版。
 
-人的成長是演講比喻，順序不代表產品上市時間。學習光流、知識節點、硬體模型與連線是概念展示；WinEdge Ultra 名稱與定位依本次演講產品規劃呈現。
+人的成長是演講比喻，順序不代表產品上市時間。學習光流、知識節點、硬體模型與連線是概念展示；WinEdge 名稱與定位依本次演講產品規劃呈現。
 
 ## 演講操作
 
@@ -103,7 +103,39 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 5. 五案都完成後，按「把經驗化為訓練」，觀看機器人累積知識，以及整理、標註、訓練驗證三個重點。
 6. 按「誕生 AIWinOps」，五案、底座與完整專案陣列一起旋轉融合（約 8.2 秒）；產品落下後停留，等待講者繼續。
 
-影片預設靜音、循環播放，使用播放器控制暫停與拖曳；關閉即停止播放。若瀏覽器阻擋自動播放，使用畫面上的播放按鈕。轉場期間前後切換會暫時鎖定。One more thing 也需講者手動啟動，不會自動跳到下一章。
+影片預設靜音、循環播放，使用播放器控制暫停與拖曳；關閉即停止播放。若瀏覽器阻擋自動播放，使用畫面上的播放按鈕。轉場期間前後切換會暫時鎖定。WinEdge 發表也由講者手動推進，不會自動跳到下一章。
+
+### WinEdge 新品發表（`codex/winedge-launch`）
+
+本分支在 GitHub 同步版本 `2689f37` 上開發。預覽入口：[WinEdge 新品](http://127.0.0.1:8765/?v=winedge-launch-4#winedge)。畫面已移除「One more thing」，轉折由講者口頭帶出；舊 `#one-more-thing` 連結仍會進入新品章節。這份分支內容尚未發布到正式 Sites 網站。
+
+若從主分支取得此版本，先執行：
+
+```sh
+git fetch github
+git switch codex/winedge-launch
+```
+
+若透過一般 `git clone` 取得倉庫，預設遠端名稱是 `origin`，請將上述 `github` 改成 `origin`。
+
+原始提案實際包含九項能力（另有一段重複殘句）；將即時預覽與熱更新合併成一段，整理為以下八幕，功能均保留：
+
+| 幕 | 能力 | 動畫與內容 |
+| --- | --- | --- |
+| 01 | 工業現場串接 | 相機 / RTSP、Modbus、OPC UA、MC Protocol、SQL 匯入 WinEdge |
+| 02 | 視覺化工作流程 | 節點逐一入場，連接輸入、前處理、推論與輸出 |
+| 03 | AI 視覺與數據並行 | 影像掃描與數據曲線同步運作；偵測、分割、SAM3、分類、迴歸、時序模型 |
+| 04 | 通道與執行節奏 | 保完整 / 保最新佇列、多來源時序對齊、全速 / 間隔 / 日週排程 |
+| 05 | 即時驗證與維運 | 參數預覽與建置；模型節點暫停、更新設定、恢復，其他節點保持運作 |
+| 06 | 儀表板設計 | 元件進場、對齊組裝、發布；包含圖層分組、縮放、CSS 與素材客製 |
+| 07 | Plugin 擴充 | 客製模型、產線邏輯、看板元件、第三方整合接入核心 |
+| 08 | 本地 Agent | WinChat RAG + Agent + Skill 連接儀表板與資料統計巡檢 |
+
+順序為 **新品主視覺 → 八幕 → 功能總覽 → 智慧城堡**。每一幕轉場結束後停留，場景內的資料光流等動畫持續運作。`→` / `←`、`PageDown` / `PageUp`、底部箭頭依序推進或返回；新品章節停用滾輪切幕，避免誤跳。底部能力列可直接跳段，總覽卡片可重看細節，重看時可按「回到功能總覽」。重新進入新品章節會回到主視覺。
+
+場景使用品牌 WinEdge 綠色、深色背景與高對比 DOM 文字；3D 積木由通用 Edge 主機承載，最後收束於八張能力卡片中央。硬體為概念模型，功能圖解與看板數字為示意，不是實際產品操作錄影或設備即時資料。功能名稱依使用者提供的新品提案，沒有額外加入硬體規格、效能或零停機保證。
+
+減少動態效果模式保留所有內容與導航，停用循環與過場動畫。轉場取消時會清理動畫，切換章節或快速操作不會留下前一幕。
 
 ## 專案結構與修改位置
 
@@ -117,6 +149,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 └── dist/                        # 原始網站檔案；直接由 HTTP 伺服器提供
     ├── index.html / style.css    # 頁面骨架、首頁文字與版面
     ├── app.js                    # 鍵盤、章節、彈窗、互動狀態與揭曉
+    ├── winedge-launch.js / .css  # 新品八段內容、過場、功能動畫、便當圖與導航
     ├── company.js / company.css # 公司介紹文案、Logo 與四大能力積木
     ├── company-history.js / .css # 公司沿革文案、兩段時間軸與響應式排版
     ├── content.js                # 產品、案例、章節、領域大腦、講者提示
@@ -145,6 +178,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 ### 常見修改
 
 - **改產品與案例內容：** `content.js`；`history-ui.js` 是十年與 Vision 專用文案，`narrative-ui.js` 是感知與其他產品文案。
+- **改 WinEdge 發表：** `winedge-launch.js` 的 `launchFeatures` 管理八項文案，`diagram()` 管理圖解；`winedge-launch.css` 管理場景、動畫與便當圖。中央 3D 在 `scene.js`，硬體由 `edge-host.js` 共用。新增能力需同步調整便當圖的網格位置。
 - **改首頁主標：** `index.html`。首頁內容會在初始化時由 `app.js` 保存並重用。
 - **調整位置、大小：** 先看 `stage-layout.js` 與 `style.css`；Vision 的鏡頭與案例位置在 `history-wall.js`。
 - **替換影片：** 將 MP4 與封面放入 `assets/vision/`，更新 `content.js` 的 `visionCases` 與對應來源紀錄。目前 Vision 五案布局與導覽含固定數量邏輯；增加案例時需一起調整，不能只新增陣列項目。
@@ -166,10 +200,12 @@ git diff --check
 - 感知世界依序展開影像、數據，再進入十年學習。
 - 五案影片可開關，每案可切到硬體；未完成五案時不提前誕生 AIWinOps。
 - 學習場景、龍捲風與 AIWinOps 落下完整銜接，章節返回與重播可用。
-- NumOps、WinChat、One more thing、城堡與實績能繼續操作。
+- NumOps、WinChat、WinEdge 新品、城堡與實績能繼續操作。
+- WinEdge 八段皆可前進、返回；功能總覽卡片可重看與返回，從總覽繼續可進入城堡。
+- 在 WinEdge 轉場中切換其他章節，不會殘留模型或文案；重新進入會重設。
 - 瀏覽器主控台沒有模組或素材載入錯誤；系統開啟減少動態效果時仍可閱讀與推進。
 
-上一輪功能修改已檢查 16:9 舞台、五案與硬體流程、學習與產品揭曉，以及 JavaScript 語法與本機模組引用。本次 GitHub 整理主要補齊文件與來源庫，不代表新增跨瀏覽器效能認證。
+本次 WinEdge 分支已以瀏覽器檢查 1920 × 1080 的新品主視覺、八段功能與總覽，以及 1280 × 720 總覽。已操作前進、返回、卡片重看、返回總覽、總覽進入城堡、轉場中切換章節及重新進入；檢查 JavaScript 語法、本機模組引用與舊入口相容性。檢查範圍為桌面預覽，不代表跨瀏覽器效能認證。
 
 ### 部署方式
 

@@ -1,7 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 
 // A generic industrial edge computer physically carries the software building block.
-export function createEdgeHost({parent,brick,addLabel,id,name,color,pos=[0,-3.05,.4]}){
+export function createEdgeHost({parent,brick,addLabel,id,name,color,subtitle,pos=[0,-3.05,.4]}){
  const root=new THREE.Group();root.name=`${id}-edge-host`;root.position.set(...pos);parent.add(root);
  const metal=new THREE.MeshStandardMaterial({color:'#9babb6',metalness:.7,roughness:.3}),shell=new THREE.MeshStandardMaterial({color:'#324556',metalness:.55,roughness:.35}),black=new THREE.MeshStandardMaterial({color:'#0c1620',roughness:.48});
  const indicator=new THREE.MeshStandardMaterial({color:'#9fceb8',emissive:'#4f9e79',emissiveIntensity:.45,roughness:.3});
@@ -14,7 +14,7 @@ export function createEdgeHost({parent,brick,addLabel,id,name,color,pos=[0,-3.05
  box(.63,.24,.075,metal,1.28,-.05,1.17);box(.49,.13,.025,black,1.28,-.05,1.222);
  for(let j=0;j<5;j++)box(.032,.032,.028,metal,1.1+j*.09,-.045,1.241);
  for(let j=0;j<3;j++)box(.047,.047,.03,indicator,2.02,.13-j*.12,1.175);
- const o=brick(root,{id,name,sub:id==='numeric'?'CONNECT / UNDERSTAND / INFER':'CAPTURE / PIPELINE / INFERENCE',color,cols:4,rows:2,h:.83,pos:[0,1.07,0],scale:1.06});o.senseManaged=true;
+ const o=brick(root,{id,name,sub:subtitle||(id==='numeric'?'CONNECT / UNDERSTAND / INFER':'CAPTURE / PIPELINE / INFERENCE'),color,cols:4,rows:2,h:.83,pos:[0,1.07,0],scale:1.06});o.senseManaged=true;
  addLabel(root,new THREE.Vector3(0,-1.08,.65),'Edge 硬體 · 現場運算',id,'#c4d1dc','edge-host-label','growth');
  return {root,brick:o,update(time,progress,reduced){const p=THREE.MathUtils.clamp(progress,0,1),k=1-Math.pow(1-p,3);root.visible=p>0;root.position.y=pos[1]-(1-k)*.65;root.scale.setScalar(.88+.12*k);o.g.position.y=1.07+(1-k)*1.35;indicator.emissiveIntensity=reduced?.5:.40+Math.sin(time*1.5)*.13}};
 }
