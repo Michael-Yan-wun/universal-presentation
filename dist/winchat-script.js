@@ -3,7 +3,7 @@
 export const winChatScript = [
  [
   {scene:'perception',title:'企業的知識，不只在文字裡。',subtitle:'RAG / 給 Agent 可查證的知識',action:'看圖像如何被理解',seconds:35,note:'先看文件與圖解。RAG 是 Agent 可使用的知識能力，不是另一個與 Agent 並列的大腦。'},
-  {scene:'vlm',title:'圖像，也能成為知識。',subtitle:'VLM / 看圖表、位置與圖文關係',action:'建立多模態知識索引',seconds:40,note:'趨勢圖進入 VLM，轉成圖像描述與關係。保留原圖及頁碼連結；這是概念示意，不是模型實測。'},
+  {scene:'vlm',title:'PDF 裡的架構，也能讀懂。',subtitle:'VLM / 架構圖、流程圖與元件關係',action:'建立多模態知識索引',seconds:40,note:'以 PDF 中的系統架構圖為例：VLM 看懂方塊代表的元件、箭頭方向與上下層級，再結合頁面文字形成圖像描述。也可用流程圖與元件圖說明，並保留原圖、文件、頁碼與圖號。本頁為概念示意，不是模型實測。'},
   {scene:'indexing',title:'讓圖文，進入同一份知識脈絡。',subtitle:'理解 → 整理 → Embedding → 索引',action:'走進企業知識庫',seconds:45,note:'文字與圖像走各自理解路徑，內容整理後建立檢索表示。VLM 看圖，LLM 理解文字；Embedding 的具體輸入依產品實作，本圖不限定特定拓撲。'},
   {scene:'screen',asset:'knowledge',view:'wide',title:'把經驗，整理成企業知識。',subtitle:'WinChat / 多知識庫與文件管理',action:'看 Agent 如何找回知識',seconds:35,note:'大型官網知識庫介面。企業可按部門、產品與任務整理內容，讓前面積木的經驗有地方留下。'},
   {scene:'retrieval',title:'Agent 提問，RAG 找回依據。',subtitle:'問題 → 檢索 → 相關片段 → 回答',action:'查看官方問答介面',seconds:35,note:'問題帶出相關內容與來源，再回到 Agent 的上下文。Vector、Hybrid、GraphRAG 是可配置的檢索方式，不代表每次都同時使用。'},

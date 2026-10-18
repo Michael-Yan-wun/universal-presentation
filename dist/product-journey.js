@@ -1,4 +1,4 @@
-import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './winchat-script.js?v=winchat-skills-3';
+import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './winchat-script.js?v=winchat-pdf-1';
 import * as THREE from './vendor/three.module.js';
 import {journeyStage as layout} from './stage-layout.js?v=company-stage-2';
 import {products} from './content.js?v=company-history-15';

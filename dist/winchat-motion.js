@@ -1,5 +1,5 @@
-import {winChatBrain} from './winchat-brain.js?v=winchat-skills-3';
-import {winChatTravelSeconds} from './winchat-script.js?v=winchat-skills-3';
+import {winChatBrain} from './winchat-brain.js?v=winchat-pdf-1';
+import {winChatTravelSeconds} from './winchat-script.js?v=winchat-pdf-1';
 
 // Coordinates in the SVG's own viewBox. Camera movement follows the region,
 // rather than scaling every topic around the same center.
