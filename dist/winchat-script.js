@@ -11,19 +11,20 @@ export const winChatScript = [
   {scene:'citations',title:'每一份回答，都能回到依據。',subtitle:'回答 ↔ 知識片段 ↔ 原始文件',action:'讓 Agent 使用 SKILL 工作能力',seconds:35,note:'用追溯圖示意答案、引用片段與原文頁碼的連結。知識建立時讀圖，回答時保留證據脈絡。下一段介紹 Agent 如何取得現況。'}
  ],
  [
-  {scene:'recipe',title:'SKILL，把專業做法留下來。',subtitle:'工作方法 · 工具使用 · 輸出要求',action:'看 SKILL 如何使用工具',seconds:30,note:'SKILL 是 Agent 可使用的工作能力。以巡檢摘要說明任務輸入、作業步驟、可使用的工具與輸出格式；不把它講成某種連接協定。'},
+  {scene:'recipe',title:'SKILL，把專業做法留下來。',subtitle:'工作方法 · 工具使用 · 輸出要求',action:'看 SKILL 如何使用工具',seconds:30,note:'SKILL 是 Agent 可使用的工作能力。以現場巡檢摘要說明任務輸入、作業步驟、可使用的工具與輸出格式；不把它講成某種連接協定。'},
   {scene:'skilldispatch',title:'Agent 調用 SKILL，使用現場能力。',subtitle:'依工作需要，組合資料與分析工具。',action:'讓工具結果回到 Agent',seconds:40,note:'Agent 依工作選擇 SKILL，由方法與工具組合取得資料、使用分析能力。圖中系統為應用示意，可用工具依實際部署配置。'},
   {scene:'returns',title:'工具回傳結果，Agent 整理脈絡。',subtitle:'查詢紀錄 · 分析結果 · 知識依據',action:'查看 WinChat 工具管理',seconds:35,note:'工具回傳運轉紀錄與分析，RAG 提供相關知識。結果回到 Agent 整理；請沿著資料流介紹，示意內容不是現場即時資料。'},
   {scene:'screen',asset:'tools',view:'wide',title:'Agent 可用的工具，由企業管理。',subtitle:'WinChat / 工具包、單項工具與啟用控制',action:'讓 Agent 按工作方法執行',seconds:40,note:'官方工具管理介面，指出工具包、單項工具與啟用控制。SKILL 的工作方法與可用工具一起構成工作能力，這張截圖僅呈現既有工具管理功能。'},
   {scene:'execution',title:'按工作方法，完成每一個步驟。',subtitle:'SKILL 定義做法，Agent 調用知識與工具。',action:'走進實際工作情境',seconds:35,note:'依次顯示讀方法、RAG 查規範、工具取紀錄、Agent 產出摘要。SKILL 說明怎麼做，工具負責取得資料或執行能力；Agent 統籌與檢視。'}
  ],
  [
-  {scene:'mission',title:'把知識與能力，放進一份工作。',subtitle:'理解目標 · 選擇能力 · 檢視結果',action:'走進營運戰情室',seconds:30,note:'提出整理今日設備巡檢摘要的工作目標。Agent 使用 RAG 的知識與 SKILL 的方法及工具，最後產出可供人員使用的結果。'},
-  {scene:'screen',asset:'dashboard',view:'wide',title:'讓現況，進入同一個工作視野。',subtitle:'WinChat / 營運戰情室與 AI Copilot',action:'把狀況整理成巡檢摘要',seconds:40,note:'展示官方戰情室的指標、趨勢、事件與 Copilot。數字來自官網展示，並非本場即時紀錄；下一頁用資料流說明如何形成摘要。'},
-  {scene:'report',title:'從現場資料，到有依據的摘要。',subtitle:'現況 + 知識 → 分析 → 工作輸出',action:'看 Agent 的完整協作關係',seconds:35,note:'工具取得的現場資料與 RAG 的 SOP 合流。Agent 依 SKILL 的方法整理觀察、依據、待確認事項，交回人員使用。'},
+  {scene:'mission',title:'把現場資訊，整理成巡檢摘要。',subtitle:'理解目標 · 選擇能力 · 檢視結果',action:'走進營運戰情室',seconds:30,note:'提出整理今日現場巡檢摘要的工作目標。Agent 使用 RAG 的知識與 SKILL 的方法及工具，最後產出現場巡檢摘要，可依場域需求串接 LINE、警示設備，或匯出報告。'},
+  {scene:'screen',asset:'dashboard',view:'wide',title:'讓現況，進入同一個工作視野。',subtitle:'WinChat / 營運戰情室與 AI Copilot',action:'把狀況整理成現場巡檢摘要',seconds:40,note:'展示官方戰情室的指標、趨勢、事件與 Copilot。數字來自官網展示，並非本場即時紀錄；下一頁用資料流說明如何形成摘要。'},
+  {scene:'report',title:'從現場資料，到有依據的摘要。',subtitle:'現況 + 知識 → 分析 → 工作輸出',action:'讓現場巡檢摘要送到需要的地方',seconds:35,note:'工具取得的現場資料與 RAG 的 SOP 合流。Agent 依 SKILL 的方法整理觀察、依據、待確認事項，交回人員使用。'},
+  {scene:'delivery',title:'現場巡檢摘要，送到需要的地方。',subtitle:'LINE 通知 · 現場警示設備 · 報告匯出',action:'看 Agent 的完整協作關係',seconds:35,note:'現場巡檢摘要形成後，透過 SKILL 與已配置的工具選擇輸出：LINE 通知相關人員、依規則連動現場警示設備，或匯出留存報告。三條連線依序亮起。本頁為串接概念示意，不會實際發送訊息或操作設備。'},
   {scene:'orchestration',title:'Agent，讓知識與工作能力一起運作。',subtitle:'RAG 提供依據，SKILL 提供做法與工具。',action:'看三種企業應用',seconds:35,note:'工作目標在上方，中央 Agent 統籌。左側 RAG 提供知識，右側 SKILL 提供工作方法與工具能力，結果從下方輸出。三者不是並列的大腦。'},
   {scene:'applications',reveal:0,title:'不同工作，組合不同的知識與工具。',subtitle:'客服維修 / 新人培訓 / 現場巡檢',action:'展開三種工作成果',seconds:35,note:'三條資料流從問題開始：圖片查修、流程學習、現場巡檢。Agent 依工作使用相應 SKILL 與 RAG 知識，按下一步再揭曉成果。'},
-  {scene:'applications',reveal:1,title:'讓專業，變成每天能用的成果。',subtitle:'圖文答覆 · SOP 導讀 · 巡檢摘要',action:'凝聚為 WinChat',seconds:45,note:'三條流程抵達圖文答覆、流程導讀、巡檢摘要。都是應用示意；最後把 Agent、知識與工作能力凝聚成 WinChat 積木。'}
+  {scene:'applications',reveal:1,title:'讓專業，變成每天能用的成果。',subtitle:'圖文答覆 · SOP 導讀 · 現場巡檢摘要',action:'凝聚為 WinChat',seconds:45,note:'三條流程抵達圖文答覆、流程導讀、現場巡檢摘要。都是應用示意；最後把 Agent、知識與工作能力凝聚成 WinChat 積木。'}
  ]
 ];
 export const winChatBeatCounts=winChatScript.map(topic=>topic.length);

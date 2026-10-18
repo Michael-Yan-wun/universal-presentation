@@ -51,7 +51,7 @@ test('detail beats explain Agent support with distinct data flows, not repeated 
    assert.equal(seenAssets.has(data.asset),false,'each official product image appears once');seenAssets.add(data.asset);
   }else assert.match(ui.detail,/wc-flow-layout|wc-perception/);
  }
- const diagram=winChatUI({phase:'focus',selected:2,beat:3,visited:[]}).detail;
+ const diagram=winChatUI({phase:'focus',selected:2,beat:winChatScript[2].findIndex(beat=>beat.scene==='orchestration'),visited:[]}).detail;
  for(const role of ['ORCHESTRATOR','Agent','RAG / 知識支援','SKILL / 工作能力','WORK OBJECTIVE'])assert.ok(diagram.includes(role));
 });
 test('NumOps keeps its original three-topic sequence',()=>{

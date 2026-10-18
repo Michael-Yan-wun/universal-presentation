@@ -1,5 +1,5 @@
-import {winChatFlow} from './winchat-flows.js?v=winchat-pdf-1';
-import {winChatBeat,winChatAction} from './winchat-script.js?v=winchat-pdf-1';
+import {winChatFlow} from './winchat-flows.js?v=winchat-field-2';
+import {winChatBeat,winChatAction} from './winchat-script.js?v=winchat-field-2';
 
 const assets={
  knowledge:{alt:'WinChat 官方知識庫文件管理介面',label:'企業知識庫',ratio:'1280 / 635'},

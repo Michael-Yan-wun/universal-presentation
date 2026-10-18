@@ -1,6 +1,6 @@
-import {createWinChatStage} from './winchat-motion.js?v=winchat-pdf-1';
-import {syncWinChatKeynote} from './winchat-keynote.js?v=winchat-pdf-1';
-import { winChatUI, winChatEvidence } from './winchat-story.js?v=winchat-pdf-1';
+import {createWinChatStage} from './winchat-motion.js?v=winchat-field-2';
+import {syncWinChatKeynote} from './winchat-keynote.js?v=winchat-field-2';
+import { winChatUI, winChatEvidence } from './winchat-story.js?v=winchat-field-2';
 import { createWinEdgeLaunch } from './winedge-launch.js?v=winedge-detail-1';
 import { companyHistory, companyHistoryHTML } from './company-history.js?v=heritage-growth-17';
 import { animateCompanyHistory } from './company-history-motion.js?v=heritage-growth-18';
@@ -10,7 +10,7 @@ import { productColors, palette, productInk } from './product-colors.js?v=produc
 import { companyHTML, companyStageHTML, companyProductHTML, companyLayouts, companyPreviewHTML, animateCompanyIntro } from './company.js?v=company-lockup-6';
 import { createCosmicBackground } from './cosmic-background.js?v=cosmic-final-1';
 import { historyOverview, historyUI, historyRoomAction, createVisionPlayer } from './history-ui.js?v=company-history-15';
-import { createScene } from './scene.js?v=winchat-pdf-1';
+import { createScene } from './scene.js?v=winchat-field-2';
 import {growthHTML,senseHTML,journeyUI} from './narrative-ui.js?v=company-history-15';
 import { chapters, products, cases, agents, icons, chapterFor, growthStages, senseRoutes, resolveChapterRoute } from './content.js?v=winedge-launch-7';
 const $=s=>document.querySelector(s),root=$('#experience'),story=$('#story'),dialog=$('#case-dialog'),detail=$('#stage-detail');
