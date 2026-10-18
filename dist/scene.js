@@ -5,7 +5,7 @@ import {stageView} from './stage-layout.js?v=winedge-launch-7';
 import { products, chapters, agents, palette } from './content.js?v=winedge-launch-7';
 import { createHistoryWall } from './history-wall.js?v=company-history-15';
 import {createGrowthScene} from './growth-scene.js?v=product-colors-1';
-import {createProductJourney} from './product-journey.js?v=winchat-launch-1';
+import {createProductJourney} from './product-journey.js?v=numops-stage-1';
 import { createAnniversary } from './anniversary.js?v=cosmic-opening-1';
 
 export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>{},onProductStage=()=>{},onSenseStage=()=>{}) {
@@ -89,7 +89,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     // Layout dimensions stay stable during CSS entrance transforms. Refresh density when the display changes.
     const width=container.clientWidth,height=container.clientHeight;if(width<=0||height<=0)return;
     const nativeRatio=window.devicePixelRatio||1;
-    const desiredRatio=kind==='launch'?(launchMode==='summary'?4:Math.max(2,Math.min(nativeRatio,3))):kind==='product'&&chapters[chapter]?.product?.id==='chat'?Math.max(2,Math.min(nativeRatio,3)):Math.min(nativeRatio,2);
+    const desiredRatio=kind==='launch'?(launchMode==='summary'?4:Math.max(2,Math.min(nativeRatio,3))):kind==='product'&&['chat','analytics'].includes(chapters[chapter]?.product?.id)?Math.max(2,Math.min(nativeRatio,3)):Math.min(nativeRatio,2);
     const ratio=Math.min(desiredRatio,renderer.capabilities.maxTextureSize/Math.max(width,height));
     if(renderer.getPixelRatio()!==ratio)renderer.setPixelRatio(ratio);
     aspect=width/height;renderer.setSize(width,height,false);camera.aspect=aspect;camera.updateProjectionMatrix();
@@ -103,7 +103,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   container.addEventListener('pointerup',e=>{if(drag&&distance<6){const id=pick(e);if(id)onSelect(id)}drag=false});container.addEventListener('pointercancel',()=>drag=false);
   container.addEventListener('pointerleave',()=>companyScene.setHovered(null));
   function setChapter(index){if(kind==='history'&&chapters[index].kind!=='history'){camera.position.set(5,6,24);target.set(0,0,0)}chapter=index;kind=chapters[index].kind;age=0;introClock=null;angleGoal=0;inspect=false;exploded=false;for(const [id,g]of Object.entries(groups))g.visible=id===(kind==='product'?'products':kind);for(const o of bricks){o.goal.copy(o.home);o.targetScale=o.growthScale||1}groups.intro.visible=kind==='intro';
-    grid.visible=ring.visible=floor.visible=kind!=='intro'&&kind!=='history'&&kind!=='company'&&kind!=='closing'&&kind!=='chronicle'&&kind!=='launch'&&chapters[index].product?.id!=='chat';key.position.set(...(kind==='intro'?[4,10,-3]:[-6,12,10]));key.intensity=kind==='intro'?4.1:3.2;
+    grid.visible=ring.visible=floor.visible=kind!=='intro'&&kind!=='history'&&kind!=='company'&&kind!=='closing'&&kind!=='chronicle'&&kind!=='launch'&&!['chat','analytics'].includes(chapters[index].product?.id);key.position.set(...(kind==='intro'?[4,10,-3]:[-6,12,10]));key.intensity=kind==='intro'?4.1:3.2;
     if(kind==='intro'){angle=0;ten.forEach(o=>{o.g.position.copy(reduced?o.home:o.introStart);o.g.rotation.set(0,reduced?0:o.introTwist,0);o.targetScale=1});const view=stageView(kind,aspect);camera.position.set(view.x+(reduced?0:3),view.y+(reduced?0:1.5),view.z+(reduced?0:4));target.set(0,view.targetY,0);}
     if(kind==='company'){companyScene.reset();angle=0;const view=stageView(kind,aspect,{companyLayout});camera.position.set(view.x+(reduced?0:1.8),view.y+(reduced?0:.65),view.z+(reduced?0:1.5));target.set(0,view.targetY,0);}
     if(kind==='history')historyWall.restart();

@@ -55,12 +55,6 @@ test('detail beats explain Agent support with distinct data flows, not repeated 
  const diagram=winChatUI({phase:'focus',selected:2,beat:winChatScript[2].findIndex(beat=>beat.scene==='mission'),visited:[]}).detail;
  for(const role of ['ORCHESTRATOR','Agent','RAG / 知識','SKILL / 工作能力','THE GOAL'])assert.ok(diagram.includes(role));
 });
-test('NumOps keeps its original three-topic sequence',()=>{
- const {journey,state,settle}=setup('analytics');
- for(let i=0;i<3;i++){journey.action('next');settle();assert.equal(state().selected,i);assert.equal(state().beat,0);}
- assert.equal(state().canFuse,true);journey.action('next');settle();assert.equal(state().phase,'born');assert.equal(journey.action('next'),false);
-});
-
 test('WinChat bricks stay hidden until the final brain-to-product reveal',()=>{
  const {journey,models,settle}=setup();
  const topics=['RAG','SKILL','WORK'];
