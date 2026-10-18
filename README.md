@@ -142,15 +142,16 @@ WinChat 開場保留大型企業大腦，**Agent 是統籌者**；RAG 提供知�
 
 驗證：`node --test tests/winchat-keynote.test.mjs`，涵蓋手動停留、完成條件、返回、重入重設、NumOps 路徑、移除多餘按鈕、轉場內容連續，以及細節不重複大腦。桌面以 1920 × 1080 和 1280 × 720 檢查；尊重減少動態效果設定。
 
-### WinEdge 新品發表（`codex/winedge-launch`）
+### WinEdge 新品發表
 
-本分支在 GitHub 同步版本 `2689f37` 上開發。預覽入口：[WinEdge 新品](http://127.0.0.1:8765/?v=winedge-detail-1#winedge)。畫面已移除「One more thing」，轉折由講者口頭帶出；舊 `#one-more-thing` 連結仍會進入新品章節。這份分支內容尚未發布到正式 Sites 網站。
+預覽入口：[WinEdge 新品](http://127.0.0.1:8765/?v=winedge-detail-1#winedge)。畫面已移除「One more thing」，轉折由講者口頭帶出；舊 `#one-more-thing` 連結仍會進入新品章節。GitHub 合併與正式 Sites 發布為獨立流程，這次 WinEdge／WinChat 更新尚未發布到正式 Sites 網站。
 
-若從主分支取得此版本，先執行：
+PR 合併後，既有工作目錄可從主分支取得此版本：
 
 ```sh
 git fetch github
-git switch codex/winedge-launch
+git switch main
+git pull --ff-only github main
 ```
 
 若透過一般 `git clone` 取得倉庫，預設遠端名稱是 `origin`，請將上述 `github` 改成 `origin`。
