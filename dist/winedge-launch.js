@@ -1,3 +1,4 @@
+import {ecosystemHTML,ecosystemNote} from './winedge-ecosystem.js?v=ecosystem-1';
 // Presenter-controlled product launch. Product claims come from the supplied launch brief.
 export const launchFeatures = [
  {id:'connect',label:'工業串接',en:'CONNECT EVERYTHING',title:'讓現場，接上同一條線。',description:'從相機、設備到資料庫，影像與數據在 WinEdge 匯流。',points:['IP Camera / RTSP、Web Camera / USB、Basler 工業相機','Modbus · OPC UA · MC Protocol','SQL 資料庫與多種輸入輸出'],summary:'IP / Web / Basler 相機、設備、資料庫。',note:'先把現場帶進來。介紹影像、工業通訊與 SQL；各項為支援形式，實際配置依設備與專案需求。'},
@@ -7,7 +8,7 @@ export const launchFeatures = [
  {id:'iterate',label:'即時驗證與維運',en:'ITERATE WITHOUT STARTING OVER',title:'邊設計，邊驗證。持續進化。',description:'調整參數，即時預覽與建置。<br>流程運作中，也能靈活維護。',points:['即時預覽與建置執行','執行中熱更新、重建設定','單一節點暫停 / 恢復'],summary:'即時預覽、熱更新、單節點暫停與恢復。',note:'合併原提案的即時預覽與熱更新。動畫中只有中間節點暫停並更新，其餘節點保持運作；不宣稱所有配置均零停機或沒有資料損失。'},
  {id:'dashboard',label:'自由設計看板',en:'DESIGN WHAT YOU NEED',title:'你的產線，你的儀表板。',description:'像設計軟體一樣編排現場資訊，設計完成，一鍵發布。',points:['拖拉元件、圖層分組、對齊與縮放','CSS 與素材客製化','所見即所得，設計完直接發布'],summary:'拖拉排版、CSS 客製，完成即可發布。',note:'看板元件從散開位置進入畫布，對齊、分組後完成發布。畫面以示意數據展示排版能力。'},
  {id:'plugins',label:'Plugin 擴充',en:'READY TO GROW',title:'能力，持續長出來。',description:'節點與看板元件皆可外掛擴充，讓平台跟著現場需求成長。',points:['流程節點與看板元件外掛','延伸既有產線邏輯與客製模型','加入第三方整合'],summary:'節點與看板元件，皆可外掛擴充。',note:'四個模組從外圍接入共用核心，說明可模組化擴充；不加入未提供的外掛市場或 SDK 規格。'},
- {id:'agent',label:'本地 AI Agent',en:'FROM MONITORING TO UNDERSTANDING',title:'讓監控，開始理解。',description:'透過 WinChat 的 RAG、Agent 與 Skill，打造本地端的 Agent 監控系統。',points:['RAG 連結現場知識與操作脈絡','Agent 串接巡檢任務','Skill 重用儀表板與資料統計巡檢方法'],summary:'WinChat RAG + Agent + Skill，本地巡檢。',note:'知識、任務與方法匯入 Agent，再連接 WinEdge 看板與數據巡檢。避免延伸為未授權的自主產線控制。'}
+ {id:'agent',label:'本地 AI Agent',en:'FROM MONITORING TO UNDERSTANDING',title:'讓監控，開始理解。',description:'透過 WinChat 的 RAG、Agent 與 SKILL，打造本地端的 Agent 監控系統。',points:['RAG 連結現場知識與操作脈絡','Agent 串接巡檢任務','SKILL 重用儀表板與資料統計巡檢方法'],summary:'WinChat RAG + Agent + SKILL，本地巡檢。',note:'知識、任務與方法匯入 Agent，再連接 WinEdge 看板與數據巡檢。避免延伸為未授權的自主產線控制。'}
 ];
 // Product positioning supplied by AIWin: compose AI around the needs of each site.
 export const launchPositioning = {
@@ -19,10 +20,11 @@ export const launchPositioning = {
 export const launchChapters = [
  {id:'compose',en:'CONNECT. COMPOSE. INFER.',title:'接上現場，組合 AI。',description:'從資料進來，到 AI 做出判斷。<br>在同一張畫布，接成完整流程。',points:['相機、設備、資料庫，一站串接','影像與數據模型，雙路並行','資料怎麼對齊、何時執行，自由掌握'],features:['connect','flow','inference','rhythm'],note:'這一幕一次講完「串接 → 畫流程 → 雙路推論 → 控制節奏」。先指左側相機、設備與資料庫，再帶到中間視覺與數據模型，最後指向輸出及底部時序。以一個現場需求貫穿，不逐條念規格。'},
  {id:'operate',en:'DESIGN. VERIFY. EVOLVE.',title:'設計到維運，一氣呵成。',description:'把現場資訊，做成看得懂的看板。<br>邊設計、邊驗證，持續調整。',points:['拖拉排版，所見即所得','即時預覽與建置，一鍵發布看板','熱更新、單節點暫停與恢復'],features:['dashboard','iterate'],note:'把看板設計與即時驗證、維運合成一次完整操作故事：元件組裝 → 預覽結果 → 發布，再看下方單一節點如何暫停、更新與恢復。圖層分組、對齊縮放、CSS 與素材客製可口頭補充。'},
- {id:'extend',en:'EXTEND. UNDERSTAND. ACT.',title:'擴充能力，交給 Agent。',description:'用 Plugin 延伸現場能力，<br>讓 WinChat 接手知識與巡檢。',points:['客製模型、產線邏輯與元件持續擴充','RAG ＋ Agent ＋ Skill，串起知識與任務','打造本地端的看板與數據巡檢'],features:['plugins','agent'],note:'外圍模組接入 WinEdge，代表現場能力能持續擴充；WinChat 的 RAG、Agent、Skill 結合這些資訊，進行儀表板與資料統計巡檢。以「能力長出來，再交給 Agent 理解」收尾，接實際案例。'}
+ {id:'extend',en:'EXTEND. UNDERSTAND. ACT.',title:'擴充能力，交給 Agent。',description:'用 Plugin 延伸現場能力，<br>讓 WinChat 接手知識與巡檢。',points:['客製模型、產線邏輯與元件持續擴充','RAG ＋ Agent ＋ SKILL，串起知識與任務','打造本地端的看板與數據巡檢'],features:['plugins','agent'],note:'外圍模組接入 WinEdge，代表現場能力能持續擴充；WinChat 的 RAG、Agent、SKILL 結合這些資訊，進行儀表板與資料統計巡檢。以「能力長出來，再交給 Agent 理解」收尾，接實際案例。'}
 ].map(chapter=>({...chapter,note:[chapter.note,...chapter.features.map(id=>{const f=launchFeatures.find(f=>f.id===id);return `${f.label}：${f.points.join('；')}。\n${f.note}`})].join('\n\n')}));
 export const launchCaseStep = launchChapters.length + 1;
-export const launchLastStep = launchCaseStep + 1;
+export const launchSummaryStep = launchCaseStep + 1;
+export const launchLastStep = launchSummaryStep + 1;
 
 // Local SVG artwork stays crisp on stage; each scene has its own motion grammar.
 const paths={
@@ -61,7 +63,7 @@ function dashboardDiagram(){
 function diagram(id){
  if(id==='compose')return `<div class="wl-compose wl-art"><div class="wl-compose-heading"><span>${icon('branch')}<strong>視覺化工作流程</strong></span><small>INPUT → AI → OUTPUT</small></div><div class="wl-compose-flow">${routes(['M305 111H345Q370 111 370 106H420','M305 331H345Q370 331 370 343Q370 355 390 355H420','M305 521H345Q370 521 370 491V385Q370 355 390 355H420'])}<div class="wl-compose-inputs">${[['camera','相機 / 串流','IP Camera · RTSP<br>Web Camera / USB<br>Basler 工業相機'],['plc','設備 / PLC','Modbus · OPC UA<br>MC Protocol'],['database','資料庫','SQL · 資料輸入輸出']].map((a,i)=>`<div class="wl-input-card" style="--i:${i}">${icon(a[0])}<strong>${a[1]}</strong><small>${a[2]}</small><i></i></div>`).join('')}</div><div class="wl-compose-models"><article class="wl-model-lane vision"><div class="wl-model-visual"><img src="./assets/vision/caps.jpg" alt="瓶蓋視覺檢測畫面"/><i class="wl-scan"></i><i class="wl-detection-box"></i></div><div><small>VISION</small><h2>視覺推論</h2><p class="wl-vision-model-list"><span>VLM · 物件偵測</span><span>分類 · 影像分割</span></p></div></article><article class="wl-model-lane data"><div class="wl-model-visual">${graph()}</div><div><small>DATA</small><h2>數據推論</h2><p>分類 · 迴歸 · 時序</p></div></article><div class="wl-compose-output">${icon('output')}<strong>判斷結果</strong>${beam}<span>看板 / SQL / I/O</span></div></div></div><div class="wl-compose-timing">${icon('clock')}<div><strong>每筆資料，都在節奏裡。</strong><p>佇列與背壓 · 時序對齊 · 執行排程</p></div><div class="wl-signal-tracks" aria-hidden="true">${[0,1].map(j=>`<div>${[0,1,2,3,4,5].map(i=>`<i style="--i:${i};--track:${j}"></i>`).join('')}</div>`).join('')}<b></b></div></div></div>`;
  if(id==='operate')return `<div class="wl-operate wl-art">${dashboardDiagram()}<div class="wl-operation-cycle"><span>${icon('sliders')}設計與預覽</span><i></i><span>${icon('check')}建置與發布</span><i></i><span>${icon('refresh')}持續維運</span></div><div class="wl-runtime">${node('資料輸入','RUNNING','input','wl-running')}${beam}<div class="wl-update-node">${icon('refresh')}<strong>單一模型節點</strong><div class="wl-update-states"><span>執行中</span><span>暫停 · 熱更新</span><span>恢復執行 ✓</span></div><i class="wl-update-progress"></i></div>${beam}${node('資料輸出','RUNNING','output','wl-running')}</div></div>`;
- return `<div class="wl-extend wl-art"><div class="wl-extend-header"><span>PLUGIN ARCHITECTURE</span><strong>現場能力，持續長出來。</strong></div><div class="wl-extend-network">${routes(['M200 155H350Q500 155 500 300','M800 155H650Q500 155 500 300','M200 445H350Q500 445 500 300','M800 445H650Q500 445 500 300'])}${[['客製模型','MODEL','chip',0],['產線邏輯','LOGIC','branch',1],['看板元件','WIDGET','dashboard',2],['第三方整合','PLUGIN','plugin',3]].map(a=>node(a[0],a[1],a[2],`wl-extension wl-extension-${a[3]}`,`--i:${a[3]}`)).join('')}<div class="wl-extend-core"><div class="wl-orb" aria-hidden="true"><svg viewBox="0 0 300 300"><circle cx="150" cy="150" r="110"/><ellipse cx="150" cy="150" rx="60" ry="110"/><ellipse cx="150" cy="150" rx="110" ry="40"/><path d="M40 150H260M150 40V260M72 72L228 228M72 228L228 72"/>${[[150,40],[260,150],[150,260],[40,150],[72,72],[228,228],[72,228],[228,72]].map(a=>`<circle class="wl-orb-dot" cx="${a[0]}" cy="${a[1]}" r="4"/>`).join('')}</svg><i></i></div><div class="wl-extend-title"><strong>WinEdge</strong><span>× WinChat</span></div></div></div><div class="wl-agent-stack"><span><b>RAG</b> 知識</span><i>＋</i><span><b>Agent</b> 任務</span><i>＋</i><span><b>Skill</b> 方法</span></div><div class="wl-agent-targets"><div>${icon('dashboard')}<span>儀表板巡檢</span><b>01</b></div><div>${icon('chart')}<span>資料統計巡檢</span><b>02</b></div></div></div>`;
+ return `<div class="wl-extend wl-art"><div class="wl-extend-header"><span>PLUGIN ARCHITECTURE</span><strong>現場能力，持續長出來。</strong></div><div class="wl-extend-network">${routes(['M200 155H350Q500 155 500 300','M800 155H650Q500 155 500 300','M200 445H350Q500 445 500 300','M800 445H650Q500 445 500 300'])}${[['客製模型','MODEL','chip',0],['產線邏輯','LOGIC','branch',1],['看板元件','WIDGET','dashboard',2],['第三方整合','PLUGIN','plugin',3]].map(a=>node(a[0],a[1],a[2],`wl-extension wl-extension-${a[3]}`,`--i:${a[3]}`)).join('')}<div class="wl-extend-core"><div class="wl-orb" aria-hidden="true"><svg viewBox="0 0 300 300"><circle cx="150" cy="150" r="110"/><ellipse cx="150" cy="150" rx="60" ry="110"/><ellipse cx="150" cy="150" rx="110" ry="40"/><path d="M40 150H260M150 40V260M72 72L228 228M72 228L228 72"/>${[[150,40],[260,150],[150,260],[40,150],[72,72],[228,228],[72,228],[228,72]].map(a=>`<circle class="wl-orb-dot" cx="${a[0]}" cy="${a[1]}" r="4"/>`).join('')}</svg><i></i></div><div class="wl-extend-title"><strong>WinEdge</strong><span>× WinChat</span></div></div></div><div class="wl-agent-stack"><span><b>RAG</b> 知識</span><i>＋</i><span><b>Agent</b> 任務</span><i>＋</i><span><b>SKILL</b> 方法</span></div><div class="wl-agent-targets"><div>${icon('dashboard')}<span>儀表板巡檢</span><b>01</b></div><div>${icon('chart')}<span>資料統計巡檢</span><b>02</b></div></div></div>`;
 }
 function miniArt(id){
  const art={
@@ -72,7 +74,7 @@ function miniArt(id){
   iterate:`<div class="wl-mini-live">${icon('refresh')}<span>LIVE</span><i></i></div>`,
   dashboard:`<div class="wl-mini-board"><div><i></i><i></i><i></i></div><section><span>${graph()}</span><b><i></i><i></i><i></i></b></section></div>`,
   plugins:`<div class="wl-mini-modules">${icon('chip')}${icon('dashboard')}${icon('plugin')}</div>`,
-  agent:`<div class="wl-mini-agent"><div class="wl-mini-agent-orbit"><svg viewBox="0 0 180 180"><circle cx="90" cy="90" r="73"/><ellipse cx="90" cy="90" rx="35" ry="73"/><ellipse cx="90" cy="90" rx="73" ry="28"/><path d="M17 90H163M90 17V163"/><circle cx="90" cy="17" r="3"/><circle cx="163" cy="90" r="3"/></svg><i></i></div><div class="wl-mini-agent-skills"><span>RAG</span><span>Agent</span><span>Skill</span></div></div>`
+  agent:`<div class="wl-mini-agent"><div class="wl-mini-agent-orbit"><svg viewBox="0 0 180 180"><circle cx="90" cy="90" r="73"/><ellipse cx="90" cy="90" rx="35" ry="73"/><ellipse cx="90" cy="90" rx="73" ry="28"/><path d="M17 90H163M90 17V163"/><circle cx="90" cy="17" r="3"/><circle cx="163" cy="90" r="3"/></svg><i></i></div><div class="wl-mini-agent-skills"><span>RAG</span><span>Agent</span><span>SKILL</span></div></div>`
  };
  return `<div class="wl-tile-art" aria-hidden="true">${art[id]}</div>`;
 }
@@ -84,7 +86,7 @@ function casesHTML(){return `<section class="wl-cases wl-slide"><header><div><p 
 export function createWinEdgeLaunch({container,productStage,onChange=()=>{}}){
  let current=0,active=false,busy=false,generation=0,animations=[];
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
- const mode=()=>current===0?'hero':current===launchCaseStep?'cases':current===launchLastStep?'summary':'feature';
+ const mode=()=>current===0?'hero':current===launchCaseStep?'cases':current===launchSummaryStep?'summary':current===launchLastStep?'ecosystem':'feature';
  function fitProduct(){
   if(!productStage)return;
   const slot=active&&mode()==='summary'?container.querySelector('.wl-core-product'):null;
@@ -95,12 +97,12 @@ export function createWinEdgeLaunch({container,productStage,onChange=()=>{}}){
   if(element===parent)Object.assign(productStage.style,{left:x+'px',top:y+'px',width:slot.offsetWidth+'px',height:slot.offsetHeight+'px',right:'auto',bottom:'auto'});
  }
  const layoutObserver=new ResizeObserver(fitProduct);layoutObserver.observe(container);
- function notify(){onChange({step:current,last:launchLastStep,mode:mode(),busy,feature:launchChapters[current-1]});fitProduct()}
+ function notify(){onChange({step:current,last:launchLastStep,mode:mode(),busy,feature:current===launchLastStep?{note:ecosystemNote}:launchChapters[current-1]});fitProduct()}
  function cancel(){generation++;animations.forEach(a=>a.cancel());animations=[];busy=false}
  function stopMedia(){container.querySelectorAll('.wl-root video').forEach(v=>{v.pause();v.removeAttribute('src');v.querySelectorAll('source').forEach(s=>s.removeAttribute('src'));v.load()})}
  function playMedia(){const v=container.querySelector('.wl-root video'),button=container.querySelector('.wl-video-play');if(!v)return;v.play().then(()=>{if(button?.isConnected)button.hidden=true}).catch(()=>{if(button?.isConnected)button.hidden=false})}
  function render(){
-  container.innerHTML=`<div class="wl-root" data-mode="${mode()}"><div class="wl-content" aria-live="polite" aria-atomic="true">${current===0?heroHTML():current===launchCaseStep?casesHTML():current===launchLastStep?summaryHTML():featureHTML(launchChapters[current-1],current)}</div><div class="wl-transit" aria-hidden="true"></div></div>`;
+  container.innerHTML=`<div class="wl-root" data-mode="${mode()}"><div class="wl-content" aria-live="polite" aria-atomic="true">${current===0?heroHTML():current===launchCaseStep?casesHTML():current===launchSummaryStep?summaryHTML():current===launchLastStep?ecosystemHTML():featureHTML(launchChapters[current-1],current)}</div><div class="wl-transit" aria-hidden="true"></div></div>`;
   if(current===launchCaseStep&&!reduced)playMedia();
   else if(current===launchCaseStep)container.querySelector('.wl-video-play').hidden=false;
  }

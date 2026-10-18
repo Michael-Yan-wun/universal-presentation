@@ -1,3 +1,4 @@
+import {visionLessonHTML,visionHardwareHTML} from './aiwinops-keynote.js?v=vision-keynote-1';
 import { historyCases, visionCases } from './content.js?v=company-history-15';
 const eyebrow=text=>`<p class="eyebrow"><span class="eyebrow-line"></span>${text}</p>`;
 const button=(action,text,secondary=false)=>secondary?`<button class="text-button" data-history="${action}">${text} <span>↶</span></button>`:'';
@@ -12,8 +13,8 @@ export function historyUI(state){
  if(phase==='entering')return {story:'',detail:'<div class="history-transition vision-entry"><p class="vision-entry-kicker">A DECADE OF LEARNING TO SEE</p><div class="vision-wordmark" data-text="VISION"><span>VISION</span></div><p class="vision-entry-subtitle">從看見，到學會辨識。</p><div class="vision-entry-rule"></div></div>'};
  if(phase==='returning')return {story:'',detail:'<div class="history-transition returning"><span>EXPERIENCE BECOMES CAPABILITY</span></div>'};
  if(phase==='room')return {story:'',detail:`<div class="vision-room-heading">${eyebrow('LEARNING TO SEE / FIVE LESSONS FROM THE FIELD')}<h1>每一個專案，<em>都是一堂成長的課。</em></h1><p>從五個真實場景，累積辨識物件、理解異常與判斷流程的經驗。</p></div><button class="room-back" data-history="back">↖ 十年積累</button><div class="vision-room-footer"><div><small>FROM MANY PROJECTS, FIVE PERSPECTIVES.</small><p>看見問題、整理樣本，再練習判斷。</p></div><div class="history-room-action">${historyRoomAction(canFuse)}</div></div>`};
- if(phase==='hardware'){const c=visionCases[selected],h=c.hardware;return {story:'',detail:`<div class="vision-room-heading">${eyebrow('FROM THE FIELD / '+c.english)}<h1>${c.title}<em>，接回真實現場。</em></h1><p>${h.feedback}</p></div><div class="field-labels"><div><small>01 / INPUT</small><strong>${h.device}</strong><span>${h.input}</span></div><div><small>02 / EDGE</small><strong>邊緣運算設備</strong><span>WinEdge-V · 影像推論</span></div><div><small>03 / OUTPUT</small><strong>現場介面與流程</strong><span>${h.output}</span></div></div><div class="vision-room-footer"><div><small>HARDWARE × SOFTWARE</small><p>現場提供樣本，也驗證學習的成果。</p><small>連接概念依專案需求配置</small></div><div class="field-actions"><button class="text-button" data-history="select" data-case-index="${selected}">重看片段 ↶</button></div></div>`}}
- if(phase==='learning')return {story:'',detail:`<div class="vision-room-heading">${eyebrow('LEARN / TURN EXPERIENCE INTO KNOWLEDGE')}<h1>累積了經驗，<em>接著教它學會判斷。</em></h1><p>像孩子在課堂上反覆練習：整理資料、給出標註，再訓練與驗證模型。</p></div><div class="learning-steps"><div><b>01</b><h2>分專案整理</h2><p>把不同場域的樣本，整理成清楚的學習材料。</p></div><div><b>02</b><h2>標記對與不對</h2><p>標註物件、類別與異常，給模型學習的依據。</p></div><div><b>03</b><h2>訓練、驗證、修正</h2><p>反覆檢驗判斷結果，再部署回現場接收回饋。</p></div></div><div class="vision-room-footer"><div><small>FROM EXPERIENCE TO REUSABLE INTELLIGENCE</small><p>將十年的訓練經驗，累積成可重複使用的平台。</p></div>${button('train','誕生 AIWinOps')}</div>`};
+ if(phase==='hardware')return {story:'',detail:visionHardwareHTML(selected)};
+ if(phase==='learning')return {story:'',detail:visionLessonHTML(state.learningStep||0)};
  if(phase==='fusing')return {story:'',detail:`<div class="vision-fusion-heading">${eyebrow('FROM PROJECTS TO PRODUCT')}<h1>十年的學習，<em>凝聚成一塊新能力。</em></h1></div><div class="vision-fusion-flash"></div>`};
  return {story:'',detail:`<div class="vision-product-heading">${eyebrow('EXPERIENCE BECOMES LEARNING')}<h1>AIWinOps<span>影像 AI 訓練平台</span></h1><p>把資料管理、標註、訓練與驗證，變成持續成長的能力。</p></div><div class="vision-product-bottom"><div class="vision-product-pipeline"><span>相機與現場樣本</span><b>→</b><span>AIWinOps 訓練與驗證</span><b>→</b><span>WinEdge-V 部署與回饋</span></div><div class="vision-product-actions">${button('back','回到十年積累',true)}</div></div>`};
 }
@@ -37,7 +38,7 @@ export function createVisionPlayer(dialog,onAction){
   currentState=state;
   if(state.phase!=='room'||!state.caseOpen){if(dialog.open)hide();return}
   const c=visionCases[state.selected];if(!c)return;
-  if(!dialog.open)dialog.showModal();
+  if(!dialog.open)dialog.show();
   if(selected!==state.selected){
    video.pause();selected=state.selected;error.hidden=true;retry.hidden=true;retry.textContent='播放影片 ▶';video.poster='./assets/'+c.image;video.src='./assets/'+c.video;video.muted=true;video.load();play();
    dialog.querySelector('#vision-film-title').textContent=c.title;

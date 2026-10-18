@@ -3,7 +3,7 @@ import { createCompanyScene } from './company.js?v=company-lockup-6';
 import * as THREE from './vendor/three.module.js';
 import {stageView} from './stage-layout.js?v=winedge-launch-7';
 import { products, chapters, agents, palette } from './content.js?v=winedge-launch-7';
-import { createHistoryWall } from './history-wall.js?v=company-history-15';
+import { createHistoryWall } from './history-wall.js?v=vision-keynote-1';
 import {createGrowthScene} from './growth-scene.js?v=product-colors-1';
 import {createProductJourney} from './product-journey.js?v=numops-stage-1';
 import { createAnniversary } from './anniversary.js?v=cosmic-opening-1';
@@ -89,7 +89,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     // Layout dimensions stay stable during CSS entrance transforms. Refresh density when the display changes.
     const width=container.clientWidth,height=container.clientHeight;if(width<=0||height<=0)return;
     const nativeRatio=window.devicePixelRatio||1;
-    const desiredRatio=kind==='launch'?(launchMode==='summary'?4:Math.max(2,Math.min(nativeRatio,3))):kind==='product'&&['chat','analytics'].includes(chapters[chapter]?.product?.id)?Math.max(2,Math.min(nativeRatio,3)):Math.min(nativeRatio,2);
+    const desiredRatio=kind==='launch'?(launchMode==='summary'?4:Math.max(2,Math.min(nativeRatio,3))):(kind==='history'||kind==='product'&&['chat','analytics'].includes(chapters[chapter]?.product?.id))?Math.max(2,Math.min(nativeRatio,3)):Math.min(nativeRatio,2);
     const ratio=Math.min(desiredRatio,renderer.capabilities.maxTextureSize/Math.max(width,height));
     if(renderer.getPixelRatio()!==ratio)renderer.setPixelRatio(ratio);
     aspect=width/height;renderer.setSize(width,height,false);camera.aspect=aspect;camera.updateProjectionMatrix();
@@ -116,7 +116,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   }
   function setExploded(on){exploded=on;castleCore.forEach((o,i)=>{o.goal.copy(o.home);if(on){o.goal.y+=[.15,.35,.35,.7][i];o.goal.x+=[0,-.5,.5,0][i]}});foundation.forEach(o=>o.goal.copy(o.home))}
   function setInspect(on){inspect=on}
-  function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden||openingOccluded||kind==='closing'||kind==='chronicle'||kind==='launch'&&['feature','cases'].includes(launchMode)){last=ms;return;}const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
+  function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden||openingOccluded||kind==='closing'||kind==='chronicle'||kind==='launch'&&['feature','cases','ecosystem'].includes(launchMode)){last=ms;return;}const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
     domainRig.position.y+=((exploded?.7:0)-domainRig.position.y)*e;
     const view=stageView(kind,aspect,{phase:productJourney.phase(),exploded,inspect,companyLayout});
     if(kind==='history'){historyWall.update(age,reduced,dt);camera.position.copy(historyWall.cameraPosition);target.copy(historyWall.cameraTarget);camera.lookAt(target);rig.rotation.y=0;}else{
@@ -134,7 +134,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     }
     if(kind==='growth'||kind==='body')growth.update(kind,age,reduced);
     if(kind==='product')productJourney.update(age,reduced,dt);
-    renderer.render(scene,camera);
+    if(kind!=='history'||historyWall.shouldRender())renderer.render(scene,camera);
     const r=container.getBoundingClientRect(),lr=labelLayer.getBoundingClientRect();labels.forEach(l=>{l.el.hidden=kind!==l.scope||!visible(l.group)||(l.scope==='history'&&!historyWall.labelsVisible())||(l.scope==='product'&&!productJourney.labelsVisible());if(l.el.hidden)return;v.copy(l.anchor);l.group.localToWorld(v);v.project(camera);l.el.style.left=`${(v.x*.5+.5)*r.width+r.left-lr.left}px`;l.el.style.top=`${(-v.y*.5+.5)*r.height+r.top-lr.top}px`});
   }
   camera.position.set(5,6,24);setChapter(0);raf=requestAnimationFrame(animate);
