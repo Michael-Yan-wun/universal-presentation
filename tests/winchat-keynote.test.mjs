@@ -5,10 +5,10 @@ import {createProductJourney} from '../dist/product-journey.js';
 import {winChatBeatCounts,winChatFinalBeats} from '../dist/winchat-script.js';
 
 function setup(id='chat'){
- let state;
- const journey=createProductJourney({group:new THREE.Group(),brick(parent,options){const g=new THREE.Group();parent.add(g);g.position.fromArray(options.pos);return {g,home:g.position.clone()};},addLabel(){return {};},onStage(value){state=value;}});
+ let state;const models=new Map();
+ const journey=createProductJourney({group:new THREE.Group(),brick(parent,options){const g=new THREE.Group();parent.add(g);g.position.fromArray(options.pos);models.set(options.name,g);return {g,home:g.position.clone()};},addLabel(){return {};},onStage(value){state=value;}});
  journey.reset(id);
- return {journey,state:()=>state,settle(){journey.update(10,true,2);}};
+ return {journey,models,state:()=>state,settle(){journey.update(10,true,2);}};
 }
 test('all keynote beats are manual, with complete topics required before fusion',()=>{
  const {journey,state,settle}=setup();
@@ -44,4 +44,19 @@ test('NumOps keeps its original three-topic sequence',()=>{
  const {journey,state,settle}=setup('analytics');
  for(let i=0;i<3;i++){journey.action('next');settle();assert.equal(state().selected,i);assert.equal(state().beat,0);}
  assert.equal(state().canFuse,true);journey.action('next');settle();assert.equal(state().phase,'born');assert.equal(journey.action('next'),false);
+});
+
+test('WinChat bricks stay hidden until the final brain-to-product reveal',()=>{
+ const {journey,models,settle}=setup();
+ const topics=['RAG','AGENT','SKILL'];
+ const hidden=()=>topics.forEach(name=>assert.equal(models.get(name).visible,false));
+ hidden();assert.equal(models.get('WinChat').visible,false);
+ for(let topic=0;topic<3;topic++){
+  journey.action('next');settle();hidden();
+  for(let i=1;i<winChatBeatCounts[topic];i++)journey.action('next');
+ }
+ journey.action('next');journey.update(1,false,1);hidden();assert.equal(models.get('WinChat').visible,false);
+ journey.update(4,false,2.6);hidden();assert.equal(models.get('WinChat').visible,true);
+ settle();journey.action('back');settle();hidden();assert.equal(models.get('WinChat').visible,false);
+ journey.reset('chat');hidden();assert.equal(models.get('WinChat').visible,false);
 });

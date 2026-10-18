@@ -1,4 +1,5 @@
-import {winChatBeat,winChatAction} from './winchat-script.js?v=winchat-stage-1';
+import {winChatBrain} from './winchat-brain.js?v=winchat-brain-1';
+import {winChatBeat,winChatAction} from './winchat-script.js?v=winchat-brain-1';
 
 const official='https://www.aiwin.com.tw/products/winchat';
 const assets={
@@ -25,8 +26,9 @@ function mission({icon}){
  return frame(`<div class="wc-mission"><div class="wc-mission-goal"><span>工作目標</span><h2>今天的現場，<br>哪些地方需要留意？</h2><div class="wc-goal-orb">${icon('brain')}<i></i><i></i><i></i></div></div><div class="wc-mission-route" data-reveal-at="1">${[['search','查知識','SOP / 歷史紀錄'],['database','連資料','資料庫 / 企業系統'],['brain','做分析','關係 / 脈絡 / 判讀']].map((a,i)=>`<article style="--i:${i}"><span>0${i+1}</span>${icon(a[0])}<h3>${a[1]}</h3><p>${a[2]}</p><div class="wc-route-dots"></div></article>`).join('')}</div><div class="wc-mission-delivery" data-reveal-at="2"><div class="wc-delivery-stamp">${icon('check')}<span>WORK SUMMARY</span></div><div><h3>把資料與知識，整理在一起。</h3><p>運轉紀錄 · 關注項目 · 相關規範 · 後續判讀</p></div><svg class="wc-delivery-chart" viewBox="0 0 360 100" aria-hidden="true"><path d="M0 85L30 72 60 78 90 48 120 59 150 35 180 49 210 21 240 33 270 15 300 24 330 7 360 17"/></svg></div></div>`,'demo','wc-mission-frame');
 }
 function modules({icon}){
- return frame(`<div class="wc-module-world"><div class="wc-module-orbits"><i></i><i></i></div><svg class="wc-module-wires" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true"><path d="M150 110Q230 350 500 350 M500 65V350 M850 110Q770 350 500 350"/></svg>${[['database','KNOWLEDGE','知識檢索'],['chart','ANALYSIS','資料分析'],['document','WORKFLOW','工作彙整']].map((a,i)=>`<article class="wc-skill-block block-${i}"><div class="wc-block-studs"><i></i><i></i><i></i></div><span>0${i+1}</span>${icon(a[0])}<h2>${a[2]}</h2><p>${a[1]}</p></article>`).join('')}<div class="wc-agent-dock"><span class="wc-dock-symbol">W</span><div><span>WINCHAT</span><h2>Agent</h2></div><div class="wc-dock-ports"><i></i><i></i></div></div><div class="wc-module-result" data-reveal-at="1"><span>KNOWLEDGE</span><b>＋</b><span>SYSTEMS</span><b>＋</b><span>EXPERTISE</span><p>依任務調用，依企業需求組合。</p></div></div>`,'demo','wc-modules-frame');
+ return frame(`<div class="wc-skill-network"><div class="wc-skill-mind">${winChatBrain({mode:'skill'})}</div><svg class="wc-skill-paths" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true"><path d="M180 140C270 140 260 260 430 260 M820 140C730 140 740 260 570 260 M500 430V340"/></svg>${[['database','KNOWLEDGE','知識檢索'],['chart','ANALYSIS','資料分析'],['document','WORKFLOW','工作彙整']].map((a,i)=>`<article class="wc-neural-skill skill-${i}"><div>${icon(a[0])}</div><span>${a[1]}</span><h2>${a[2]}</h2></article>`).join('')}<div class="wc-skill-network-caption" data-reveal-at="1"><h2>依任務調用，讓專業一起工作。</h2></div></div>`,'demo','wc-modules-frame');
 }
+
 function applications({icon}){
  const data=[['chat','CUSTOMER SERVICE','客服與維修','這個部件，<br>該怎麼查？','圖像 × 文件 × 問答','找回圖解與相關知識','圖文回答，附上參考來源。'],['people','ONBOARDING','新人與培訓','第一次做，<br>該從哪開始？','SOP × 經驗 × 導讀','把流程與經驗傳下去','依問題找到規範與操作說明。'],['chart','FIELD OPERATIONS','現場與巡檢','今天的現場，<br>有什麼要注意？','數據 × 知識 × 工具','把狀況整理成巡檢摘要','結合資料與紀錄，協助判讀。']];
  return frame(`<div class="wc-application-stage">${data.map((a,i)=>`<article style="--i:${i}"><div class="wc-app-top"><span>0${i+1}</span>${icon(a[0])}</div><p class="wc-app-english">${a[1]}</p><h2>${a[2]}</h2><p class="wc-app-question">${a[3]}</p><div class="wc-app-recipe">${a[4]}</div><div class="wc-app-outcome" data-reveal-at="1">${icon('check')}<h3>${a[5]}</h3><p>${a[6]}</p></div></article>`).join('')}</div>`,'demo','wc-application-frame');
@@ -36,7 +38,7 @@ function hero(){
 }
 export function winChatKeynote(state,helpers){
  if(state.phase==='born'){
-  if(!state.beat)return {key:'chat-product-hero',story:'',detail:hero(),layout:'hero',fullStage:true,note:'建議 30 秒。三塊能力融合成 WinChat。先停留讓產品出現，再收束：記憶、思考與技能，組成企業工作的力量。',action:'走進 WinChat 工作區'};
+  if(!state.beat)return {key:'chat-product-hero',story:'',detail:hero(),layout:'hero',fullStage:true,note:'建議 30 秒。大腦與神經訊號凝聚成 WinChat 積木。先停留讓產品出現，再收束：記憶、思考與技能，組成企業工作的力量。',action:'走進 WinChat 工作區'};
   return {key:'chat-product-workspace',story:'',detail:screen('workspace'),layout:'full',fullStage:true,note:'建議 40 秒。以官方完整工作區收尾：從 RAG 到 Agent，接上企業知識、技能與系統。再回到整體積木與協作成形。',action:'前往協作成形'};
  }
  const beat=winChatBeat(state);

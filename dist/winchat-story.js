@@ -1,4 +1,5 @@
-import {winChatKeynote} from './winchat-keynote.js?v=winchat-stage-1';
+import {winChatBrain} from './winchat-brain.js?v=winchat-brain-1';
+import {winChatKeynote} from './winchat-keynote.js?v=winchat-brain-1';
 // Keynote visuals: official WinChat capabilities + the user's multimodal RAG brief.
 // All question/answer and workflow examples below are illustrative, not a live product session.
 export const winChatSource='https://www.aiwin.com.tw/products/winchat';
@@ -12,21 +13,17 @@ const topics=[
  {tag:'SKILL',label:'可組合的技能',title:'把專業做法，<br><em>變成可用的技能。</em>',copy:'知識工具與系統工具，<br>讓 Agent 依任務調用所需能力。',points:[['工具包管理','依工作需求開啟對應技能'],['權限範圍','設定工具參數與可存取資源'],['重複組合','把專業能力用在不同企業情境']],note:'官網技能頁支持工具包與單項工具啟停、工具參數及權限範圍。用客服維修、新人培訓、現場巡檢呈現組合方向，不宣稱可自行學會技能、保證所有外部系統現成支援。'}
 ];
 export const winChatTopics=topics;
-function brain(){
- const left='M394 117C370 75 310 76 285 112C245 102 208 133 213 174C169 188 154 236 181 268C168 306 204 343 242 339C261 381 308 389 337 356C367 371 394 344 394 309Z';
- let nodes='',links='';const pts=[];
- for(let i=0;i<230;i++){const x=175+((i*137.508)%450),y=85+((i*83.317)%310);pts.push([x,y]);nodes+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${i%9===0?2.5:1.25}" style="--i:${i%12}"/>`;if(i>0){const near=pts.slice(0,-1).map(p=>({p,d:Math.hypot(p[0]-x,p[1]-y)})).filter(n=>n.d<43).sort((a,b)=>a.d-b.d).slice(0,2);near.forEach(({p})=>links+=`<path d="M${p[0]} ${p[1]}L${x} ${y}"/>`);}}
- const folds='M289 115C269 142 291 163 269 185S232 192 240 223S277 242 256 275S266 318 294 324 M351 117C319 147 337 171 311 194S291 230 316 246S336 278 314 298S320 329 336 355 M214 175C242 157 253 174 269 185 M182 267C208 249 232 252 256 275 M242 339C234 308 259 299 270 297 M394 182C361 169 339 197 359 220S376 252 354 271S354 313 393 309';
- return `<svg class="wc-brain" viewBox="0 0 800 500" aria-hidden="true"><defs><linearGradient id="wc-brain-fill" x2="1" y2="1"><stop stop-color="#bda4ed" stop-opacity=".19"/><stop offset="1" stop-color="#4b247d" stop-opacity=".06"/></linearGradient><linearGradient id="wc-brain-line"><stop stop-color="#91b8e8"/><stop offset=".5" stop-color="#e7d9ff"/><stop offset="1" stop-color="#9777d2"/></linearGradient><clipPath id="wc-brain-clip"><path d="${left}"/><path d="${left}" transform="translate(800 0) scale(-1 1)"/></clipPath></defs><ellipse class="wc-brain-orbit" cx="400" cy="263" rx="332" ry="91" transform="rotate(-17 400 263)"/><ellipse class="wc-brain-orbit orbit-two" cx="400" cy="263" rx="316" ry="91" transform="rotate(21 400 263)"/><g fill="url(#wc-brain-fill)" stroke="url(#wc-brain-line)" stroke-width="1.6"><path d="${left}"/><path d="${left}" transform="translate(800 0) scale(-1 1)"/></g><g class="wc-cortex"><path d="${folds}"/><path d="${folds}" transform="translate(800 0) scale(-1 1)"/></g><g clip-path="url(#wc-brain-clip)" class="wc-synapses">${links}${nodes}<path class="wc-neural-pulse" d="M180 270Q260 150 320 245T420 205T610 270 M250 350Q300 230 360 160T545 350"/></g><path class="wc-brain-stem" d="M394 307V396Q400 423 405 396V307 M400 417V456"/><circle class="wc-brain-core" cx="400" cy="252" r="10"/><circle class="wc-core-ring" cx="400" cy="252" r="24"/><g class="wc-brain-labels"><text x="95" y="153">MEMORY</text><text x="620" y="172">REASONING</text><text x="550" y="416">ACTION</text></g></svg>`;
-}
 const applications=()=>`<div class="wc-applications">${[['chat','客服與維修','找知識 · 查圖解'],['people','新人與培訓','學流程 · 問規範'],['chart','現場與巡檢','看狀態 · 做摘要']].map(a=>`<div>${icon(a[0])}<strong>${a[1]}</strong><small>${a[2]}</small></div>`).join('')}</div>`;
 function drawing(){return `<svg class="wc-drawing" viewBox="0 0 300 190" aria-hidden="true"><g stroke="#8196bc" stroke-width="1.5" fill="none"><path d="M55 122L130 153 243 91 167 57z M55 122V68l76 31v54 M55 68l112-62 76 30v55 M131 99l112-63 M80 79v56 M109 92v54 M159 84v54 M186 69v54 M214 53v54"/><path d="M87 38l73 30 52-29-73-29z M87 38V59l73 30V68 M160 89l52-29V39"/><circle cx="202" cy="90" r="9"/><path d="M211 90h53v47"/></g><rect class="wc-image-target" x="180" y="68" width="44" height="44" rx="6"/><circle cx="202" cy="90" r="3" fill="#b998f6"/></svg>`;}
-function overview(){return {story:`${kicker('WINCHAT / THE THINKING CHAPTER')}<h1 class="wc-heading">從記住，<br>到知道<em>怎麼做。</em></h1><p class="wc-intro-copy">學會看見與分析之後，<br>讓知識成為下一步行動。</p><div class="wc-topic-links">${topics.map((t,i)=>`<button data-journey="select" data-topic="${i}"><span>0${i+1}</span><div><b>${t.tag}</b><strong>${t.label}</strong></div><i>↗</i></button>`).join('')}</div><p class="wc-worlds">客服維修 / 新人培訓 / 現場巡檢</p>`,detail:`<div class="wc-overview-visual"><div class="wc-brain-heading"><span>MEMORY. REASONING. ACTION.</span><strong>逐漸成熟的企業大腦</strong></div>${brain()}<div class="wc-neural-trails"><i></i><i></i><i></i></div></div>`};}
+function overview(state){
+ const active=state.phase==='selecting'?state.selected:-1;
+ const portalTitles=['讓經驗，<br>成為<em>企業記憶。</em>','連起知識，<br>開始<em>思考協作。</em>','連起專業，<br>學會<em>調用技能。</em>'];
+ return {key:`brain-${active}`,layout:'brain',action:active>=0?`進入 ${topics[active].tag}`:'展開 WinChat 多模態 RAG',story:`${kicker('WINCHAT / THE THINKING CHAPTER')}<h1 class="wc-heading">${active<0?'從記住，<br>到知道<em>怎麼做。</em>':portalTitles[active]}</h1><p class="wc-intro-copy">學會看見與分析之後，<br>讓企業擁有記憶、思考與技能。</p><div class="wc-topic-links">${topics.map((t,i)=>`<button data-journey="select" data-topic="${i}" ${active>=0?'disabled':''}><span>0${i+1}</span><div><b>${t.tag}</b><strong>${t.label}</strong></div><i>↗</i></button>`).join('')}</div><p class="wc-worlds">客服維修 / 新人培訓 / 現場巡檢</p>`,detail:`<div class="wc-overview-visual ${active>=0?'is-entering':''}"><div class="wc-brain-heading"><span>MEMORY. REASONING. ACTION.</span><strong>逐漸成熟的企業大腦</strong></div>${winChatBrain({interactive:active<0,active})}</div>`,note:'以企業大腦接續生命體的成長：RAG 是記憶，Agent 是思考，Skill 是可調用的技能。三段內容講完，才把累積的智慧凝聚成 WinChat 積木。'};
+}
 export function winChatUI(state){
- if(state.phase==='overview')return {...overview(),key:'overview',note:'接續感知與專案學習：企業的大腦開始具備記憶、思考與技能。三塊依序深入，全部完成後融合成 WinChat。涵蓋客服維修、新人培訓與現場巡檢。'};
- if(['selecting','focus','born'].includes(state.phase))return winChatKeynote(state,{icon,drawing});
- if(state.phase==='fusing')return {key:'fusing',story:'',detail:`<div class="wc-fusion"><p class="wc-kicker">KNOWLEDGE BECOMES CAPABILITY</p><h1>記憶、思考、技能。<br><em>組成企業的智慧。</em></h1><div class="wc-fusion-halo"><i></i><i></i><i></i><i></i></div><div class="wc-fusion-words"><span>RAG</span><b>＋</b><span>Agent</span><b>＋</b><span>Skill</span></div></div>`,note:'三塊能力共同旋入中心，融合後才揭曉 WinChat。'};
-
+ if(['overview','selecting'].includes(state.phase))return overview(state);
+ if(['focus','born'].includes(state.phase))return winChatKeynote(state,{icon,drawing});
+ if(state.phase==='fusing')return {key:'fusing',layout:'fusion',story:'',detail:`<div class="wc-fusion"><p class="wc-kicker">INTELLIGENCE TAKES SHAPE</p><h1>讓累積的智慧，<br><em>凝聚成一塊能力。</em></h1><div class="wc-mind-condense">${winChatBrain({mode:'fusion'})}</div><div class="wc-fusion-halo"><i></i><i></i><i></i><i></i></div><div class="wc-fusion-words"><span>RAG</span><b>＋</b><span>Agent</span><b>＋</b><span>Skill</span></div></div>`,note:'大腦與神經訊號聚光收攏，再揭曉 WinChat 積木。此時才將記憶、思考與技能回歸整體積木故事。'};
 }
 
 export function winChatEvidence(view='answer'){

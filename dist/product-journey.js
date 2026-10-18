@@ -1,4 +1,4 @@
-import {winChatBeatCounts,winChatFinalBeats} from './winchat-script.js?v=winchat-stage-1';
+import {winChatBeatCounts,winChatFinalBeats} from './winchat-script.js?v=winchat-brain-1';
 import * as THREE from './vendor/three.module.js';
 import {journeyStage as layout} from './stage-layout.js?v=company-stage-2';
 import {products} from './content.js?v=company-history-15';
@@ -17,7 +17,7 @@ export function createProductJourney({group,brick,addLabel,onStage}){
  const roots={},V=(...a)=>new THREE.Vector3(...a),ease=t=>1-Math.pow(1-t,3),clamp=t=>Math.max(0,Math.min(1,t));let id='analytics',phase='overview',selected=-1,beat=0,clock=0,from=[],visited=new Set();
  for(const p of products.filter(p=>productStories[p.id])){const root=new THREE.Group();group.add(root);const pieces=productStories[p.id].topics.map((t,i)=>{const o=brick(root,{id:'journey-'+i,name:t.tag,color:p.id==='chat'?['#755695','#8366a6','#67508e'][i]:p.color,cols:3,rows:2,h:1.15,pos:[(i-1)*layout.spread,p.id==='chat'?-2.3:layout.overviewY,0],scale:layout.overviewScale,detail:p.id==='chat'?'hero':'standard'});o.journeyManaged=true;const label=addLabel(o.g,V(0,-1.58,1),t.title,'journey-'+i,p.uiColor,'journey-label','product');return {o,label}});const born=brick(root,{id:p.id,name:p.name,sub:p.role,color:p.id==='chat'?'#80619e':p.color,cols:5,rows:3,h:1.45,detail:p.id==='chat'?'hero':'standard',pos:[0,layout.bornY,0]});born.journeyManaged=true;const kit=createFieldKit(root,{scale:.77,input:['numeric','analytics'].includes(p.id)?'sensor':'camera'});kit.group.position.z=-2;roots[p.id]={root,pieces,born,kit}}
  const state=()=>({id,phase,selected,beat,visited:[...visited],canFuse:visited.size===3});const notify=()=>onStage(state());const change=p=>{phase=p;clock=0;notify()};
- function reset(product){id=product;phase='overview';clock=0;selected=-1;beat=0;visited=new Set();for(const[k,v]of Object.entries(roots))v.root.visible=k===id;const r=roots[id];r.born.g.visible=false;r.kit.group.visible=false;r.pieces.forEach(({o})=>{o.g.visible=true;o.g.position.copy(o.home);o.g.rotation.set(0,0,0);o.g.scale.setScalar(layout.overviewScale)});notify()}
+ function reset(product){id=product;phase='overview';clock=0;selected=-1;beat=0;visited=new Set();for(const[k,v]of Object.entries(roots))v.root.visible=k===id;const r=roots[id];r.born.g.visible=false;r.kit.group.visible=false;r.pieces.forEach(({o})=>{o.g.visible=id!=='chat';o.g.position.copy(o.home);o.g.rotation.set(0,0,0);o.g.scale.setScalar(layout.overviewScale)});notify()}
  function selectTopic(index,startBeat=0){
   const r=roots[id];from=r.pieces.map(({o})=>o.g.position.clone());selected=index;beat=startBeat;change('selecting');return true;
  }
@@ -37,7 +37,7 @@ export function createProductJourney({group,brick,addLabel,onStage}){
   if(type==='back'){
    if(phase==='born'&&id==='chat'){
     if(beat>0){beat--;notify();return true;}
-    r.born.g.visible=false;r.pieces.forEach(({o})=>o.g.visible=true);return selectTopic(2,winChatBeatCounts[2]-1);
+    r.born.g.visible=false;r.pieces.forEach(({o})=>o.g.visible=false);return selectTopic(2,winChatBeatCounts[2]-1);
    }
    if(phase==='focus'){
     if(id==='chat'&&beat>0){beat--;notify();return true;}
@@ -51,7 +51,7 @@ export function createProductJourney({group,brick,addLabel,onStage}){
 
  function update(age,reduced,dt){clock+=dt;const r=roots[id];if(!r)return;
  if(phase==='selecting'){const p=reduced?1:clamp(clock/1.65),k=ease(p);r.pieces.forEach(({o},i)=>{const target=i===selected?V(0,layout.focusY,2.0):V((i-1)*layout.spread,-.95,-2.6);o.g.position.lerpVectors(from[i],target,k);o.g.position.y+=Math.sin(p*Math.PI)*.8;o.g.scale.setScalar(i===selected?layout.overviewScale+k*(layout.focusScale-layout.overviewScale):layout.overviewScale-k*.46)});if(p===1){if(id!=='chat'||beat===winChatBeatCounts[selected]-1)visited.add(selected);change('focus')}}
- if(phase==='fusing'){const p=reduced?1:clamp(clock/4.6),k=ease(clamp(p/.76));r.pieces.forEach(({o},i)=>{const a=i*2.09+p*6.2,rad=(1-k)*3.5;o.g.visible=p<.8;o.g.position.lerpVectors(from[i],V(Math.cos(a)*rad,Math.sin(p*Math.PI)*2,Math.sin(a)*rad),ease(clamp(p/.3)));o.g.scale.setScalar((1-k)*1.2+.05);o.g.rotation.y=a});r.born.g.visible=p>.73;r.born.g.scale.setScalar(.1+((id==='chat'?2.05:layout.bornScale)-.1)*ease(clamp((p-.73)/.27)));if(p===1)change('born')}
+ if(phase==='fusing'){const p=reduced?1:clamp(clock/4.6),k=ease(clamp(p/.76));r.pieces.forEach(({o},i)=>{const a=i*2.09+p*6.2,rad=(1-k)*3.5;o.g.visible=id!=='chat'&&p<.8;o.g.position.lerpVectors(from[i],V(Math.cos(a)*rad,Math.sin(p*Math.PI)*2,Math.sin(a)*rad),ease(clamp(p/.3)));o.g.scale.setScalar((1-k)*1.2+.05);o.g.rotation.y=a});r.born.g.visible=p>.73;r.born.g.scale.setScalar(.1+((id==='chat'?2.05:layout.bornScale)-.1)*ease(clamp((p-.73)/.27)));if(p===1)change('born')}
  if(phase==='born'){r.born.g.visible=true;r.born.g.scale.setScalar(id==='chat'?2.05:layout.bornScale);r.born.g.rotation.y=reduced?0:Math.sin(age*.25)*.04;if(id==='chat'){r.kit.group.visible=false;r.pieces.forEach(({o})=>o.g.visible=false)}else{r.kit.layoutMode??(r.kit.layoutMode=true,r.kit.layout(true));r.kit.update(reduced?0:age,reduced?1:ease(clamp(clock/1.5)));r.kit.group.position.z=.75}}else r.kit.group.visible=false;
  }
  return {reset,action,update,phase:()=>phase,labelsVisible:()=>phase==='overview'};

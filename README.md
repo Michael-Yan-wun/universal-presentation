@@ -37,7 +37,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 | 感知世界 | 小機器人、六種感知入口、眼睛展開 Basler / IP / USB 相機；影像匯入 WinEdge-V，Modbus / MC Protocol / Database 匯入 WinEdge-N；兩者搭載 Edge 硬體 |
 | 十年專案與學習 | 「有了感知，開始學習」；同一個機器人接收積木光流、知識節點亮起；深入 Vision 後探索五個實際案例影片及硬體流程 |
 | AIWinOps 誕生 | 五案完成後，呈現整理、標註、訓練與驗證；全部專案積木形成龍捲風，融合誕生 AIWinOps，再連回部署硬體 |
-| NumOps / WinChat | 各有三塊能力積木與逐段重點；完成該輪內容後融合為產品；WinChat 以 RAG、Agent、Skill 組成 |
+| NumOps / WinChat | NumOps 由三塊能力積木展開；WinChat 由企業大腦深入 RAG、Agent、Skill，最後凝聚成產品積木 |
 | 協作與新品 | 產品連成完整智慧身體；WinEdge 積木搭載實體 Edge 主機，三段主題整合八項能力，最後聚合成中央產品的便當圖 |
 | 城堡與實績 | 實體積木底座、完整產品城堡、五個領域大腦，以及 Wafer Map、烤箱溫控、企業知識三組應用 |
 | 封底 | 地球曙光地平線、「下一個十年，與你同行」、品牌收尾 |
@@ -109,14 +109,16 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 ### WinChat：12 分鐘舞台版
 
-預覽：[WinChat 章節](http://127.0.0.1:8765/?v=winchat-stage-1#chat)。本次只調整 WinChat，其他產品與 WinEdge 新品發表維持原樣。
+入場以大型企業大腦呈現記憶、思考與技能；三組神經訊號依序點亮，點選可深入主題。中途的 Skill 使用神經能力節點，直到收尾才由大腦聚光凝結成 WinChat 積木。
+
+預覽：[WinChat 章節](http://127.0.0.1:8765/?v=winchat-brain-1#chat)。本次只調整 WinChat，其他產品與 WinEdge 新品發表維持原樣。
 
 講述節奏與逐段內容：[WinChat 舞台講述稿](docs/WINCHAT-KEYNOTE.md)。建議 **12 分 35 秒**，是人工講述配速，沒有自動翻頁計時。
 
-- **開場：** 神經網路大腦與三塊能力積木，接續生命體的感知與學習。
+- **開場：** 大型企業大腦與三組神經訊號，接續生命體的感知與學習。
 - **RAG，7 個步驟：** 大幅圖文手冊 → 按壓 VLM 掃圖 → 圖文與 Embedding 合流 → 官方知識庫 → 搜尋模式 → 問答 → 引用來源鏡頭放大。
 - **Agent，5 個步驟：** 工作目標 → 按壓拆解任務 → 彙整輸出 → 官方戰情室 → AI Copilot 聚焦。
-- **Skill，6 個步驟：** 專業能力積木 → 按壓接合 → 官方工具管理 → 啟用區放大 → 客服維修／新人培訓／現場巡檢 → 按壓揭曉成果。
+- **Skill，6 個步驟：** 專業能力節點 → 按壓連結大腦 → 官方工具管理 → 啟用區放大 → 客服維修／新人培訓／現場巡檢 → 按壓揭曉成果。
 - **誕生，2 幕：** 三個主題完成後才融合，揭曉大型 WinChat 積木，再進入大幅官方工作區，最後接回協作成形。
 
 右方向鍵、Page Down、空白鍵或主題動作按鈕推進；左方向鍵／Page Up 逐步返回。各步可停留，沒有時間到了就跳頁；WinChat 的滾輪翻頁停用，避免觸控板誤操作。直接從總覽選主題時仍須看完三個主題才能融合。標題不會在 3D 轉場完成時重新跳動；同一張官方介面的前後步使用連續平移放大。
@@ -127,7 +129,8 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 - `winchat-script.js`：18 個手動步驟的文案、順序、講述秒數與隱藏提詞。
 - `winchat-keynote.js` / `winchat-keynote.css`：大型官網畫面、點擊揭曉與攝影機聚焦效果。
-- `winchat-story.js` / `winchat-story.css`：大腦總覽與原有三塊積木融合視覺。
+- `winchat-story.js` / `winchat-story.css`：大腦總覽與主題進場。
+- `winchat-brain.js` / `winchat-brain.css`：具景深的大腦向量、神經脈衝、主題深入與收尾凝聚動畫。
 - `product-journey.js`：WinChat 專屬逐步推進、返回與完成條件，NumOps 保留原流程。
 
 驗證指令：`node --test tests/winchat-keynote.test.mjs`。涵蓋停留不自動推進、先完成所有主題、跳入 Skill、逐步返回、重入重設與 NumOps 原有路徑。桌面 1920 × 1080、1280 × 720 另以瀏覽器檢查。減少動態效果偏好會停用裝飾與轉場動畫，但保留手動揭曉內容。

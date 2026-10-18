@@ -17,12 +17,12 @@ export const winChatScript = [
     {scene:'screen',asset:'dashboard',view:'copilot',title:'把變化，整理成需要關注的事。',subtitle:'從看見指標，到掌握工作脈絡。',action:'讓能力可以組合',seconds:35,note:'鏡頭推向 AI Copilot 與告警摘要。可舉巡檢工作情境：先看狀況，再回到 SOP 與紀錄，讓人決定下一步。'}
   ],
   [
-    {scene:'modules',reveal:0,title:'每一項專業，都能成為一塊能力。',subtitle:'SKILL / 可組合的企業技能',action:'將技能接上 Agent',seconds:30,note:'三塊獨立能力浮在舞台：知識檢索、資料分析、工作彙整。連回積木：不同專業可組合，並非每次重寫一套。'},
-    {scene:'modules',reveal:1,title:'依照任務，把技能組合起來。',subtitle:'知識、系統、分析，接到同一個 Agent。',action:'看看實際工具管理',seconds:40,note:'按下後能力積木向中央匯合，連線亮起。說明工具需依企業系統、參數與權限配置，這裡是組合概念演示。'},
+    {scene:'modules',reveal:0,title:'每一項專業，都是可調用的能力。',subtitle:'SKILL / 可組合的企業技能',action:'連起大腦的技能',seconds:30,note:'三個神經能力節點圍繞企業大腦：知識檢索、資料分析、工作彙整。先講每種能力的角色，最後才回歸產品積木。'},
+    {scene:'modules',reveal:1,title:'依照任務，把技能組合起來。',subtitle:'知識、系統、分析，接到同一個 Agent。',action:'看看實際工具管理',seconds:40,note:'按下後能力節點向大腦靠攏，神經連線亮起。說明工具需依企業系統、參數與權限配置，這裡是組合概念演示。'},
     {scene:'screen',asset:'tools',view:'wide',title:'技能，是可以管理的能力。',subtitle:'WinChat / 工具包與單項工具',action:'聚焦工具啟用與範圍',seconds:35,note:'展示官網高解析度技能介面。先聚焦知識庫與系統工具，說明各項專業如何成為 Agent 可調用的能力。'},
     {scene:'screen',asset:'tools',view:'tools',title:'哪些工具可用，由企業掌握。',subtitle:'工具包 · 單項工具 · 啟用控制',action:'組成三種企業應用',seconds:35,note:'鏡頭放大知識庫工具與啟用控制。說明可管理工具參數和存取範圍；不把動畫當成真的修改正式系統。'},
     {scene:'applications',reveal:0,title:'同一個 WinChat，不同的工作現場。',subtitle:'客服維修 / 新人培訓 / 現場巡檢',action:'展開三種工作成果',seconds:35,note:'先講三個問題：零件圖怎麼查、新人流程怎麼學、現場異常怎麼整理。每個情境都需要不同的知識與工具組合。'},
-    {scene:'applications',reveal:1,title:'讓企業知識，走進每一天的工作。',subtitle:'把經驗留下，把能力組合。',action:'融合為 WinChat',seconds:45,note:'按下後揭曉三種應用成果：圖文知識答覆、SOP 導讀、巡檢摘要。這些是應用示意，不是新客戶實績。最後準備把三塊能力融合。'}
+    {scene:'applications',reveal:1,title:'讓企業知識，走進每一天的工作。',subtitle:'把經驗留下，把能力組合。',action:'融合為 WinChat',seconds:45,note:'按下後揭曉三種應用成果：圖文知識答覆、SOP 導讀、巡檢摘要。這些是應用示意，不是新客戶實績。最後準備把大腦累積的智慧凝聚成產品積木。'}
   ]
 ];
 export const winChatBeatCounts=winChatScript.map(topic=>topic.length);
