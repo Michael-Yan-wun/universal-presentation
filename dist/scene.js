@@ -1,8 +1,8 @@
-import { createEdgeHost } from './edge-host.js?v=winedge-launch-4';
+import { createEdgeHost } from './edge-host.js?v=winedge-launch-6';
 import { createCompanyScene } from './company.js?v=company-lockup-6';
 import * as THREE from './vendor/three.module.js';
-import {stageView} from './stage-layout.js?v=winedge-launch-4';
-import { products, chapters, agents, palette } from './content.js?v=winedge-launch-4';
+import {stageView} from './stage-layout.js?v=winedge-launch-6';
+import { products, chapters, agents, palette } from './content.js?v=winedge-launch-6';
 import { createHistoryWall } from './history-wall.js?v=company-history-15';
 import {createGrowthScene} from './growth-scene.js?v=product-colors-1';
 import {createProductJourney} from './product-journey.js?v=company-history-15';
@@ -107,7 +107,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   }
   function setExploded(on){exploded=on;castleCore.forEach((o,i)=>{o.goal.copy(o.home);if(on){o.goal.y+=[.15,.35,.35,.7][i];o.goal.x+=[0,-.5,.5,0][i]}});foundation.forEach(o=>o.goal.copy(o.home))}
   function setInspect(on){inspect=on}
-  function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden||openingOccluded||kind==='closing'||kind==='chronicle'||kind==='launch'&&launchMode==='feature'){last=ms;return;}const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
+  function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden||openingOccluded||kind==='closing'||kind==='chronicle'||kind==='launch'&&['feature','cases'].includes(launchMode)){last=ms;return;}const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
     domainRig.position.y+=((exploded?.7:0)-domainRig.position.y)*e;
     const view=stageView(kind,aspect,{phase:productJourney.phase(),exploded,inspect,companyLayout});
     if(kind==='history'){historyWall.update(age,reduced,dt);camera.position.copy(historyWall.cameraPosition);target.copy(historyWall.cameraTarget);camera.lookAt(target);rig.rotation.y=0;}else{

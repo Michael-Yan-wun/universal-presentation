@@ -58,7 +58,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 | 05 | 數據規律 | `#analytics` | 情境、模式與專家規則、現場驗證 → NumOps |
 | 06 | 知識與行動 | `#chat` | RAG 記憶、Agent 任務、Skill 方法 → WinChat |
 | 07 | 協作成形 | `#connected-intelligence` | 感官、學習、神經與肢體共同運作 |
-| 08 | WinEdge 新品 | `#winedge` | 新品主視覺 → 八項能力 → 中央 WinEdge 便當圖 |
+| 08 | WinEdge 新品 | `#winedge` | 新品主視覺 → 八項能力 → 實際案例 → 中央 WinEdge 便當圖 |
 | 09 | 智慧城堡 | `#castle` | 現場、產品、WinChat 與五個 Domain AI 大腦 |
 | 10 | Wafer Map | `#inspection` | AIWinOps + WinEdge-V |
 | 11 | 智慧烤箱 | `#temperature` | NumOps + WinEdge-N |
@@ -107,7 +107,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 ### WinEdge 新品發表（`codex/winedge-launch`）
 
-本分支在 GitHub 同步版本 `2689f37` 上開發。預覽入口：[WinEdge 新品](http://127.0.0.1:8765/?v=winedge-launch-4#winedge)。畫面已移除「One more thing」，轉折由講者口頭帶出；舊 `#one-more-thing` 連結仍會進入新品章節。這份分支內容尚未發布到正式 Sites 網站。
+本分支在 GitHub 同步版本 `2689f37` 上開發。預覽入口：[WinEdge 新品](http://127.0.0.1:8765/?v=winedge-launch-6#winedge)。畫面已移除「One more thing」，轉折由講者口頭帶出；舊 `#one-more-thing` 連結仍會進入新品章節。這份分支內容尚未發布到正式 Sites 網站。
 
 若從主分支取得此版本，先執行：
 
@@ -131,11 +131,19 @@ git switch codex/winedge-launch
 | 07 | Plugin 擴充 | 客製模型、產線邏輯、看板元件、第三方整合接入核心 |
 | 08 | 本地 Agent | WinChat RAG + Agent + Skill 連接儀表板與資料統計巡檢 |
 
-順序為 **新品主視覺 → 八幕 → 功能總覽 → 智慧城堡**。每一幕轉場結束後停留，場景內的資料光流等動畫持續運作。`→` / `←`、`PageDown` / `PageUp`、底部箭頭依序推進或返回；新品章節停用滾輪切幕，避免誤跳。底部能力列可直接跳段，總覽卡片可重看細節，重看時可按「回到功能總覽」。重新進入新品章節會回到主視覺。
+順序為 **新品主視覺 → 八幕 → 實際案例 → 功能總覽 → 智慧城堡**。每一幕轉場結束後停留，場景內的資料光流等動畫持續運作。`→` / `←`、`PageDown` / `PageUp`、底部箭頭依序推進或返回；新品章節停用滾輪切幕，避免誤跳。已移除中間的能力導覽列，僅保留原本底部簡報控制。總覽為純展示：八張卡片不再是按鈕，沒有右上角箭頭，也不會跳回細節。重新進入新品章節會回到主視覺。
 
-場景使用品牌 WinEdge 綠色、深色背景與高對比 DOM 文字；3D 積木由通用 Edge 主機承載，最後收束於八張能力卡片中央。硬體為概念模型，功能圖解與看板數字為示意，不是實際產品操作錄影或設備即時資料。功能名稱依使用者提供的新品提案，沒有額外加入硬體規格、效能或零停機保證。
+場景採大幅圖解與固定左側文案，依能力使用青綠、藍、紫、琥珀等色彩，搭配高對比 DOM 文字與 SVG 圖形。資料沿線匯流、節點逐一接合、佇列保留／淘汰、單節點更新、看板元件對齊與模組接合各有獨立動畫；3D 積木由通用 Edge 主機承載，最後收束於彩色便當圖中央。硬體為概念模型，功能圖解與看板數字為示意，不是實際產品操作錄影或設備即時資料。功能名稱依使用者提供的新品提案，沒有額外加入硬體規格、效能或零停機保證。
 
-減少動態效果模式保留所有內容與導航，停用循環與過場動畫。轉場取消時會清理動畫，切換章節或快速操作不會留下前一幕。
+實際案例頁放在第八幕後、便當圖前，使用已有素材：
+
+- **瓶蓋瑕疵檢測：** `assets/vision/caps.mp4`，來源為使用者 Pitch v5 第 46 頁的應用展示影片。靜音循環播放；播放被瀏覽器限制時顯示播放按鈕，離開頁面即停止並卸載媒體。
+- **智慧烤箱溫控：** `assets/pitch-oven-temperature.png`，第 34 頁，27 個風門、15 個溫度點，NumOps ＋ WinEdge-N。
+- **企業知識問答：** `assets/pitch-winchat.png`，第 20／38 頁，WinChat 文件知識與來源引用。
+
+這些是既有產品／專案展示，用來說明新品的經驗基礎，不宣稱已部署在新版 WinEdge。素材沿用既有來源，不新增客戶名稱、準確率或效益數字。影片來源詳見 [`CREDITS.md`](dist/assets/vision/CREDITS.md)。
+
+減少動態效果模式保留所有內容與導航，停用循環與過場動畫，案例影片改為手動播放。轉場取消時會清理動畫及媒體，切換章節或快速操作不會留下前一幕。
 
 ## 專案結構與修改位置
 
@@ -149,7 +157,7 @@ git switch codex/winedge-launch
 └── dist/                        # 原始網站檔案；直接由 HTTP 伺服器提供
     ├── index.html / style.css    # 頁面骨架、首頁文字與版面
     ├── app.js                    # 鍵盤、章節、彈窗、互動狀態與揭曉
-    ├── winedge-launch.js / .css  # 新品八段內容、過場、功能動畫、便當圖與導航
+    ├── winedge-launch.js / .css  # 新品八段動畫、實際案例、純展示便當圖與逐幕控制
     ├── company.js / company.css # 公司介紹文案、Logo 與四大能力積木
     ├── company-history.js / .css # 公司沿革文案、兩段時間軸與響應式排版
     ├── content.js                # 產品、案例、章節、領域大腦、講者提示
@@ -178,7 +186,7 @@ git switch codex/winedge-launch
 ### 常見修改
 
 - **改產品與案例內容：** `content.js`；`history-ui.js` 是十年與 Vision 專用文案，`narrative-ui.js` 是感知與其他產品文案。
-- **改 WinEdge 發表：** `winedge-launch.js` 的 `launchFeatures` 管理八項文案，`diagram()` 管理圖解；`winedge-launch.css` 管理場景、動畫與便當圖。中央 3D 在 `scene.js`，硬體由 `edge-host.js` 共用。新增能力需同步調整便當圖的網格位置。
+- **改 WinEdge 發表：** `winedge-launch.js` 的 `launchFeatures` 管理八項文案，`diagram()` 管理圖解、`casesHTML()` 管理實績、`summaryHTML()` 管理純展示總覽；`winedge-launch.css` 管理場景、動畫與便當圖。中央 3D 在 `scene.js`，硬體由 `edge-host.js` 共用。新增能力需同步調整便當圖的網格位置。
 - **改首頁主標：** `index.html`。首頁內容會在初始化時由 `app.js` 保存並重用。
 - **調整位置、大小：** 先看 `stage-layout.js` 與 `style.css`；Vision 的鏡頭與案例位置在 `history-wall.js`。
 - **替換影片：** 將 MP4 與封面放入 `assets/vision/`，更新 `content.js` 的 `visionCases` 與對應來源紀錄。目前 Vision 五案布局與導覽含固定數量邏輯；增加案例時需一起調整，不能只新增陣列項目。
@@ -201,11 +209,11 @@ git diff --check
 - 五案影片可開關，每案可切到硬體；未完成五案時不提前誕生 AIWinOps。
 - 學習場景、龍捲風與 AIWinOps 落下完整銜接，章節返回與重播可用。
 - NumOps、WinChat、WinEdge 新品、城堡與實績能繼續操作。
-- WinEdge 八段皆可前進、返回；功能總覽卡片可重看與返回，從總覽繼續可進入城堡。
+- WinEdge 八段皆可前進、返回；第八段後先進入實際案例，再到純展示總覽，從總覽繼續可進入城堡。
 - 在 WinEdge 轉場中切換其他章節，不會殘留模型或文案；重新進入會重設。
 - 瀏覽器主控台沒有模組或素材載入錯誤；系統開啟減少動態效果時仍可閱讀與推進。
 
-本次 WinEdge 分支已以瀏覽器檢查 1920 × 1080 的新品主視覺、八段功能與總覽，以及 1280 × 720 總覽。已操作前進、返回、卡片重看、返回總覽、總覽進入城堡、轉場中切換章節及重新進入；檢查 JavaScript 語法、本機模組引用與舊入口相容性。檢查範圍為桌面預覽，不代表跨瀏覽器效能認證。
+本次 WinEdge 分支已以瀏覽器檢查 1920 × 1080 與 1280 × 720 的主視覺、八段功能、實際案例及總覽。已操作逐幕前進、返回、影片自動播放、離場卸載、轉場中切換章節及重新進入；確認中間導覽列、卡片按鈕與右上箭頭均已移除。檢查 JavaScript 語法、本機模組與媒體引用，以及案例／總覽步驟順序。檢查範圍為桌面預覽，不代表跨瀏覽器效能認證。
 
 ### 部署方式
 
