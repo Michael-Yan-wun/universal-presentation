@@ -107,21 +107,30 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 影片預設靜音、循環播放，使用播放器控制暫停與拖曳；關閉即停止播放。若瀏覽器阻擋自動播放，使用畫面上的播放按鈕。轉場期間前後切換會暫時鎖定。WinEdge 發表也由講者手動推進，不會自動跳到下一章。
 
-### WinChat：記憶、思考與行動
+### WinChat：12 分鐘舞台版
 
-預覽入口：[WinChat 章節](http://127.0.0.1:8765/?v=winchat-mind-2#chat)。本次只調整 WinChat 章節，其他產品與新品發表內容維持原樣。
+預覽：[WinChat 章節](http://127.0.0.1:8765/?v=winchat-stage-1#chat)。本次只調整 WinChat，其他產品與 WinEdge 新品發表維持原樣。
 
-- **總覽：** 神經網路大腦、緩慢流動的訊號與三塊不同紫色的能力積木。
-- **RAG：** VLM 讀取圖像／圖表，LLM 理解文字／脈絡，Embedding 建立檢索索引；透過企業知識庫，帶回相關內容與引用來源。
-- **Agent：** 將需求串成查知識、連資料、做分析的工作流程，最後形成摘要與看板。
-- **Skill：** 管理工具包、啟用控制與權限範圍，把能力組合到客服維修、新人培訓與現場巡檢。
-- **融合與誕生：** 三段都看完後，所有能力積木旋入中心，才揭曉 WinChat 與三種企業應用。下一幕接回原本的協作成形。
+講述節奏與逐段內容：[WinChat 舞台講述稿](docs/WINCHAT-KEYNOTE.md)。建議 **12 分 35 秒**，是人工講述配速，沒有自動翻頁計時。
 
-各段由底部箭頭或鍵盤推進，段落內動畫循環，不會自動跳頁；主文字不會在積木轉場完成時重新播放。可直接點選總覽的能力積木／文字進入主題，但融合前仍會補完尚未觀看的主題。誕生頁可返回 Skill；轉場期間暫停前後操作。
+- **開場：** 神經網路大腦與三塊能力積木，接續生命體的感知與學習。
+- **RAG，7 個步驟：** 大幅圖文手冊 → 按壓 VLM 掃圖 → 圖文與 Embedding 合流 → 官方知識庫 → 搜尋模式 → 問答 → 引用來源鏡頭放大。
+- **Agent，5 個步驟：** 工作目標 → 按壓拆解任務 → 彙整輸出 → 官方戰情室 → AI Copilot 聚焦。
+- **Skill，6 個步驟：** 專業能力積木 → 按壓接合 → 官方工具管理 → 啟用區放大 → 客服維修／新人培訓／現場巡檢 → 按壓揭曉成果。
+- **誕生，2 幕：** 三個主題完成後才融合，揭曉大型 WinChat 積木，再進入大幅官方工作區，最後接回協作成形。
 
-「查看 WinChat 產品介面」可放大官網 RAG 問答與 Skill 工具管理截圖；來源收錄於 [`assets/winchat/CREDITS.md`](dist/assets/winchat/CREDITS.md)。能力依 [AIWin 官方產品頁](https://www.aiwin.com.tw/products/winchat) 整理；**VLM 讀圖為使用者此次補充的產品能力**。文件圖解、問答與巡檢流程是演講示意，非實測、客戶案例或即時產品連線；沒有新增效能／準確率數字。
+右方向鍵、Page Down、空白鍵或主題動作按鈕推進；左方向鍵／Page Up 逐步返回。各步可停留，沒有時間到了就跳頁；WinChat 的滾輪翻頁停用，避免觸控板誤操作。直接從總覽選主題時仍須看完三個主題才能融合。標題不會在 3D 轉場完成時重新跳動；同一張官方介面的前後步使用連續平移放大。
 
-`winchat-story.js` 管理分幕文案、SVG 圖解與官方介面視窗，`winchat-story.css` 以 `data-product=chat` 限定章節。Three.js 沿用產品積木的深入與融合動畫；WinChat 專用位置、細緻模型與取樣設定不影響 NumOps 或 WinEdge。桌面 1920 × 1080、1280 × 720 已檢查；減少動態效果偏好會停用裝飾循環與進場動畫。
+官方知識庫、問答、戰情室、技能及工作區圖像都放在主要舞台，不依賴小預覽視窗。來源與檔案記錄見 [`assets/winchat/CREDITS.md`](dist/assets/winchat/CREDITS.md)。高解析度官網圖片保留原檔；CSS 鏡頭裁切與標示聚焦重要區域。所有產品介面為展示截圖，並非即時連線；VLM 圖解、Agent 任務及三種應用結果為演講示意。多模態 RAG 的 VLM 讀圖能力依使用者補充，其他功能參考 [AIWin 官方產品頁](https://www.aiwin.com.tw/products/winchat)。
+
+實作分工：
+
+- `winchat-script.js`：18 個手動步驟的文案、順序、講述秒數與隱藏提詞。
+- `winchat-keynote.js` / `winchat-keynote.css`：大型官網畫面、點擊揭曉與攝影機聚焦效果。
+- `winchat-story.js` / `winchat-story.css`：大腦總覽與原有三塊積木融合視覺。
+- `product-journey.js`：WinChat 專屬逐步推進、返回與完成條件，NumOps 保留原流程。
+
+驗證指令：`node --test tests/winchat-keynote.test.mjs`。涵蓋停留不自動推進、先完成所有主題、跳入 Skill、逐步返回、重入重設與 NumOps 原有路徑。桌面 1920 × 1080、1280 × 720 另以瀏覽器檢查。減少動態效果偏好會停用裝飾與轉場動畫，但保留手動揭曉內容。
 
 ### WinEdge 新品發表（`codex/winedge-launch`）
 
@@ -201,6 +210,9 @@ git switch codex/winedge-launch
     ├── history-ui.js             # 學習段文字、案例影片與導覽
     ├── field-kit.js              # 案例中的相機、感測器、邊緣與輸出設備
     ├── product-journey.js        # NumOps / WinChat 三段能力與產品誕生
+    ├── winchat-script.js         # WinChat 18 個手動步驟與講述配速
+    ├── winchat-keynote.js        # WinChat 大型產品介面與按壓揭曉
+    ├── winchat-keynote.css       # WinChat 舞台版布局與鏡頭動畫
     ├── narrative-ui.js           # 感知、產品與協作文字
     ├── assets/                  # 圖片、影片與來源說明
     └── vendor/                  # Three.js、Reflector 與授權
@@ -218,10 +230,11 @@ git switch codex/winedge-launch
 
 ## 檢查與發布
 
-此版本沒有 npm 建置程序、測試框架或 GitHub Actions 自動部署。若已安裝 Node.js，可先做 JavaScript 語法檢查：
+此版本沒有 npm 建置程序、外部測試框架或 GitHub Actions 自動部署。WinChat 流程使用 Node.js 內建測試工具；若已安裝 Node.js，可執行：
 
 ```sh
 for file in dist/*.js; do node --check "$file" || exit 1; done
+node --test tests/winchat-keynote.test.mjs
 git diff --check
 ```
 

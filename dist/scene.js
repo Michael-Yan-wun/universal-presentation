@@ -5,7 +5,7 @@ import {stageView} from './stage-layout.js?v=winedge-launch-7';
 import { products, chapters, agents, palette } from './content.js?v=winedge-launch-7';
 import { createHistoryWall } from './history-wall.js?v=company-history-15';
 import {createGrowthScene} from './growth-scene.js?v=product-colors-1';
-import {createProductJourney} from './product-journey.js?v=winchat-mind-2';
+import {createProductJourney} from './product-journey.js?v=winchat-stage-1';
 import { createAnniversary } from './anniversary.js?v=cosmic-opening-1';
 
 export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>{},onProductStage=()=>{},onSenseStage=()=>{}) {
