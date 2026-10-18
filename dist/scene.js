@@ -1,4 +1,4 @@
-import { createEdgeHost } from './edge-host.js?v=winedge-launch-7';
+import { createEdgeHost } from './edge-host.js?v=winedge-detail-1';
 import { createCompanyScene } from './company.js?v=company-lockup-6';
 import * as THREE from './vendor/three.module.js';
 import {stageView} from './stage-layout.js?v=winedge-launch-7';
@@ -31,20 +31,21 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   const temp=new THREE.Object3D(),v=new THREE.Vector3();
   const anniversary=createAnniversary(renderer);
   function material(color,finish='plastic'){if(finish!=='plastic')return anniversary.material(color,finish);if(!mats.has(color))mats.set(color,new THREE.MeshPhysicalMaterial({color,roughness:.34,metalness:0,clearcoat:.28,clearcoatRoughness:.3}));return mats.get(color)}
-  function geometry(w,h,d){const k=[w,h,d].join(',');if(geos.has(k))return geos.get(k);const r=.065,s=new THREE.Shape();s.moveTo(-w/2+r,-h/2);s.lineTo(w/2-r,-h/2);s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);s.lineTo(w/2,h/2-r);s.quadraticCurveTo(w/2,h/2,w/2-r,h/2);s.lineTo(-w/2+r,h/2);s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);s.lineTo(-w/2,-h/2+r);s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);const g=new THREE.ExtrudeGeometry(s,{depth:d-.08,bevelEnabled:true,bevelSegments:3,steps:1,bevelSize:.04,bevelThickness:.04,curveSegments:5});g.translate(0,0,-(d-.08)/2);geos.set(k,g);return g}
+  function geometry(w,h,d,hero=false){const k=[w,h,d,hero].join(',');if(geos.has(k))return geos.get(k);const r=.065,s=new THREE.Shape();s.moveTo(-w/2+r,-h/2);s.lineTo(w/2-r,-h/2);s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);s.lineTo(w/2,h/2-r);s.quadraticCurveTo(w/2,h/2,w/2-r,h/2);s.lineTo(-w/2+r,h/2);s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);s.lineTo(-w/2,-h/2+r);s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);const g=new THREE.ExtrudeGeometry(s,{depth:d-.08,bevelEnabled:true,bevelSegments:hero?6:3,steps:1,bevelSize:.04,bevelThickness:.04,curveSegments:hero?16:5});g.translate(0,0,-(d-.08)/2);geos.set(k,g);return g}
   const studGeo=new THREE.CylinderGeometry(.31,.32,.22,32,1),lipGeo=new THREE.TorusGeometry(.244,.014,5,32);
+  const heroStudGeo=new THREE.CylinderGeometry(.31,.32,.22,96,1),heroLipGeo=new THREE.TorusGeometry(.244,.014,12,96);
   function printTexture(title,sub,w,h){const c=document.createElement('canvas');c.width=2048;c.height=Math.round(2048*h/w);const x=c.getContext('2d');x.textAlign='center';x.textBaseline='middle';x.fillStyle='#fff';let size=Math.min(c.height*.5,2048/(title.length*.66+2));x.font=`650 ${size}px Arial, sans-serif`;x.fillText(title,1024,c.height*(sub?.length?.41:.53));if(sub){x.font=`500 ${Math.min(c.height*.125,2048/(sub.length*.72+4))}px Arial, sans-serif`;x.fillStyle='#ffffffd9';x.fillText(sub,1024,c.height*.77)}const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t}
-  function brick(parent,{id,name='',sub='',color=palette.stone,finish='plastic',shine=false,cols=4,rows=2,h=1.1,pos=[0,0,0],scale=1,label=false}){
+  function brick(parent,{id,name='',sub='',color=palette.stone,finish='plastic',shine=false,cols=4,rows=2,h=1.1,pos=[0,0,0],scale=1,label=false,detail='standard'}){
     const w=cols*1.05-.06,d=rows*1.05-.06,g=new THREE.Group();parent.add(g);g.position.set(...pos);g.scale.setScalar(scale);
-    const mat=material(color,finish),body=new THREE.Mesh(geometry(w,h,d),mat);body.castShadow=true;body.receiveShadow=true;g.add(body);if(id){body.userData.id=id;hits.push(body)}
-    const studs=new THREE.InstancedMesh(studGeo,mat,cols*rows),lips=new THREE.InstancedMesh(lipGeo,mat,cols*rows);let k=0;
+    const mat=material(color,finish),body=new THREE.Mesh(geometry(w,h,d,detail==='hero'),mat);body.castShadow=true;body.receiveShadow=true;g.add(body);if(id){body.userData.id=id;hits.push(body)}
+    const studs=new THREE.InstancedMesh(detail==='hero'?heroStudGeo:studGeo,mat,cols*rows),lips=new THREE.InstancedMesh(detail==='hero'?heroLipGeo:lipGeo,mat,cols*rows);let k=0;
     for(let x=0;x<cols;x++)for(let z=0;z<rows;z++){temp.position.set((x-(cols-1)/2)*1.05,h/2+.13,(z-(rows-1)/2)*1.05);temp.rotation.set(0,0,0);temp.updateMatrix();studs.setMatrixAt(k,temp.matrix);temp.position.y+=.111;temp.rotation.x=Math.PI/2;temp.updateMatrix();lips.setMatrixAt(k++,temp.matrix)}studs.castShadow=true;studs.receiveShadow=true;g.add(studs,lips);
     if(name){const face=new THREE.Mesh(new THREE.PlaneGeometry(w*.88,h*.84),new THREE.MeshBasicMaterial({map:printTexture(name,sub,w*.88,h*.84),transparent:true,toneMapped:false,depthWrite:false}));face.position.set(0,0,d/2+.05);g.add(face)}
     const o={g,home:new THREE.Vector3(...pos),goal:new THREE.Vector3(...pos),targetScale:scale,id,name,w,h,d};bricks.push(o);
     if(label)addLabel(g,new THREE.Vector3(0,h/2+.8,0),name,id,color,'product-label');return o;
   }
   function addLabel(group,anchor,text,id,color,cls='',scope='castle'){const el=document.createElement('button');el.className='model-label '+cls;el.style.setProperty('--label-color',color);el.innerHTML=`<i></i><span>${text}</span>`;el.setAttribute('aria-label',`探索 ${text}`);el.onclick=()=>onSelect(id);labelLayer.appendChild(el);labels.push({group,anchor,el,parent:group.parent,scope});return el}
-  const launchHost=createEdgeHost({parent:groups.launch,brick,addLabel:()=>{},id:'launch-core',name:'WinEdge',subtitle:'VISION / DATA / AGENT',color:palette.unified,pos:[0,0,0]});
+  const launchHost=createEdgeHost({parent:groups.launch,brick,addLabel:()=>{},id:'launch-core',detail:'hero',name:'WinEdge',subtitle:'VISION / DATA / AGENT',color:palette.unified,pos:[0,0,0]});
   // Match the reference: a stepped arch, close seams, solid warm gold and a physical deck.
   const ten=[],goldPalette=['#f3b93d','#f9cc68','#c88920','#dfa02a','#ebb137'];
   groups.intro.scale.setScalar(1);groups.intro.position.set(-.5,-1.8,0);
@@ -84,8 +85,16 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   let openingOccluded=false;
   let chapter=0,kind='intro',age=0,exploded=false,inspect=false,angle=0,angleGoal=0,drag=false,downX=0,downY=0,lastX=0,distance=0,last=0,raf,aspect=1,launchMode='hero',companyLayout='stage';
   const target=new THREE.Vector3(),look=new THREE.Vector3(),camGoal=new THREE.Vector3();
-  function resize(){const r=container.getBoundingClientRect();if(r.width<=0||r.height<=0)return;aspect=r.width/r.height;renderer.setSize(r.width,r.height,false);camera.aspect=aspect;camera.updateProjectionMatrix()}
-  const observer=new ResizeObserver(resize);observer.observe(container);resize();
+  function resize(){
+    // Layout dimensions stay stable during CSS entrance transforms. Refresh density when the display changes.
+    const width=container.clientWidth,height=container.clientHeight;if(width<=0||height<=0)return;
+    const nativeRatio=window.devicePixelRatio||1;
+    const desiredRatio=kind==='launch'?(launchMode==='summary'?4:Math.max(2,Math.min(nativeRatio,3))):Math.min(nativeRatio,2);
+    const ratio=Math.min(desiredRatio,renderer.capabilities.maxTextureSize/Math.max(width,height));
+    if(renderer.getPixelRatio()!==ratio)renderer.setPixelRatio(ratio);
+    aspect=width/height;renderer.setSize(width,height,false);camera.aspect=aspect;camera.updateProjectionMatrix();
+  }
+  const observer=new ResizeObserver(resize);observer.observe(container);window.addEventListener('resize',resize);resize();
   function visible(obj){for(let p=obj;p;p=p.parent)if(!p.visible)return false;return true}
   const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
   function pick(e){const r=container.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(pointer,camera);return ray.intersectObjects(hits).find(h=>visible(h.object))?.object.userData.id}
@@ -103,7 +112,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     if(kind==='castle'){for(const [i,o]of [...foundation,...castleCore].entries()){o.g.position.copy(o.home);o.g.position.y+=7+i*.7}}
     if(kind==='launch'){angle=0;launchMode='hero';const view=stageView(kind,aspect);camera.position.set(view.x,view.y,view.z);target.set(0,view.targetY,0);}
     if(kind==='case'){const ids=chapters[index].combination.products;comboBricks.forEach((o,i)=>{const id=i<5?products[i].id:'domain',j=ids.indexOf(id);o.g.visible=j>=0;o.goal.set((j-(ids.length-1)/2)*5.8,2.1,0);o.targetScale=1.03;if(j>=0)o.g.position.set(o.goal.x,6,-3)});caseBrain.visible=ids.includes('domain')}
-    labels.forEach(l=>l.el.hidden=kind!==l.scope);
+    labels.forEach(l=>l.el.hidden=kind!==l.scope);resize();
   }
   function setExploded(on){exploded=on;castleCore.forEach((o,i)=>{o.goal.copy(o.home);if(on){o.goal.y+=[.15,.35,.35,.7][i];o.goal.x+=[0,-.5,.5,0][i]}});foundation.forEach(o=>o.goal.copy(o.home))}
   function setInspect(on){inspect=on}
@@ -129,5 +138,5 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     const r=container.getBoundingClientRect(),lr=labelLayer.getBoundingClientRect();labels.forEach(l=>{l.el.hidden=kind!==l.scope||!visible(l.group)||(l.scope==='history'&&!historyWall.labelsVisible())||(l.scope==='product'&&!productJourney.labelsVisible());if(l.el.hidden)return;v.copy(l.anchor);l.group.localToWorld(v);v.project(camera);l.el.style.left=`${(v.x*.5+.5)*r.width+r.left-lr.left}px`;l.el.style.top=`${(-v.y*.5+.5)*r.height+r.top-lr.top}px`});
   }
   camera.position.set(5,6,24);setChapter(0);raf=requestAnimationFrame(animate);
-  return {setOpeningOccluded(value){openingOccluded=value;},setIntroTime(time){introClock=time;if(time>=20){age=4;introClock=null;}},setChapter,setExploded,setInspect,setLaunchMode(mode){launchMode=mode;resize();},setCompanyLayout(id){companyLayout=id;angleGoal=0;companyScene.setLayout(id);},senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();anniversary.dispose();companyScene.dispose();historyWall.dispose();renderer.dispose()}};
+  return {setOpeningOccluded(value){openingOccluded=value;},setIntroTime(time){introClock=time;if(time>=20){age=4;introClock=null;}},setChapter,setExploded,setInspect,setLaunchMode(mode){launchMode=mode;resize();},setCompanyLayout(id){companyLayout=id;angleGoal=0;companyScene.setLayout(id);},senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();window.removeEventListener('resize',resize);anniversary.dispose();companyScene.dispose();historyWall.dispose();renderer.dispose()}};
 }
