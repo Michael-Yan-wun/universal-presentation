@@ -3,6 +3,7 @@
 #experience[data-kind=launch]::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 48%,#0c243e80,transparent 65%),linear-gradient(110deg,#030914fc,#050d1af5);z-index:-1}
 #experience[data-kind=launch] #stage-detail{z-index:2}
 #experience[data-kind=launch] #scene{z-index:3;left:47%;right:3%;top:10%;bottom:12%;pointer-events:none;cursor:default;opacity:1;transition:opacity .45s}
+#experience[data-kind=launch][data-launch-mode=hero] #scene{top:2%;bottom:25%}
 #experience[data-kind=launch]:is([data-launch-mode=feature],[data-launch-mode=cases]) #scene{opacity:0;visibility:hidden}
 #experience[data-kind=launch][data-launch-mode=summary] #scene{left:30%;right:30%;top:43%;bottom:29%}
 #experience[data-kind=launch] :is(.scene-topline,.scene-bottomline,#model-labels,.scene-atmosphere){display:none}
@@ -23,9 +24,21 @@
 .wl-hero-origin{display:flex;align-items:center;gap:14px;margin-top:30px;font-size:clamp(12px,.95vw,18px);color:#a0b6bf}
 .wl-hero-origin>span{border:1px solid #74bbac38;background:#051b2080;border-radius:7px;padding:9px 13px}
 .wl-hero-origin :is(i,b){font-style:normal;font-weight:400;color:#708c90}.wl-hero-origin strong{color:var(--wl)}
-.wl-hero-orbit{position:absolute;left:50%;right:7%;top:39%;height:34%;border:1px solid #69baa74a;border-radius:50%;transform:rotateX(65deg);box-shadow:0 0 100px #00a88c16,inset 0 0 70px #00a88c12;animation:wl-orbit-breathe 7s ease-in-out infinite}
+.wl-hero-orbit{position:absolute;left:50%;right:7%;top:28%;height:34%;border:1px solid #69baa74a;border-radius:50%;transform:rotateX(65deg);box-shadow:0 0 100px #00a88c16,inset 0 0 70px #00a88c12;animation:wl-orbit-breathe 7s ease-in-out infinite}
 .wl-hero-orbit:before,.wl-hero-orbit:after{content:'';position:absolute;inset:-19%;border:1px solid #63d8c51a;border-radius:50%}.wl-hero-orbit:after{inset:18%;border-color:#63d8c531}
-.wl-hero-caption{position:absolute;bottom:8%;left:48%;right:4%;text-align:center;font-size:clamp(10px,.8vw,16px);letter-spacing:.25em;color:#7eb6ae}
+.wl-hero-caption{position:absolute;bottom:5%;left:48%;right:4%;text-align:center;font-size:clamp(10px,.8vw,16px);letter-spacing:.25em;color:#7eb6ae}
+.wl-field-applications{position:absolute;left:49%;right:5%;bottom:12%;text-align:center}
+.wl-field-applications>p{font-size:clamp(12px,1vw,20px);letter-spacing:.05em;color:#abcfc7;margin:0 0 20px}
+.wl-field-applications ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;position:relative}
+.wl-field-applications ul:before{content:'';position:absolute;left:10%;right:10%;top:-10px;height:1px;background:linear-gradient(90deg,#69dfc500,#69dfc56b,#69dfc500)}
+.wl-field-applications li{position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;gap:10px;padding:17px 5px;border:1px solid #70c5b440;border-radius:12px;background:linear-gradient(145deg,#1a3a3e,#0c1d2c);box-shadow:inset 0 1px #a8f5da0c;animation:wl-field-in 1s calc(.25s + var(--i)*.12s) cubic-bezier(.16,1,.3,1) both}
+.wl-field-applications li:before{content:'';position:absolute;top:-11px;left:50%;height:10px;width:1px;background:#69dfc566}
+.wl-field-applications li:after{content:'';position:absolute;top:-13px;left:calc(50% - 2px);width:4px;height:4px;background:#a2edd5;border-radius:50%;animation:wl-field-signal 8s calc(var(--i)*.8s) infinite}
+.wl-field-applications .wl-icon{color:#9bdecf;width:clamp(25px,2.15vw,42px);height:clamp(25px,2.15vw,42px)}
+.wl-field-applications li>span{font-size:clamp(13px,1.1vw,22px);line-height:1.2;color:#d5eee7;white-space:nowrap}
+@keyframes wl-field-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes wl-field-signal{0%,18%,100%{opacity:.3;box-shadow:none}7%{opacity:1;box-shadow:0 0 10px #9bdecf}}
+@media(max-height:740px){.wl-field-applications{bottom:11%}.wl-field-applications>p{margin-bottom:16px}.wl-field-applications ul{gap:8px}.wl-field-applications li{padding:12px 4px;gap:7px}}
 /* Large stage; no second row of navigation. Accent follows the capability. */
 .wl-feature{display:grid;grid-template-columns:32% 1fr;gap:4%;padding:3% 4.5% 4%;align-items:center}
 .wl-feature[data-feature=flow]{--wl:#83b9ff;--wl-rgb:131,185,255}

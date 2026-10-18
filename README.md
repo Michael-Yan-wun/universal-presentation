@@ -107,7 +107,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 ### WinEdge 新品發表（`codex/winedge-launch`）
 
-本分支在 GitHub 同步版本 `2689f37` 上開發。預覽入口：[WinEdge 新品](http://127.0.0.1:8765/?v=winedge-launch-6#winedge)。畫面已移除「One more thing」，轉折由講者口頭帶出；舊 `#one-more-thing` 連結仍會進入新品章節。這份分支內容尚未發布到正式 Sites 網站。
+本分支在 GitHub 同步版本 `2689f37` 上開發。預覽入口：[WinEdge 新品](http://127.0.0.1:8765/?v=winedge-launch-7#winedge)。畫面已移除「One more thing」，轉折由講者口頭帶出；舊 `#one-more-thing` 連結仍會進入新品章節。這份分支內容尚未發布到正式 Sites 網站。
 
 若從主分支取得此版本，先執行：
 
@@ -117,6 +117,8 @@ git switch codex/winedge-launch
 ```
 
 若透過一般 `git clone` 取得倉庫，預設遠端名稱是 `origin`，請將上述 `github` 改成 `origin`。
+
+新品主軸是 **「WinEdge，最貼近現場的 AI 平台。」** 依製造業、機台、Agent、儀表板與 Robot 等現場需求，組合影像、數據與 AI 能力。開場以五個應用節點接在實體 Edge 主機下方，總覽再次收束這個定位；這五項是應用方向，非新增五個已驗證客戶案例或 Robot 通訊規格。定位與節點由 `launchPositioning` 管理。
 
 原始提案實際包含九項能力（另有一段重複殘句）；將即時預覽與熱更新合併成一段，整理為以下八幕，功能均保留：
 

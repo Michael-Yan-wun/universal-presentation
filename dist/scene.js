@@ -1,8 +1,8 @@
-import { createEdgeHost } from './edge-host.js?v=winedge-launch-6';
+import { createEdgeHost } from './edge-host.js?v=winedge-launch-7';
 import { createCompanyScene } from './company.js?v=company-lockup-6';
 import * as THREE from './vendor/three.module.js';
-import {stageView} from './stage-layout.js?v=winedge-launch-6';
-import { products, chapters, agents, palette } from './content.js?v=winedge-launch-6';
+import {stageView} from './stage-layout.js?v=winedge-launch-7';
+import { products, chapters, agents, palette } from './content.js?v=winedge-launch-7';
 import { createHistoryWall } from './history-wall.js?v=company-history-15';
 import {createGrowthScene} from './growth-scene.js?v=product-colors-1';
 import {createProductJourney} from './product-journey.js?v=company-history-15';

@@ -55,7 +55,7 @@ export const chapters = [
  {slug:'decade',kind:'history',accent:'#92a8c8',label:'從經驗中學習',stage:'experience',note:'承接前面的生命體：有了影像與數據的感知，就像孩子開始上學，在十年的不同專案中累積知識與判斷經驗。將現場資料依專案整理、標註，再反覆訓練與驗證，讓模型逐步學會判斷。先看五個影像案例影片，再逐案看硬體如何接收影像、在 WinEdge-V 上推論並輸出結果。五案完成後，全部經驗積木形成龍捲風，誕生 AIWinOps；硬體留下，連成現場蒐集、訓練、部署與回饋的迴路。完成後進入 NumOps，繼續學習數據中的規律。'},
  productChapter('analytics'),productChapter('chat'),
  {slug:'connected-intelligence',kind:'body',accent:'#a5c9d1',label:'協作成形',stage:'connect',note:'眼睛與觸覺接收資訊，AIWinOps 與 NumOps 學會規律，WinChat 串起記憶、任務與技能。設備與執行端像肢體，資料通道像神經。所有部位開始協作；但數據與影像還分開，為新品發佈留下問題。'},
- {slug:'winedge',kind:'launch',accent:productInk.unified,label:'WinEdge 新品',stage:'evolve',note:'完整的身體，不會把看見的與感受到的分開。揭曉 WinEdge：整合 WinEdge-N 與 WinEdge-V，作為模組化擴充的新一代現場平台。名稱與定位依使用者本次確認，不加入未提供的硬體規格或效能承諾。'},
+ {slug:'winedge',kind:'launch',accent:productInk.unified,label:'WinEdge 新品',stage:'evolve',note:'完整的身體，不會把看見的與感受到的分開。揭曉 WinEdge：最貼近現場的 AI 平台。整合 WinEdge-N 與 WinEdge-V，依製造業、機台、Agent、儀表板與 Robot 等現場需求，模組化組合各式 AI 應用。名稱與定位依使用者本次確認，不加入未提供的硬體規格或效能承諾。'},
  {slug:'castle',kind:'castle',accent:productInk.unified,label:'智慧城堡',stage:'evolve',note:'WinEdge 統一現場入口，AIWinOps 與 NumOps 提供學習能力，WinChat 的 RAG、Agent、Skill 串起知識與行動，再依領域組成不同 AI 大腦。模組化的智慧身體，可以長出不同的專業組合。'},
  ...combinations.map(c=>({slug:c.id,kind:'case',accent:products.find(p=>p.id===c.products[0]).uiColor,label:c.title,stage:'practice',combination:c,note:c.note})),
  {slug:'closing',kind:'closing',accent:'#a8c4df',label:'封底',stage:'closing',note:'下一個十年，與你同行。感謝一路同行的夥伴；讓每一次累積，成為下一個智慧新章。'}
