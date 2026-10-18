@@ -107,6 +107,22 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 影片預設靜音、循環播放，使用播放器控制暫停與拖曳；關閉即停止播放。若瀏覽器阻擋自動播放，使用畫面上的播放按鈕。轉場期間前後切換會暫時鎖定。WinEdge 發表也由講者手動推進，不會自動跳到下一章。
 
+### WinChat：記憶、思考與行動
+
+預覽入口：[WinChat 章節](http://127.0.0.1:8765/?v=winchat-mind-2#chat)。本次只調整 WinChat 章節，其他產品與新品發表內容維持原樣。
+
+- **總覽：** 神經網路大腦、緩慢流動的訊號與三塊不同紫色的能力積木。
+- **RAG：** VLM 讀取圖像／圖表，LLM 理解文字／脈絡，Embedding 建立檢索索引；透過企業知識庫，帶回相關內容與引用來源。
+- **Agent：** 將需求串成查知識、連資料、做分析的工作流程，最後形成摘要與看板。
+- **Skill：** 管理工具包、啟用控制與權限範圍，把能力組合到客服維修、新人培訓與現場巡檢。
+- **融合與誕生：** 三段都看完後，所有能力積木旋入中心，才揭曉 WinChat 與三種企業應用。下一幕接回原本的協作成形。
+
+各段由底部箭頭或鍵盤推進，段落內動畫循環，不會自動跳頁；主文字不會在積木轉場完成時重新播放。可直接點選總覽的能力積木／文字進入主題，但融合前仍會補完尚未觀看的主題。誕生頁可返回 Skill；轉場期間暫停前後操作。
+
+「查看 WinChat 產品介面」可放大官網 RAG 問答與 Skill 工具管理截圖；來源收錄於 [`assets/winchat/CREDITS.md`](dist/assets/winchat/CREDITS.md)。能力依 [AIWin 官方產品頁](https://www.aiwin.com.tw/products/winchat) 整理；**VLM 讀圖為使用者此次補充的產品能力**。文件圖解、問答與巡檢流程是演講示意，非實測、客戶案例或即時產品連線；沒有新增效能／準確率數字。
+
+`winchat-story.js` 管理分幕文案、SVG 圖解與官方介面視窗，`winchat-story.css` 以 `data-product=chat` 限定章節。Three.js 沿用產品積木的深入與融合動畫；WinChat 專用位置、細緻模型與取樣設定不影響 NumOps 或 WinEdge。桌面 1920 × 1080、1280 × 720 已檢查；減少動態效果偏好會停用裝飾循環與進場動畫。
+
 ### WinEdge 新品發表（`codex/winedge-launch`）
 
 本分支在 GitHub 同步版本 `2689f37` 上開發。預覽入口：[WinEdge 新品](http://127.0.0.1:8765/?v=winedge-detail-1#winedge)。畫面已移除「One more thing」，轉折由講者口頭帶出；舊 `#one-more-thing` 連結仍會進入新品章節。這份分支內容尚未發布到正式 Sites 網站。
