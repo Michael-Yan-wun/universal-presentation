@@ -10,13 +10,13 @@ export function stageView(kind,aspect,{phase='overview',exploded=false,inspect=f
   body:{x:1.6,y:3.7,z:21.8,targetY:.8},
   castle:{x:3,y:5.4,z:exploded?23.5:22.5,targetY:.8},
   case:{x:2.0,y:4.8,z:22.5,targetY:1.4},
-  reveal:{x:2.7,y:5.2,z:19.2,targetY:.4},
+  launch:{x:3.4,y:3.1,z:12.2,targetY:.5},
   intro:{x:7,y:5.7,z:22,targetY:0}
  };
  const view={...(views[kind]||views.product)};
  // Topic overviews need width; a focused object can be more prominent above its evidence.
  if(kind==='product'&&phase==='focus')view.z=20.5;
- view.z*=Math.max(1,(kind==='intro'?1.22:1.36)/aspect);
+ view.z*=Math.max(1,(kind==='intro'?1.22:kind==='launch'?1:1.36)/aspect);
  if(inspect)view.z*=.76;
  return view;
 }

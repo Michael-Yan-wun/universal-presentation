@@ -1,0 +1,66 @@
+/* Brain first; the physical WinChat block appears only at the final reveal. */
+#experience[data-product=chat][data-winchat-layout=brain] #scene{visibility:hidden;opacity:0;pointer-events:none;animation:none}
+#experience[data-product=chat][data-winchat-layout=brain] .wc-overview-visual{left:36%;right:3%;top:1%;height:89%;perspective:1400px}
+.wc-overview-visual .wc-mind-scene{position:absolute;inset:12% 0 2%}
+.wc-mind-scene{position:relative;width:100%;height:100%;isolation:isolate;perspective:1400px;--neural:#c8b1e5}
+.wc-mind-aura{position:absolute;inset:14% 10%;border-radius:50%;background:radial-gradient(ellipse,#9070bd20,transparent 70%);filter:blur(24px);animation:wc-mind-breathe 7s ease-in-out infinite}
+.wc-mind-organ{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(12px 25px 22px #0009);transform-origin:50% 51%;animation:wc-mind-sway 15s ease-in-out infinite}
+.wc-mind-orbits{fill:none;stroke:#aa93ce42;stroke-width:.6;stroke-dasharray:3 12;animation:wc-orbit-flow 45s linear infinite}
+.wc-mind-orbits>ellipse:last-child{stroke:#93c5d73d;stroke-dasharray:1 10}
+.wc-mind-fold-shadow{fill:none;stroke:#0c142d8c;stroke-width:9;stroke-linecap:round;filter:blur(1.4px)}
+.wc-mind-fold-light{fill:none;stroke:#d9c9ef38;stroke-width:1.8;stroke-linecap:round}
+.wc-mind-links{fill:none;stroke:var(--neural);stroke-width:.65;opacity:.42}
+.wc-mind-nodes{fill:var(--neural)}.wc-mind-nodes>circle{animation:wc-mind-node 5s var(--delay) ease-in-out infinite}
+.wc-mind-region{animation:wc-mind-region 7s var(--cycle-delay) ease-in-out infinite}.wc-mind-region.region-1{--neural:#a9cde9}.wc-mind-region.region-2{--neural:#d1b8e0}
+.wc-region-wash{opacity:.09;mix-blend-mode:screen}
+.wc-mind-impulses{fill:none;stroke:#e1d2fb;stroke-width:1.8;stroke-linecap:round;stroke-dasharray:5 65;animation:wc-orbit-flow 14s linear infinite}
+.wc-mind-stem{fill:none;stroke:#aa91cb88;stroke-width:1.3}.wc-mind-center{fill:#f6eaff;filter:drop-shadow(0 0 5px #cba7ff)}
+.wc-mind-center-halo{animation:wc-mind-breathe 5s ease-in-out infinite}
+.wc-mind-labels{position:absolute;inset:0;pointer-events:none}.wc-mind-labels>button,.wc-mind-labels>div{position:absolute;display:grid;grid-template-columns:12px auto;align-items:center;column-gap:11px;text-align:left;padding:14px 19px;border:1px solid #c2aad642;border-radius:9px;background:linear-gradient(115deg,#1b1b30eb,#111a2bc4);box-shadow:0 12px 35px #0003;pointer-events:auto}
+.wc-mind-labels i{width:5px;height:5px;background:#d3b9ed;border-radius:50%;box-shadow:0 0 10px #c39fe399;grid-row:span 2}.wc-mind-labels b{font-size:clamp(20px,1.45vw,28px);font-weight:500;letter-spacing:.07em;color:#e3d8f1}.wc-mind-labels span{font-size:clamp(14px,1.05vw,20px);color:#b6a7c9;margin-top:7px;letter-spacing:.05em}.wc-mind-labels button:hover,.wc-mind-labels button:focus-visible{background:#453253;border-color:#d0b4eb;outline:1px solid #d0b4eb;outline-offset:4px}
+.wc-mind-labels .mind-label-0{left:4%;top:18%}.wc-mind-labels .mind-label-1{right:0;top:40%}.wc-mind-labels .mind-label-2{left:39%;bottom:5%}
+.wc-mind-scene[data-active="0"] .region-0,.wc-mind-scene[data-active="1"] .region-1,.wc-mind-scene[data-active="2"] .region-2{animation:wc-mind-activate 1.65s both}
+.wc-mind-scene[data-active="0"] .mind-label-0,.wc-mind-scene[data-active="1"] .mind-label-1,.wc-mind-scene[data-active="2"] .mind-label-2{border-color:#d7b4ef;background:#4f3c65;box-shadow:0 0 30px #a480cd2b}
+.wc-overview-visual.is-entering{animation:none}.wc-overview-visual.is-entering .wc-mind-organ{animation:wc-mind-dive 1.65s cubic-bezier(.25,.6,.35,1) both}
+/* The same organ returns at the end, then contracts into the product. */
+.wc-mind-condense{position:absolute;left:22%;right:22%;top:29%;bottom:6%;animation:wc-mind-condense 3.65s cubic-bezier(.42,0,.3,1) both;transform-origin:50% 56%}
+.wc-mind-condense .wc-mind-organ{animation:none}.wc-mind-condense .wc-mind-region{animation:wc-mind-activate 3.4s both}.wc-mind-condense .wc-mind-impulses{stroke-width:2.5;animation-duration:3s}
+#experience[data-product=chat][data-winchat-layout=fusion] #scene{z-index:3}
+/* Skills connect as neural capabilities; no physical product block yet. */
+.wc-skill-network{position:relative;min-height:0}.wc-skill-mind{position:absolute;left:22%;right:22%;top:0;bottom:14%;opacity:.68;transition:opacity 1.1s,filter 1.1s}.wc-skill-mind .wc-mind-organ{animation-duration:18s}.wc-skill-mind .wc-mind-orbits{opacity:.5}
+.wc-neural-skill{position:absolute;display:grid;grid-template-columns:64px auto;align-items:center;column-gap:18px;padding:24px 29px;background:linear-gradient(120deg,#28223bdc,#112035e8);border:1px solid #b899d24a;border-radius:100px;box-shadow:0 15px 40px #0004;transition:transform 1.3s,background 1s,border-color 1s,box-shadow 1s;z-index:2}
+.wc-neural-skill>div{grid-row:span 2;width:64px;height:64px;border-radius:50%;border:1px solid #c3a6df66;display:grid;place-items:center;background:#8a70ac24}.wc-neural-skill .wc-icon{width:32px;height:32px;color:#d2b8e8}.wc-neural-skill>span{font-size:clamp(10px,.72vw,14px);color:#9c8cba;letter-spacing:.13em}.wc-neural-skill h2{font-size:clamp(25px,2vw,39px);font-weight:450;margin:6px 0 0;white-space:nowrap}.wc-neural-skill.skill-0{left:2%;top:18%}.wc-neural-skill.skill-1{right:2%;top:18%}.wc-neural-skill.skill-2{left:50%;top:71%;transform:translateX(-50%)}
+.wc-skill-paths{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:#cfb8eb;stroke-width:1.3;stroke-dasharray:5 9;opacity:.12;transition:opacity 1s}
+.wc-modules-frame[data-reveal="1"] .wc-skill-mind{opacity:1;filter:drop-shadow(0 0 15px #a082c137)}.wc-modules-frame[data-reveal="1"] .wc-skill-paths{opacity:.8;animation:wc-orbit-flow 24s linear infinite}.wc-modules-frame[data-reveal="1"] .skill-0{transform:translate(10%,-9%)}.wc-modules-frame[data-reveal="1"] .skill-1{transform:translate(-10%,-9%)}.wc-modules-frame[data-reveal="1"] .skill-2{transform:translate(-50%,-14%)}.wc-modules-frame[data-reveal="1"] .wc-neural-skill{background:linear-gradient(120deg,#4b375c,#243447);border-color:#c8a6e48c;box-shadow:0 0 35px #aa89cf23,0 15px 40px #0004}
+.wc-skill-network-caption{position:absolute;left:0;right:0;bottom:0;text-align:center}.wc-skill-network-caption>span{font-size:10px;letter-spacing:.19em;color:#b195ce}.wc-skill-network-caption h2{font-size:clamp(21px,1.6vw,31px);font-weight:400;margin:10px 0 0}
+@keyframes wc-mind-sway{0%,100%{transform:rotateY(-8deg) rotateZ(-2deg) translateY(0)}50%{transform:rotateY(7deg) rotateZ(1deg) translateY(-9px)}}
+@keyframes wc-mind-breathe{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes wc-mind-node{0%,100%{opacity:.4}45%{opacity:1}}
+@keyframes wc-mind-region{0%,100%{opacity:.44}35%,55%{opacity:1}}
+@keyframes wc-mind-activate{0%{opacity:.5}40%,100%{opacity:1;filter:drop-shadow(0 0 3px #e0c7ff)}}
+@keyframes wc-mind-dive{0%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:1}100%{transform:scale(1.28);opacity:.15}}
+@keyframes wc-mind-condense{0%,23%{opacity:1;transform:scale(1)}54%{opacity:1;transform:scale(.98) rotateZ(-6deg);filter:brightness(1.5)}85%{opacity:.9;transform:scale(.13) rotateZ(24deg);filter:brightness(3)}100%{opacity:0;transform:scale(.01) rotateZ(48deg);filter:brightness(4)}}
+@media(max-height:800px){.wc-mind-labels>button,.wc-mind-labels>div{padding:10px 14px}.wc-mind-labels b{font-size:20px}.wc-mind-labels span{font-size:13px;margin-top:5px}.wc-neural-skill{padding:14px 22px;grid-template-columns:44px auto;gap:4px 13px}.wc-neural-skill>div{width:44px;height:44px}.wc-neural-skill .wc-icon{width:25px;height:25px}.wc-neural-skill h2{font-size:26px}.wc-neural-skill.skill-2{top:69%}.wc-skill-network-caption h2{font-size:20px;margin-top:6px}.wc-skill-network-caption>span{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.wc-mind-scene *,.wc-mind-condense{animation:none!important;transition:none!important}.wc-overview-visual.is-entering .wc-mind-organ{opacity:1}.wc-mind-condense{opacity:0}}
+/* Presentation-only labels: all progression uses the shared previous/next controls. */
+.wc-topic-list{display:grid;margin-top:6%}
+.wc-topic-list>div{display:flex;align-items:baseline;gap:22px;padding:21px 0;border-bottom:1px solid var(--wc-line)}
+.wc-topic-list>div>span{color:#a98ac9;font-size:12px;letter-spacing:.1em}
+.wc-topic-list b{font-size:clamp(23px,1.8vw,35px);font-weight:550;letter-spacing:-.03em}
+.wc-topic-list strong{font-size:clamp(14px,1.08vw,21px);font-weight:400;color:#bfc3d3}
+.wc-mind-labels>div{pointer-events:none;cursor:default}
+/* Camera layers preserve the outgoing frame and blend the destination into the dive. */
+#experience[data-product=chat][data-winchat-motion=travel]{overflow:hidden}
+.wc-travel-layer{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+.wc-travel-camera{position:absolute;inset:0;transform-origin:0 0;will-change:transform,opacity}
+.wc-travel-camera .wc-overview-visual{left:36%;right:3%;top:1%;height:89%;animation:none}
+.wc-travel-camera .wc-mind-scene{position:absolute;inset:12% 0 2%}
+.wc-travel-camera .wc-mind-organ{filter:none}
+.wc-travel-camera .wc-mind-fold-shadow{filter:none;stroke-width:7;opacity:.7}
+.wc-travel-camera .wc-mind-aura{filter:none}
+.wc-travel-camera .wc-mind-region{animation:none;opacity:.35}
+.wc-travel-camera .wc-mind-scene[data-active="0"] .region-0,.wc-travel-camera .wc-mind-scene[data-active="1"] .region-1,.wc-travel-camera .wc-mind-scene[data-active="2"] .region-2{opacity:1;filter:none}
+.wc-outgoing-story,.wc-outgoing-detail{pointer-events:none;will-change:opacity,transform}
+.wc-outgoing-detail .wc-keynote{animation:none}
+@media(max-height:800px){.wc-topic-list>div{padding:16px 0;gap:18px}}
+@media(prefers-reduced-motion:reduce){.wc-travel-layer{display:none}}
