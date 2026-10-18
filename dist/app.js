@@ -1,4 +1,4 @@
-import { createWinEdgeLaunch } from './winedge-launch.js?v=winedge-launch-7';
+import { createWinEdgeLaunch } from './winedge-launch.js?v=winedge-three-stories-2';
 import { companyHistory, companyHistoryHTML } from './company-history.js?v=heritage-growth-17';
 import { animateCompanyHistory } from './company-history-motion.js?v=heritage-growth-18';
 import { applyBrandTypography } from './text-color-preview.js?v=brand-text-5';
@@ -75,7 +75,7 @@ function updateLaunchStage(state){
  $('#previous').setAttribute('aria-label',state.step===0?'回到協作成形':'WinEdge 上一段');
  $('#next').setAttribute('aria-label',state.step===state.last?'組成智慧城堡':'WinEdge 下一段');
  $('#growth-state').textContent='WinEdge 新品發佈';
- $('#note-text').textContent=state.feature?.note||(state.mode==='hero'?'WinEdge 是最貼近現場的 AI 平台：依製造業、機台、Agent、儀表板與 Robot 等需求，組合各式現場 AI。N 與 V 的整合是基礎，重點是把能力組成可用的現場應用。右箭頭依序展開八項能力。':state.mode==='cases'?'以既有瓶蓋檢測影片、智慧烤箱溫控與 WinChat 知識問答帶出新平台的實戰基礎。這些為既有展示，不宣稱已部署在新品。':'八項能力回到最貼近現場的 WinEdge，依不同現場組合各式 AI。帶出製造業、機台、Agent、儀表板與 Robot；便當圖為純展示收尾，按右箭頭組成智慧城堡。');
+ $('#note-text').textContent=state.feature?.note||(state.mode==='hero'?'WinEdge 是最貼近現場的 AI 平台：依製造業、機台、Agent、儀表板與 Robot 等需求，組合各式現場 AI。N 與 V 的整合是基礎，重點是把能力組成可用的現場應用。右箭頭依序展開三段主題：接上現場與組合 AI、設計到維運、Plugin 與 Agent。實際案例後，以便當圖一次收束完整八項能力。':state.mode==='cases'?'以既有瓶蓋檢測影片、智慧烤箱溫控與 WinChat 知識問答帶出新平台的實戰基礎。這些為既有展示，不宣稱已部署在新品。':'八項能力回到最貼近現場的 WinEdge，依不同現場組合各式 AI。帶出製造業、機台、Agent、儀表板與 Robot；便當圖為純展示收尾，按右箭頭組成智慧城堡。');
 }
 function openCase(id){const c=cases[id];if(!c)return;delete dialog.dataset.companyProduct;$('#close-case').setAttribute('aria-label','關閉案例');let visual=c.image?`<img class="official-case" src="./assets/${c.image}" alt="${c.alt||c.title}">`:`<div class="agent-grid">${agents.map(a=>`<button class="agent-row" data-case="${a.id}">${icon(a.icon)}<strong>${a.zh}</strong><small>${a.title}</small></button>`).join('')}</div>`;$('#case-content').innerHTML=`<div class="case-layout"><div class="case-description">${eyebrow(c.eyebrow)}<h2 id="case-heading">${c.title}</h2><p>${c.description}</p><ol>${c.steps.map(s=>`<li>${s}</li>`).join('')}</ol>${c.source?`<a class="source-link" href="${c.source}" target="_blank" rel="noopener">查看官方資料 ↗</a>`:''}<p class="case-footnote">${c.footnote||''}</p></div><div class="case-visual">${visual}</div></div>`;if(!dialog.open)dialog.showModal();scene?.setInspect(true)}
 function closeCase(){dialog.close();scene?.setInspect(inspected)}
