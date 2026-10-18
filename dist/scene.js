@@ -117,7 +117,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     for(const o of bricks){if(!visible(o.g)||o.historyManaged||o.companyManaged||o.journeyManaged||o.senseManaged||o.introManaged)continue;o.g.position.lerp(o.goal,e);o.g.scale.lerp(v.setScalar(o.targetScale),e)}
     if(!reduced){brains.forEach(({brain,nodes},i)=>{if(visible(brain)){brain.rotation.y=Math.sin(t*.45+i)*.18;nodes.material.opacity=.65+.35*Math.sin(t*1.6+i)}});connections.forEach(({curve,bead,offset})=>bead.position.copy(curve.getPoint((t*.24+offset)%1)))}
     if(kind==='company')companyScene.update(age,reduced);
-    if(kind==='launch'){launchHost.update(age,reduced?1:Math.min(1,age/1.6),reduced);if(launchMode==='summary')launchHost.root.scale.multiplyScalar(1.12);}
+    if(kind==='launch'){launchHost.update(age,reduced?1:Math.min(1,age/1.6),reduced);if(launchMode==='summary')launchHost.root.scale.multiplyScalar(2.15);}
     if(kind==='intro'){
       const introTime=introClock??age;
       ten.forEach(o=>{const p=reduced?1:THREE.MathUtils.clamp((introTime-o.introDelay)/1.65,0,1),ease=1-Math.pow(1-p,4);o.g.position.lerpVectors(o.introStart,o.home,ease);o.g.rotation.y=o.introTwist*(1-ease);});

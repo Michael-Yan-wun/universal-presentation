@@ -1,4 +1,4 @@
-import { createWinEdgeLaunch } from './winedge-launch.js?v=winedge-three-stories-2';
+import { createWinEdgeLaunch } from './winedge-launch.js?v=winedge-bento-2';
 import { companyHistory, companyHistoryHTML } from './company-history.js?v=heritage-growth-17';
 import { animateCompanyHistory } from './company-history-motion.js?v=heritage-growth-18';
 import { applyBrandTypography } from './text-color-preview.js?v=brand-text-5';
@@ -7,7 +7,7 @@ import { productColors, palette, productInk } from './product-colors.js?v=produc
 import { companyHTML, companyStageHTML, companyProductHTML, companyLayouts, companyPreviewHTML, animateCompanyIntro } from './company.js?v=company-lockup-6';
 import { createCosmicBackground } from './cosmic-background.js?v=cosmic-final-1';
 import { historyOverview, historyUI, historyRoomAction, createVisionPlayer } from './history-ui.js?v=company-history-15';
-import { createScene } from './scene.js?v=winedge-launch-7';
+import { createScene } from './scene.js?v=winedge-bento-2';
 import {growthHTML,senseHTML,journeyUI} from './narrative-ui.js?v=company-history-15';
 import { chapters, products, cases, agents, icons, chapterFor, growthStages, senseRoutes, resolveChapterRoute } from './content.js?v=winedge-launch-7';
 const $=s=>document.querySelector(s),root=$('#experience'),story=$('#story'),dialog=$('#case-dialog'),detail=$('#stage-detail');
@@ -23,7 +23,7 @@ if(!companyLayouts.some(item=>item.id===companyLayout))companyLayout='stage';
 root.dataset.companyLayout=companyLayout;
 let companyHistoryPage=0;
 let chapter=0,productState=null,scene,presentation=false,notes=false,toastTimer,inspected=false;
-const launch=createWinEdgeLaunch({container:detail,onChange:updateLaunchStage});
+const launch=createWinEdgeLaunch({container:detail,productStage:$('#scene'),onChange:updateLaunchStage});
 const opening=createOpening({onTime:time=>scene?.setIntroTime(time),onOcclusion:hidden=>scene?.setOpeningOccluded(hidden)});
 const eyebrow=text=>`<p class="eyebrow"><span class="eyebrow-line"></span>${text}</p>`;
 const icon=id=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${icons[id]}"/></svg>`;
