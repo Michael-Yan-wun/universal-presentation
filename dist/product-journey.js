@@ -1,4 +1,4 @@
-import {winChatBeatCounts,winChatFinalBeats} from './winchat-script.js?v=winchat-brain-1';
+import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './winchat-script.js?v=winchat-skills-3';
 import * as THREE from './vendor/three.module.js';
 import {journeyStage as layout} from './stage-layout.js?v=company-stage-2';
 import {products} from './content.js?v=company-history-15';
@@ -10,8 +10,9 @@ export const productStories={
   {tag:'VALIDATE',title:'讓規律接受現場驗證',question:'學會一個方法，還要能用得上。',copy:'將分析與模型交給 WinEdge-N，在設備旁運作，再根據現場回饋修正。',points:['確認模型與規則適用的情境。','部署到現場數據推論平台。','用運轉結果持續驗證與改善。'],image:'winedge-n.png',source:'WinEdge-N 官方邊緣推論介面'}]},
  chat:{title:'不只累積知識，<br>開始知道怎麼做。',bridge:'像逐漸成熟的大腦，連起記憶、思考與行動。',topics:[
   {tag:'RAG',title:'找回企業的記憶',question:'答案散在文件裡，如何用得到？',copy:'把企業文件整理成可檢索的知識，回答問題時帶回相關來源與脈絡。',points:['解析 PDF、Word、Excel 等文件。','檢索相關企業知識。','保留來源引用與助理權限。'],image:'pitch-winchat.png',source:'AIWin Pitch v5 · P.19、38 知識庫與 RAG'},
-  {tag:'AGENT',title:'把問題變成任務',question:'找到答案之後，下一步是什麼？',copy:'讓 AI Agent 依任務串起工具與不同專業，從回答問題走向工作協作。',points:['理解使用者的工作目標。','連結工具與領域能力。','將結果交回人員確認與使用。'],image:'pitch-winchat.png',source:'介面：Pitch v5 P.38 · 協作定位：P.20'},
-  {tag:'SKILL',title:'把做法留成能力',question:'做過一次的事，能否成為可重用的方法？',copy:'將步驟、工具與領域做法整理為 Skill，讓工作方法能被再次組合與使用。',points:['整理可重複使用的作業步驟。','結合知識、工具與領域規則。','由 Agent 按任務使用對應的 Skill。'],source:'本次產品敘事 · Skill 定位依產品策略',flow:['工作方法','可重用 Skill','Agent 執行']}]}
+  {tag:'SKILL',title:'使用方法與工具',question:'專業做法如何成為可使用的能力？',copy:'讓 Agent 依工作需要使用 SKILL 的方法與工具能力。',points:['定義工作步驟與輸出要求。','依任務調用資料與分析工具。','由 Agent 整理與檢視結果。'],source:'本次產品敘事依使用者提供'},
+  {tag:'WORK',title:'組合成工作成果',question:'知識與工作能力如何一起發揮？',copy:'Agent 結合 RAG 與 SKILL，形成客服維修、新人培訓與現場巡檢等應用。',points:['理解工作目標。','使用知識、方法與工具。','輸出有依據的結果。'],source:'應用流程為演講示意'}
+]}
 };
 export function createProductJourney({group,brick,addLabel,onStage}){
  const roots={},V=(...a)=>new THREE.Vector3(...a),ease=t=>1-Math.pow(1-t,3),clamp=t=>Math.max(0,Math.min(1,t));let id='analytics',phase='overview',selected=-1,beat=0,clock=0,from=[],visited=new Set();
@@ -50,7 +51,7 @@ export function createProductJourney({group,brick,addLabel,onStage}){
  }
 
  function update(age,reduced,dt){clock+=dt;const r=roots[id];if(!r)return;
- if(phase==='selecting'){const p=reduced?1:clamp(clock/1.65),k=ease(p);r.pieces.forEach(({o},i)=>{const target=i===selected?V(0,layout.focusY,2.0):V((i-1)*layout.spread,-.95,-2.6);o.g.position.lerpVectors(from[i],target,k);o.g.position.y+=Math.sin(p*Math.PI)*.8;o.g.scale.setScalar(i===selected?layout.overviewScale+k*(layout.focusScale-layout.overviewScale):layout.overviewScale-k*.46)});if(p===1){if(id!=='chat'||beat===winChatBeatCounts[selected]-1)visited.add(selected);change('focus')}}
+ if(phase==='selecting'){const p=reduced?1:clamp(clock/(id==='chat'?winChatTravelSeconds:1.65)),k=ease(p);r.pieces.forEach(({o},i)=>{const target=i===selected?V(0,layout.focusY,2.0):V((i-1)*layout.spread,-.95,-2.6);o.g.position.lerpVectors(from[i],target,k);o.g.position.y+=Math.sin(p*Math.PI)*.8;o.g.scale.setScalar(i===selected?layout.overviewScale+k*(layout.focusScale-layout.overviewScale):layout.overviewScale-k*.46)});if(p===1){if(id!=='chat'||beat===winChatBeatCounts[selected]-1)visited.add(selected);change('focus')}}
  if(phase==='fusing'){const p=reduced?1:clamp(clock/4.6),k=ease(clamp(p/.76));r.pieces.forEach(({o},i)=>{const a=i*2.09+p*6.2,rad=(1-k)*3.5;o.g.visible=id!=='chat'&&p<.8;o.g.position.lerpVectors(from[i],V(Math.cos(a)*rad,Math.sin(p*Math.PI)*2,Math.sin(a)*rad),ease(clamp(p/.3)));o.g.scale.setScalar((1-k)*1.2+.05);o.g.rotation.y=a});r.born.g.visible=p>.73;r.born.g.scale.setScalar(.1+((id==='chat'?2.05:layout.bornScale)-.1)*ease(clamp((p-.73)/.27)));if(p===1)change('born')}
  if(phase==='born'){r.born.g.visible=true;r.born.g.scale.setScalar(id==='chat'?2.05:layout.bornScale);r.born.g.rotation.y=reduced?0:Math.sin(age*.25)*.04;if(id==='chat'){r.kit.group.visible=false;r.pieces.forEach(({o})=>o.g.visible=false)}else{r.kit.layoutMode??(r.kit.layoutMode=true,r.kit.layout(true));r.kit.update(reduced?0:age,reduced?1:ease(clamp(clock/1.5)));r.kit.group.position.z=.75}}else r.kit.group.visible=false;
  }

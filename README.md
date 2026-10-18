@@ -37,7 +37,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 | 感知世界 | 小機器人、六種感知入口、眼睛展開 Basler / IP / USB 相機；影像匯入 WinEdge-V，Modbus / MC Protocol / Database 匯入 WinEdge-N；兩者搭載 Edge 硬體 |
 | 十年專案與學習 | 「有了感知，開始學習」；同一個機器人接收積木光流、知識節點亮起；深入 Vision 後探索五個實際案例影片及硬體流程 |
 | AIWinOps 誕生 | 五案完成後，呈現整理、標註、訓練與驗證；全部專案積木形成龍捲風，融合誕生 AIWinOps，再連回部署硬體 |
-| NumOps / WinChat | NumOps 由三塊能力積木展開；WinChat 由企業大腦深入 RAG、Agent、Skill，最後凝聚成產品積木 |
+| NumOps / WinChat | NumOps 由三塊能力積木展開；WinChat 由 Agent 大腦深入 RAG 知識、SKILL 能力與工作成果，最後凝聚成產品積木 |
 | 協作與新品 | 產品連成完整智慧身體；WinEdge 積木搭載實體 Edge 主機，三段主題整合八項能力，最後聚合成中央產品的便當圖 |
 | 城堡與實績 | 實體積木底座、完整產品城堡、五個領域大腦，以及 Wafer Map、烤箱溫控、企業知識三組應用 |
 | 封底 | 地球曙光地平線、「下一個十年，與你同行」、品牌收尾 |
@@ -56,7 +56,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 | 03 | 感知世界 | `#first-contact` | 初生機器人 → 影像入口 → 數據入口 |
 | 04 | 實戰與學習 | `#decade` | 十年專案是成長課堂；案例累積成 AIWinOps |
 | 05 | 數據規律 | `#analytics` | 情境、模式與專家規則、現場驗證 → NumOps |
-| 06 | 知識與行動 | `#chat` | RAG 記憶、Agent 任務、Skill 方法 → WinChat |
+| 06 | 知識與行動 | `#chat` | Agent 統籌 RAG 知識與 SKILL 能力 → WinChat |
 | 07 | 協作成形 | `#connected-intelligence` | 感官、學習、神經與肢體共同運作 |
 | 08 | WinEdge 新品 | `#winedge` | 新品主視覺 → 三段整合主題 → 實際案例 → 八項能力便當圖 |
 | 09 | 智慧城堡 | `#castle` | 現場、產品、WinChat 與五個 Domain AI 大腦 |
@@ -107,33 +107,40 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 影片預設靜音、循環播放，使用播放器控制暫停與拖曳；關閉即停止播放。若瀏覽器阻擋自動播放，使用畫面上的播放按鈕。轉場期間前後切換會暫時鎖定。WinEdge 發表也由講者手動推進，不會自動跳到下一章。
 
-### WinChat：12 分鐘舞台版
+### WinChat：Agent 統籌 RAG 與 SKILL（12 分 35 秒）
 
-入場以大型企業大腦呈現記憶、思考與技能；三組神經訊號依序點亮，點選可深入主題。中途的 Skill 使用神經能力節點，直到收尾才由大腦聚光凝結成 WinChat 積木。
+WinChat 開場保留大型企業大腦，**Agent 是統籌者**；RAG 提供知識，SKILL 提供工作方法與工具能力，再進入實際應用。
 
-預覽：[WinChat 章節](http://127.0.0.1:8765/?v=winchat-brain-1#chat)。本次只調整 WinChat，其他產品與 WinEdge 新品發表維持原樣。
+| 角色 | 對觀眾的說法 | 內容 |
+| --- | --- | --- |
+| RAG | 找得到依據 | VLM 圖像理解、文字理解、知識索引、檢索與來源引用 |
+| SKILL | 有方法，也有工具 | 可重複使用的工作步驟、工具使用與輸出要求 |
+| Agent | 把工作串起來 | 理解目標、規劃、調用知識與能力、整理及檢視結果 |
+| 應用與成果 | 能夠交付工作 | 客服維修、新人培訓、現場巡檢 |
 
-講述節奏與逐段內容：[WinChat 舞台講述稿](docs/WINCHAT-KEYNOTE.md)。建議 **12 分 35 秒**，是人工講述配速，沒有自動翻頁計時。
+預覽：[WinChat 章節](http://127.0.0.1:8765/?v=winchat-skills-3#chat)。講述稿：[WinChat 舞台講述稿](docs/WINCHAT-KEYNOTE.md)。建議 **12 分 35 秒**是人工講述配速，沒有自動翻頁計時。
 
-- **開場：** 大型企業大腦與三組神經訊號，接續生命體的感知與學習。
-- **RAG，7 個步驟：** 大幅圖文手冊 → 按壓 VLM 掃圖 → 圖文與 Embedding 合流 → 官方知識庫 → 搜尋模式 → 問答 → 引用來源鏡頭放大。
-- **Agent，5 個步驟：** 工作目標 → 按壓拆解任務 → 彙整輸出 → 官方戰情室 → AI Copilot 聚焦。
-- **Skill，6 個步驟：** 專業能力節點 → 按壓連結大腦 → 官方工具管理 → 啟用區放大 → 客服維修／新人培訓／現場巡檢 → 按壓揭曉成果。
-- **誕生，2 幕：** 三個主題完成後才融合，揭曉大型 WinChat 積木，再進入大幅官方工作區，最後接回協作成形。
+- **RAG，7 步：** 圖文手冊 → VLM 圖表理解 → 多模態索引資料流 → 官方知識庫 → 檢索資料流 → 官方問答 → 引用追溯圖。
+- **SKILL，5 步：** 工作方法手冊 → Agent 調用 SKILL 與工具 → 工具結果回流 → 官方工具管理 → 依工作方法執行。
+- **應用，6 步：** 工作目標 → 官方戰情室 → 摘要生成 → Agent／RAG／SKILL 協作關係 → 三種應用資料流 → 揭曉三種成果。
+- **收尾，2 幕：** 大腦聚光凝結 → WinChat 積木 → 官方完整工作區，再接回協作成形。
 
-右方向鍵、Page Down、空白鍵或主題動作按鈕推進；左方向鍵／Page Up 逐步返回。各步可停留，沒有時間到了就跳頁；WinChat 的滾輪翻頁停用，避免觸控板誤操作。直接從總覽選主題時仍須看完三個主題才能融合。標題不會在 3D 轉場完成時重新跳動；同一張官方介面的前後步使用連續平移放大。
+主題列表、大腦標籤與內頁沒有額外按鈕、跳轉箭頭或操作教學。用左右方向鍵、Page Up/Down、空白鍵或全站底部前後步驟控制；每幕可停留，WinChat 不接受滾輪翻頁。三段主題完成後才融合。
 
-官方知識庫、問答、戰情室、技能及工作區圖像都放在主要舞台，不依賴小預覽視窗。來源與檔案記錄見 [`assets/winchat/CREDITS.md`](dist/assets/winchat/CREDITS.md)。高解析度官網圖片保留原檔；CSS 鏡頭裁切與標示聚焦重要區域。所有產品介面為展示截圖，並非即時連線；VLM 圖解、Agent 任務及三種應用結果為演講示意。多模態 RAG 的 VLM 讀圖能力依使用者補充，其他功能參考 [AIWin 官方產品頁](https://www.aiwin.com.tw/products/winchat)。
+進入主題時保留當下大腦，沿對應區域平移放大，約 2.2 秒接入內容；跨主題先拉遠再移向下一區，返回則反向拉遠。移除短暫替換的過渡標題。**大腦只用在總覽、跨主題轉場及收尾；細節使用資料流與示意圖。** 每張主要官網介面圖只展示一次，不用連續微小放大填充步驟。圖解明確區分輸入、處理、輸出，連線光點呈現移動方向，每一步仍由講者推進。
 
-實作分工：
+官方知識庫、問答、工具管理、戰情室及工作區圖片保留原檔，來源見 [`CREDITS.md`](dist/assets/winchat/CREDITS.md)。產品畫面為展示截圖；VLM、工具調用、巡檢摘要與應用成果為演講示意，沒有連線正式設備或使用客戶即時資料。具體工具依實際部署配置。SKILL 工作方法及 VLM 參與 RAG 的定位依使用者產品補充，不宣稱相容特定開放檔案格式。
 
-- `winchat-script.js`：18 個手動步驟的文案、順序、講述秒數與隱藏提詞。
-- `winchat-keynote.js` / `winchat-keynote.css`：大型官網畫面、點擊揭曉與攝影機聚焦效果。
-- `winchat-story.js` / `winchat-story.css`：大腦總覽與主題進場。
-- `winchat-brain.js` / `winchat-brain.css`：具景深的大腦向量、神經脈衝、主題深入與收尾凝聚動畫。
-- `product-journey.js`：WinChat 專屬逐步推進、返回與完成條件，NumOps 保留原流程。
+實作檔案：
 
-驗證指令：`node --test tests/winchat-keynote.test.mjs`。涵蓋停留不自動推進、先完成所有主題、跳入 Skill、逐步返回、重入重設與 NumOps 原有路徑。桌面 1920 × 1080、1280 × 720 另以瀏覽器檢查。減少動態效果偏好會停用裝飾與轉場動畫，但保留手動揭曉內容。
+- `winchat-script.js`：18 個手動步驟、順序、講述時間與隱藏提詞。
+- `winchat-story.js` / `winchat-brain.js`：Agent 大腦總覽與收尾。
+- `winchat-motion.js`：主題區域鏡頭、返回與離場清理。
+- `winchat-keynote.js` / `winchat-keynote.css`：完整舞台、官方介面及產品揭曉。
+- `winchat-flows.js` / `winchat-flows.css`：VLM、索引、檢索、SKILL 工具調用、工作步驟與應用資料流。
+- `product-journey.js`：手動推進、返回與完成條件；NumOps 保留原流程。
+
+驗證：`node --test tests/winchat-keynote.test.mjs`，涵蓋手動停留、完成條件、返回、重入重設、NumOps 路徑、移除多餘按鈕、轉場內容連續，以及細節不重複大腦。桌面以 1920 × 1080 和 1280 × 720 檢查；尊重減少動態效果設定。
 
 ### WinEdge 新品發表（`codex/winedge-launch`）
 
@@ -156,7 +163,7 @@ git switch codex/winedge-launch
 | --- | --- | --- | --- |
 | 01 | 接上現場，組合 AI | 工業串接、視覺化流程、雙路 AI 推論、通道與節奏 | 相機／設備／資料庫匯流，影像與數據雙路推論後輸出；底部以同步訊號呈現時序控制 |
 | 02 | 設計到維運，一氣呵成 | 自由設計看板、即時驗證與維運 | 看板元件對齊組裝、設計／預覽／發布，接到單一模型節點暫停、熱更新與恢復 |
-| 03 | 擴充能力，交給 Agent | Plugin 擴充、本地 AI Agent | 客製模型／產線邏輯／元件／整合向核心接合，WinChat RAG + Agent + Skill 連到巡檢任務 |
+| 03 | 擴充能力，交給 Agent | Plugin 擴充、本地 AI Agent | 客製模型／產線邏輯／元件／整合向核心接合，WinChat RAG + Agent + SKILL 連到巡檢任務 |
 
 一段只需按一次前進，沒有隱藏的八個子步驟。精簡的是發表節奏，功能規劃不變：VLM、物件偵測、視覺分類／分割、數據分類／迴歸／時序、佇列與背壓、保完整／保最新、多來源時序對齊、全速／間隔／日週排程、圖層分組、對齊縮放、CSS 與素材客製等細節保留於八項資料、整合動畫或講者筆記。
 
@@ -216,6 +223,7 @@ git switch codex/winedge-launch
     ├── winchat-script.js         # WinChat 18 個手動步驟與講述配速
     ├── winchat-keynote.js        # WinChat 大型產品介面與按壓揭曉
     ├── winchat-keynote.css       # WinChat 舞台版布局與鏡頭動畫
+    ├── winchat-motion.js         # 大腦區域鏡頭移動、返回與清理
     ├── narrative-ui.js           # 感知、產品與協作文字
     ├── assets/                  # 圖片、影片與來源說明
     └── vendor/                  # Three.js、Reflector 與授權

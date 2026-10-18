@@ -42,3 +42,25 @@
 @keyframes wc-mind-condense{0%,23%{opacity:1;transform:scale(1)}54%{opacity:1;transform:scale(.98) rotateZ(-6deg);filter:brightness(1.5)}85%{opacity:.9;transform:scale(.13) rotateZ(24deg);filter:brightness(3)}100%{opacity:0;transform:scale(.01) rotateZ(48deg);filter:brightness(4)}}
 @media(max-height:800px){.wc-mind-labels>button,.wc-mind-labels>div{padding:10px 14px}.wc-mind-labels b{font-size:20px}.wc-mind-labels span{font-size:13px;margin-top:5px}.wc-neural-skill{padding:14px 22px;grid-template-columns:44px auto;gap:4px 13px}.wc-neural-skill>div{width:44px;height:44px}.wc-neural-skill .wc-icon{width:25px;height:25px}.wc-neural-skill h2{font-size:26px}.wc-neural-skill.skill-2{top:69%}.wc-skill-network-caption h2{font-size:20px;margin-top:6px}.wc-skill-network-caption>span{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.wc-mind-scene *,.wc-mind-condense{animation:none!important;transition:none!important}.wc-overview-visual.is-entering .wc-mind-organ{opacity:1}.wc-mind-condense{opacity:0}}
+/* Presentation-only labels: all progression uses the shared previous/next controls. */
+.wc-topic-list{display:grid;margin-top:6%}
+.wc-topic-list>div{display:flex;align-items:baseline;gap:22px;padding:21px 0;border-bottom:1px solid var(--wc-line)}
+.wc-topic-list>div>span{color:#a98ac9;font-size:12px;letter-spacing:.1em}
+.wc-topic-list b{font-size:clamp(23px,1.8vw,35px);font-weight:550;letter-spacing:-.03em}
+.wc-topic-list strong{font-size:clamp(14px,1.08vw,21px);font-weight:400;color:#bfc3d3}
+.wc-mind-labels>div{pointer-events:none;cursor:default}
+/* Camera layers preserve the outgoing frame and blend the destination into the dive. */
+#experience[data-product=chat][data-winchat-motion=travel]{overflow:hidden}
+.wc-travel-layer{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden}
+.wc-travel-camera{position:absolute;inset:0;transform-origin:0 0;will-change:transform,opacity}
+.wc-travel-camera .wc-overview-visual{left:36%;right:3%;top:1%;height:89%;animation:none}
+.wc-travel-camera .wc-mind-scene{position:absolute;inset:12% 0 2%}
+.wc-travel-camera .wc-mind-organ{filter:none}
+.wc-travel-camera .wc-mind-fold-shadow{filter:none;stroke-width:7;opacity:.7}
+.wc-travel-camera .wc-mind-aura{filter:none}
+.wc-travel-camera .wc-mind-region{animation:none;opacity:.35}
+.wc-travel-camera .wc-mind-scene[data-active="0"] .region-0,.wc-travel-camera .wc-mind-scene[data-active="1"] .region-1,.wc-travel-camera .wc-mind-scene[data-active="2"] .region-2{opacity:1;filter:none}
+.wc-outgoing-story,.wc-outgoing-detail{pointer-events:none;will-change:opacity,transform}
+.wc-outgoing-detail .wc-keynote{animation:none}
+@media(max-height:800px){.wc-topic-list>div{padding:16px 0;gap:18px}}
+@media(prefers-reduced-motion:reduce){.wc-travel-layer{display:none}}

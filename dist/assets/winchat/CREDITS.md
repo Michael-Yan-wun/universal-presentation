@@ -22,3 +22,9 @@
 | `knowledge.webp` | https://www.aiwin.com.tw/products/winchat/timeline/01.webp | 文件與多知識庫管理 |
 
 原檔保留，舞台透過 CSS 鏡頭平移與放大展示重點，並加上獨立的講解標籤。介面截圖不會執行工具或更動產品設定；畫面中的數字、帳戶及問題來自官網公開展示，並非本次新增客戶實績。
+
+## Agent 敘事與資料流更新
+
+`winchat-flows.js` 的圖解皆為程式繪製示意，不新增客戶數據或圖片。Agent 使用 RAG 與 SKILL 工作方法／工具能力的定位依使用者補充；工作方法的概念參考 [Agent Skills](https://agentskills.io/home)，不宣稱相容特定檔案格式。工具管理截圖僅呈現既有產品介面。
+
+舞台目前每張主要官方介面圖只展示一次，細節以資料流圖解說明；舊有放大設定與備用圖片保留於素材檔案。

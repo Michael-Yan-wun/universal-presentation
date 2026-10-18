@@ -1,37 +1,36 @@
-// Manual keynote beats. Durations are rehearsal guidance only; no automatic advance.
+// Manual keynote beats. Durations are rehearsal guidance, never auto-advance timers.
+// Agent orchestrates RAG knowledge and SKILL methods/tools, then demonstrates applications.
 export const winChatScript = [
-  [
-    {scene:'perception',reveal:0,title:'企業的知識，不只在文字裡。',subtitle:'一張圖、一份手冊，都是經驗。',action:'讓 VLM 看懂圖像',seconds:35,note:'先停在手冊：企業知識不只有段落，還有零件圖、表格與操作圖示。請觀眾想像維修人員拿到這張圖，最需要知道什麼。'},
-    {scene:'perception',reveal:1,title:'讓 VLM，看懂圖像。',subtitle:'辨識圖像內容，保留文件脈絡。',action:'連起文字與圖像',seconds:40,note:'按下後掃描圖解，揭曉圖像區域和圖文關係。說明 VLM 讀圖是這次產品策略補充；圖解為演講示意，不是實測辨識結果。'},
-    {scene:'perception',reveal:2,title:'把看見的，連成可檢索的記憶。',subtitle:'VLM × LLM × Embedding',action:'走進企業知識庫',seconds:45,note:'分清楚三件事：VLM 看圖，LLM 理解文字與脈絡，Embedding 建立檢索表示。檢索再把相關知識帶回回答；這是概念流程，不限定內部實作拓撲。'},
-    {scene:'screen',asset:'knowledge',view:'wide',title:'把經驗，放進企業自己的知識庫。',subtitle:'文件整理 · 多知識庫 · 內容管理',action:'看知識如何被找回',seconds:35,note:'官網真實介面，放大展示多知識庫與文件管理。可以指出 WinEdge、NumOps、AIWinOps 手冊如何被收進知識庫，連回先前積木故事。'},
-    {scene:'screen',asset:'library',view:'search',title:'用適合的方式，找回知識。',subtitle:'Vector · Hybrid · GraphRAG',action:'看看問答結果',seconds:35,note:'放大官方搜尋設定：語意、關鍵字及知識關係是不同檢索方式。說明依企業資料特性選擇，避免宣稱任一方式永遠最好。'},
-    {scene:'screen',asset:'answer',view:'wide',title:'回答，要有依據。',subtitle:'知識問答，連著企業文件。',action:'展開引用來源',seconds:30,note:'這是官網公開的法規問答展示，用來看介面與引用機制。不要把畫面中的內容當作本場法律建議，也不宣稱即時連線。'},
-    {scene:'screen',asset:'answer',view:'citation',title:'沿著引用，回到原文。',subtitle:'讓答案能被查核，也能繼續追問。',action:'從知識走向任務',seconds:35,note:'按下後鏡頭推向回答和參考來源，帶出可追溯性。接著轉場：如果問題不只要一句答案，而是要完成一份工作呢？'}
-  ],
-  [
-    {scene:'mission',reveal:0,title:'如果問題，是一份工作呢？',subtitle:'AGENT / 從回答，走向協作',action:'展開任務步驟',seconds:30,note:'先只讓觀眾看工作目標：整理設備狀況與關注事項。停留，說明任務通常跨越知識、資料與分析。'},
-    {scene:'mission',reveal:1,title:'把目標，拆成可以協作的步驟。',subtitle:'查知識 → 連資料 → 做分析',action:'彙整工作結果',seconds:40,note:'按下後三個步驟依序展開。說明 Agent 依任務使用知識庫與企業系統，並非單純把問題丟給模型。流程為示意。'},
-    {scene:'mission',reveal:2,title:'從零散訊息，形成工作摘要。',subtitle:'知識、現況與判讀，放在同一個脈絡。',action:'走進營運戰情室',seconds:35,note:'按下後結果展開。強調整理可供人員判讀的資訊，不宣稱已自動控制機台；將任務能力連到戰情室實際畫面。'},
-    {scene:'screen',asset:'dashboard',view:'wide',title:'從對話，走進營運現場。',subtitle:'WinChat / 營運戰情室',action:'聚焦 AI Copilot',seconds:40,note:'官網高解析度戰情室介面。先說全景：指標、趨勢、事件流及右側 AI Copilot。畫面上的數字為官方展示資料，非本場即時營運數據。'},
-    {scene:'screen',asset:'dashboard',view:'copilot',title:'把變化，整理成需要關注的事。',subtitle:'從看見指標，到掌握工作脈絡。',action:'讓能力可以組合',seconds:35,note:'鏡頭推向 AI Copilot 與告警摘要。可舉巡檢工作情境：先看狀況，再回到 SOP 與紀錄，讓人決定下一步。'}
-  ],
-  [
-    {scene:'modules',reveal:0,title:'每一項專業，都是可調用的能力。',subtitle:'SKILL / 可組合的企業技能',action:'連起大腦的技能',seconds:30,note:'三個神經能力節點圍繞企業大腦：知識檢索、資料分析、工作彙整。先講每種能力的角色，最後才回歸產品積木。'},
-    {scene:'modules',reveal:1,title:'依照任務，把技能組合起來。',subtitle:'知識、系統、分析，接到同一個 Agent。',action:'看看實際工具管理',seconds:40,note:'按下後能力節點向大腦靠攏，神經連線亮起。說明工具需依企業系統、參數與權限配置，這裡是組合概念演示。'},
-    {scene:'screen',asset:'tools',view:'wide',title:'技能，是可以管理的能力。',subtitle:'WinChat / 工具包與單項工具',action:'聚焦工具啟用與範圍',seconds:35,note:'展示官網高解析度技能介面。先聚焦知識庫與系統工具，說明各項專業如何成為 Agent 可調用的能力。'},
-    {scene:'screen',asset:'tools',view:'tools',title:'哪些工具可用，由企業掌握。',subtitle:'工具包 · 單項工具 · 啟用控制',action:'組成三種企業應用',seconds:35,note:'鏡頭放大知識庫工具與啟用控制。說明可管理工具參數和存取範圍；不把動畫當成真的修改正式系統。'},
-    {scene:'applications',reveal:0,title:'同一個 WinChat，不同的工作現場。',subtitle:'客服維修 / 新人培訓 / 現場巡檢',action:'展開三種工作成果',seconds:35,note:'先講三個問題：零件圖怎麼查、新人流程怎麼學、現場異常怎麼整理。每個情境都需要不同的知識與工具組合。'},
-    {scene:'applications',reveal:1,title:'讓企業知識，走進每一天的工作。',subtitle:'把經驗留下，把能力組合。',action:'融合為 WinChat',seconds:45,note:'按下後揭曉三種應用成果：圖文知識答覆、SOP 導讀、巡檢摘要。這些是應用示意，不是新客戶實績。最後準備把大腦累積的智慧凝聚成產品積木。'}
-  ]
+ [
+  {scene:'perception',title:'企業的知識，不只在文字裡。',subtitle:'RAG / 給 Agent 可查證的知識',action:'看圖像如何被理解',seconds:35,note:'先看文件與圖解。RAG 是 Agent 可使用的知識能力，不是另一個與 Agent 並列的大腦。'},
+  {scene:'vlm',title:'圖像，也能成為知識。',subtitle:'VLM / 看圖表、位置與圖文關係',action:'建立多模態知識索引',seconds:40,note:'趨勢圖進入 VLM，轉成圖像描述與關係。保留原圖及頁碼連結；這是概念示意，不是模型實測。'},
+  {scene:'indexing',title:'讓圖文，進入同一份知識脈絡。',subtitle:'理解 → 整理 → Embedding → 索引',action:'走進企業知識庫',seconds:45,note:'文字與圖像走各自理解路徑，內容整理後建立檢索表示。VLM 看圖，LLM 理解文字；Embedding 的具體輸入依產品實作，本圖不限定特定拓撲。'},
+  {scene:'screen',asset:'knowledge',view:'wide',title:'把經驗，整理成企業知識。',subtitle:'WinChat / 多知識庫與文件管理',action:'看 Agent 如何找回知識',seconds:35,note:'大型官網知識庫介面。企業可按部門、產品與任務整理內容，讓前面積木的經驗有地方留下。'},
+  {scene:'retrieval',title:'Agent 提問，RAG 找回依據。',subtitle:'問題 → 檢索 → 相關片段 → 回答',action:'查看官方問答介面',seconds:35,note:'問題帶出相關內容與來源，再回到 Agent 的上下文。Vector、Hybrid、GraphRAG 是可配置的檢索方式，不代表每次都同時使用。'},
+  {scene:'screen',asset:'answer',view:'wide',title:'知識問答，帶著引用來源。',subtitle:'WinChat / 官方產品介面',action:'展開來源追溯',seconds:30,note:'官方問答畫面，只看介面與引用機制，不逐條解說截圖中的法規內容。不是即時連線。'},
+  {scene:'citations',title:'每一份回答，都能回到依據。',subtitle:'回答 ↔ 知識片段 ↔ 原始文件',action:'讓 Agent 使用 SKILL 工作能力',seconds:35,note:'用追溯圖示意答案、引用片段與原文頁碼的連結。知識建立時讀圖，回答時保留證據脈絡。下一段介紹 Agent 如何取得現況。'}
+ ],
+ [
+  {scene:'recipe',title:'SKILL，把專業做法留下來。',subtitle:'工作方法 · 工具使用 · 輸出要求',action:'看 SKILL 如何使用工具',seconds:30,note:'SKILL 是 Agent 可使用的工作能力。以巡檢摘要說明任務輸入、作業步驟、可使用的工具與輸出格式；不把它講成某種連接協定。'},
+  {scene:'skilldispatch',title:'Agent 調用 SKILL，使用現場能力。',subtitle:'依工作需要，組合資料與分析工具。',action:'讓工具結果回到 Agent',seconds:40,note:'Agent 依工作選擇 SKILL，由方法與工具組合取得資料、使用分析能力。圖中系統為應用示意，可用工具依實際部署配置。'},
+  {scene:'returns',title:'工具回傳結果，Agent 整理脈絡。',subtitle:'查詢紀錄 · 分析結果 · 知識依據',action:'查看 WinChat 工具管理',seconds:35,note:'工具回傳運轉紀錄與分析，RAG 提供相關知識。結果回到 Agent 整理；請沿著資料流介紹，示意內容不是現場即時資料。'},
+  {scene:'screen',asset:'tools',view:'wide',title:'Agent 可用的工具，由企業管理。',subtitle:'WinChat / 工具包、單項工具與啟用控制',action:'讓 Agent 按工作方法執行',seconds:40,note:'官方工具管理介面，指出工具包、單項工具與啟用控制。SKILL 的工作方法與可用工具一起構成工作能力，這張截圖僅呈現既有工具管理功能。'},
+  {scene:'execution',title:'按工作方法，完成每一個步驟。',subtitle:'SKILL 定義做法，Agent 調用知識與工具。',action:'走進實際工作情境',seconds:35,note:'依次顯示讀方法、RAG 查規範、工具取紀錄、Agent 產出摘要。SKILL 說明怎麼做，工具負責取得資料或執行能力；Agent 統籌與檢視。'}
+ ],
+ [
+  {scene:'mission',title:'把知識與能力，放進一份工作。',subtitle:'理解目標 · 選擇能力 · 檢視結果',action:'走進營運戰情室',seconds:30,note:'提出整理今日設備巡檢摘要的工作目標。Agent 使用 RAG 的知識與 SKILL 的方法及工具，最後產出可供人員使用的結果。'},
+  {scene:'screen',asset:'dashboard',view:'wide',title:'讓現況，進入同一個工作視野。',subtitle:'WinChat / 營運戰情室與 AI Copilot',action:'把狀況整理成巡檢摘要',seconds:40,note:'展示官方戰情室的指標、趨勢、事件與 Copilot。數字來自官網展示，並非本場即時紀錄；下一頁用資料流說明如何形成摘要。'},
+  {scene:'report',title:'從現場資料，到有依據的摘要。',subtitle:'現況 + 知識 → 分析 → 工作輸出',action:'看 Agent 的完整協作關係',seconds:35,note:'工具取得的現場資料與 RAG 的 SOP 合流。Agent 依 SKILL 的方法整理觀察、依據、待確認事項，交回人員使用。'},
+  {scene:'orchestration',title:'Agent，讓知識與工作能力一起運作。',subtitle:'RAG 提供依據，SKILL 提供做法與工具。',action:'看三種企業應用',seconds:35,note:'工作目標在上方，中央 Agent 統籌。左側 RAG 提供知識，右側 SKILL 提供工作方法與工具能力，結果從下方輸出。三者不是並列的大腦。'},
+  {scene:'applications',reveal:0,title:'不同工作，組合不同的知識與工具。',subtitle:'客服維修 / 新人培訓 / 現場巡檢',action:'展開三種工作成果',seconds:35,note:'三條資料流從問題開始：圖片查修、流程學習、現場巡檢。Agent 依工作使用相應 SKILL 與 RAG 知識，按下一步再揭曉成果。'},
+  {scene:'applications',reveal:1,title:'讓專業，變成每天能用的成果。',subtitle:'圖文答覆 · SOP 導讀 · 巡檢摘要',action:'凝聚為 WinChat',seconds:45,note:'三條流程抵達圖文答覆、流程導讀、巡檢摘要。都是應用示意；最後把 Agent、知識與工作能力凝聚成 WinChat 積木。'}
+ ]
 ];
 export const winChatBeatCounts=winChatScript.map(topic=>topic.length);
 export const winChatFinalBeats=2;
+export const winChatTravelSeconds=2.2;
 export function winChatBeat(state){return winChatScript[state.selected]?.[state.beat||0];}
 export function winChatAction(state){
- const beat=winChatBeat(state);
- if(state.selected===2&&state.beat===winChatBeatCounts[2]-1&&!state.canFuse){
-  return (state.visited||[]).includes(0)?'深入 Agent 任務協作':'深入 RAG 企業知識';
- }
- return beat?.action;
+ if(state.selected===2&&state.beat===winChatBeatCounts[2]-1&&!state.canFuse)return (state.visited||[]).includes(0)?'深入 SKILL 工作能力':'深入 RAG 企業知識';
+ return winChatBeat(state)?.action;
 }

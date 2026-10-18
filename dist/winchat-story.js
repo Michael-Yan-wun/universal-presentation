@@ -1,5 +1,5 @@
-import {winChatBrain} from './winchat-brain.js?v=winchat-brain-1';
-import {winChatKeynote} from './winchat-keynote.js?v=winchat-brain-1';
+import {winChatBrain} from './winchat-brain.js?v=winchat-skills-3';
+import {winChatKeynote} from './winchat-keynote.js?v=winchat-skills-3';
 // Keynote visuals: official WinChat capabilities + the user's multimodal RAG brief.
 // All question/answer and workflow examples below are illustrative, not a live product session.
 export const winChatSource='https://www.aiwin.com.tw/products/winchat';
@@ -8,25 +8,24 @@ const icon=id=>`<svg class="wc-icon" viewBox="0 0 24 24" aria-hidden="true"><pat
 const kicker=text=>`<p class="wc-kicker"><i></i>${text}</p>`;
 const tag=(name,sub)=>`<div class="wc-topic-mark"><b>${name}</b><span>${sub}</span></div>`;
 const topics=[
- {tag:'RAG',label:'企業的記憶',title:'不只讀文字。<br><em>也看懂圖像。</em>',copy:'文字、圖片、圖表與文件脈絡，<br>一起成為可檢索的企業知識。',points:[['VLM','讀懂圖片、圖表與頁面內容'],['LLM + Embedding','理解文字，建立知識索引'],['來源引用','讓回答有依據，也能回到原文']],note:'重點為使用者補充的多模態 RAG：VLM 處理圖像，LLM 理解文字，Embedding 建立檢索表示。動畫的維修文件、問題與答案均為情境示意，不是客戶資料或實測。官網支持文件解析、多知識庫、Vector／Hybrid／GraphRAG 與引用來源。'},
- {tag:'AGENT',label:'思考與協作',title:'從一個問題，<br><em>走向完整任務。</em>',copy:'把知識、即時資料與工具連起來，<br>協助分析、整理與決策。',points:[['理解目標','把工作需求拆成可執行的步驟'],['串接系統','結合知識庫、資料庫與企業流程'],['彙整結果','產出摘要與看板，交回人員使用']],note:'以現場狀況摘要示意 Agent 任務協作，強調檢索、資料查詢、整理回覆。官網支持 AI Agent 多步推理、MySQL／PostgreSQL／CSV 資料源、監控看板與 Web API。示意不是即時監控，不宣稱自動控制設備或保證推理正確。'},
- {tag:'SKILL',label:'可組合的技能',title:'把專業做法，<br><em>變成可用的技能。</em>',copy:'知識工具與系統工具，<br>讓 Agent 依任務調用所需能力。',points:[['工具包管理','依工作需求開啟對應技能'],['權限範圍','設定工具參數與可存取資源'],['重複組合','把專業能力用在不同企業情境']],note:'官網技能頁支持工具包與單項工具啟停、工具參數及權限範圍。用客服維修、新人培訓、現場巡檢呈現組合方向，不宣稱可自行學會技能、保證所有外部系統現成支援。'}
+ {tag:'RAG',label:'知識與依據'},
+ {tag:'SKILL',label:'方法與工具'},
+ {tag:'WORK',label:'應用與成果'}
 ];
 export const winChatTopics=topics;
 const applications=()=>`<div class="wc-applications">${[['chat','客服與維修','找知識 · 查圖解'],['people','新人與培訓','學流程 · 問規範'],['chart','現場與巡檢','看狀態 · 做摘要']].map(a=>`<div>${icon(a[0])}<strong>${a[1]}</strong><small>${a[2]}</small></div>`).join('')}</div>`;
 function drawing(){return `<svg class="wc-drawing" viewBox="0 0 300 190" aria-hidden="true"><g stroke="#8196bc" stroke-width="1.5" fill="none"><path d="M55 122L130 153 243 91 167 57z M55 122V68l76 31v54 M55 68l112-62 76 30v55 M131 99l112-63 M80 79v56 M109 92v54 M159 84v54 M186 69v54 M214 53v54"/><path d="M87 38l73 30 52-29-73-29z M87 38V59l73 30V68 M160 89l52-29V39"/><circle cx="202" cy="90" r="9"/><path d="M211 90h53v47"/></g><rect class="wc-image-target" x="180" y="68" width="44" height="44" rx="6"/><circle cx="202" cy="90" r="3" fill="#b998f6"/></svg>`;}
-function overview(state){
- const active=state.phase==='selecting'?state.selected:-1;
- const portalTitles=['讓經驗，<br>成為<em>企業記憶。</em>','連起知識，<br>開始<em>思考協作。</em>','連起專業，<br>學會<em>調用技能。</em>'];
- return {key:`brain-${active}`,layout:'brain',action:active>=0?`進入 ${topics[active].tag}`:'展開 WinChat 多模態 RAG',story:`${kicker('WINCHAT / THE THINKING CHAPTER')}<h1 class="wc-heading">${active<0?'從記住，<br>到知道<em>怎麼做。</em>':portalTitles[active]}</h1><p class="wc-intro-copy">學會看見與分析之後，<br>讓企業擁有記憶、思考與技能。</p><div class="wc-topic-links">${topics.map((t,i)=>`<button data-journey="select" data-topic="${i}" ${active>=0?'disabled':''}><span>0${i+1}</span><div><b>${t.tag}</b><strong>${t.label}</strong></div><i>↗</i></button>`).join('')}</div><p class="wc-worlds">客服維修 / 新人培訓 / 現場巡檢</p>`,detail:`<div class="wc-overview-visual ${active>=0?'is-entering':''}"><div class="wc-brain-heading"><span>MEMORY. REASONING. ACTION.</span><strong>逐漸成熟的企業大腦</strong></div>${winChatBrain({interactive:active<0,active})}</div>`,note:'以企業大腦接續生命體的成長：RAG 是記憶，Agent 是思考，Skill 是可調用的技能。三段內容講完，才把累積的智慧凝聚成 WinChat 積木。'};
+function overview(){
+ return {key:'brain-overview',layout:'brain',action:'展開 WinChat 多模態 RAG',story:`${kicker('WINCHAT / THE THINKING CHAPTER')}<h1 class="wc-heading">從理解問題，<br>到完成<em>一份工作。</em></h1><p class="wc-intro-copy">Agent 根據任務，<br>結合 RAG 知識與 SKILL 工作能力。</p><p class="wc-agent-caption">AI AGENT / 企業的工作大腦</p><div class="wc-topic-list">${topics.map((t,i)=>`<div><span>0${i+1}</span><b>${t.tag}</b><strong>${t.label}</strong></div>`).join('')}</div><p class="wc-worlds">客服維修 / 新人培訓 / 現場巡檢</p>`,detail:`<div class="wc-overview-visual"><div class="wc-brain-heading"><span>KNOWLEDGE. CAPABILITY. OUTCOME.</span><strong>Agent 統籌，讓能力一起工作</strong></div>${winChatBrain()}</div>`,note:'以企業大腦接續生命體的成長。用下一步進入記憶區域，依序介紹 RAG 知識、SKILL 工作能力與應用成果；最後才將智慧凝聚成 WinChat 積木。'};
 }
+
 export function winChatUI(state){
- if(['overview','selecting'].includes(state.phase))return overview(state);
- if(['focus','born'].includes(state.phase))return winChatKeynote(state,{icon,drawing});
- if(state.phase==='fusing')return {key:'fusing',layout:'fusion',story:'',detail:`<div class="wc-fusion"><p class="wc-kicker">INTELLIGENCE TAKES SHAPE</p><h1>讓累積的智慧，<br><em>凝聚成一塊能力。</em></h1><div class="wc-mind-condense">${winChatBrain({mode:'fusion'})}</div><div class="wc-fusion-halo"><i></i><i></i><i></i><i></i></div><div class="wc-fusion-words"><span>RAG</span><b>＋</b><span>Agent</span><b>＋</b><span>Skill</span></div></div>`,note:'大腦與神經訊號聚光收攏，再揭曉 WinChat 積木。此時才將記憶、思考與技能回歸整體積木故事。'};
+ if(state.phase==='overview')return overview();
+ if(['selecting','focus','born'].includes(state.phase))return winChatKeynote(state,{icon,drawing});
+ if(state.phase==='fusing')return {key:'fusing',layout:'fusion',story:'',detail:`<div class="wc-fusion"><p class="wc-kicker">INTELLIGENCE TAKES SHAPE</p><h1>讓累積的智慧，<br><em>凝聚成一塊能力。</em></h1><div class="wc-mind-condense">${winChatBrain({mode:'fusion'})}</div><div class="wc-fusion-halo"><i></i><i></i><i></i><i></i></div><div class="wc-fusion-words"><span>Agent</span><b>←</b><span>RAG</span><b>·</b><span>SKILL</span></div></div>`,note:'大腦與神經訊號聚光收攏，再揭曉 WinChat 積木。此時才將記憶、思考與技能回歸整體積木故事。'};
 }
 
 export function winChatEvidence(view='answer'){
  const skills=view==='skills';
- return `<div class="wc-proof"><div class="wc-proof-top"><span>WINCHAT / OFFICIAL PRODUCT VIEW</span><h2 id="case-heading">${skills?'技能與工具包管理':'知識問答，附上引用來源。'}</h2><p>AIWin 官方產品介面</p><div><button data-winchat-evidence="answer" aria-pressed="${!skills}">RAG 知識問答</button><button data-winchat-evidence="skills" aria-pressed="${skills}">Skill 工具管理</button></div></div><img src="./assets/winchat/${skills?'skills':'answer'}.webp" alt="${skills?'WinChat 技能管理：知識工具、系統工具與啟用控制':'WinChat RAG 知識問答與參考來源'}"/><a href="${winChatSource}" target="_blank" rel="noopener">資料來源：慧穩科技 WinChat 產品頁 ↗</a></div>`;
+ return `<div class="wc-proof"><div class="wc-proof-top"><span>WINCHAT / OFFICIAL PRODUCT VIEW</span><h2 id="case-heading">${skills?'技能與工具包管理':'知識問答，附上引用來源。'}</h2><p>AIWin 官方產品介面</p><div><button data-winchat-evidence="answer" aria-pressed="${!skills}">RAG 知識問答</button><button data-winchat-evidence="skills" aria-pressed="${skills}">SKILL 工具管理</button></div></div><img src="./assets/winchat/${skills?'skills':'answer'}.webp" alt="${skills?'WinChat 技能管理：知識工具、系統工具與啟用控制':'WinChat RAG 知識問答與參考來源'}"/><a href="${winChatSource}" target="_blank" rel="noopener">資料來源：慧穩科技 WinChat 產品頁 ↗</a></div>`;
 }
