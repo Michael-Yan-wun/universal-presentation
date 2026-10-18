@@ -15,7 +15,7 @@ test('NumOps manually visits every beat before the product reveal',()=>{
   assert.ok(state().visited.includes(topic));
  }
  assert.equal(state().canFuse,true);journey.action('next');assert.equal(state().phase,'fusing');journey.update(1,false,1);assert.equal(models.get('NumOps').visible,false);settle();assert.equal(state().phase,'born');assert.equal(models.get('NumOps').visible,true);assert.equal(journey.action('next'),false);
- journey.action('back');settle();assert.equal(state().selected,2);assert.equal(state().beat,3);assert.equal(models.get('NumOps').visible,false);
+ journey.action('back');settle();assert.equal(state().selected,2);assert.equal(state().beat,numOpsBeatCounts[2]-1);assert.equal(models.get('NumOps').visible,false);
  journey.reset('analytics');assert.equal(state().phase,'overview');assert.deepEqual(state().visited,[]);
 });
 test('NumOps prevents skipped topics and navigates backwards through individual beats',()=>{
@@ -33,8 +33,12 @@ test('NumOps has distinct product-sized scenes and credits the WaterOps partners
   if(b.scene==='screen'){assert.equal(assets.has(b.asset),false);assets.add(b.asset);assert.match(ui.html,/官方產品介面/);}
  }
  const water=numOpsUI({phase:'focus',selected:2,beat:1});assert.match(water.html,/GSD 基士德/);assert.match(water.html,/AIWin/);assert.match(water.html,/數據 AutoML/);
- const deploy=numOpsUI({phase:'focus',selected:2,beat:3});assert.match(deploy.html,/WinEdge-N/);assert.match(deploy.html,/no-edge-host/);
- assert.equal(numOpsScript.flat().length,11);
+ assert.equal(numOpsScript.flat().filter(b=>b.scene.startsWith('water')).length,1);
+ assert.match(water.html,/矽品中科廠/);assert.match(water.html,/BaCl₂/);assert.match(water.html,/H₂O₂/);assert.match(water.html,/45<span>%/);assert.match(water.html,/24<span>%/);
+ assert.match(water.html,/案例藥劑用量降幅/);assert.match(water.html,/矽品獲 2026 環境部淨水永續獎/);
+ assert.match(water.html,/2026.06.05/);assert.match(water.html,/waterops-spil-award.jpg/);
+ const deploy=numOpsUI({phase:'focus',selected:2,beat:numOpsBeatCounts[2]-1});assert.match(deploy.html,/WinEdge-N/);assert.match(deploy.html,/no-edge-host/);
+ assert.equal(numOpsScript.flat().length,10);
 });
 test('reduced-motion navigation replaces the previous scene without stacked content',t=>{
  const originalDocument=globalThis.document,originalMatchMedia=globalThis.matchMedia;

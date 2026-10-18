@@ -13,8 +13,7 @@ export const numOpsScript = [
  ],
  [
   {scene:'oven',title:'把製程經驗，變成控制依據。',subtitle:'實際應用 / 智慧烤箱溫控',seconds:40,note:'沿用使用者 Pitch v5 第 34 頁案例：27 個風門與 15 個溫度點，結合 NumOps 與 WinEdge-N。右側動畫呈現多點量測與調整流程，非即時控制或節能成效實測。'},
-  {scene:'waterops',title:'當 AI，遇見水務專家。',subtitle:'GSD 基士德 × 慧穩科技',seconds:45,note:'WaterOps 是與 GSD 基士德合作的智慧水務平台，結合水務領域知識與慧穩 AI 建模及落地經驗。以合作的數據 AutoML 平台介紹，不把它說成 NumOps 的改名或單方擁有。官網說明可輸入水質數據、訓練模型、模擬成效與納入環工專家知識。'},
-  {scene:'waterflow',title:'從水質數據，到現場決策。',subtitle:'WaterOps / 智慧水務應用',seconds:45,note:'水質與流量送入 WaterOps，結合模型與專家知識，再透過 WinEdge-N 對接現場。公開合作資料提及智慧加藥與曝氣控制；本圖合併呈現可依場域配置的應用方向，不宣稱同一客戶同時具備所有配置。'},
+  {scene:'waterops',title:'讓領域專業，成為現場的 AI。',subtitle:'合作實證 / GSD × AIWin',seconds:90,note:'WaterOps 由 GSD 基士德與慧穩共同開發，結合水處理工程、操作經驗與數據 AutoML。先講合作的兩種專業，再指向矽品中科廠硼廢水智能精準加藥案例：GSD 協助導入 WaterOps，2026 年 6 月 5 日官方公布氯化鋇 BaCl₂ 用量減少 45%、過氧化氫 H₂O₂ 減少 24%。這是該案例的藥劑用量降幅，不是全部成本、全平台效能或所有客戶的保證。矽品獲環境部 2026 淨水永續獎水處理卓越獎，獲獎主體是矽品。底部動畫為平台流程示意，串起水質資料、AutoML 與環工知識、現場調控及成效檢視。收束：產品提供可重用的能力，夥伴讓能力真正進入產業。'},
   {scene:'deploy',title:'學到的規律，回到設備旁。',subtitle:'模型 → WinEdge-N → 現場回饋',seconds:40,note:'完成訓練與驗證後依授權部署至 WinEdge-N；亦可透過 API 或批次預測使用。現場新資料供後續檢視與再訓練，沒有宣稱無人審核的自動重訓。下一步將這些能力融合，揭曉 NumOps。'}
  ]
 ];

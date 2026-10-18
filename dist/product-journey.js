@@ -1,4 +1,4 @@
-import {numOpsBeatCounts,numOpsTravelSeconds} from './numops-script.js?v=numops-stage-1';
+import {numOpsBeatCounts,numOpsTravelSeconds} from './numops-script.js?v=waterops-partnership-1';
 import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './winchat-script.js?v=winchat-launch-1';
 import * as THREE from './vendor/three.module.js';
 import {journeyStage as layout} from './stage-layout.js?v=company-stage-2';

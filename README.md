@@ -121,22 +121,22 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 ### NumOps：從數據學習，到現場決策
 
-開啟 [NumOps 新版](http://127.0.0.1:8765/?v=numops-stage-1#analytics)。講稿見 [NUMOPS-KEYNOTE.md](docs/NUMOPS-KEYNOTE.md)，來源見 [素材與內容註記](dist/assets/numops/CREDITS.md)。此更新在 `codex/numops-keynote` 開發，尚未發布正式 Sites。
+開啟 [NumOps 新版](http://127.0.0.1:8765/?v=waterops-partnership-1#analytics)。講稿見 [NUMOPS-KEYNOTE.md](docs/NUMOPS-KEYNOTE.md)，來源見 [素材與內容註記](dist/assets/numops/CREDITS.md)。NumOps 初版在 `codex/numops-keynote` 開發；WaterOps 合作實證頁接續在 `codex/aiwinops-ecosystem` 更新，尚未發布正式 Sites。
 
-以數據光帶開場，承接生命體「感知之後，學習規律」的成長故事。三段共 **11 個手動步驟**，建議講述約 **8 分 30 秒**（含開場與揭曉）；每幕停留至講者前進，不自動換頁。
+以數據光帶開場，承接生命體「感知之後，學習規律」的成長故事。三段共 **10 個手動步驟**，建議講述約 **8 分 30 秒**（含開場與揭曉）；每幕停留至講者前進，不自動換頁。
 
 | 段落 | 展示順序 |
 | --- | --- |
 | 讀懂數據 | 現場訊號匯流 → 官方資料預處理 → 分類、異常、回歸、時序與分群 |
 | 學會預測 | AutoML 多模型訓練 → 官方模型建立 → 官方模型分析 → AutoML ＋ 專家系統 |
-| 回到現場 | 智慧烤箱案例 → GSD × AIWin WaterOps → 水務控制流程 → WinEdge-N 硬體部署 |
+| 回到現場 | 智慧烤箱案例 → GSD × AIWin WaterOps 合作與實證（同一頁） → WinEdge-N 硬體部署 |
 | 產品揭曉 | 經驗模組旋轉匯聚 → NumOps 產品積木 → WinChat |
 
-WaterOps 明確呈現 GSD 基士德與慧穩的合作關係；水質資料、AutoML 與環工專家知識連到現場推論，展示智慧加藥及曝氣控制方向。沒有新增客戶效益數字。模型、光流及水務設備為示意，官方介面為本機圖片；不會連線客戶平台或操作現場。
+WaterOps 將合作分工、案例證據與水務流程整合為一頁：GSD 水處理工程與操作經驗 × AIWin 數據 AutoML。以官方頒獎照片搭配矽品中科廠硼廢水智能精準加藥案例，引用 WaterOps 2026-06-05 公布的 **BaCl₂ 用量下降 45%、H₂O₂ 下降 24%**，並標示矽品獲 2026 環境部淨水永續獎。數字僅指該案例個別藥劑用量，不代表所有客戶或總成本降幅。底部水質資料 → WaterOps → 現場調控 → 持續優化為流程動畫，手動下一步直接接模型部署；不會連線客戶平台或操作現場。
 
 全程只使用既有前後控制與鍵盤。返回逐步回溯，重新進入重設；三段完成後才揭曉 NumOps。細節使用獨立資料流與大型官方畫面，無重複概念總結。支援減少動態效果設定，測試以桌面投影為主。
 
-實作：`numops-script.js` 定義步驟與提詞；`numops-keynote.js` / `.css` 管理圖解、轉場與版面；`product-journey.js` 共用完成條件與 3D 揭曉。驗證：`node --test tests/*.test.mjs`，涵蓋 NumOps 與 WinChat。
+實作：`numops-script.js` 定義步驟與提詞；`numops-keynote.js` / `.css` 管理圖解、轉場與版面；`waterops-keynote.js` / `.css` 管理單頁合作實證；`product-journey.js` 共用完成條件與 3D 揭曉。驗證：`node --test tests/*.test.mjs`，涵蓋 NumOps 與 WinChat。
 
 ### WinChat：Agent 統籌 RAG 與 SKILL（11 分 15 秒）
 
