@@ -21,10 +21,7 @@ export const winChatScript = [
   {scene:'mission',title:'把現場資訊，整理成巡檢摘要。',subtitle:'理解目標 · 選擇能力 · 檢視結果',action:'走進營運戰情室',seconds:30,note:'提出整理今日現場巡檢摘要的工作目標。Agent 使用 RAG 的知識與 SKILL 的方法及工具，最後產出現場巡檢摘要，可依場域需求串接 LINE、警示設備，或匯出報告。'},
   {scene:'screen',asset:'dashboard',view:'wide',title:'讓現況，進入同一個工作視野。',subtitle:'WinChat / 營運戰情室與 AI Copilot',action:'把狀況整理成現場巡檢摘要',seconds:40,note:'展示官方戰情室的指標、趨勢、事件與 Copilot。數字來自官網展示，並非本場即時紀錄；下一頁用資料流說明如何形成摘要。'},
   {scene:'report',title:'從現場資料，到有依據的摘要。',subtitle:'現況 + 知識 → 分析 → 工作輸出',action:'讓現場巡檢摘要送到需要的地方',seconds:35,note:'工具取得的現場資料與 RAG 的 SOP 合流。Agent 依 SKILL 的方法整理觀察、依據、待確認事項，交回人員使用。'},
-  {scene:'delivery',title:'現場巡檢摘要，送到需要的地方。',subtitle:'LINE 通知 · 現場警示設備 · 報告匯出',action:'看 Agent 的完整協作關係',seconds:35,note:'現場巡檢摘要形成後，透過 SKILL 與已配置的工具選擇輸出：LINE 通知相關人員、依規則連動現場警示設備，或匯出留存報告。三條連線依序亮起。本頁為串接概念示意，不會實際發送訊息或操作設備。'},
-  {scene:'orchestration',title:'Agent，讓知識與工作能力一起運作。',subtitle:'RAG 提供依據，SKILL 提供做法與工具。',action:'看三種企業應用',seconds:35,note:'工作目標在上方，中央 Agent 統籌。左側 RAG 提供知識，右側 SKILL 提供工作方法與工具能力，結果從下方輸出。三者不是並列的大腦。'},
-  {scene:'applications',reveal:0,title:'不同工作，組合不同的知識與工具。',subtitle:'客服維修 / 新人培訓 / 現場巡檢',action:'展開三種工作成果',seconds:35,note:'三條資料流從問題開始：圖片查修、流程學習、現場巡檢。Agent 依工作使用相應 SKILL 與 RAG 知識，按下一步再揭曉成果。'},
-  {scene:'applications',reveal:1,title:'讓專業，變成每天能用的成果。',subtitle:'圖文答覆 · SOP 導讀 · 現場巡檢摘要',action:'凝聚為 WinChat',seconds:45,note:'三條流程抵達圖文答覆、流程導讀、現場巡檢摘要。都是應用示意；最後把 Agent、知識與工作能力凝聚成 WinChat 積木。'}
+  {scene:'delivery',title:'現場巡檢摘要，送到需要的地方。',subtitle:'LINE 通知 · 現場警示設備 · 報告匯出',action:'揭曉 WinChat',seconds:35,note:'現場巡檢摘要形成後，透過 SKILL 與已配置的工具選擇輸出：LINE 通知相關人員、依規則連動現場警示設備，或匯出留存報告。三條連線依序亮起，停留展示成果；下一步直接凝聚並揭曉 WinChat，不再重複架構總結或應用列表。本頁為串接概念示意，不會實際發送訊息或操作設備。'},
  ]
 ];
 export const winChatBeatCounts=winChatScript.map(topic=>topic.length);

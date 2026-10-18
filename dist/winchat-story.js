@@ -1,5 +1,5 @@
-import {winChatBrain} from './winchat-brain.js?v=winchat-field-2';
-import {winChatKeynote} from './winchat-keynote.js?v=winchat-field-2';
+import {winChatBrain} from './winchat-brain.js?v=winchat-launch-1';
+import {winChatKeynote} from './winchat-keynote.js?v=winchat-launch-1';
 // Keynote visuals: official WinChat capabilities + the user's multimodal RAG brief.
 // All question/answer and workflow examples below are illustrative, not a live product session.
 export const winChatSource='https://www.aiwin.com.tw/products/winchat';
@@ -22,7 +22,7 @@ function overview(){
 export function winChatUI(state){
  if(state.phase==='overview')return overview();
  if(['selecting','focus','born'].includes(state.phase))return winChatKeynote(state,{icon,drawing});
- if(state.phase==='fusing')return {key:'fusing',layout:'fusion',story:'',detail:`<div class="wc-fusion"><p class="wc-kicker">INTELLIGENCE TAKES SHAPE</p><h1>讓累積的智慧，<br><em>凝聚成一塊能力。</em></h1><div class="wc-mind-condense">${winChatBrain({mode:'fusion'})}</div><div class="wc-fusion-halo"><i></i><i></i><i></i><i></i></div><div class="wc-fusion-words"><span>Agent</span><b>←</b><span>RAG</span><b>·</b><span>SKILL</span></div></div>`,note:'大腦與神經訊號聚光收攏，再揭曉 WinChat 積木。此時才將記憶、思考與技能回歸整體積木故事。'};
+ if(state.phase==='fusing')return {key:'fusing',layout:'fusion',story:'',detail:`<div class="wc-fusion"><p class="wc-kicker">INTELLIGENCE TAKES SHAPE</p><h1>讓知識，<br><em>開始行動。</em></h1><div class="wc-mind-condense">${winChatBrain({mode:'fusion'})}</div><div class="wc-fusion-halo"><i></i><i></i><i></i><i></i></div><div class="wc-fusion-words"><span>Agent</span><b>←</b><span>RAG</span><b>·</b><span>SKILL</span></div></div>`,note:'大腦與神經訊號聚光收攏，再揭曉 WinChat 積木。此時才將記憶、思考與技能回歸整體積木故事。'};
 }
 
 export function winChatEvidence(view='answer'){

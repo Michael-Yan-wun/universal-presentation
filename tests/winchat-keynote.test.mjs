@@ -25,6 +25,7 @@ test('all keynote beats are manual, with complete topics required before fusion'
   }
   assert.ok(state().visited.includes(topic));
  }
+ assert.equal(winChatScript[state().selected][state().beat].scene,'delivery','the final output demonstration leads directly to the product reveal');
  assert.equal(state().canFuse,true);journey.action('next');assert.equal(state().phase,'fusing');settle();
  assert.equal(state().phase,'born');assert.equal(state().beat,0);
  for(let beat=1;beat<winChatFinalBeats;beat++){assert.equal(journey.action('next'),true);assert.equal(state().beat,beat);}
@@ -51,8 +52,8 @@ test('detail beats explain Agent support with distinct data flows, not repeated 
    assert.equal(seenAssets.has(data.asset),false,'each official product image appears once');seenAssets.add(data.asset);
   }else assert.match(ui.detail,/wc-flow-layout|wc-perception/);
  }
- const diagram=winChatUI({phase:'focus',selected:2,beat:winChatScript[2].findIndex(beat=>beat.scene==='orchestration'),visited:[]}).detail;
- for(const role of ['ORCHESTRATOR','Agent','RAG / 知識支援','SKILL / 工作能力','WORK OBJECTIVE'])assert.ok(diagram.includes(role));
+ const diagram=winChatUI({phase:'focus',selected:2,beat:winChatScript[2].findIndex(beat=>beat.scene==='mission'),visited:[]}).detail;
+ for(const role of ['ORCHESTRATOR','Agent','RAG / 知識','SKILL / 工作能力','THE GOAL'])assert.ok(diagram.includes(role));
 });
 test('NumOps keeps its original three-topic sequence',()=>{
  const {journey,state,settle}=setup('analytics');

@@ -107,7 +107,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 影片預設靜音、循環播放，使用播放器控制暫停與拖曳；關閉即停止播放。若瀏覽器阻擋自動播放，使用畫面上的播放按鈕。轉場期間前後切換會暫時鎖定。WinEdge 發表也由講者手動推進，不會自動跳到下一章。
 
-### WinChat：Agent 統籌 RAG 與 SKILL（13 分 10 秒）
+### WinChat：Agent 統籌 RAG 與 SKILL（11 分 15 秒）
 
 WinChat 開場保留大型企業大腦，**Agent 是統籌者**；RAG 提供知識，SKILL 提供工作方法與工具能力，再進入實際應用。
 
@@ -118,11 +118,11 @@ WinChat 開場保留大型企業大腦，**Agent 是統籌者**；RAG 提供知�
 | Agent | 把工作串起來 | 理解目標、規劃、調用知識與能力、整理及檢視結果 |
 | 應用與成果 | 能夠交付工作 | 客服維修、新人培訓、現場巡檢 |
 
-預覽：[WinChat 章節](http://127.0.0.1:8765/?v=winchat-field-2#chat)。講述稿：[WinChat 舞台講述稿](docs/WINCHAT-KEYNOTE.md)。建議 **13 分 10 秒**是人工講述配速，沒有自動翻頁計時。
+預覽：[WinChat 章節](http://127.0.0.1:8765/?v=winchat-launch-1#chat)。講述稿：[WinChat 舞台講述稿](docs/WINCHAT-KEYNOTE.md)。建議 **11 分 15 秒**是人工講述配速，沒有自動翻頁計時。
 
 - **RAG，7 步：** 圖文手冊 → VLM 架構圖理解 → 多模態索引資料流 → 官方知識庫 → 檢索資料流 → 官方問答 → 引用追溯圖。
 - **SKILL，5 步：** 工作方法手冊 → Agent 調用 SKILL 與工具 → 工具結果回流 → 官方工具管理 → 依工作方法執行。
-- **應用，7 步：** 工作目標 → 官方戰情室 → 摘要生成 → LINE／警示設備／報告輸出 → Agent／RAG／SKILL 協作關係 → 三種應用資料流 → 揭曉三種成果。
+- **應用，4 步：** 工作目標 → 官方戰情室 → 現場巡檢摘要 → LINE／警示設備／報告輸出，下一步直接進入 WinChat 揭曉。
 - **收尾，2 幕：** 大腦聚光凝結 → WinChat 積木 → 官方完整工作區，再接回協作成形。
 
 主題列表、大腦標籤與內頁沒有額外按鈕、跳轉箭頭或操作教學。用左右方向鍵、Page Up/Down、空白鍵或全站底部前後步驟控制；每幕可停留，WinChat 不接受滾輪翻頁。三段主題完成後才融合。
@@ -133,11 +133,11 @@ WinChat 開場保留大型企業大腦，**Agent 是統籌者**；RAG 提供知�
 
 實作檔案：
 
-- `winchat-script.js`：19 個手動步驟、順序、講述時間與隱藏提詞。
+- `winchat-script.js`：16 個手動步驟、順序、講述時間與隱藏提詞。
 - `winchat-story.js` / `winchat-brain.js`：Agent 大腦總覽與收尾。
 - `winchat-motion.js`：主題區域鏡頭、返回與離場清理。
 - `winchat-keynote.js` / `winchat-keynote.css`：完整舞台、官方介面及產品揭曉。
-- `winchat-flows.js` / `winchat-flows.css`：VLM、索引、檢索、SKILL 工具調用、工作步驟與應用資料流。
+- `winchat-flows.js` / `winchat-flows.css`：VLM、索引、檢索、SKILL 工具調用、工作步驟與成果輸出。
 - `product-journey.js`：手動推進、返回與完成條件；NumOps 保留原流程。
 
 驗證：`node --test tests/winchat-keynote.test.mjs`，涵蓋手動停留、完成條件、返回、重入重設、NumOps 路徑、移除多餘按鈕、轉場內容連續，以及細節不重複大腦。桌面以 1920 × 1080 和 1280 × 720 檢查；尊重減少動態效果設定。
@@ -220,7 +220,7 @@ git switch codex/winedge-launch
     ├── history-ui.js             # 學習段文字、案例影片與導覽
     ├── field-kit.js              # 案例中的相機、感測器、邊緣與輸出設備
     ├── product-journey.js        # NumOps / WinChat 三段能力與產品誕生
-    ├── winchat-script.js         # WinChat 19 個手動步驟與講述配速
+    ├── winchat-script.js         # WinChat 16 個手動步驟與講述配速
     ├── winchat-keynote.js        # WinChat 大型產品介面與按壓揭曉
     ├── winchat-keynote.css       # WinChat 舞台版布局與鏡頭動畫
     ├── winchat-motion.js         # 大腦區域鏡頭移動、返回與清理
