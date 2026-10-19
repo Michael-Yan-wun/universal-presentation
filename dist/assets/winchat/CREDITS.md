@@ -28,3 +28,16 @@
 `winchat-flows.js` 的圖解皆為程式繪製示意，不新增客戶數據或圖片。Agent 使用 RAG 與 SKILL 工作方法／工具能力的定位依使用者補充；工作方法的概念參考 [Agent Skills](https://agentskills.io/home)，不宣稱相容特定檔案格式。工具管理截圖僅呈現既有產品介面。
 
 舞台目前每張主要官方介面圖只展示一次，細節以資料流圖解說明；舊有放大設定與備用圖片保留於素材檔案。
+
+## Hardware deployment
+
+2026-10-19：依使用者指定，WinChat 同頁呈現小團隊的 **NVIDIA DGX Spark**，以及搭載 **RTX PRO 6000** 的大型工作站。
+
+- [NVIDIA DGX Spark 官方頁](https://www.nvidia.com/en-us/products/workstations/dgx-spark/)
+- [官方 Spark 產品系列照片](https://www.nvidia.com/content/dam/en-zz/Solutions/dgx-spark/nvidia-dgx-spark-family-bm-lg580-offset-left-d.jpg)
+- [NVIDIA RTX PRO 6000 Blackwell Workstation Edition 官方頁](https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000/)
+- [官方 RTX PRO 6000 外觀參考](https://www.nvidia.com/content/dam/en-zz/Solutions/data-center/rtx-pro-6000-blackwell-workstation-edition/nvidia-geforce-rtx-pro-6000-bm-l580-d.jpg)
+
+`product-hardware.js` 以原生 Three.js 建模。Spark 參考金色圓角機殼、前側網孔與深色直條；工作站為原創剖面機殼，內部單張顯示卡參考 RTX PRO 6000 的雙散熱區與交叉骨架。主機相對大小經舞台視覺調整，未代表實際比例或 OEM 成品。官方照片僅供外觀參考，不隨網站載入。
+
+小團隊／企業部署定位依使用者的產品規劃，未新增並行人數、模型容量、推論效能或已完成相容性認證等宣稱。

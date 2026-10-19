@@ -6,7 +6,7 @@ import {stageView} from './stage-layout.js?v=winedge-launch-7';
 import { products, chapters, agents, palette } from './content.js?v=keynote-flow-1';
 import { createHistoryWall } from './history-wall.js?v=aiwinops-avs553-1';
 import {createGrowthScene} from './growth-scene.js?v=keynote-flow-1';
-import {createProductJourney} from './product-journey.js?v=keynote-flow-1';
+import {createProductJourney} from './product-journey.js?v=product-hardware-1';
 import { createAnniversary } from './anniversary.js?v=cosmic-opening-1';
 
 export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>{},onProductStage=()=>{},onSenseStage=()=>{}) {
@@ -106,9 +106,9 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
 
   function setInspect(on){inspect=on}
   function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden||openingOccluded||kind==='closing'||kind==='chronicle'||kind==='launch'&&['feature','cases','ecosystem'].includes(launchMode)){last=ms;return;}const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
-    const view=kind==='castle'?castle.view(aspect):stageView(kind,aspect,{phase:productJourney.phase(),exploded,inspect,companyLayout});
+    const view=(kind==='product'?productJourney.view(aspect):null)||(kind==='castle'?castle.view(aspect):stageView(kind,aspect,{phase:productJourney.phase(),exploded,inspect,companyLayout}));
     if(kind==='history'){historyWall.update(age,reduced,dt);camera.position.copy(historyWall.cameraPosition);target.copy(historyWall.cameraTarget);camera.lookAt(target);const w=container.clientWidth,h=container.clientHeight;camera.setViewOffset(w,h,-w*historyWall.frameOffset(),0,w,h);rig.rotation.y=0;}else{
-    if(camera.view?.enabled)camera.clearViewOffset();
+    if(kind==='product'&&productJourney.frameOffset()){const w=container.clientWidth,h=container.clientHeight;camera.setViewOffset(w,h,-w*productJourney.frameOffset(),0,w,h);}else if(camera.view?.enabled)camera.clearViewOffset();
     const introTime=introClock??age;const openingDolly=kind==='intro'&&!reduced?1-THREE.MathUtils.smootherstep(introTime,0,3.5):0;
     const dolly=kind==='company'&&companyLayout==='stage'&&!reduced?companyScene.entrance():0;
     camGoal.set(view.x+1.8*dolly+3*openingDolly,view.y+.65*dolly+1.5*openingDolly,view.z+1.5*dolly+4*openingDolly);camera.position.lerp(camGoal,e);look.set(0,view.targetY,0);target.lerp(look,e);camera.lookAt(target);angle+=(angleGoal-angle)*e;rig.rotation.y=angle+(reduced||kind==='company'?0:Math.sin(t*.2)*(kind==='intro'?.012:.035));}
@@ -128,5 +128,5 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     const r=container.getBoundingClientRect(),lr=labelLayer.getBoundingClientRect();labels.forEach(l=>{l.el.hidden=kind!==l.scope||!visible(l.group)||(l.scope==='history'&&!historyWall.labelsVisible())||(l.scope==='product'&&!productJourney.labelsVisible());if(l.el.hidden)return;v.copy(l.anchor);l.group.localToWorld(v);v.project(camera);l.el.style.left=`${(v.x*.5+.5)*r.width+r.left-lr.left}px`;l.el.style.top=`${(-v.y*.5+.5)*r.height+r.top-lr.top}px`});
   }
   camera.position.set(5,6,24);setChapter(0);raf=requestAnimationFrame(animate);
-  return {setOpeningOccluded(value){openingOccluded=value;},setIntroTime(time){introClock=time;if(time>=20){age=4;introClock=null;}},setChapter,setExploded,setCastleStep(value){castle.setStep(value);},setInspect,setLaunchMode(mode){launchMode=mode;resize();},setCompanyLayout(id){companyLayout=id;angleGoal=0;companyScene.setLayout(id);},senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();window.removeEventListener('resize',resize);anniversary.dispose();companyScene.dispose();historyWall.dispose();castle.dispose();renderer.dispose()}};
+  return {setOpeningOccluded(value){openingOccluded=value;},setIntroTime(time){introClock=time;if(time>=20){age=4;introClock=null;}},setChapter,setExploded,setCastleStep(value){castle.setStep(value);},setInspect,setLaunchMode(mode){launchMode=mode;resize();},setCompanyLayout(id){companyLayout=id;angleGoal=0;companyScene.setLayout(id);},senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();window.removeEventListener('resize',resize);anniversary.dispose();companyScene.dispose();historyWall.dispose();productJourney.dispose();castle.dispose();renderer.dispose()}};
 }

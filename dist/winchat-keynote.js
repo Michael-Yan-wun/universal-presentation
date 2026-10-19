@@ -21,11 +21,11 @@ function screen(asset){
  return frame(`<div class="wc-product-cinema"><div class="wc-window-bar"><span class="wc-window-dots"><i></i><i></i><i></i></span><strong>WinChat <span>/ ${a.label}</span></strong><span>PRODUCT EXPERIENCE</span></div><div class="wc-camera-viewport"><div class="wc-camera-image" style="--source-ratio:${a.ratio}"><img src="./assets/winchat/${asset}.webp" alt="${a.alt}" loading="eager" decoding="sync"/><span class="wc-source-highlight" aria-hidden="true"></span></div><div class="wc-cinema-focus" aria-hidden="true"><span></span><strong></strong><i></i></div></div></div>`,'official','wc-screen-frame');
 }
 function hero(){
- return `<section class="wc-product-reveal"><div class="wc-reveal-light"></div><p>MEMORY. REASONING. ACTION.</p><h1>WinChat<span>讓企業知識，<br>成為工作的力量。</span></h1><div class="wc-reveal-formula"><span>Agent</span><b>←</b><span>RAG</span><b>·</b><span>SKILL</span></div><footer><span>企業知識 AI 協作平台</span></footer></section>`;
+ return `<section class="wc-product-reveal"><div class="wc-reveal-light"></div><p>MEMORY. REASONING. ACTION.</p><h1>WinChat<span>讓企業知識，<br>成為工作的力量。</span></h1><div class="wc-reveal-formula"><span>Agent</span><b>←</b><span>RAG</span><b>·</b><span>SKILL</span></div><footer><span>從小團隊，到企業部署。</span></footer></section><div class="wc-hardware-options"><article><span>小團隊</span><h2>NVIDIA DGX Spark</h2><p>小巧桌上型 AI 主機</p></article><article><span>企業部署</span><h2>RTX PRO 6000</h2><p>大型 AI 工作站</p></article></div><small class="wc-hardware-note">工作站外觀為配置示意</small>`;
 }
 export function winChatKeynote(state,helpers){
  if(state.phase==='born'){
-  return {key:'chat-product-hero',story:'',detail:hero(),layout:'hero',fullStage:true,note:'建議 30 秒。大腦與神經訊號凝聚成 WinChat 積木。先停留讓產品出現，再收束：Agent 結合 RAG 知識與 SKILL 工作方法及工具能力，組成企業工作的力量。',action:'前往協作成形'};
+  return {key:'chat-product-hero',story:'',detail:hero(),layout:'hero',fullStage:true,note:'建議 30 秒。大腦與神經訊號凝聚成 WinChat 積木，連向小團隊的 NVIDIA DGX Spark 與搭載 RTX PRO 6000 的大型工作站。兩者是部署選擇，非同時必備；未宣稱特定模型容量或人數。先停留讓產品出現，再收束：Agent 結合 RAG 知識與 SKILL 工作方法及工具能力，組成企業工作的力量。',action:'前往協作成形'};
 
  }
  const beat=winChatBeat(state);

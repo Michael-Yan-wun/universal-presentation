@@ -86,3 +86,19 @@
 .wc-mission-frame[data-reveal="0"] .wc-mission-goal{height:clamp(190px,24vh,260px);transform:translateY(45%)}
 .wc-mission-frame[data-reveal="0"] .wc-mission-goal h2{font-size:clamp(39px,3.8vw,74px);line-height:1.3}
 .wc-mission-frame[data-reveal="0"] .wc-goal-orb{width:clamp(90px,9vw,175px);height:clamp(90px,9vw,175px)}
+/* One WinChat product, two clearly separated deployment scales. */
+#experience[data-product=chat][data-winchat-layout=hero] #scene,
+#experience[data-product=chat][data-product-phase=fusing] #scene{inset:0;pointer-events:none}
+#experience[data-product=chat] .wc-product-reveal{inset:6% 4.5% 7%;z-index:3}
+#experience[data-product=chat] .wc-product-reveal h1{font-size:clamp(72px,6.2vw,124px);margin-top:4%;width:34%}
+#experience[data-product=chat] .wc-product-reveal h1>span{font-size:clamp(28px,2.25vw,46px);margin-top:4vh}
+.wc-product-reveal .wc-reveal-formula{margin-top:4vh;gap:16px}
+.wc-product-reveal>footer{bottom:3%;right:auto;max-width:35%}
+.wc-hardware-options{position:absolute;left:43%;right:3%;bottom:3.5%;display:grid;grid-template-columns:1fr 1fr;gap:4%;z-index:4;animation:wc-stage-enter 1s .2s both;text-align:center}
+.wc-hardware-options article{padding-top:18px;border-top:1px solid #b4a4c441}
+.wc-hardware-options article>span{font-size:clamp(14px,1vw,20px);letter-spacing:.16em;color:#c5addb}
+.wc-hardware-options h2{font-size:clamp(24px,1.8vw,36px);font-weight:500;letter-spacing:-.035em;margin:10px 0 8px;color:#f0e7f8;white-space:nowrap}
+.wc-hardware-options p{font-size:clamp(15px,1.05vw,21px);color:#ada0bd;margin:0}
+.wc-hardware-options article:first-child>span{color:#d8c3a2}
+.wc-hardware-note{position:absolute;right:3%;bottom:.1%;font-size:clamp(9px,.63vw,13px);color:#81758d}
+@media(prefers-reduced-motion:reduce){.wc-hardware-options{animation:none}}

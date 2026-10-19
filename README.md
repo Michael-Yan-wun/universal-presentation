@@ -20,6 +20,17 @@ AIWinOps 最後的產品畫面已加入參考 APLEX AVS-553 的 Three.js 工業�
 - 官方參考與展示方向說明：[AIWinOps credits](dist/assets/aiwinops/CREDITS.md#avs-553-product-reveal)。
 - `prefers-reduced-motion` 顯示完成的組合，並停止風扇、光點和鏡頭擺動。
 
+## NumOps / WinChat 硬體配置
+
+產品最後一幕保留積木融合，再帶出各自的運算硬體；沿用原本上一段／下一段，不增加講解頁數。
+
+- **NumOps：APLEX AVS-530**。無風扇工業電腦，銀色散熱鰭片、前面板 LAN／USB／COM 與電源端子。部署圖同步標示 WinEdge-N 搭載 AVS-530。
+- **WinChat：兩種部署選擇**。小團隊使用 NVIDIA DGX Spark；大型部署呈現搭載 RTX PRO 6000 的工作站。共同的 WinChat 積木以流動訊號連向兩台主機。
+- `dist/product-hardware.js` 提供原生 Three.js 幾何模型、風扇與訊號動畫；`product-journey.js` 管理融合、返回和重播。模型不依賴外部貼圖或 CDN。
+- 硬體搭配依本次產品規劃；工作站為原創剖面示意，RTX PRO 6000 是內部顯示卡，未宣稱特定 OEM 主機、模型容量、並行人數或測試效能。
+- 官方外觀參考記錄於 [NumOps 素材來源](dist/assets/numops/CREDITS.md#avs-530-hardware) 與 [WinChat 素材來源](dist/assets/winchat/CREDITS.md#hardware-deployment)。
+- 減少動態效果時直接顯示完整配置，停止風扇與光點。驗證包含 1920 × 1080／1280 × 720、返回後重播融合、離場清理與資源釋放。
+
 ## 快速啟動
 
 需求：Git、Python 3，以及支援 WebGL 2 的桌面瀏覽器。

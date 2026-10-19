@@ -27,3 +27,12 @@ Retrieved 2026-10-18; WaterOps case and award photo added 2026-10-19. Product sc
 Signal sculpture, diagrams, model-training animation, water workflow, hardware illustration and fusion blocks are original HTML/CSS/SVG illustrations. They are conceptual, not a live model run, a physical equipment specification, or a customer measurement. No automatic retraining, guaranteed savings or accuracy claims are added.
 
 The WaterOps partnership and “data AutoML platform” framing follow the user's product description together with the public references. WaterOps is not represented as a renamed NumOps product or a solely owned AIWin brand.
+
+## AVS-530 hardware
+
+Reviewed 2026-10-19. The user's requested NumOps hardware is **APLEX AVS-530**.
+
+- [APLEX official AVS-5 series](https://www.aplex.com/index.php/product/list/machine_vision_system/avs_-_5_series)
+- [APLEX official AVS-530 photo](https://www.aplex.com/images/products/AVS530_1.png)
+
+`product-hardware.js` is an original procedural Three.js interpretation of the fanless enclosure, top cooling fins, terminal block, LAN, USB and serial connectors. `numops-keynote.js` uses the same reference for its deployment SVG. Official photographs are reference-only and are not served by the site. Dimensions are adapted for stage legibility, not mechanical drawings. The illustrated pairing does not claim APLEX certification, benchmark results or a WaterOps customer installation BOM.

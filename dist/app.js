@@ -1,9 +1,9 @@
 import {castleBeats,createCastleProgress,castleStoryHTML,castleDetailHTML,paintCastleBeat} from './castle-keynote.js?v=castle-living-2';
 import {createVisionLessonMotion,visionCurriculum} from './aiwinops-keynote.js?v=keynote-flow-1';
-import {createNumOpsStage,numOpsUI} from './numops-keynote.js?v=keynote-flow-1';
+import {createNumOpsStage,numOpsUI} from './numops-keynote.js?v=product-hardware-1';
 import {createWinChatStage} from './winchat-motion.js?v=keynote-flow-1';
-import {syncWinChatKeynote} from './winchat-keynote.js?v=keynote-flow-1';
-import { winChatUI, winChatEvidence } from './winchat-story.js?v=keynote-flow-1';
+import {syncWinChatKeynote} from './winchat-keynote.js?v=product-hardware-1';
+import { winChatUI, winChatEvidence } from './winchat-story.js?v=product-hardware-1';
 import { createWinEdgeLaunch } from './winedge-launch.js?v=keynote-flow-1';
 import { companyHistory, companyHistoryHTML } from './company-history.js?v=heritage-growth-17';
 import { animateCompanyHistory } from './company-history-motion.js?v=heritage-growth-18';
@@ -13,7 +13,7 @@ import { productColors, palette, productInk } from './product-colors.js?v=produc
 import { companyHTML, companyStageHTML, companyProductHTML, companyLayouts, companyPreviewHTML, animateCompanyIntro } from './company.js?v=company-lockup-6';
 import { createCosmicBackground } from './cosmic-background.js?v=cosmic-final-1';
 import { historyOverview, historyUI, historyRoomAction, createVisionPlayer } from './history-ui.js?v=aiwinops-avs553-1';
-import { createScene } from './scene.js?v=aiwinops-avs553-1';
+import { createScene } from './scene.js?v=product-hardware-1';
 import {growthHTML,senseHTML,journeyUI} from './narrative-ui.js?v=keynote-flow-1';
 import { chapters, chapterNavigation, products, cases, agents, icons, chapterFor, growthStages, senseRoutes, resolveChapterRoute } from './content.js?v=keynote-flow-1';
 const $=s=>document.querySelector(s),root=$('#experience'),story=$('#story'),dialog=$('#case-dialog'),detail=$('#stage-detail');
