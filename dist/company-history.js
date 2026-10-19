@@ -28,7 +28,7 @@ function stageHTML(stage, index){
     </div>
     <ol class="heritage-achievements">${stage.achievements.map((entry, i)=>`<li data-heritage-reveal>
       <span class="heritage-number" aria-hidden="true">0${i+1}</span>
-      <div><h3>${entry.platform?'<span class="heritage-platform">WinHub.AI</span> 平台啟動':entry.title}</h3><p>${entry.description}</p></div>
+      <div><h3>${entry.platform?'<span class="heritage-platform-heading"><span class="heritage-platform-logo"><img src="./assets/company-products/winhub-cutout-v1.png" alt="WinHub.AI 產品 Logo" width="1491" height="1055"></span><span><span class="heritage-platform">WinHub.AI</span> 平台啟動</span></span>':entry.title}</h3><p>${entry.description}</p></div>
     </li>`).join('')}</ol>
   </section>`;
 }
