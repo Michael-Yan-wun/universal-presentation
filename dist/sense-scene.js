@@ -76,7 +76,7 @@ export function createSenseScene({group:parent,brick,addLabel,onStage=()=>{}}){
  return {reset,action,update(age,reduced){
   lastAge=age;
   if(mode!=='overview'){
-   const elapsed=age-started,k=clamp(elapsed/1.1);group.visible=!reduced&&fromMode==='overview'&&elapsed<1.1;
+   const elapsed=(age-started)*2.6,k=clamp(elapsed/1.1);group.visible=!reduced&&fromMode==='overview'&&elapsed<1.1;
    if(group.visible){robot.update(age,reduced,1-k);group.scale.setScalar(1-.16*k);group.position.z=-1.5*k}
    if(mode==='cameras'){data.group.visible=false;cameras.update(elapsed,reduced)}
    else{

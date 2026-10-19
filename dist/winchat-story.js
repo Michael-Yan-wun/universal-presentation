@@ -1,5 +1,5 @@
 import {winChatBrain} from './winchat-brain.js?v=winchat-launch-1';
-import {winChatKeynote} from './winchat-keynote.js?v=winchat-launch-1';
+import {winChatKeynote} from './winchat-keynote.js?v=winchat-integrated-1';
 // Keynote visuals: official WinChat capabilities + the user's multimodal RAG brief.
 // All question/answer and workflow examples below are illustrative, not a live product session.
 export const winChatSource='https://www.aiwin.com.tw/products/winchat';

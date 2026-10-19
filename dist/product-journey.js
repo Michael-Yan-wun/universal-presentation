@@ -1,7 +1,9 @@
-import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './winchat-script.js?v=winchat-launch-1';
+import {numOpsBeatCounts,numOpsTravelSeconds} from './numops-script.js?v=keynote-flow-1';
+import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './winchat-script.js?v=keynote-flow-1';
 import * as THREE from './vendor/three.module.js';
 import {journeyStage as layout} from './stage-layout.js?v=company-stage-2';
-import {products} from './content.js?v=company-history-15';
+import {products} from './content.js?v=keynote-flow-1';
+import {createProductHardware} from './product-hardware.js?v=winchat-integrated-1';
 import {createFieldKit} from './field-kit.js?v=learning-life-1';
 export const productStories={
  analytics:{title:'經驗多了，<br>開始找出規律。',bridge:'像在學校學會推理，把訊號與經驗整理成方法。',topics:[
@@ -15,12 +17,14 @@ export const productStories={
 ]}
 };
 export function createProductJourney({group,brick,addLabel,onStage}){
- const roots={},V=(...a)=>new THREE.Vector3(...a),ease=t=>1-Math.pow(1-t,3),clamp=t=>Math.max(0,Math.min(1,t));let id='analytics',phase='overview',selected=-1,beat=0,clock=0,from=[],visited=new Set();
- for(const p of products.filter(p=>productStories[p.id])){const root=new THREE.Group();group.add(root);const pieces=productStories[p.id].topics.map((t,i)=>{const o=brick(root,{id:'journey-'+i,name:t.tag,color:p.id==='chat'?['#755695','#8366a6','#67508e'][i]:p.color,cols:3,rows:2,h:1.15,pos:[(i-1)*layout.spread,p.id==='chat'?-2.3:layout.overviewY,0],scale:layout.overviewScale,detail:p.id==='chat'?'hero':'standard'});o.journeyManaged=true;const label=addLabel(o.g,V(0,-1.58,1),t.title,'journey-'+i,p.uiColor,'journey-label','product');return {o,label}});const born=brick(root,{id:p.id,name:p.name,sub:p.role,color:p.id==='chat'?'#80619e':p.color,cols:5,rows:3,h:1.45,detail:p.id==='chat'?'hero':'standard',pos:[0,layout.bornY,0]});born.journeyManaged=true;const kit=createFieldKit(root,{scale:.77,input:['numeric','analytics'].includes(p.id)?'sensor':'camera'});kit.group.position.z=-2;roots[p.id]={root,pieces,born,kit}}
+ const roots={},V=(...a)=>new THREE.Vector3(...a),ease=t=>1-Math.pow(1-t,3),clamp=t=>Math.max(0,Math.min(1,t));let id='analytics',phase='overview',selected=-1,beat=0,clock=0,transitionDuration=.65,from=[],visited=new Set();
+ for(const p of products.filter(p=>productStories[p.id])){const root=new THREE.Group();group.add(root);const pieces=productStories[p.id].topics.map((t,i)=>{const o=brick(root,{id:'journey-'+i,name:t.tag,color:p.id==='chat'?['#755695','#8366a6','#67508e'][i]:p.color,cols:3,rows:2,h:1.15,pos:[(i-1)*layout.spread,p.id==='chat'?-2.3:layout.overviewY,0],scale:layout.overviewScale,detail:'hero'});o.journeyManaged=true;const label=addLabel(o.g,V(0,-1.58,1),t.title,'journey-'+i,p.uiColor,'journey-label','product');return {o,label}});const born=brick(root,{id:p.id,name:p.name,sub:p.role,color:p.id==='chat'?'#80619e':p.color,cols:5,rows:3,h:1.45,detail:'hero',pos:[0,layout.bornY,0]});born.journeyManaged=true;const kit=createFieldKit(root,{scale:.77,input:['numeric','analytics'].includes(p.id)?'sensor':'camera'});kit.group.position.z=-2;const hardware=createProductHardware(root,p.id);roots[p.id]={root,pieces,born,kit,hardware}}
+ const counts=()=>id==='chat'?winChatBeatCounts:numOpsBeatCounts;
+ const travelSeconds=()=>transitionDuration;
  const state=()=>({id,phase,selected,beat,visited:[...visited],canFuse:visited.size===3});const notify=()=>onStage(state());const change=p=>{phase=p;clock=0;notify()};
- function reset(product){id=product;phase='overview';clock=0;selected=-1;beat=0;visited=new Set();for(const[k,v]of Object.entries(roots))v.root.visible=k===id;const r=roots[id];r.born.g.visible=false;r.kit.group.visible=false;r.pieces.forEach(({o})=>{o.g.visible=id!=='chat';o.g.position.copy(o.home);o.g.rotation.set(0,0,0);o.g.scale.setScalar(layout.overviewScale)});notify()}
+ function reset(product,{atEnd=false}={}){id=product;phase='overview';clock=0;selected=-1;beat=0;visited=new Set();for(const[k,v]of Object.entries(roots))v.root.visible=k===id;const r=roots[id];r.hardware.update(0,0,true);r.born.g.visible=false;r.kit.group.visible=false;r.pieces.forEach(({o})=>{o.g.visible=false;o.g.position.copy(o.home);o.g.rotation.set(0,0,0);o.g.scale.setScalar(layout.overviewScale)});if(atEnd){phase='born';selected=2;beat=id==='chat'?winChatFinalBeats-1:0;visited=new Set([0,1,2]);r.born.g.visible=true;reveal(r,0,1,true);}notify()}
  function selectTopic(index,startBeat=0){
-  const r=roots[id];from=r.pieces.map(({o})=>o.g.position.clone());selected=index;beat=startBeat;change('selecting');return true;
+  transitionDuration=phase==='overview'?(id==='chat'?winChatTravelSeconds:numOpsTravelSeconds):.55;const r=roots[id];from=r.pieces.map(({o})=>o.g.position.clone());selected=index;beat=startBeat;change('selecting');return true;
  }
  function action(type,index){
   const r=roots[id];
@@ -29,20 +33,20 @@ export function createProductJourney({group,brick,addLabel,onStage}){
    if(phase==='overview')return selectTopic(0);
    if(phase==='born'&&id==='chat'&&beat<winChatFinalBeats-1){beat++;notify();return true;}
    if(phase==='focus'){
-    if(id==='chat'&&beat<winChatBeatCounts[selected]-1){beat++;if(beat===winChatBeatCounts[selected]-1)visited.add(selected);notify();return true;}
+    if(beat<counts()[selected]-1){beat++;if(beat===counts()[selected]-1)visited.add(selected);notify();return true;}
     if(selected<2)return selectTopic(selected+1);
     if(visited.size<3)return selectTopic([0,1,2].find(i=>!visited.has(i)));
     from=r.pieces.map(({o})=>o.g.position.clone());beat=0;change('fusing');return true;
    }
   }
   if(type==='back'){
-   if(phase==='born'&&id==='chat'){
+   if(phase==='born'){
     if(beat>0){beat--;notify();return true;}
-    r.born.g.visible=false;r.pieces.forEach(({o})=>o.g.visible=false);return selectTopic(2,winChatBeatCounts[2]-1);
+    r.hardware.update(0,0,true);r.born.g.visible=false;r.pieces.forEach(({o})=>o.g.visible=false);return selectTopic(2,counts()[2]-1);
    }
    if(phase==='focus'){
-    if(id==='chat'&&beat>0){beat--;notify();return true;}
-    if(selected>0)return selectTopic(selected-1,id==='chat'?winChatBeatCounts[selected-1]-1:0);
+    if(beat>0){beat--;notify();return true;}
+    if(selected>0)return selectTopic(selected-1,counts()[selected-1]-1);
     reset(id);return true;
    }
   }
@@ -50,10 +54,15 @@ export function createProductJourney({group,brick,addLabel,onStage}){
   return false;
  }
 
- function update(age,reduced,dt){clock+=dt;const r=roots[id];if(!r)return;
- if(phase==='selecting'){const p=reduced?1:clamp(clock/(id==='chat'?winChatTravelSeconds:1.65)),k=ease(p);r.pieces.forEach(({o},i)=>{const target=i===selected?V(0,layout.focusY,2.0):V((i-1)*layout.spread,-.95,-2.6);o.g.position.lerpVectors(from[i],target,k);o.g.position.y+=Math.sin(p*Math.PI)*.8;o.g.scale.setScalar(i===selected?layout.overviewScale+k*(layout.focusScale-layout.overviewScale):layout.overviewScale-k*.46)});if(p===1){if(id!=='chat'||beat===winChatBeatCounts[selected]-1)visited.add(selected);change('focus')}}
- if(phase==='fusing'){const p=reduced?1:clamp(clock/4.6),k=ease(clamp(p/.76));r.pieces.forEach(({o},i)=>{const a=i*2.09+p*6.2,rad=(1-k)*3.5;o.g.visible=id!=='chat'&&p<.8;o.g.position.lerpVectors(from[i],V(Math.cos(a)*rad,Math.sin(p*Math.PI)*2,Math.sin(a)*rad),ease(clamp(p/.3)));o.g.scale.setScalar((1-k)*1.2+.05);o.g.rotation.y=a});r.born.g.visible=p>.73;r.born.g.scale.setScalar(.1+((id==='chat'?2.05:layout.bornScale)-.1)*ease(clamp((p-.73)/.27)));if(p===1)change('born')}
- if(phase==='born'){r.born.g.visible=true;r.born.g.scale.setScalar(id==='chat'?2.05:layout.bornScale);r.born.g.rotation.y=reduced?0:Math.sin(age*.25)*.04;if(id==='chat'){r.kit.group.visible=false;r.pieces.forEach(({o})=>o.g.visible=false)}else{r.kit.layoutMode??(r.kit.layoutMode=true,r.kit.layout(true));r.kit.update(reduced?0:age,reduced?1:ease(clamp(clock/1.5)));r.kit.group.position.z=.75}}else r.kit.group.visible=false;
+ function reveal(r,age,p,reduced){
+  const k=ease(p),scale=id==='chat'?1.32:1.16,y=id==='chat'?3.0:1.65;
+  r.born.g.visible=p>0;r.born.g.scale.setScalar(scale*(.85+.15*k));r.born.g.position.set(0,y+(1-k)*1.9,id==='chat'?-1.1:0);r.born.g.rotation.set(0,reduced?0:Math.sin(age*.25)*.025,0);r.hardware.update(age,p,reduced);
  }
- return {reset,action,update,phase:()=>phase,labelsVisible:()=>phase==='overview'};
+ function view(aspect){if(!['fusing','born'].includes(phase))return null;return {x:id==='chat'?2.4:4.9,y:id==='chat'?5.2:5.4,z:(id==='chat'?23.5:19.6)*Math.max(1,1.45/aspect),targetY:id==='chat'?.65:-.5};}
+ function update(age,reduced,dt){clock+=dt;const r=roots[id];if(!r)return;
+ if(phase==='selecting'){const p=reduced?1:clamp(clock/travelSeconds()),k=ease(p);r.pieces.forEach(({o},i)=>{const target=i===selected?V(0,layout.focusY,2.0):V((i-1)*layout.spread,-.95,-2.6);o.g.position.lerpVectors(from[i],target,k);o.g.position.y+=Math.sin(p*Math.PI)*.8;o.g.scale.setScalar(i===selected?layout.overviewScale+k*(layout.focusScale-layout.overviewScale):layout.overviewScale-k*.46)});if(p===1){if(beat===counts()[selected]-1)visited.add(selected);change('focus')}}
+ if(phase==='fusing'){const p=reduced?1:clamp(clock/4.6),k=ease(clamp(p/.76));r.pieces.forEach(({o},i)=>{const a=i*2.09+p*6.2,rad=(1-k)*3.5;o.g.visible=false;o.g.position.lerpVectors(from[i],V(Math.cos(a)*rad,Math.sin(p*Math.PI)*2,Math.sin(a)*rad),ease(clamp(p/.3)));o.g.scale.setScalar((1-k)*1.2+.05);o.g.rotation.y=a});reveal(r,age,clamp((p-.73)/.27),reduced);if(p===1)change('born')}
+ if(phase==='born'){reveal(r,age,1,reduced);r.kit.group.visible=false;r.pieces.forEach(({o})=>o.g.visible=false)}else r.kit.group.visible=false;
+ }
+ return {reset,action,update,view,frameOffset:()=>id==='analytics'&&['fusing','born'].includes(phase)?.2:0,dispose(){Object.values(roots).forEach(r=>r.hardware.dispose());},phase:()=>phase,labelsVisible:()=>phase==='overview'};
 }

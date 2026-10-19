@@ -1,6 +1,6 @@
 import { palette } from './product-colors.js?v=product-colors-1';
 import * as THREE from './vendor/three.module.js';
-import {createSenseScene} from './sense-scene.js?v=product-colors-1';
+import {createSenseScene} from './sense-scene.js?v=keynote-flow-1';
 export function createGrowthScene({early,body,brick,addLabel,onSenseStage}){
  const rigs=[],links=[];const V=(x,y,z)=>new THREE.Vector3(x,y,z);
  function human(parent,isChild){

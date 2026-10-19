@@ -210,7 +210,7 @@ export function createCompanyScene({ group, brick, addLabel, hits }) {
       mesh(monitorGroup,new THREE.BoxGeometry(.13,.2,.1),satin,[0,-.62,0]);
       mesh(monitorGroup,new THREE.BoxGeometry(.85,.05,.38),satin,[0,-.72,0]);
     }
-    const monitor=mesh(monitorGroup,new THREE.PlaneGeometry(w,monitorHeight),material,[0,monitorHeight/2-.49,product.image?.035:0]);
+    const monitor=mesh(monitorGroup,new THREE.PlaneGeometry(w,monitorHeight),material,[0,monitorHeight/2-.49,product.image ? .035 : 0]);
     monitor.castShadow=monitor.receiveShadow=false;monitor.userData.id='company-'+product.id;hits.push(monitor);
     const button=addLabel(plinth,new THREE.Vector3(0,top-.27,1.6),product.name,'company-'+product.id,product.ink,'company-product-label','company');
     button.innerHTML=`<strong>${product.name}</strong><small>${product.label}</small>`;

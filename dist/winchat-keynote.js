@@ -1,5 +1,5 @@
 import {winChatFlow} from './winchat-flows.js?v=winchat-launch-1';
-import {winChatBeat,winChatAction} from './winchat-script.js?v=winchat-launch-1';
+import {winChatBeat,winChatAction} from './winchat-script.js?v=keynote-flow-1';
 
 const assets={
  knowledge:{alt:'WinChat 官方知識庫文件管理介面',label:'企業知識庫',ratio:'1280 / 635'},
@@ -21,12 +21,12 @@ function screen(asset){
  return frame(`<div class="wc-product-cinema"><div class="wc-window-bar"><span class="wc-window-dots"><i></i><i></i><i></i></span><strong>WinChat <span>/ ${a.label}</span></strong><span>PRODUCT EXPERIENCE</span></div><div class="wc-camera-viewport"><div class="wc-camera-image" style="--source-ratio:${a.ratio}"><img src="./assets/winchat/${asset}.webp" alt="${a.alt}" loading="eager" decoding="sync"/><span class="wc-source-highlight" aria-hidden="true"></span></div><div class="wc-cinema-focus" aria-hidden="true"><span></span><strong></strong><i></i></div></div></div>`,'official','wc-screen-frame');
 }
 function hero(){
- return `<section class="wc-product-reveal"><div class="wc-reveal-light"></div><p>MEMORY. REASONING. ACTION.</p><h1>WinChat<span>讓企業知識，<br>成為工作的力量。</span></h1><div class="wc-reveal-formula"><span>Agent</span><b>←</b><span>RAG</span><b>·</b><span>SKILL</span></div><footer><span>企業知識 AI 協作平台</span></footer></section>`;
+ return `<section class="wc-product-reveal"><div class="wc-reveal-light"></div><header><p>WINCHAT / ENTERPRISE AI</p><h1>從小團隊，到企業部署。</h1></header></section><div class="wc-hardware-options"><article><span>01 <i></i> 小團隊</span><h2>NVIDIA DGX Spark</h2><p>小巧桌上型 AI 主機</p></article><article><span>02 <i></i> 企業部署</span><h2>RTX PRO 6000</h2><p>大型 AI 工作站</p></article></div><small class="wc-hardware-note">工作站外觀為配置示意</small>`;
 }
 export function winChatKeynote(state,helpers){
  if(state.phase==='born'){
-  if(!state.beat)return {key:'chat-product-hero',story:'',detail:hero(),layout:'hero',fullStage:true,note:'建議 30 秒。大腦與神經訊號凝聚成 WinChat 積木。先停留讓產品出現，再收束：Agent 結合 RAG 知識與 SKILL 工作方法及工具能力，組成企業工作的力量。',action:'走進 WinChat 工作區'};
-  return {key:'chat-product-workspace',story:'',detail:screen('workspace'),layout:'full',fullStage:true,note:'建議 40 秒。以官方完整工作區收尾：從 RAG 到 Agent，接上企業知識、技能與系統。再回到整體積木與協作成形。',action:'前往協作成形'};
+  return {key:'chat-product-hero',story:'',detail:hero(),layout:'hero',fullStage:true,note:'建議 30 秒。大腦與神經訊號凝聚成 WinChat 積木，連向小團隊的 NVIDIA DGX Spark 與搭載 RTX PRO 6000 的大型工作站。兩者是部署選擇，非同時必備；未宣稱特定模型容量或人數。先停留讓產品出現，再收束：Agent 結合 RAG 知識與 SKILL 工作方法及工具能力，組成企業工作的力量。',action:'前往協作成形'};
+
  }
  const beat=winChatBeat(state);
  const content=beat.scene==='screen'?screen(beat.asset):beat.scene==='perception'?perception(helpers):frame(winChatFlow(beat.scene),'demo','wc-flow-frame');
@@ -34,7 +34,7 @@ export function winChatKeynote(state,helpers){
 }
 export function syncWinChatKeynote(container,state){
  const born=state.phase==='born';
- const beat=born?{title:'WinChat，企業的 AI 工作區。',subtitle:'Agent × RAG × SKILL / 企業 AI 協作',action:state.beat?'前往協作成形':'走進 WinChat 工作區',view:'workspace',asset:'workspace'}:winChatBeat(state);
+ const beat=born?{title:'WinChat，企業的 AI 工作區。',subtitle:'Agent × RAG × SKILL / 企業 AI 協作',action:'前往協作成形',view:'workspace',asset:'workspace'}:winChatBeat(state);
  if(!beat)return;
  const stage=container.querySelector('.wc-keynote, .wc-product-reveal');if(!stage)return;
  stage.dataset.reveal=beat.reveal||0;stage.dataset.view=beat.view||'';stage.dataset.asset=beat.asset||'';
