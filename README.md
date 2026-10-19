@@ -83,7 +83,7 @@ WinHub.AI 產品簡報左下方顯示 `00 / 13`，表示章節編號 0–13，�
 | 00 | 序章 | `#intro` | From Edge to Agent、金色積木 10 |
 | 01 | 公司介紹 | `#company` | 企業 AI 導入專家、交付實績、海外市場、WinHub.AI 四大能力 |
 | 02 | 公司沿革 | `#company-history` | 上下兩個五年階段的單頁十年總覽 |
-| 03 | 智慧城堡 | `#castle` | 五階積木依序堆疊 → 手動組合城堡 → 三層能力全貌 |
+| 03 | 智慧城堡 | `#castle` | 完整五階積木 → 彈性重排為城堡 → 三層能力全貌 |
 | 04 | 感知世界 | `#first-contact` | 初生機器人 → 影像入口 → 數據入口 |
 | 05 | 實戰與學習 | `#decade` | 十年專案是成長課堂；案例累積成 AIWinOps |
 | 06 | 數據規律 | `#analytics` | 情境、模式與專家規則、現場驗證 → NumOps |
@@ -315,7 +315,7 @@ git pull --ff-only github main
 ### 常見修改
 
 - **改產品與案例內容：** `content.js`；`history-ui.js` 是十年與 Vision 專用文案，`narrative-ui.js` 是感知與其他產品文案。
-- **能力階梯前導：** `castle-ascent.js` 管理五階積木、8.4 秒入場與手動重組。從 `#castle` 進入先播放階梯，完成後停留；按 → 用 2.5 秒組合成原有城堡，快速再按可立即完成組合。城堡全貌按 ← 可重播階梯，再按 ← 返回公司沿革；從感知世界返回保留城堡最後一層。減少動態效果直接顯示完整階梯，手動推進時立即顯示城堡。
+- **能力階梯前導：** `castle-ascent.js` 與 `castle-scene.js` 共用同一批實體積木。從 `#castle` 進入即顯示完整階梯與「企業 AI 不用一次到位」，積木下方沒有產品名稱。按 → 後，原積木持續保持可見，依序拆開、移動、重新堆疊成智慧城堡；約 8.2 秒後落定，快速再按可立即完成。城堡全貌按 ← 返回完整階梯，再按 ← 返回公司沿革；從感知世界返回保留城堡最後一層。減少動態效果時手動推進立即顯示完整城堡。
 
 - **改智慧城堡：** `castle-keynote.js` 管理四段文案、手動進度與講者備註；`castle-keynote.css` 管理舞台排版；`castle-scene.js` 管理積木／工業主機架構、焦點鏡頭、領域大腦與資料流。`app.js` 負責前後章節銜接。
 - **改 WinEdge 發表：** `winedge-launch.js` 的 `launchChapters` 管理三段發表主題及其能力對應，`launchFeatures` 獨立管理八項便當圖文案與細節，`productBeats` / `productTourHTML()` 管理六幕實際產品展示，`extensionDiagram()` 管理 Agent 整合圖解、`casesHTML()` 管理實績、`summaryHTML()` 管理純展示總覽；`winedge-launch.css` 管理場景、動畫與便當圖。中央 3D 在 `scene.js`，硬體由 `edge-host.js` 共用。新增能力需同步調整便當圖的網格位置。

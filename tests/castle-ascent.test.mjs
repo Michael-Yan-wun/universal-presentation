@@ -1,43 +1,46 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from '../dist/vendor/three.module.js';
-import {ascentStages,ascentDuration,createCastleAscent} from '../dist/castle-ascent.js';
+import {ascentStages,ascentStoryHTML,assemblyDuration,createCastleAscent} from '../dist/castle-ascent.js';
 function fixture(){
  const group=new THREE.Group(),castleGroup=new THREE.Group();group.add(castleGroup);
- const products=[],labels=[],phases=[];let reveal=1;
- const shared=new THREE.MeshPhysicalMaterial({color:'#546d82'});
- const model=createCastleAscent({group,castleGroup,
-  castle:{reset(){},setReveal(value){reveal=value;},view(){return {x:1.8,y:4.8,z:23.1,targetY:1.15};}},
-  geometry:(w,h,d)=>new THREE.BoxGeometry(w,h,d),
-  brick(parent,options){const g=new THREE.Group();g.position.fromArray(options.pos);g.add(new THREE.Mesh(new THREE.BoxGeometry(3,options.h,2),shared));parent.add(g);if(options.name)products.push(g);return {g};},
-  makeBrain(parent,color,scale){const g=new THREE.Group();g.scale.setScalar(scale);g.add(new THREE.Mesh(new THREE.SphereGeometry(.5),new THREE.MeshBasicMaterial({color})));parent.add(g);return g;},
-  addLabel(){const el={style:{},setAttribute(){},innerHTML:''};labels.push(el);return el;},
-  onPhase:phase=>phases.push(phase)
- });
- return {model,products,labels,phases,castleGroup,shared,get reveal(){return reveal;}};
+ const parts=[],phases=[];let reveal=1,assemblyMode=false;
+ function part(kind,role,shape,pos,extra={}){
+  const root=new THREE.Group();root.position.fromArray(pos);castleGroup.add(root);
+  const body=new THREE.Mesh(new THREE.BoxGeometry(...shape),new THREE.MeshPhysicalMaterial({color:'#54728b'}));root.add(body);
+  if(role){const front=new THREE.Mesh(new THREE.PlaneGeometry(2,1),new THREE.MeshBasicMaterial({map:new THREE.Texture(),transparent:true}));front.position.z=shape[2]/2+.01;root.add(front);}
+  const p={root,home:root.position.clone(),scale:root.scale.clone(),kind,role,shape,...extra};parts.push(p);return p;
+ }
+ ['ON-SITE','EDGE AI FOUNDATION','FIELD I/O'].forEach((r,i)=>part('brick',r,[3.09,.5,3.09],[(i-1)*3.15,-3.35,.1]));
+ part('brick','WinEdge',[8.34,1,2.04],[0,-.88,0]);part('brick','AIWinOps',[4.14,1.12,2.04],[-2.1,.48,0]);part('brick','NumOps',[4.14,1.12,2.04],[2.1,.48,0]);part('brick','WinChat',[6.24,1.03,2.04],[0,1.87,0]);
+ for(const side of [-1,1]){for(let i=0;i<4;i++)part('brick','',[.99,.83,2.04],[side*4.72,-2.94+i*1.05,-.35]);for(const z of[-.87,.18])part('brick','',[.99,.35,.99],[side*4.72,.81,z]);}
+ part('hardware','',[8,1.5,2.4],[0,-2.3,0]);part('deck','',[12,.12,5],[0,-3.76,0]);
+ for(let i=0;i<5;i++)part('brain','',[1,1,1],[(i-2)*2.72,4.5,-.3],{brainIndex:i});
+ const castle={getAssemblyParts:()=>parts,setAssemblyMode:v=>assemblyMode=v,setAssemblyDecorations(){},reset(){for(const p of parts){p.root.position.copy(p.home);p.root.scale.copy(p.scale);}},setReveal:v=>reveal=v,view:()=>({x:1.8,y:4.8,z:23.1,targetY:1.15})};
+ const model=createCastleAscent({group,castleGroup,castle,geometry:(w,h,d)=>new THREE.BoxGeometry(w,h,d),makeTitleTexture:()=>new THREE.Texture(),onPhase:p=>phases.push(p)});
+ return {model,parts,phases,castleGroup,get reveal(){return reveal;},get assemblyMode(){return assemblyMode;}};
 }
-test('capabilities arrive in sequence, then hold without advancing to the castle',()=>{
- const f=fixture();assert.equal(ascentStages.length,5);
- f.model.update(1,1,false);assert.equal(f.products.filter(p=>p.visible).length,1);
- f.model.update(2,3,false);assert.equal(f.products.filter(p=>p.visible).length,2);
- f.model.update(ascentDuration,20,false);assert.ok(f.products.every(p=>p.visible));assert.ok(f.model.ready);assert.equal(f.model.phase,'ascent');assert.equal(f.castleGroup.visible,false);
- const poses=f.products.map(p=>p.position.clone()),view=f.model.view(16/9);
- f.model.update(60,80,false);f.products.forEach((p,i)=>assert.ok(p.position.equals(poses[i])));assert.deepEqual(f.model.view(16/9),view);assert.equal(f.phases.length,0);
+test('the complete staircase is visible immediately, with no product-name labels or timed construction',()=>{
+ const f=fixture(),bricks=f.parts.filter(p=>p.kind==='brick');
+ assert.equal(ascentStages.length,5);assert.ok(f.model.ready);assert.ok(bricks.every(p=>p.root.visible));assert.equal(f.model.phase,'ascent');assert.equal(f.assemblyMode,true);
+ const poses=bricks.map(p=>p.root.matrixWorld.clone());f.castleGroup.updateMatrixWorld(true);const matrices=bricks.map(p=>p.root.matrixWorld.clone());
+ f.model.update(60,60,false);f.castleGroup.updateMatrixWorld(true);bricks.forEach((p,i)=>assert.ok(p.root.matrixWorld.equals(matrices[i])));assert.deepEqual(f.phases,[]);
+ assert.match(ascentStoryHTML(),/企業 AI<em>不用一次到位/);assert.doesNotMatch(ascentStoryHTML(),/WinEdge|WinChat|AIWinOps|NumOps|Domain AI|一步步累積/);
  f.model.dispose();
 });
-test('assembly is manual, can finish early, and restarting clears the previous reveal',()=>{
- const f=fixture();assert.equal(f.model.advance(),true);assert.equal(f.model.phase,'assembling');assert.equal(f.castleGroup.visible,true);
- f.model.update(.8,.8,false);assert.ok(f.reveal>0&&f.reveal<1);
- f.model.advance();assert.equal(f.model.phase,'castle');assert.equal(f.reveal,1);assert.equal(f.model.advance(),false);
- f.model.reset();assert.equal(f.model.phase,'ascent');assert.equal(f.castleGroup.visible,false);assert.equal(f.reveal,0);assert.ok(f.products.every(p=>!p.visible));
- f.model.advance();f.model.update(3,3,false);assert.equal(f.model.phase,'castle');assert.deepEqual(f.phases,['assembling','castle','assembling','castle']);
- f.model.dispose();
+test('the SAME opaque physical bricks travel to their native castle poses instead of fading to a second scene',()=>{
+ const f=fixture(),bricks=f.parts.filter(p=>p.kind==='brick'),ids=bricks.map(p=>p.root.uuid);f.castleGroup.updateMatrixWorld(true);const start=bricks.map(p=>p.root.matrixWorld.clone());
+ f.model.advance();assert.equal(f.model.phase,'assembling');f.model.update(2.5,2.5,false);f.castleGroup.updateMatrixWorld(true);
+ assert.ok(bricks.some((p,i)=>!p.root.matrixWorld.equals(start[i])));assert.ok(bricks.every(p=>p.root.visible));assert.ok(bricks.every(p=>p.root.children[0].material.opacity===1));assert.equal(f.reveal,1);
+ f.model.update(assemblyDuration,10,false);assert.equal(f.model.phase,'castle');assert.equal(f.assemblyMode,false);assert.deepEqual(bricks.map(p=>p.root.uuid),ids);
+ for(const p of bricks){assert.ok(p.root.parent.position.length()<1e-9);assert.ok(p.root.parent.scale.distanceTo(new THREE.Vector3(1,1,1))<1e-9);assert.ok(p.root.position.equals(p.home));}
+ assert.deepEqual(f.phases,['assembling','docking','castle']);f.model.dispose();
 });
-test('reduced motion shows all steps and immediately assembles; GPU ownership is isolated',()=>{
- const f=fixture(),color=f.shared.color.clone();
- f.model.update(0,0,true);assert.ok(f.products.every(p=>p.visible));assert.ok(f.labels.every(l=>l.style.opacity==='1'));assert.ok(f.model.ready);
- f.model.advance(true);assert.equal(f.model.phase,'castle');assert.equal(f.reveal,1);
+test('assembly can finish early or restart; reduced motion restores exactly the native castle',()=>{
+ const f=fixture();f.model.advance();f.model.update(.7,.7,false);f.model.advance();assert.equal(f.model.phase,'castle');
+ f.model.reset();assert.equal(f.model.phase,'ascent');assert.ok(f.parts.filter(p=>p.kind==='brick').every(p=>p.root.visible));
+ f.model.advance(true);assert.equal(f.model.phase,'castle');assert.equal(f.model.advance(),false);
  f.model.reset({atEnd:true});assert.equal(f.model.phase,'castle');assert.equal(f.castleGroup.visible,true);
  for(const aspect of [16/9,3,1.2])for(const n of Object.values(f.model.view(aspect)))assert.ok(Number.isFinite(n));
- assert.ok(f.shared.color.equals(color));f.model.dispose();assert.equal(f.shared.opacity,1);assert.equal(f.shared.transparent,false);
+ f.model.dispose();assert.ok(f.parts.every(p=>p.root.parent===f.castleGroup));
 });

@@ -1,4 +1,4 @@
-import {ascentStoryHTML,ascentDetailHTML} from './castle-ascent.js?v=castle-ascent-20261019-92';
+import {ascentStoryHTML,ascentDetailHTML} from './castle-ascent.js?v=castle-modular-20261020-94';
 import { createEventPrelude } from './event-prelude.js?v=partner-honours-20261019-85';
 import {castleBeats,createCastleProgress,castleStoryHTML,castleDetailHTML,paintCastleBeat} from './castle-keynote.js?v=castle-living-2';
 import {createVisionLessonMotion,visionCurriculum} from './aiwinops-keynote.js?v=keynote-flow-1';
@@ -15,7 +15,7 @@ import { productColors, palette, productInk } from './product-colors.js?v=produc
 import { companyHTML, companyStageHTML, companyProductHTML, companyLayouts, companyPreviewHTML, animateCompanyIntro } from './company.js?v=company-five-products-20261019-87';
 import { createCosmicBackground } from './cosmic-background.js?v=cosmic-final-1';
 import { historyOverview, historyUI, historyRoomAction, createVisionPlayer } from './history-ui.js?v=aiwinops-avs553-1';
-import { createScene } from './scene.js?v=castle-ascent-20261019-92';
+import { createScene } from './scene.js?v=castle-modular-20261020-94';
 import {growthHTML,senseHTML,journeyUI} from './narrative-ui.js?v=keynote-flow-1';
 import { chapters, chapterNavigation, products, cases, agents, icons, chapterFor, growthStages, senseRoutes, resolveChapterRoute } from './content.js?v=integration-20261019-88';
 const $=s=>document.querySelector(s),root=$('#experience'),story=$('#story'),dialog=$('#case-dialog'),detail=$('#stage-detail');
@@ -51,12 +51,12 @@ const visionPlayer=createVisionPlayer($('#vision-player'),(type,index)=>scene?.h
 function showCastleAscent(){
  root.dataset.castlePhase='ascent';story.innerHTML=ascentStoryHTML();detail.innerHTML=ascentDetailHTML();
  $('#next').setAttribute('aria-label','將能力階梯組合成智慧城堡');$('#previous').setAttribute('aria-label','返回公司沿革');
- $('#growth-state').textContent='從小場景開始 · 能力逐步累積';$('#note-text').textContent='企業 AI 不需要一次到位。五階依序為現場看得見、經驗會學習、知識能對話、任務能執行、場景會協作。約 8.4 秒後保持完整階梯，按下一步才組成智慧城堡。';
+ $('#growth-state').textContent='從小場景開始 · 彈性堆疊組合';$('#note-text').textContent='企業 AI 不需要一次到位。五階依序為現場看得見、經驗會學習、知識能對話、任務能執行、場景會協作。一開始即顯示完整階梯，不顯示產品名稱。按下一步後，同一批實體積木重新堆疊成智慧城堡。';
 }
 function updateCastlePhase(phase){
  if(chapters[chapter].kind!=='castle')return;
  root.dataset.castlePhase=phase;
- if(phase==='assembling'){$('#next').setAttribute('aria-label','完成城堡組合');return;}
+ if(phase==='assembling'||phase==='docking'){$('#next').setAttribute('aria-label','完成城堡組合');return;}
  if(phase==='castle'){
   story.innerHTML=castleStoryHTML();detail.innerHTML=castleDetailHTML();updateCastleStage();
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
@@ -94,7 +94,7 @@ function selectCompanyLayout(id){
  document.querySelectorAll('[data-company-layout]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.companyLayout===id)));
  const url=new URL(location.href);url.searchParams.set('company-layout',id);history.replaceState(null,'',url);
 }
-function previous(){const kind=chapters[chapter].kind;if(['chat','analytics'].includes(root.dataset.product)&&['selecting','fusing'].includes(productState?.phase))return;if(kind==='castle'){if(scene&&(root.dataset.castlePhase==='assembling'||root.dataset.castlePhase==='castle'&&castleProgress.index===0)){scene?.resetCastleAscent();showCastleAscent();return;}if(root.dataset.castlePhase==='castle'&&castleProgress.previous()){updateCastleStage();return;}}if(kind==='launch'&&launch.previous())return;if(kind==='growth'&&scene?.senseAction('back'))return;if(kind==='history'&&scene?.historyPrevious())return;if(kind==='product'&&scene?.productAction('back'))return;go(chapter-1,{atEnd:true,senseMode:chapters[chapter-1]?.kind==='growth'?'data':undefined,castleStep:chapters[chapter-1]?.kind==='castle'?castleBeats.length-1:0})}
+function previous(){const kind=chapters[chapter].kind;if(['chat','analytics'].includes(root.dataset.product)&&['selecting','fusing'].includes(productState?.phase))return;if(kind==='castle'){if(scene&&(['assembling','docking'].includes(root.dataset.castlePhase)||root.dataset.castlePhase==='castle'&&castleProgress.index===0)){scene?.resetCastleAscent();showCastleAscent();return;}if(root.dataset.castlePhase==='castle'&&castleProgress.previous()){updateCastleStage();return;}}if(kind==='launch'&&launch.previous())return;if(kind==='growth'&&scene?.senseAction('back'))return;if(kind==='history'&&scene?.historyPrevious())return;if(kind==='product'&&scene?.productAction('back'))return;go(chapter-1,{atEnd:true,senseMode:chapters[chapter-1]?.kind==='growth'?'data':undefined,castleStep:chapters[chapter-1]?.kind==='castle'?castleBeats.length-1:0})}
 function advance(){if(dialog.open)return;const kind=chapters[chapter].kind;if(kind==='castle'){if(root.dataset.castlePhase!=='castle'&&scene?.castleAscentAction())return;if(castleProgress.next())updateCastleStage();else go(chapter+1);return;}if(kind==='launch'){if(!launch.next())go(chapter+1);return;}if(kind==='growth'&&scene?.senseAction('next'))return;if(kind==='history'){if(root.dataset.historyPhase==='product')go(chapter+1);else scene?.historyAdvance();return}if(kind==='product'){if(root.dataset.product==='chat'){if(!scene?.productAction('next')&&scene?.productPhase()==='born')go(chapter+1);return;}if(scene?.productPhase()==='born')go(chapter+1);else scene?.productAction('next');return}go(chapter+1)}
 function updateLaunchStage(state){
  if(chapters[chapter].kind!=='launch')return;

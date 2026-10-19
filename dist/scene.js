@@ -1,5 +1,5 @@
-import {createCastleAscent} from './castle-ascent.js?v=castle-ascent-20261019-92';
-import {createCastleScene} from './castle-scene.js?v=castle-ascent-20261019-92';
+import {createCastleAscent} from './castle-ascent.js?v=castle-modular-20261020-94';
+import {createCastleScene} from './castle-scene.js?v=castle-modular-20261020-94';
 import { createEdgeHost } from './edge-host.js?v=winedge-detail-1';
 import { createCompanyScene } from './company.js?v=company-five-products-20261019-87';
 import * as THREE from './vendor/three.module.js';
@@ -68,7 +68,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   }
   const castleWorld=new THREE.Group();groups.castle.add(castleWorld);
   const castle=createCastleScene({group:castleWorld,brick,geometry,makeBrain,addLabel,agents});
-  const castleAscent=createCastleAscent({group:groups.castle,castleGroup:castleWorld,castle,brick,geometry,makeBrain,addLabel,onPhase:onCastlePhase});
+  const castleAscent=createCastleAscent({group:groups.castle,castleGroup:castleWorld,castle,geometry,makeTitleTexture:printTexture,onPhase:onCastlePhase});
   const comboBricks=products.map(p=>brick(groups.case,{id:p.id,name:p.name,sub:p.role,color:p.color,cols:4,rows:2,h:1.25}));
   const agentBrick=brick(groups.case,{id:'ecosystem',name:'AI Agent',sub:'DOMAIN INTELLIGENCE',color:palette.stone,cols:4,rows:2,h:1.25});comboBricks.push(agentBrick);
   const caseBrain=makeBrain(groups.case,'#c2d3e7',.8);caseBrain.position.set(5.8,3.7,0);
@@ -100,7 +100,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     if(kind==='history')historyWall.restart({atEnd});
     if(kind==='growth')growth.reset();
     if(kind==='product')productJourney.reset(chapters[index].product.id,{atEnd});
-    if(kind==='castle'){castleAscent.reset({atEnd});angle=0;const view=atEnd?castle.view(aspect):castleAscent.view(aspect);camera.position.set(view.x+.8,view.y+.4,view.z+1);target.set(0,view.targetY,0);}
+    if(kind==='castle'){castleAscent.reset({atEnd});angle=0;const view=atEnd?castle.view(aspect):castleAscent.view(aspect);camera.position.set(view.x,view.y,view.z);target.set(0,view.targetY,0);}
     if(kind==='launch'){angle=0;launchMode='hero';const view=stageView(kind,aspect);camera.position.set(view.x,view.y,view.z);target.set(0,view.targetY,0);}
     if(kind==='case'){const ids=chapters[index].combination.products;comboBricks.forEach((o,i)=>{const id=i<5?products[i].id:'domain',j=ids.indexOf(id);o.g.visible=j>=0;o.goal.set((j-(ids.length-1)/2)*5.8,2.1,0);o.targetScale=1.03;if(j>=0)o.g.position.set(o.goal.x,6,-3)});caseBrain.visible=ids.includes('domain')}
     labels.forEach(l=>l.el.hidden=kind!==l.scope);resize();

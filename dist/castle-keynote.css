@@ -43,19 +43,16 @@
 
 /* Five physical steps precede the existing architectural overview. */
 #experience[data-kind=castle] #scene{transition:left 1.5s cubic-bezier(.3,.1,.2,1),right 1.5s,top 1.5s,bottom 1.5s}
-#experience[data-castle-phase=ascent] #scene{left:3%;right:3%;top:17%;bottom:9%}
-#experience[data-castle-phase=ascent]>.castle-story,#experience[data-castle-phase=assembling]>.castle-story{left:5.5%;top:2%;width:87%;bottom:auto;height:auto;display:block;pointer-events:none}
-#experience[data-castle-phase=ascent] .castle-story h1,#experience[data-castle-phase=assembling] .castle-story h1{font-size:clamp(32px,3vw,56px);letter-spacing:.01em;line-height:1.25}
+#experience:is([data-castle-phase=ascent],[data-castle-phase=assembling]) #scene{left:3%;right:3%;top:17%;bottom:9%}
+#experience[data-castle-phase=ascent]>.castle-story,#experience[data-castle-phase=assembling]>.castle-story,#experience[data-castle-phase=docking]>.castle-story{left:5.5%;top:2%;width:87%;bottom:auto;height:auto;display:block;pointer-events:none}
+#experience[data-castle-phase=ascent] .castle-story h1,#experience[data-castle-phase=assembling] .castle-story h1,#experience[data-castle-phase=docking] .castle-story h1{font-size:clamp(32px,3vw,56px);letter-spacing:.01em;line-height:1.25}
 #experience .ca-heading h1 em{margin-left:.2em;color:#e6d6b9;font-style:normal}
 #experience .ca-heading .eyebrow{margin-bottom:18px!important}
 .ca-heading>p:last-child{font-size:clamp(17px,1.35vw,26px);letter-spacing:.08em;color:#afbdcd;margin:18px 0 0}
-#experience[data-castle-phase=assembling] .ca-heading,#experience[data-castle-phase=assembling] .ca-stage-foot{opacity:0;transition:opacity .5s}
+#experience[data-castle-phase=assembling] .ca-heading,#experience[data-castle-phase=assembling] .ca-stage-foot,#experience[data-castle-phase=docking] .ca-heading,#experience[data-castle-phase=docking] .ca-stage-foot{opacity:0;transition:opacity .5s}
 .ca-stage-foot{position:absolute;bottom:1%;left:6%;right:6%;text-align:center;pointer-events:none}
 .ca-stage-foot>span{font-size:clamp(17px,1.4vw,27px);letter-spacing:.13em;color:#cfdae5;display:block}
 .ca-stage-foot>small{display:block;font-size:clamp(10px,.7vw,14px);letter-spacing:.2em;color:#879bae;margin-top:14px}
-.ct-ascent-label{display:flex;gap:10px;align-items:center;justify-content:center;background:transparent;border:0;box-shadow:none;pointer-events:none;color:#e0e8f1;font-size:clamp(11px,.9vw,18px);line-height:1.15;padding:2px 0;letter-spacing:0;white-space:nowrap;text-shadow:0 2px 6px #000}
-.ct-ascent-label>i{display:none}
-.ca-step-number{font-size:.73em;color:#aab9cb;letter-spacing:.12em}
 .ca-accessible-stages{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0;padding:0}
 #experience:not([data-castle-phase=castle]) .ct-domain-label{display:none}
 @media(prefers-reduced-motion:reduce){#experience[data-kind=castle] #scene{transition:none}.ca-heading,.ca-stage-foot{transition:none!important}}
