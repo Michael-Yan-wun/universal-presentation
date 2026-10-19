@@ -132,3 +132,42 @@
 @media(max-height:800px){.av-hardware-flow h2{margin:16px 0 10px}.av-hardware-flow>article>small{margin-bottom:10px}}
 
 .av-camera,.av-edge{stroke:none!important}
+
+/* Cases and their field deployment share a single speaking beat. */
+#vision-player[open]{grid-template-rows:7% minmax(0,1fr) 19%}
+#vision-player .vision-player-layout{padding-bottom:1%;grid-template-columns:67% minmax(0,1fr);gap:3%}
+#vision-player .vision-film-screen video{max-height:94%;border-radius:8px}
+#vision-player .vision-film-credit{margin-top:10px}
+#vision-player .vision-film-copy{padding:0}
+#vision-player .vision-film-copy h2{font-size:clamp(29px,2.55vw,51px);margin-bottom:16px}
+#vision-player .vision-film-copy h3{font-size:clamp(18px,1.3vw,26px);line-height:1.65}
+#vision-player .vision-film-meta{margin-bottom:18px}
+#vision-player .vision-film-copy ol{gap:12px;padding-top:15px;margin-top:12px}
+#vision-player .vision-film-copy li{font-size:clamp(13px,1vw,20px);line-height:1.55}
+.vision-film-hardware{margin:0 4.5% 1.2%;border-top:1px solid #c6a48250;border-bottom:1px solid #c6a48226;min-height:0;background:linear-gradient(90deg,#14213288,#0d192355)}
+.av-case-hardware{height:100%;display:grid;grid-template-columns:28% 5% 34% 5% 28%;align-items:center;padding:0 1%}
+.av-case-hardware>div{display:flex;align-items:center;gap:20px;min-width:0;height:100%}
+.av-case-hardware svg{width:28%;height:85%;flex:none;filter:drop-shadow(0 8px 9px #0005)}
+.av-case-hardware p{margin:0;display:flex;flex-direction:column;gap:10px}
+.av-case-hardware small{font-size:clamp(10px,.8vw,16px);color:#a3b5c9;letter-spacing:.1em}
+.av-case-hardware strong{font-size:clamp(16px,1.3vw,26px);font-weight:450;color:#e6c4a6;line-height:1.4}
+.av-case-hardware strong>span{font-size:.75em;display:block;color:#9fb6bd;margin-top:5px}
+.av-case-hardware>i{height:1px;background:#82b9b74d;position:relative;overflow:hidden;width:70%}
+.av-case-hardware>i:after{content:'';position:absolute;width:40%;height:2px;background:#a8e1ce;animation:av-packet 2.8s linear infinite}
+.av-result-symbol{font-size:35px;color:#82c6b8;width:35px;flex:none}
+.av-compact-model{height:22%;min-height:65px;display:flex;justify-content:center}
+.av-compact-model .av-model{height:100%;width:auto;aspect-ratio:1}
+.av-train-demo .av-demo-guide{gap:6%}
+.av-validate-edge{height:21%;min-height:70px}
+.av-validate-edge .av-edge{width:90%;height:100%}
+#experience[data-kind=history] .vision-room-footer p{font-size:clamp(18px,1.3vw,26px)}
+@media(max-height:800px){#vision-player[open]{inset:65px 0 90px;grid-template-rows:6% minmax(0,1fr) 21%}#vision-player .vision-film-copy h2{font-size:28px;margin-bottom:10px}#vision-player .vision-film-meta{font-size:11px;margin-bottom:12px}#vision-player .vision-film-copy h3{font-size:17px;line-height:1.5}#vision-player .vision-film-copy ol{gap:8px;margin-top:8px;padding-top:10px}#vision-player .vision-film-copy li{font-size:12px}.av-case-hardware>div{gap:10px}.av-case-hardware p{gap:5px}.av-case-hardware strong{font-size:16px}.av-compact-model{min-height:45px}.av-validate-edge{min-height:45px}}
+@media(prefers-reduced-motion:reduce){.av-case-hardware *{animation:none!important}}
+
+/* Keep product screenshots and side explanations inside the stage grid. */
+.av-product-demo{grid-template-rows:minmax(0,1fr)}
+.av-product-demo>.av-screen,.av-demo-guide{min-height:0}
+.av-demo-guide{gap:5%}
+.av-demo-guide>div{flex-shrink:0}
+.av-validate-edge{flex-shrink:1!important;min-height:45px}
+@media(max-height:800px){.av-demo-guide{gap:4%}.av-demo-guide h2{font-size:24px;margin:7px 0}.av-demo-guide p{font-size:14px;line-height:1.5}.av-demo-guide small{font-size:10px}.av-validate-edge{height:17%}.av-train-demo .av-demo-guide{gap:5%}}

@@ -1,5 +1,5 @@
 import {waterOpsShowcase} from './waterops-keynote.js?v=waterops-partnership-1';
-import {numOpsScript,numOpsBeat} from './numops-script.js?v=waterops-partnership-1';
+import {numOpsScript,numOpsBeat} from './numops-script.js?v=keynote-flow-1';
 const icon=(type)=>`<svg class="no-icon" viewBox="0 0 48 48" aria-hidden="true">${({sensor:'<circle cx="24" cy="24" r="5"/><path d="M16 16a11 11 0 0 0 0 16M32 16a11 11 0 0 1 0 16M10 10a20 20 0 0 0 0 28M38 10a20 20 0 0 1 0 28"/>',database:'<ellipse cx="24" cy="10" rx="15" ry="6"/><path d="M9 10v27c0 8 30 8 30 0V10M9 23c0 8 30 8 30 0"/>',file:'<path d="M13 5h17l9 9v29H13zM30 5v10h9M19 23h14M19 30h14M19 37h9"/>',model:'<path d="M8 12l16-8 16 8v24l-16 8-16-8zM8 12l16 9 16-9M24 21v23"/>',water:'<path d="M24 3C20 12 8 22 8 30a16 16 0 0 0 32 0C40 22 28 12 24 3Z"/><path d="M15 31c0 6 4 9 9 9"/>',check:'<path d="M9 24l10 10L39 12"/>',chip:'<rect x="11" y="11" width="26" height="26" rx="4"/><path d="M18 1v10M30 1v10M18 37v10M30 37v10M1 18h10M1 30h10M37 18h10M37 30h10"/><path d="M19 19h10v10H19z"/>'})[type]||''}</svg>`;
 const wire=(d,i=0)=>`<path class="no-wire" d="${d}"/><path class="no-current" d="${d}" style="--delay:${i*.55}s"/>`;
 const routes=(paths)=>`<svg class="no-routes" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">${paths.map((d,i)=>wire(d,i)).join('')}</svg>`;
@@ -21,7 +21,7 @@ export function numOpsUI(state){
  if(state.phase==='fusing')return {key:'fusing',layout:'fusion',note:'三段經驗匯聚為 NumOps。',html:`<section class="no-fusion"><p class="no-kicker">EXPERIENCE BECOMES INTELLIGENCE</p><h1>讓規律，成為能力。</h1><div class="no-fusion-vortex">${['DATA','AutoML','EXPERT','VALIDATE','WaterOps','EDGE'].map(miniBrick).join('')}</div><div class="no-fusion-flash"></div></section>`};
  if(state.phase==='born')return {key:'born',layout:'hero',action:'前往 WinChat 知識與行動',note:'NumOps 結合資料處理、AutoML 與專家系統，將能力帶回現場。接著進入 WinChat，從理解數據走向企業知識與行動。',html:`<section class="no-product-reveal"><p class="no-kicker">INTELLIGENT DATA AI PLATFORM</p><h1>NumOps<span>讓數據，<br>成為決策能力。</span></h1><p>AutoML ＋ 專家系統</p><div><span>資料準備</span><i>→</i><span>模型學習</span><i>→</i><span>現場應用</span></div></section><div class="no-product-halo"></div>`};
  const b=numOpsBeat(state),section=['讀懂數據','學會預測','回到現場'][state.selected];
- return {key:`${state.selected}:${state.beat}`,layout:'full',action:state.selected===2&&state.beat===numOpsScript[2].length-1?'揭曉 NumOps':`NumOps 下一段`,note:b.note,html:`<section class="no-keynote" data-no-scene="${b.scene}" data-no-beat="${state.selected}:${state.beat}"><header><div><p class="no-kicker">NUMOPS / ${section}</p><h1>${b.title}</h1></div><p>${b.subtitle}</p></header><div class="no-stage">${b.scene==='screen'?screen(b.asset):scenes[b.scene]()}</div><footer><span>${b.scene.startsWith('water')?'GSD × AIWIN / WATEROPS':'NUMOPS'}</span><small>${b.scene==='screen'?'官方產品介面':b.scene==='oven'?'專案素材 · 流程示意':b.scene.startsWith('water')?'矽品中科廠公開案例 · 來源：WaterOps 2026.06.05 · 資料流為示意':'功能概念動畫'}</small></footer></section>`};
+ return {key:`${state.selected}:${state.beat}`,layout:'full',action:state.selected===2&&state.beat===numOpsScript[2].length-1?'揭曉 NumOps':`NumOps 下一段`,note:b.note,html:`<section class="no-keynote" data-no-scene="${b.scene}" data-no-beat="${state.selected}:${state.beat}"><header><div><p class="no-kicker">NUMOPS / ${section}</p><h1>${b.title}</h1></div><p>${b.subtitle}</p></header><div class="no-stage">${b.scene==='screen'?screen(b.asset):b.scene==='automl'?`<div class="no-automl-demo">${screen('training')}<aside><span>AUTOML</span><h2>資料 × 目標</h2><p>選擇學習任務</p><div class="no-mini-models">${['A','B','C'].map((v,i)=>`<div style="--i:${i}"><b>MODEL ${v}</b><i></i></div>`).join('')}</div><h2>訓練・比較・選擇</h2><p>把反覆嘗試，交給平台。</p></aside></div>`:scenes[b.scene]()}</div><footer><span>${b.scene.startsWith('water')?'GSD × AIWIN / WATEROPS':'NUMOPS'}</span><small>${b.scene==='screen'?'官方產品介面':b.scene==='oven'?'專案素材 · 流程示意':b.scene.startsWith('water')?'矽品中科廠公開案例 · 來源：WaterOps 2026.06.05 · 資料流為示意':'功能概念動畫'}</small></footer></section>`};
 }
 // Move between full-size visual scenes; leave every beat on screen until the speaker advances.
 export function createNumOpsStage({root,story,detail}){
@@ -38,10 +38,10 @@ export function createNumOpsStage({root,story,detail}){
   if(detail.firstElementChild&&key&&!reduced){oldLayer=document.createElement('div');oldLayer.className='no-outgoing';oldLayer.setAttribute('aria-hidden','true');oldLayer.inert=true;oldLayer.append(...detail.childNodes);detail.append(oldLayer);}
   const frame=document.createElement('div');frame.className='no-frame';frame.innerHTML=ui.html;detail.append(frame);
   if(!reduced){
-   const duration=state.phase==='selecting'?1650:state.phase==='born'?1100:850;
+   const duration=state.phase==='born'?850:550;
    const direction=backward?-1:1;
-   if(oldLayer)animations.push(oldLayer.animate([{opacity:1,transform:'none'},{opacity:0,transform:`translateX(${-direction*60}px) scale(.96)`}],{duration:300,easing:'ease-in-out',fill:'both'}));
-   animations.push(frame.animate([{opacity:0,transform:`translateX(${direction*90}px) scale(${state.phase==='selecting'?1.10:1.025})`},{opacity:1,transform:'none'}],{duration:duration-250,delay:oldLayer?250:0,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'}));
+   if(oldLayer)animations.push(oldLayer.animate([{opacity:1,transform:'none'},{opacity:0,transform:`translateX(${-direction*60}px) scale(.96)`}],{duration:180,easing:'ease-in-out',fill:'both'}));
+   animations.push(frame.animate([{opacity:0,transform:`translateX(${direction*30}px) scale(${1.015})`},{opacity:1,transform:'none'}],{duration:duration-120,delay:oldLayer?120:0,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'}));
    const outgoing=oldLayer;animations.at(-1).finished.then(()=>{outgoing?.remove();if(oldLayer===outgoing)oldLayer=null;}).catch(()=>{});
   }else{oldLayer?.remove();oldLayer=null;}
   key=ui.key;

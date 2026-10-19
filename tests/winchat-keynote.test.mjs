@@ -87,3 +87,5 @@ test('WinChat stage uses sequential controls without topic buttons or transient 
   assert.doesNotMatch(ui.story+ui.detail,/<button|data-winchat-next|↗/);
  }
 });
+
+test('WinChat has one final reveal and returning from the next chapter resumes it',()=>{const {journey,state,models}=setup();journey.reset('chat',{atEnd:true});assert.equal(state().phase,'born');assert.equal(state().beat,0);assert.equal(winChatFinalBeats,1);assert.equal(models.get('WinChat').visible,true);assert.equal(journey.action('next'),false);assert.equal(winChatScript.flat().length,12);});

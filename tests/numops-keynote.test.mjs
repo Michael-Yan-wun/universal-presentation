@@ -38,7 +38,8 @@ test('NumOps has distinct product-sized scenes and credits the WaterOps partners
  assert.match(water.html,/案例藥劑用量降幅/);assert.match(water.html,/矽品獲 2026 環境部淨水永續獎/);
  assert.match(water.html,/2026.06.05/);assert.match(water.html,/waterops-spil-award.jpg/);
  const deploy=numOpsUI({phase:'focus',selected:2,beat:numOpsBeatCounts[2]-1});assert.match(deploy.html,/WinEdge-N/);assert.match(deploy.html,/no-edge-host/);
- assert.equal(numOpsScript.flat().length,10);
+ assert.match(numOpsUI({phase:'focus',selected:1,beat:0}).html,/assets\/numops\/training.webp/);
+ assert.equal(numOpsScript.flat().length,8);
 });
 test('reduced-motion navigation replaces the previous scene without stacked content',t=>{
  const originalDocument=globalThis.document,originalMatchMedia=globalThis.matchMedia;
@@ -52,3 +53,5 @@ test('reduced-motion navigation replaces the previous scene without stacked cont
  }
  assert.equal(story.hidden,true);stage.reset();assert.equal(root.dataset.numopsLayout,undefined);
 });
+
+test('returning from the next chapter resumes the finished product',()=>{const {journey,state,models}=setup();journey.reset('analytics',{atEnd:true});assert.equal(state().phase,'born');assert.equal(models.get('NumOps').visible,true);assert.deepEqual(state().visited,[0,1,2]);});

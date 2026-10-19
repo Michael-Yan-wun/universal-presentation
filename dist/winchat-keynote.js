@@ -1,5 +1,5 @@
 import {winChatFlow} from './winchat-flows.js?v=winchat-launch-1';
-import {winChatBeat,winChatAction} from './winchat-script.js?v=winchat-launch-1';
+import {winChatBeat,winChatAction} from './winchat-script.js?v=keynote-flow-1';
 
 const assets={
  knowledge:{alt:'WinChat 官方知識庫文件管理介面',label:'企業知識庫',ratio:'1280 / 635'},
@@ -25,8 +25,8 @@ function hero(){
 }
 export function winChatKeynote(state,helpers){
  if(state.phase==='born'){
-  if(!state.beat)return {key:'chat-product-hero',story:'',detail:hero(),layout:'hero',fullStage:true,note:'建議 30 秒。大腦與神經訊號凝聚成 WinChat 積木。先停留讓產品出現，再收束：Agent 結合 RAG 知識與 SKILL 工作方法及工具能力，組成企業工作的力量。',action:'走進 WinChat 工作區'};
-  return {key:'chat-product-workspace',story:'',detail:screen('workspace'),layout:'full',fullStage:true,note:'建議 40 秒。以官方完整工作區收尾：從 RAG 到 Agent，接上企業知識、技能與系統。再回到整體積木與協作成形。',action:'前往協作成形'};
+  return {key:'chat-product-hero',story:'',detail:hero(),layout:'hero',fullStage:true,note:'建議 30 秒。大腦與神經訊號凝聚成 WinChat 積木。先停留讓產品出現，再收束：Agent 結合 RAG 知識與 SKILL 工作方法及工具能力，組成企業工作的力量。',action:'前往協作成形'};
+
  }
  const beat=winChatBeat(state);
  const content=beat.scene==='screen'?screen(beat.asset):beat.scene==='perception'?perception(helpers):frame(winChatFlow(beat.scene),'demo','wc-flow-frame');
@@ -34,7 +34,7 @@ export function winChatKeynote(state,helpers){
 }
 export function syncWinChatKeynote(container,state){
  const born=state.phase==='born';
- const beat=born?{title:'WinChat，企業的 AI 工作區。',subtitle:'Agent × RAG × SKILL / 企業 AI 協作',action:state.beat?'前往協作成形':'走進 WinChat 工作區',view:'workspace',asset:'workspace'}:winChatBeat(state);
+ const beat=born?{title:'WinChat，企業的 AI 工作區。',subtitle:'Agent × RAG × SKILL / 企業 AI 協作',action:'前往協作成形',view:'workspace',asset:'workspace'}:winChatBeat(state);
  if(!beat)return;
  const stage=container.querySelector('.wc-keynote, .wc-product-reveal');if(!stage)return;
  stage.dataset.reveal=beat.reveal||0;stage.dataset.view=beat.view||'';stage.dataset.asset=beat.asset||'';

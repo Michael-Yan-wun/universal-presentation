@@ -1,8 +1,8 @@
-import {numOpsBeatCounts,numOpsTravelSeconds} from './numops-script.js?v=waterops-partnership-1';
-import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './winchat-script.js?v=winchat-launch-1';
+import {numOpsBeatCounts,numOpsTravelSeconds} from './numops-script.js?v=keynote-flow-1';
+import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './winchat-script.js?v=keynote-flow-1';
 import * as THREE from './vendor/three.module.js';
 import {journeyStage as layout} from './stage-layout.js?v=company-stage-2';
-import {products} from './content.js?v=castle-first-1';
+import {products} from './content.js?v=keynote-flow-1';
 import {createFieldKit} from './field-kit.js?v=learning-life-1';
 export const productStories={
  analytics:{title:'經驗多了，<br>開始找出規律。',bridge:'像在學校學會推理，把訊號與經驗整理成方法。',topics:[
@@ -16,14 +16,14 @@ export const productStories={
 ]}
 };
 export function createProductJourney({group,brick,addLabel,onStage}){
- const roots={},V=(...a)=>new THREE.Vector3(...a),ease=t=>1-Math.pow(1-t,3),clamp=t=>Math.max(0,Math.min(1,t));let id='analytics',phase='overview',selected=-1,beat=0,clock=0,from=[],visited=new Set();
+ const roots={},V=(...a)=>new THREE.Vector3(...a),ease=t=>1-Math.pow(1-t,3),clamp=t=>Math.max(0,Math.min(1,t));let id='analytics',phase='overview',selected=-1,beat=0,clock=0,transitionDuration=.65,from=[],visited=new Set();
  for(const p of products.filter(p=>productStories[p.id])){const root=new THREE.Group();group.add(root);const pieces=productStories[p.id].topics.map((t,i)=>{const o=brick(root,{id:'journey-'+i,name:t.tag,color:p.id==='chat'?['#755695','#8366a6','#67508e'][i]:p.color,cols:3,rows:2,h:1.15,pos:[(i-1)*layout.spread,p.id==='chat'?-2.3:layout.overviewY,0],scale:layout.overviewScale,detail:'hero'});o.journeyManaged=true;const label=addLabel(o.g,V(0,-1.58,1),t.title,'journey-'+i,p.uiColor,'journey-label','product');return {o,label}});const born=brick(root,{id:p.id,name:p.name,sub:p.role,color:p.id==='chat'?'#80619e':p.color,cols:5,rows:3,h:1.45,detail:'hero',pos:[0,layout.bornY,0]});born.journeyManaged=true;const kit=createFieldKit(root,{scale:.77,input:['numeric','analytics'].includes(p.id)?'sensor':'camera'});kit.group.position.z=-2;roots[p.id]={root,pieces,born,kit}}
  const counts=()=>id==='chat'?winChatBeatCounts:numOpsBeatCounts;
- const travelSeconds=()=>id==='chat'?winChatTravelSeconds:numOpsTravelSeconds;
+ const travelSeconds=()=>transitionDuration;
  const state=()=>({id,phase,selected,beat,visited:[...visited],canFuse:visited.size===3});const notify=()=>onStage(state());const change=p=>{phase=p;clock=0;notify()};
- function reset(product){id=product;phase='overview';clock=0;selected=-1;beat=0;visited=new Set();for(const[k,v]of Object.entries(roots))v.root.visible=k===id;const r=roots[id];r.born.g.visible=false;r.kit.group.visible=false;r.pieces.forEach(({o})=>{o.g.visible=false;o.g.position.copy(o.home);o.g.rotation.set(0,0,0);o.g.scale.setScalar(layout.overviewScale)});notify()}
+ function reset(product,{atEnd=false}={}){id=product;phase='overview';clock=0;selected=-1;beat=0;visited=new Set();for(const[k,v]of Object.entries(roots))v.root.visible=k===id;const r=roots[id];r.born.g.visible=false;r.kit.group.visible=false;r.pieces.forEach(({o})=>{o.g.visible=false;o.g.position.copy(o.home);o.g.rotation.set(0,0,0);o.g.scale.setScalar(layout.overviewScale)});if(atEnd){phase='born';selected=2;beat=id==='chat'?winChatFinalBeats-1:0;visited=new Set([0,1,2]);r.born.g.visible=true;}notify()}
  function selectTopic(index,startBeat=0){
-  const r=roots[id];from=r.pieces.map(({o})=>o.g.position.clone());selected=index;beat=startBeat;change('selecting');return true;
+  transitionDuration=phase==='overview'?(id==='chat'?winChatTravelSeconds:numOpsTravelSeconds):.55;const r=roots[id];from=r.pieces.map(({o})=>o.g.position.clone());selected=index;beat=startBeat;change('selecting');return true;
  }
  function action(type,index){
   const r=roots[id];

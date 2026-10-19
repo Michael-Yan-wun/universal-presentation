@@ -1,13 +1,11 @@
 // Speaker-controlled beats. Timing is rehearsal guidance, never an auto-advance timer.
 export const numOpsScript = [
  [
-  {scene:'signals',title:'讓每個數字，回到它的現場。',subtitle:'設備 · 製程 · 時間',seconds:35,note:'承接生命體的成長：我們已能接收影像與數據，現在開始從經驗找出規律。不同訊號先對應到設備、時間與工作目標。光流與表格為示意。'},
-  {scene:'screen',asset:'prepare',title:'準備好資料，學習才有起點。',subtitle:'資料預處理 / 官方產品介面',seconds:40,note:'用放大的 NumOps 官方畫面說明資料來源、預處理方式與資料集。平台支援資料清理、轉換與特徵工程；不是在台上操作正式系統。'},
+  {scene:'screen',asset:'prepare',title:'準備好資料，學習才有起點。',subtitle:'設備・時間・目標 / 資料預處理',seconds:40,note:'用放大的 NumOps 官方畫面說明資料來源、預處理方式與資料集。平台支援資料清理、轉換與特徵工程；不是在台上操作正式系統。'},
   {scene:'tasks',title:'一份數據，不只一種答案。',subtitle:'依工作目標，選擇學習方式。',seconds:40,note:'以三個問題帶出能力：判斷狀態對應分類、異常偵測；預測變化對應回歸、時間序列；發現相似性對應分群。專家系統留到後面用不同畫面展示。圖形為能力示意，沒有客戶效能數據。'}
  ],
  [
   {scene:'automl',title:'把反覆嘗試，交給 AutoML。',subtitle:'多模型訓練 → 比較 → 選擇',seconds:45,note:'資料與預測目標送入 AutoML，候選模型分路訓練再匯回比較。這是建模流程動畫，不是即時訓練或速度保證；沒有捏造準確率。'},
-  {scene:'screen',asset:'training',title:'選擇目標，開始建立模型。',subtitle:'No-Code / 官方產品介面',seconds:35,note:'展示官方建立模型畫面，指出分類、回歸、時序、異常與分群入口及 AutoML。只需掌握場域問題，也能以視覺介面建立模型。'},
   {scene:'screen',asset:'analysis',title:'模型好不好，用結果說話。',subtitle:'模型排行 · 評估指標 · 特徵重要性',seconds:45,note:'展示官方模型排行榜與評估入口。截圖數字是官網示範資料，不是本次客戶結果，不將指標泛化為效能承諾。依任務檢視測試集與評估指標。'},
   {scene:'expert',title:'數據會學習，經驗也能留下。',subtitle:'AutoML ＋ 專家系統',seconds:40,note:'資料走模型訓練，老師傅經驗走規則庫。歷史資料不足時可先建立專家規則，不代表無資料就能訓練出有效機器學習模型。兩條路依場域組合使用。'}
  ],
@@ -18,5 +16,5 @@ export const numOpsScript = [
  ]
 ];
 export const numOpsBeatCounts=numOpsScript.map(group=>group.length);
-export const numOpsTravelSeconds=1.8;
+export const numOpsTravelSeconds=.65;
 export const numOpsBeat=state=>numOpsScript[state.selected]?.[state.beat||0];

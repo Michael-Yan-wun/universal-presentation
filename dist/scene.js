@@ -3,10 +3,10 @@ import { createEdgeHost } from './edge-host.js?v=winedge-detail-1';
 import { createCompanyScene } from './company.js?v=company-lockup-6';
 import * as THREE from './vendor/three.module.js';
 import {stageView} from './stage-layout.js?v=winedge-launch-7';
-import { products, chapters, agents, palette } from './content.js?v=castle-first-1';
-import { createHistoryWall } from './history-wall.js?v=castle-first-1';
-import {createGrowthScene} from './growth-scene.js?v=product-colors-1';
-import {createProductJourney} from './product-journey.js?v=castle-first-1';
+import { products, chapters, agents, palette } from './content.js?v=keynote-flow-1';
+import { createHistoryWall } from './history-wall.js?v=keynote-flow-1';
+import {createGrowthScene} from './growth-scene.js?v=keynote-flow-1';
+import {createProductJourney} from './product-journey.js?v=keynote-flow-1';
 import { createAnniversary } from './anniversary.js?v=cosmic-opening-1';
 
 export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>{},onProductStage=()=>{},onSenseStage=()=>{}) {
@@ -45,7 +45,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     const o={g,home:new THREE.Vector3(...pos),goal:new THREE.Vector3(...pos),targetScale:scale,id,name,w,h,d};bricks.push(o);
     if(label)addLabel(g,new THREE.Vector3(0,h/2+.8,0),name,id,color,'product-label');return o;
   }
-  function addLabel(group,anchor,text,id,color,cls='',scope='castle'){const el=document.createElement(cls==='ct-domain-label'?'div':'button');el.className='model-label '+cls;el.style.setProperty('--label-color',color);el.innerHTML=`<i></i><span>${text}</span>`;el.setAttribute('aria-label',`探索 ${text}`);el.onclick=()=>onSelect(id);labelLayer.appendChild(el);labels.push({group,anchor,el,parent:group.parent,scope});return el}
+  function addLabel(group,anchor,text,id,color,cls='',scope='castle'){const el=document.createElement(cls==='ct-domain-label'||scope==='body'?'div':'button');el.className='model-label '+cls;el.style.setProperty('--label-color',color);el.innerHTML=`<i></i><span>${text}</span>`;el.setAttribute('aria-label',scope==='body'?text:`探索 ${text}`);if(scope!=='body')el.onclick=()=>onSelect(id);labelLayer.appendChild(el);labels.push({group,anchor,el,parent:group.parent,scope});return el}
   const launchHost=createEdgeHost({parent:groups.launch,brick,addLabel:()=>{},id:'launch-core',detail:'hero',name:'WinEdge',subtitle:'VISION / DATA / AGENT',color:palette.unified,pos:[0,0,0]});
   // Match the reference: a stepped arch, close seams, solid warm gold and a physical deck.
   const ten=[],goldPalette=['#f3b93d','#f9cc68','#c88920','#dfa02a','#ebb137'];
@@ -87,16 +87,16 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
   const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
   function pick(e){const r=container.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(pointer,camera);return ray.intersectObjects(hits).find(h=>visible(h.object))?.object.userData.id}
   container.addEventListener('pointerdown',e=>{drag=true;downX=lastX=e.clientX;downY=e.clientY;distance=0;container.setPointerCapture(e.pointerId)});
-  container.addEventListener('pointermove',e=>{if(drag){distance=Math.max(distance,Math.hypot(e.clientX-downX,e.clientY-downY));if(!['history','company','castle'].includes(kind))angleGoal+=(e.clientX-lastX)*.005;lastX=e.clientX}else{const id=kind==='castle'?null:pick(e);container.style.cursor=kind==='castle'?'default':id?'pointer':kind==='company'?'default':'grab';if(kind==='company')companyScene.setHovered(id)}});
-  container.addEventListener('pointerup',e=>{if(drag&&distance<6&&kind!=='castle'){const id=pick(e);if(id)onSelect(id)}drag=false});container.addEventListener('pointercancel',()=>drag=false);
+  container.addEventListener('pointermove',e=>{if(drag){distance=Math.max(distance,Math.hypot(e.clientX-downX,e.clientY-downY));if(!['history','company','castle'].includes(kind))angleGoal+=(e.clientX-lastX)*.005;lastX=e.clientX}else{const id=['castle','body'].includes(kind)?null:pick(e);container.style.cursor=kind==='castle'?'default':id?'pointer':kind==='company'?'default':'grab';if(kind==='company')companyScene.setHovered(id)}});
+  container.addEventListener('pointerup',e=>{if(drag&&distance<6&&!['castle','body'].includes(kind)){const id=pick(e);if(id)onSelect(id)}drag=false});container.addEventListener('pointercancel',()=>drag=false);
   container.addEventListener('pointerleave',()=>companyScene.setHovered(null));
-  function setChapter(index){if(kind==='history'&&chapters[index].kind!=='history'){camera.position.set(5,6,24);target.set(0,0,0)}chapter=index;kind=chapters[index].kind;age=0;introClock=null;angleGoal=0;inspect=false;exploded=false;for(const [id,g]of Object.entries(groups))g.visible=id===(kind==='product'?'products':kind);for(const o of bricks){o.goal.copy(o.home);o.targetScale=o.growthScale||1}groups.intro.visible=kind==='intro';
+  function setChapter(index,{atEnd=false}={}){if(kind==='history'&&chapters[index].kind!=='history'){camera.position.set(5,6,24);target.set(0,0,0)}chapter=index;kind=chapters[index].kind;age=0;introClock=null;angleGoal=0;inspect=false;exploded=false;for(const [id,g]of Object.entries(groups))g.visible=id===(kind==='product'?'products':kind);for(const o of bricks){o.goal.copy(o.home);o.targetScale=o.growthScale||1}groups.intro.visible=kind==='intro';
     grid.visible=ring.visible=floor.visible=kind!=='intro'&&kind!=='history'&&kind!=='company'&&kind!=='closing'&&kind!=='chronicle'&&kind!=='launch'&&!['chat','analytics'].includes(chapters[index].product?.id);key.position.set(...(kind==='intro'?[4,10,-3]:[-6,12,10]));key.intensity=kind==='intro'?4.1:3.2;
     if(kind==='intro'){angle=0;ten.forEach(o=>{o.g.position.copy(reduced?o.home:o.introStart);o.g.rotation.set(0,reduced?0:o.introTwist,0);o.targetScale=1});const view=stageView(kind,aspect);camera.position.set(view.x+(reduced?0:3),view.y+(reduced?0:1.5),view.z+(reduced?0:4));target.set(0,view.targetY,0);}
     if(kind==='company'){companyScene.reset();angle=0;const view=stageView(kind,aspect,{companyLayout});camera.position.set(view.x+(reduced?0:1.8),view.y+(reduced?0:.65),view.z+(reduced?0:1.5));target.set(0,view.targetY,0);}
-    if(kind==='history')historyWall.restart();
+    if(kind==='history')historyWall.restart({atEnd});
     if(kind==='growth')growth.reset();
-    if(kind==='product')productJourney.reset(chapters[index].product.id);
+    if(kind==='product')productJourney.reset(chapters[index].product.id,{atEnd});
     if(kind==='castle'){castle.reset();angle=0;const view=castle.view(aspect);camera.position.set(view.x+.8,view.y+.4,view.z+1);target.set(0,view.targetY,0);}
     if(kind==='launch'){angle=0;launchMode='hero';const view=stageView(kind,aspect);camera.position.set(view.x,view.y,view.z);target.set(0,view.targetY,0);}
     if(kind==='case'){const ids=chapters[index].combination.products;comboBricks.forEach((o,i)=>{const id=i<5?products[i].id:'domain',j=ids.indexOf(id);o.g.visible=j>=0;o.goal.set((j-(ids.length-1)/2)*5.8,2.1,0);o.targetScale=1.03;if(j>=0)o.g.position.set(o.goal.x,6,-3)});caseBrain.visible=ids.includes('domain')}
