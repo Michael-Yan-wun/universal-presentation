@@ -1,0 +1,97 @@
+/* Continue the logo's machined-metal light into the anniversary numeral. */
+#event-prelude[data-event-kind=opening] .event-ten-solid {
+  animation:none;
+  opacity:1;
+  transform:none;
+}
+#event-prelude[data-event-kind=opening] .event-ten .ten-relief {
+  fill:url('#event-metal-depth');
+  stroke:#d9b37440;
+  stroke-width:.32;
+  stroke-linejoin:round;
+  paint-order:stroke fill;
+}
+#event-prelude[data-event-kind=opening] .event-ten .ten-relief:last-child {
+  stroke:#f1ce8f90;
+  stroke-width:.6;
+}
+#event-prelude[data-event-kind=opening] .event-ten .ten-face {
+  stroke:#e9e5d8a6;
+  stroke-width:.7;
+  paint-order:stroke fill;
+}
+#event-prelude[data-event-kind=opening] .event-ten-reveal-plane {
+  transform-box:view-box;
+  transform-origin:0 0;
+  animation:anniversary-metal-unveil 3.55s calc(var(--anniversary-delay) + .65s) cubic-bezier(.4,.05,.35,1) both;
+}
+#event-prelude[data-event-kind=opening] .event-ten-optical-plane {
+  transform-box:view-box;
+  transform-origin:0 0;
+  animation:anniversary-optical-pass 3.55s calc(var(--anniversary-delay) + .65s) cubic-bezier(.4,.05,.35,1) both;
+}
+#event-prelude[data-event-kind=opening] .event-ten .ten-rim-light {
+  fill:none;
+  stroke:#e7f3ff;
+  stroke-width:1.15;
+  stroke-linejoin:round;
+  opacity:.8;
+  filter:drop-shadow(0 0 2px #b9dcff4d);
+}
+#event-prelude[data-event-kind=opening] .event-ten .ten-quiet-edge {
+  fill:none;
+  stroke:#a9bdd4;
+  stroke-width:.45;
+  animation:anniversary-quiet-edge 3.7s var(--anniversary-delay) ease-in-out both;
+}
+#event-prelude[data-event-kind=opening] .event-gold-sheen {
+  animation:anniversary-finish-polish 2.4s calc(var(--anniversary-delay) + 1.5s) cubic-bezier(.2,.6,.25,1) both;
+  mix-blend-mode:screen;
+}
+
+/* Diffuse starlight replaces theatrical spotlights and the warm wash. */
+#event-prelude[data-event-kind=opening] .event-ceremony-lights>i,
+#event-prelude[data-event-kind=opening] .event-reveal-wash {
+  display:none;
+}
+#event-prelude[data-event-kind=opening] .event-reveal-halo {
+  background:radial-gradient(ellipse 32% 41% at 74% 48%,#a7c9f115,transparent 78%);
+  animation:anniversary-cool-haze 5.4s var(--anniversary-delay) ease-in-out both;
+}
+
+@keyframes anniversary-metal-unveil {
+  from {transform:translateX(-120px) skewX(-10deg);}
+  to {transform:translateX(840px) skewX(-10deg);}
+}
+@keyframes anniversary-optical-pass {
+  from {transform:translateX(-5px) skewX(-10deg);}
+  to {transform:translateX(955px) skewX(-10deg);}
+}
+@keyframes anniversary-quiet-edge {
+  0% {opacity:0;}
+  16%,52% {opacity:.1;}
+  100% {opacity:0;}
+}
+@keyframes anniversary-finish-polish {
+  0% {opacity:0;transform:translateX(0) skewX(-10deg);}
+  22% {opacity:.2;}
+  78% {opacity:.12;}
+  100% {opacity:0;transform:translateX(1000px) skewX(-10deg);}
+}
+@keyframes anniversary-cool-haze {
+  0% {opacity:0;}
+  35% {opacity:.55;}
+  100% {opacity:.2;}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  #event-prelude[data-event-kind=opening] .event-ten-reveal-plane {
+    transform:translateX(840px) skewX(-10deg);
+  }
+  #event-prelude[data-event-kind=opening] .event-ten .ten-rim-light,
+  #event-prelude[data-event-kind=opening] .event-ten .ten-quiet-edge,
+  #event-prelude[data-event-kind=opening] .event-gold-sheen {
+    display:none;
+  }
+  #event-prelude[data-event-kind=opening] .event-reveal-halo {opacity:.2;}
+}

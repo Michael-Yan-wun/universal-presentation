@@ -4,12 +4,20 @@
 
 慧穩科技十週年活動使用的互動式 3D 演講網站。以「生命體的成長」串起感知、專案學習、知識與行動；以積木呈現產品能力，最後揭曉整合影像與數據、可模組化擴充的 **WinEdge Ultra**。
 
-- [正式展示網站](https://winedge-anniversary-experience.yanwun1214.chatgpt.site/)
+- [正式展示網站](https://aiwin-anniversary-presentation-2026.lllm33.chatgpt.site/)
 - 使用情境：桌面、16:9 投影、講者手動推進。
 - 技術：原生 HTML / CSS / JavaScript、Three.js **0.180.0**、本機圖片與 H.264 MP4。
 - 執行不需要 npm 安裝、編譯、API Key、資料庫或後端服務；所需的 Three.js 與展示素材皆已收錄。
 
 本倉庫保存目前的 AIWin 演講版本。修改內容與動畫需編輯原始碼，目前沒有通用簡報編輯器或即時 AI 訓練功能。
+
+## 十週年活動流程（2026-10-18）
+
+首頁已加入 17 個活動畫面：活動開場 → 林總致詞 → 十週年影片入口 → 四位夥伴獎盃頒獎 → 感謝狀逐一致贈 → 大合影，再接原本 WinHub.AI 簡報。所有橋段由導播手動推進，不會自動催下一位上台。
+
+從 `#event-opening` 或無網址片段的首頁開始；`#intro` 仍是原 WinHub.AI 序章。左下「導播控制」提供跳段、選影片與重播，`H` 可隱藏控制列。正式影片尚未提供，入口不會播放其他影片代替。
+
+姓名、上台順序及正式影片路徑在 `dist/event-config.js`；完整操作與影片替換方式見 [活動導播手冊](docs/EVENT-RUNBOOK.md)。
 
 ## 快速啟動
 
