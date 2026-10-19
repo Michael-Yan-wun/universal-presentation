@@ -5,7 +5,7 @@ export const products = [
   {id:'analytics',name:'NumOps',order:2,color:palette.analytics,ink:'#ffffff',role:'DATA ANALYTICS PLATFORM',verb:'理解',headline:'再讓數據，說出下一步。',description:'當問題藏在訊號與趨勢裡，<br>用資料分析，將經驗轉成可理解的洞察。',tags:['AI 數據分析','預測性維護','製程最佳化'],pipeline:['DATA','ANALYZE','PREDICT'],caseId:'analytics',caseTitle:'從專家規則，走向現場溫控。',note:'第二塊：NumOps。資料與影像是不同的題目，於是將數據分析能力產品化。可提官網紀錄的工業風機維護預測、刀具數據分析與半導體空調節能分析，避免宣稱未提供的改善百分比。'},
   {id:'numeric',name:'WinEdge-N',order:3,color:palette.numeric,ink:'#ffffff',role:'DATA INFERENCE AT THE EDGE',verb:'落地',headline:'把數據模型，帶到現場。',description:'串接資料源、部署數據推論模型，<br>讓分析能力在邊緣端真正運作。',tags:['資料庫與 Modbus','模型部署','儀表板'],pipeline:['CONNECT','INFER','MONITOR'],caseId:'numeric',caseTitle:'讓設備異常，有跡可循。',note:'第三塊：WinEdge-N。介紹數據邊緣推論、資料來源與儀表板。模型的價值必須在現場被使用，這塊積木把數據能力帶到設備旁。'},
   {id:'visual',name:'WinEdge-V',order:4,color:palette.visual,ink:'#ffffff',role:'VISION INFERENCE AT THE EDGE',verb:'辨識',headline:'把視覺 AI，帶到第一線。',description:'透過影像 Pipeline 串接輸入、推論與輸出，<br>讓視覺能力在不同場域部署。',tags:['相機與影像輸入','Pipeline 編排','影像 AI 推論'],pipeline:['CAMERA','PIPELINE','RESULT'],caseId:'visual',caseTitle:'辨識金屬表面的微小刮傷。',note:'第四塊：WinEdge-V。與前一塊的資料推論呼應，這塊處理影像。用官網金屬刮傷案例說明從影像輸入到現場判讀的流程。'},
-  {id:'chat',name:'WinChat',order:5,color:palette.chat,ink:'#ffffff',role:'KNOWLEDGE & AGENT COLLABORATION',verb:'協作',headline:'最後，讓知識與智慧彼此連結。',description:'企業知識中樞，連結 AI Agent 協作。<br>讓不同專業，開始說同一種語言。',tags:['企業知識中樞','AI Agent 協作','人與 AI 的對話'],pipeline:['KNOWLEDGE','AGENTS','COLLABORATE'],caseId:'chat',caseTitle:'把企業知識，帶進一段對話。',note:'第五塊：WinChat。從提供的架構圖帶出 Enterprise Knowledge Hub 與 AI Agent Collaboration。使用簡報第 38 頁的知識庫介面說明來源引用與權限。介紹完五塊後停一下，再按 → 進入 One more thing。'}
+  {id:'chat',name:'WinChat',order:5,color:palette.chat,ink:'#ffffff',role:'KNOWLEDGE & AGENT COLLABORATION',verb:'協作',headline:'最後，讓知識與智慧彼此連結。',description:'企業知識中樞，連結 AI Agent 協作。<br>讓不同專業，開始說同一種語言。',tags:['企業知識中樞','AI Agent 協作','人與 AI 的對話'],pipeline:['KNOWLEDGE','AGENTS','COLLABORATE'],caseId:'chat',caseTitle:'把企業知識，帶進一段對話。',note:'第五塊：WinChat。從提供的架構圖帶出 Enterprise Knowledge Hub 與 AI Agent Collaboration。使用簡報第 38 頁的知識庫介面說明來源引用與權限。介紹完五塊後停一下，再按 → 進入新品發佈。'}
 ];
 export const milestones = [
  {year:'2016—19',title:'在現場，累積答案',text:'從影像辨識出發，走進製造、零售與更多真實場域。'},
@@ -54,16 +54,16 @@ export const chapters = [
  {slug:'first-contact',kind:'growth',accent:'#8cbbd7',label:'感知世界',stage:'sense',note:'像嬰兒第一次用眼睛與雙手接觸世界。感知不只有相機：鏡頭、光源與取像決定輸入的品質，串流與前處理整理畫面；感測器、PLC、資料庫與通訊帶回物理變化及設備脈絡。WinEdge-V 與 WinEdge-N 接收這些輸入，在現場串起流程、推論與回饋。接著依序展開影像入口與數據入口，兩塊 WinEdge 都由 Edge 硬體搭載；數據入口以 Modbus、MC Protocol、Database 接入，不再經過獨立三段式產品介紹。六個入口是概念說明，配置依現場而定。這是成長比喻，不是產品上市時間軸。'},
  {slug:'decade',kind:'history',accent:'#92a8c8',label:'從經驗中學習',stage:'experience',note:'承接前面的生命體：有了影像與數據的感知，就像孩子開始上學，在十年的不同專案中累積知識與判斷經驗。將現場資料依專案整理、標註，再反覆訓練與驗證，讓模型逐步學會判斷。先看五個影像案例影片，再逐案看硬體如何接收影像、在 WinEdge-V 上推論並輸出結果。五案完成後，全部經驗積木形成龍捲風，誕生 AIWinOps；硬體留下，連成現場蒐集、訓練、部署與回饋的迴路。完成後進入 NumOps，繼續學習數據中的規律。'},
  productChapter('analytics'),productChapter('chat'),
- {slug:'connected-intelligence',kind:'body',accent:'#a5c9d1',label:'協作成形',stage:'connect',note:'眼睛與觸覺接收資訊，AIWinOps 與 NumOps 學會規律，WinChat 串起記憶、任務與技能。設備與執行端像肢體，資料通道像神經。所有部位開始協作；但數據與影像還分開，為 One more thing 留下問題。'},
- {slug:'one-more-thing',kind:'reveal',accent:productInk.unified,label:'One more thing',stage:'evolve',note:'完整的身體，不會把看見的與感受到的分開。揭曉 WinEdge Ultra：整合 WinEdge-N 與 WinEdge-V，作為模組化擴充的新一代現場平台。名稱與定位依使用者本次確認，不加入未提供的硬體規格或效能承諾。'},
- {slug:'castle',kind:'castle',accent:productInk.unified,label:'智慧城堡',stage:'evolve',note:'WinEdge Ultra 統一現場入口，AIWinOps 與 NumOps 提供學習能力，WinChat 的 RAG、Agent、Skill 串起知識與行動，再依領域組成不同 AI 大腦。模組化的智慧身體，可以長出不同的專業組合。'},
+ {slug:'connected-intelligence',kind:'body',accent:'#a5c9d1',label:'協作成形',stage:'connect',note:'眼睛與觸覺接收資訊，AIWinOps 與 NumOps 學會規律，WinChat 串起記憶、任務與技能。設備與執行端像肢體，資料通道像神經。所有部位開始協作；但數據與影像還分開，為新品發佈留下問題。'},
+ {slug:'winedge',kind:'launch',accent:productInk.unified,label:'WinEdge 新品',stage:'evolve',note:'完整的身體，不會把看見的與感受到的分開。揭曉 WinEdge：最貼近現場的 AI 平台。整合 WinEdge-N 與 WinEdge-V，依製造業、機台、Agent、儀表板與 Robot 等現場需求，模組化組合各式 AI 應用。名稱與定位依使用者本次確認，不加入未提供的硬體規格或效能承諾。'},
+ {slug:'castle',kind:'castle',accent:productInk.unified,label:'智慧城堡',stage:'evolve',note:'WinEdge 統一現場入口，AIWinOps 與 NumOps 提供學習能力，WinChat 的 RAG、Agent、Skill 串起知識與行動，再依領域組成不同 AI 大腦。模組化的智慧身體，可以長出不同的專業組合。'},
  ...combinations.map(c=>({slug:c.id,kind:'case',accent:products.find(p=>p.id===c.products[0]).uiColor,label:c.title,stage:'practice',combination:c,note:c.note})),
  {slug:'closing',kind:'closing',accent:'#a8c4df',label:'封底',stage:'closing',note:'下一個十年，與你同行。感謝一路同行的夥伴；讓每一次累積，成為下一個智慧新章。'}
 ];
 export const senseRoutes={visual:'cameras',numeric:'data'};
-export const chapterFor=slug=>chapters.findIndex(c=>c.slug===(senseRoutes[slug]?'first-contact':slug));
+export const chapterFor=slug=>chapters.findIndex(c=>c.slug===(senseRoutes[slug]?'first-contact':slug==='one-more-thing'?'winedge':slug));
 export const resolveChapterRoute=slug=>({index:chapterFor(slug),senseMode:senseRoutes[slug]});
-export const growthStages=[{id:'sense',title:'感知',sub:'眼睛與觸覺'},{id:'experience',title:'實戰',sub:'接觸真實問題'},{id:'learn',title:'學習',sub:'辨識與理解規律'},{id:'think',title:'思考',sub:'記憶、任務與技能'},{id:'connect',title:'協作',sub:'神經與肢體連結'},{id:'evolve',title:'進化',sub:'WinEdge Ultra'}];
+export const growthStages=[{id:'sense',title:'感知',sub:'眼睛與觸覺'},{id:'experience',title:'實戰',sub:'接觸真實問題'},{id:'learn',title:'學習',sub:'辨識與理解規律'},{id:'think',title:'思考',sub:'記憶、任務與技能'},{id:'connect',title:'協作',sub:'神經與肢體連結'},{id:'evolve',title:'進化',sub:'WinEdge'}];
 const fieldLinks=[
  {input:'瓶蓋影像',device:'相機與取像設備',output:'品質結果與檢測紀錄',feedback:'現場的新樣本，回到專案中持續標註與驗證。'},
  {input:'人員與場域影像',device:'現場攝影機',output:'事件畫面與風險提示',feedback:'將不同場域的情境留下，讓模型學習環境差異。'},
@@ -87,7 +87,7 @@ export const cases = {
  numeric:{title:'設備異常偵測',eyebrow:'WINEDGE-N / OFFICIAL APPLICATION',description:'WinEdge-N 官方案例透過感測資料辨識設備異常行為，協助現場人員掌握潛在問題。',steps:['接收溫度、震動、水壓與運轉狀態。','在邊緣端執行數據 AI 推論。','透過儀表板呈現資訊，供人員判讀。'],image:'winedge-n.png',alt:'WinEdge-N 官方數據儀表板介面',source:'https://winhub.ai/zh-Hans/winedge-n',footnote:'產品介面與應用描述依 WinEdge-N 官網。'},
  visual:{title:'金屬刮傷檢查',eyebrow:'WINEDGE-V / OFFICIAL APPLICATION',description:'WinEdge-V 官方應用以 AI 檢查金屬零件表面刮傷、凹痕與瑕疵。',steps:['相機與影像輸入。','透過 Pipeline 進行預處理與模型推論。','輸出結果，協助判斷品質。'],image:'metal-inspection.png',alt:'WinEdge-V 官方金屬刮傷檢查案例',source:'https://winhub.ai/zh-Hans/winedge-v',footnote:'圖片與應用依 WinEdge-V 官網；未宣稱特定客戶或準確率。'},
  chat:{title:'讓知識走進每一次工作對話。',eyebrow:'WINCHAT / KNOWLEDGE & AGENTS',description:'從企業文件建立知識庫，透過來源引用與助理權限，協助人員查找知識，再延伸至 AI Agent 的工具與任務協作。',steps:['解析 PDF、Word 與 Excel 文件。','建立企業知識庫與 RAG 檢索。','引用來源、控制助理權限，連結 Agent 工具。'],image:'pitch-winchat.png',alt:'WinChat 企業知識庫與來源引用介面',footnote:'來源：AIWin 完整 Pitch v5，第 19、20、38 頁。圖片為簡報中的產品介面。'},
- ecosystem:{title:'每一塊專業，都有自己的位置。',eyebrow:'THE INTELLIGENCE CASTLE',description:'WinEdge Ultra 是整合數據與影像的現場入口，AIWinOps 與 NumOps 承接視覺與數據能力；WinChat 與 AI Agent 則串起企業知識與協作。',steps:['現場：設備、感測器、PLC 與相機。','WinEdge Ultra：整合數據與影像，依需求擴充模組。','AIWinOps、NumOps：專業能力；WinChat、AI Agent：知識與協作。'],type:'agents',footnote:'依本次產品策略繪製的概念架構，不代表正式技術部署拓樸。'},
+ ecosystem:{title:'每一塊專業，都有自己的位置。',eyebrow:'THE INTELLIGENCE CASTLE',description:'WinEdge 是整合數據與影像的現場入口，AIWinOps 與 NumOps 承接視覺與數據能力；WinChat 與 AI Agent 則串起企業知識與協作。',steps:['現場：設備、感測器、PLC 與相機。','WinEdge：整合數據與影像，依需求擴充模組。','AIWinOps、NumOps：專業能力；WinChat、AI Agent：知識與協作。'],type:'agents',footnote:'依本次產品策略繪製的概念架構，不代表正式技術部署拓樸。'},
  decade:{title:'每一個專案，都留下一塊能力。',eyebrow:'AIWIN / 2016—2026',description:'慧穩從 2016 年成立後投入產業 AI，並在 2020—2022 年逐步發展 AI SaaS、Domain AI SaaS 與 WinHub.AI。',steps:['先在真實的產業問題中累積能力。','再把反覆被需要的能力產品化。','讓不同能力能再次組合，回到更多現場。'],image:'aiwin-2020-tie-exhibition.png',alt:'慧穩科技 2020 台灣創新技術博覽會展會合影',source:'https://aiwin.com.tw/archives/3690',footnote:'歷程與 150+ 專案、30+ 產業數據：簡報第 5–6 頁。照片：2020 台灣創新技術博覽會。'},
 };
 for(const c of combinations){cases[c.caseId]={title:c.title,eyebrow:c.english,description:c.fact,steps:c.flow.map((p,i)=>p+' · '+c.roles[i]),image:c.image,alt:c.alt,footnote:c.sourceLabel+'。圖片與案例資料來自使用者提供簡報。'};}
