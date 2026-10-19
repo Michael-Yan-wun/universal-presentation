@@ -86,11 +86,11 @@ body:has(#experience[data-kind=company]) #universe { opacity: .42; }
 .company-design-tools button:hover { color: #fff1dc; border-color: #dabc8c; }
 body:has(#experience[data-kind=company]) #universe { opacity: .28; }
 .company-lighting { position: absolute; left: 49%; right: 2%; top: 0; height: 70%; pointer-events: none; overflow: hidden; mask-image: linear-gradient(transparent, #000 25%, #000 70%, transparent); }
-.company-lighting:before { content: ''; position: absolute; inset: 3% 5% 15%; background: radial-gradient(ellipse at 44% 35%,#ffdfad24,transparent 58%),radial-gradient(ellipse at 70% 40%,#b3d8ff1a,transparent 57%); filter: blur(16px); }
-.company-lighting i { position: absolute; left: 12%; top: -18%; width: 40%; height: 110%; transform: rotate(-29deg); background: radial-gradient(ellipse at 50% 35%,#fff1d12b, #e7be7416 37%,transparent 69%); filter: blur(16px); }
+.company-lighting:before { opacity: .35; content: ''; position: absolute; inset: 3% 5% 15%; background: radial-gradient(ellipse at 44% 35%,#ffdfad24,transparent 58%),radial-gradient(ellipse at 70% 40%,#b3d8ff1a,transparent 57%); filter: blur(16px); }
+.company-lighting i { opacity: .35; position: absolute; left: 12%; top: -18%; width: 40%; height: 110%; transform: rotate(-29deg); background: radial-gradient(ellipse at 50% 35%,#fff1d12b, #e7be7416 37%,transparent 69%); filter: blur(16px); }
 .company-lighting i+i { left: auto; right: 10%; transform: rotate(29deg); background: radial-gradient(ellipse at 50% 35%,#e6f1ff32,#a0caff14 37%,transparent 69%); }
 .company-identity { top: -8%; height: 39%; left: 56%; right: 10%; }
-.company-identity img { position: absolute; left: 50%; top: 0; height: 170%; width: auto; max-width: none; translate: -50% 0; filter: brightness(1.42) saturate(1.35) drop-shadow(-9px -12px 15px #ffe3b037) drop-shadow(12px -8px 17px #afd8ff35); mask-image: radial-gradient(ellipse,#000 38%,#000e 52%,transparent 71%); }
+.company-identity img { position: absolute; left: 50%; top: 0; height: 170%; width: auto; max-width: none; translate: -50% 0; filter: brightness(.95) saturate(1.08); mask-image: radial-gradient(ellipse,#000 30%,#000e 43%,transparent 63%); }
 #experience[data-kind=company] #scene { left: 47%; right: 1%; top: 31%; bottom: 12%; }
 .company-platform { bottom: 2.8%; }
 #experience[data-kind=company] .scene-topline { top: 0; }
