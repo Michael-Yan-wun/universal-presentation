@@ -12,8 +12,8 @@ import { createOpening } from './opening.js?v=opening-recovery-25';
 import { productColors, palette, productInk } from './product-colors.js?v=product-colors-1';
 import { companyHTML, companyStageHTML, companyProductHTML, companyLayouts, companyPreviewHTML, animateCompanyIntro } from './company.js?v=company-lockup-6';
 import { createCosmicBackground } from './cosmic-background.js?v=cosmic-final-1';
-import { historyOverview, historyUI, historyRoomAction, createVisionPlayer } from './history-ui.js?v=keynote-flow-1';
-import { createScene } from './scene.js?v=keynote-flow-1';
+import { historyOverview, historyUI, historyRoomAction, createVisionPlayer } from './history-ui.js?v=aiwinops-avs553-1';
+import { createScene } from './scene.js?v=aiwinops-avs553-1';
 import {growthHTML,senseHTML,journeyUI} from './narrative-ui.js?v=keynote-flow-1';
 import { chapters, chapterNavigation, products, cases, agents, icons, chapterFor, growthStages, senseRoutes, resolveChapterRoute } from './content.js?v=keynote-flow-1';
 const $=s=>document.querySelector(s),root=$('#experience'),story=$('#story'),dialog=$('#case-dialog'),detail=$('#stage-detail');
@@ -44,7 +44,7 @@ function updateCastleStage(){const index=castleProgress.index,b=castleBeats[inde
 
 function caseHTML(c,index){return `${eyebrow(`IN THE REAL WORLD / 0${index-chapterFor('inspection')+1}`)}<span class="industry-tag">${c.date}</span><h1 class="case-heading">${c.title}</h1><div class="story-copy"><h2>${c.headline}</h2><p>${c.fact}</p></div><div class="combination-flow">${c.flow.map((f,i)=>`${i?'<span class="plus">＋</span>':''}<div><strong>${f}</strong><small>${c.roles[i]}</small></div>`).join('')}</div><div class="case-proof">${c.proof}</div><p class="source-note">${c.sourceLabel}</p>`}
 const visionPlayer=createVisionPlayer($('#vision-player'),(type,index)=>scene?.historyAction(type,index));
-function go(index,{hash=true,senseMode,timelinePage=0,castleStep=0,atEnd=false}={}){opening.stop();launch.stop();delete root.dataset.castleBeat;winChatStage.reset();numOpsStage.reset();visionLessonMotion.reset();delete root.dataset.launchMode;delete root.dataset.launchStep;cancelCompanyMotion();cancelHistoryMotion();visionPlayer.hide();delete root.dataset.productPhase;delete root.dataset.senseMode;delete root.dataset.historyPhase;detail.dataset.historyRenderedPhase='';delete detail.dataset.winchatView;delete root.dataset.winchatLayout;if(dialog.open)dialog.close();chapter=Math.max(0,Math.min(chapters.length-1,index));const d=chapters[chapter];inspected=false;root.dataset.chapter=chapter;root.dataset.kind=d.kind;root.dataset.product=d.product?.id||'';root.classList.remove('inspecting');document.documentElement.style.setProperty('--accent',d.accent);story.hidden=d.kind==='launch';story.className='story enter '+d.kind+'-story';detail.innerHTML='';
+function go(index,{hash=true,senseMode,timelinePage=0,castleStep=0,atEnd=false}={}){opening.stop();launch.stop();delete root.dataset.castleBeat;winChatStage.reset();numOpsStage.reset();visionLessonMotion.reset();delete root.dataset.launchMode;delete root.dataset.launchStep;cancelCompanyMotion();cancelHistoryMotion();visionPlayer.hide();delete root.dataset.productPhase;delete root.dataset.senseMode;delete root.dataset.historyPhase;delete root.dataset.historyReveal;detail.dataset.historyRenderedPhase='';delete detail.dataset.winchatView;delete root.dataset.winchatLayout;if(dialog.open)dialog.close();chapter=Math.max(0,Math.min(chapters.length-1,index));const d=chapters[chapter];inspected=false;root.dataset.chapter=chapter;root.dataset.kind=d.kind;root.dataset.product=d.product?.id||'';root.classList.remove('inspecting');document.documentElement.style.setProperty('--accent',d.accent);story.hidden=d.kind==='launch';story.className='story enter '+d.kind+'-story';detail.innerHTML='';
   const isClosing=d.kind==='closing';root.hidden=isClosing;$('#cosmic-closing').hidden=!isClosing;$('.footer').hidden=isClosing;
   story.innerHTML=d.kind==='growth'||d.kind==='body'?growthHTML(d.kind):d.kind==='intro'?intro:d.kind==='company'?companyHTML():d.kind==='history'?historyOverview():d.kind==='product'?productHTML(d.product):d.kind==='castle'?castleHTML():d.kind==='case'?caseHTML(d.combination,chapter):'';
   if(d.kind==='product')detail.innerHTML=`<div class="pipeline">${d.product.pipeline.map((t,i)=>`<div><span>0${i+1}</span><strong>${t}</strong></div>`).join('<b>→</b>')}</div>`;
@@ -101,10 +101,10 @@ let wheelTime=0;window.addEventListener('wheel',e=>{if(presentation||dialog.open
 function updateHistoryStage(state){
   if(chapters[chapter].kind!=='history')return;
   const busy=['selecting','settling','fusing'].includes(state.phase);
-  const renderPhase=['selecting','settling'].includes(state.phase)?'room':state.phase;
+  const renderPhase=state.phase==='fusing'&&state.revealing?'product':['selecting','settling'].includes(state.phase)?'room':state.phase;
   document.documentElement.style.setProperty('--accent',state.phase==='overview'?chapters[chapter].accent:productInk.vision);
   $('#growth-state').textContent=state.phase==='overview'?'從感知到學習':state.phase==='product'?'學習的能力':'在實戰中學習';
-  root.dataset.historyPhase=state.phase;story.hidden=state.phase!=='overview';
+  root.dataset.historyPhase=state.phase;root.dataset.historyReveal=String(!!state.revealing);story.hidden=state.phase!=='overview';
   if(state.phase==='learning'){
     visionLessonMotion.render(state.learningStep||0);detail.dataset.historyRenderedPhase='learning';
     $('#note-text').textContent=visionCurriculum[state.learningStep||0].note;

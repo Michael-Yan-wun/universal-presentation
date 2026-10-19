@@ -1,4 +1,5 @@
 import {visionCurriculum} from './aiwinops-keynote.js?v=keynote-flow-1';
+import {createAVS553} from './avs553.js?v=aiwinops-avs553-1';
 import * as THREE from './vendor/three.module.js';
 import { visionCases, palette } from './content.js?v=keynote-flow-1';
 
@@ -11,13 +12,14 @@ export function createHistoryWall({group, brick, renderer, geometry, addLabel, o
   const clamp=t=>THREE.MathUtils.clamp(t,0,1);
   const V=(x,y,z)=>new THREE.Vector3(x,y,z);
   let phase='room',clock=0,selected=-1,completed=false,entryAge=0,caseOpen=false,learningStep=0;
-  let transitionStarts=[],galleryEntering=false;
+  let transitionStarts=[],galleryEntering=false,revealing=false,frameOffset=0;
   const captureExhibits=()=>{transitionStarts=exhibits.map(({o})=>({position:o.g.position.clone(),scale:o.g.scale.x,rotation:o.g.rotation.y}))};
   const visited=new Set();
   const canFuse=()=>visited.size===visionCases.length;
   const roomCamera=V(0,4.8,-12),roomTarget=V(0,-.15,-32);
+  const heroCamera=V(6.2,6.3,-13),heroTarget=V(0,.6,-32);
   const cameraPosition=roomCamera.clone(),cameraTarget=roomTarget.clone();
-  function notify(){onStage({phase,selected,completed,caseOpen,learningStep,visited:[...visited],canFuse:canFuse()})}
+  function notify(){onStage({phase,selected,completed,revealing,caseOpen,learningStep,visited:[...visited],canFuse:canFuse()})}
   function change(next){phase=next;clock=0;notify()}
   function managed(parent,options){const o=brick(parent,{detail:'hero',...options});o.historyManaged=true;return o}
   function screen(o,c,full=false){
@@ -77,16 +79,34 @@ export function createHistoryWall({group, brick, renderer, geometry, addLabel, o
     const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color:i%2?'#87a9d2':'#d2e5ff',transparent:true,opacity:0}));vortex.add(line);trails.push(line);
   }
   const birthLight=new THREE.PointLight('#bfdcff',0,27,2);birthLight.position.set(0,2,0);room.add(birthLight);
-  const product=managed(room,{name:'AIWinOps',sub:'AI VISION PLATFORM',color:palette.vision,cols:5,rows:3,h:1.6,pos:[0,-.5,0]});
+  const assembly=new THREE.Group();assembly.name='aiwinops-compute-assembly';room.add(assembly);
+  const host=createAVS553(assembly);host.root.visible=false;
+  const product=managed(assembly,{name:'AIWinOps',sub:'AI VISION PLATFORM',color:palette.vision,cols:5,rows:3,h:1.6,pos:[0,-.5,0]});
+  const heroMaterials=[];
+  product.g.traverse(mesh=>{if(mesh.material?.isMeshPhysicalMaterial){mesh.material=mesh.material.clone();mesh.material.roughness=.28;mesh.material.clearcoat=.6;mesh.material.metalness=.06;heroMaterials.push(mesh.material)}});
+  // Subtle light bridges: the learned model meets the physical compute layer.
+  const bridges=new THREE.Group();assembly.add(bridges);
+  const bridgeMaterial=new THREE.MeshBasicMaterial({color:'#f8c599',transparent:true,opacity:.5});
+  const bridgeGeometry=new THREE.CylinderGeometry(.016,.016,.48,16);
+  for(const x of[-2.05,2.05])for(const z of[-.9,1.3]){const beam=new THREE.Mesh(bridgeGeometry,bridgeMaterial);beam.position.set(x,2.07,z);bridges.add(beam)}
+  const heroKey=new THREE.SpotLight('#e1edff',90,28,.65,.6,1.5);heroKey.position.set(-6,10,7);heroKey.target.position.set(0,0,0);heroKey.castShadow=true;heroKey.shadow.mapSize.set(1024,1024);heroKey.shadow.bias=-.0004;heroKey.shadow.normalBias=.025;assembly.add(heroKey,heroKey.target);
+  const heroRim=new THREE.PointLight('#f0b479',15,16,2);heroRim.position.set(3,4,-4);assembly.add(heroRim);
+  function compose(age,progress,reduced){
+    host.update(age,progress,reduced);bridges.visible=progress>.7;heroKey.visible=heroRim.visible=progress>0;
+    assembly.rotation.y=reduced?0:Math.sin(age*.18)*.025;
+    bridgeMaterial.opacity=reduced?.4:.32+Math.sin(age*1.3)*.12;
+    product.g.scale.setScalar(1.05);product.g.rotation.set(0,0,0);
+    product.g.position.set(0,2.95+4.2*(1-ease(clamp(progress))),.2);
+  }
   const pulse=new THREE.Mesh(new THREE.RingGeometry(1,1.03,100),new THREE.MeshBasicMaterial({color:'#adc9ee',transparent:true,opacity:0,side:THREE.DoubleSide}));pulse.rotation.x=-Math.PI/2;pulse.position.y=-2.7;room.add(pulse);
   const particles=[];
   for(let i=0;i<24;i++){const m=new THREE.Mesh(new THREE.BoxGeometry(.1,.1,.1),new THREE.MeshBasicMaterial({color:i%3?'#7c9bc8':'#d7e5f7'}));room.add(m);particles.push(m)}
-  function restoreExhibits(){resetArchive();vortex.visible=false;birthLight.intensity=0;for(const {o,stand,foot} of exhibits){o.g.position.copy(o.home);o.g.scale.setScalar(1);o.g.rotation.set(0,0,0);o.g.visible=stand.g.visible=foot.visible=true;stand.g.position.copy(stand.home);stand.g.rotation.set(0,0,0);stand.g.scale.setScalar(1)}product.g.visible=false;particles.forEach(p=>p.visible=false);pulse.material.opacity=0}
+  function restoreExhibits(){revealing=false;frameOffset=0;host.root.visible=bridges.visible=heroKey.visible=heroRim.visible=false;resetArchive();vortex.visible=false;birthLight.intensity=0;for(const {o,stand,foot} of exhibits){o.g.position.copy(o.home);o.g.scale.setScalar(1);o.g.rotation.set(0,0,0);o.g.visible=stand.g.visible=foot.visible=true;stand.g.position.copy(stand.home);stand.g.rotation.set(0,0,0);stand.g.scale.setScalar(1)}product.g.visible=false;particles.forEach(p=>p.visible=false);pulse.material.opacity=0}
   function resetRound(){learningStep=0;selected=-1;completed=false;caseOpen=false;visited.clear();restoreExhibits()}
   function restart({atEnd=false}={}){
     resetRound();clock=entryAge=0;room.visible=true;cameraPosition.copy(roomCamera);cameraTarget.copy(roomTarget);
     galleryEntering=!atEnd;phase=atEnd?'product':'room';
-    if(atEnd){completed=true;visionCases.forEach((_,i)=>visited.add(i));product.g.position.set(0,-1.61,0);exhibits.forEach(({o,stand,foot})=>o.g.visible=stand.g.visible=foot.visible=false);}
+    if(atEnd){completed=true;revealing=true;frameOffset=.215;visionCases.forEach((_,i)=>visited.add(i));compose(0,1,true);exhibits.forEach(({o,stand,foot})=>o.g.visible=stand.g.visible=foot.visible=false);}
     else exhibits.forEach(({o,from})=>{o.g.position.copy(from);o.g.scale.setScalar(.3)});
     notify();
   }
@@ -115,12 +135,13 @@ export function createHistoryWall({group, brick, renderer, geometry, addLabel, o
     if(phase==='room'&&!caseOpen)return false;
     if(phase==='room'&&caseOpen){if(selected>0)action('select',selected-1);else action('close')}
     else if(phase==='learning'){if(learningStep>0){learningStep--;notify()}else{phase='room';action('select',visionCases.length-1)}}
-    else if(phase==='product'){product.g.visible=false;learningStep=visionCurriculum.length-1;change('learning')}
+    else if(phase==='product'){revealing=false;frameOffset=0;host.root.visible=false;bridges.visible=false;product.g.visible=false;learningStep=visionCurriculum.length-1;change('learning')}
     return true;
   }
   function update(age,reduced,dt){
     clock+=dt;entryAge+=dt;const duration=d=>reduced?.01:d;
-    architecture.visible=phase!=='product';if(phase!=='fusing')cloud.visible=false;
+    if(!['fusing','product'].includes(phase))host.root.visible=bridges.visible=heroKey.visible=heroRim.visible=false;
+    architecture.visible=phase!=='product'&&!revealing;if(phase!=='fusing')cloud.visible=false;
     if(phase==='selecting'||phase==='settling'){
       const selecting=phase==='selecting',p=clamp(clock/duration(selecting?.72:.48)),k=ease(p);
       exhibits.forEach(({o},i)=>{const active=selecting&&i===selected,start=transitionStarts[i],end=active?V(0,.1,4.4):o.home;o.g.position.lerpVectors(start.position,end,k);o.g.position.y+=Math.sin(p*Math.PI)*(active?1.7:.4);o.g.scale.setScalar(THREE.MathUtils.lerp(start.scale,active?1.55:1,k));o.g.rotation.y=THREE.MathUtils.lerp(start.rotation,0,k)+Math.sin(p*Math.PI)*(active?-.22:.05)});
@@ -133,9 +154,10 @@ export function createHistoryWall({group, brick, renderer, geometry, addLabel, o
       cameraPosition.copy(roomCamera);cameraTarget.copy(roomTarget);
       exhibits.forEach(({o,foot},i)=>{o.g.visible=true;foot.visible=false;o.g.position.lerp(V((i-2)*3.5,-.55,.6),reduced?1:1-Math.exp(-dt*4));o.g.scale.lerp(V(.62,.62,.62),reduced?1:1-Math.exp(-dt*4));o.g.rotation.y=0});
     }else if(phase==='fusing'){
-      const time=reduced?8.2:clock*1.35,p=clamp(time/8.2),lift=ease(clamp(time/1.7)),collapse=ease(clamp((time-4.1)/1.25));
-      const stormCamera=V(2.5,6.2,-8.6),stormTarget=V(0,.75,-32),landing=ease(clamp((time-5.25)/1.75));
-      cameraPosition.lerpVectors(roomCamera,stormCamera,ease(clamp(time/1.7)));cameraPosition.lerp(V(3.7,4.6,-14),landing);cameraTarget.lerpVectors(roomTarget,stormTarget,lift*(1-landing));
+      const time=reduced?9.2:clock*1.35,p=clamp(time/9.2),lift=ease(clamp(time/1.7)),collapse=ease(clamp((time-4.1)/1.25));
+      const stormCamera=V(2.5,6.2,-8.6),stormTarget=V(0,.75,-32),landing=ease(clamp((time-5.25)/2.8));
+      cameraPosition.lerpVectors(roomCamera,stormCamera,ease(clamp(time/1.7)));cameraPosition.lerp(heroCamera,landing);cameraTarget.lerpVectors(roomTarget,stormTarget,lift);cameraTarget.lerp(heroTarget,landing);frameOffset=.215*landing;
+      if(time>=5.25&&!revealing){revealing=true;notify();}
       cloud.visible=time<5.5;
       if(cloud.visible){archive.forEach((a,i)=>{
         const h=(i%24)/23,angle=a.angle+time*(1.7+h*.6),radius=(.9+h*4.4)*(1-collapse),y=-2.05+h*5.7;
@@ -150,15 +172,14 @@ export function createHistoryWall({group, brick, renderer, geometry, addLabel, o
       vortex.visible=time>.4&&time<5.4;vortex.rotation.y=time*1.2;vortex.scale.setScalar(1-collapse);trails.forEach(l=>l.material.opacity=Math.sin(clamp((time-.4)/5)*Math.PI)*.19);
       birthLight.intensity=time>4.5&&time<6.7?Math.sin(clamp((time-4.5)/2.2)*Math.PI)*55:time<4.5?Math.sin(clamp(time/5.3)*Math.PI)*16:0;
       particles.forEach((m,i)=>{m.visible=time>4.65&&time<5.8;const a=i*2.399+time*4,r=(1-collapse)*(3+i%4);m.position.set(Math.cos(a)*r,1.4+Math.sin(a)*r*.25,Math.sin(a)*r);m.scale.setScalar(.8*(1-collapse))});
-      product.g.visible=time>=5.25;product.g.scale.setScalar(1.5);product.g.rotation.set(0,0,0);
-      const fall=clamp((time-5.25)/.95),after=time-6.2;product.g.position.set(0,6.6-8.21*fall*fall+(after>0?Math.sin(after*12)*Math.exp(-after*5)*.18:0),0);
-      const impact=clamp(after/1.5);pulse.material.opacity=after>0?Math.pow(1-impact,2)*.7:0;pulse.scale.setScalar(1+impact*12);
-      if(after>0&&after<.6&&!reduced){const shake=Math.exp(-after*9)*.07;cameraPosition.x+=Math.sin(after*60)*shake;cameraPosition.y+=Math.cos(after*50)*shake}
-      if(p===1){cloud.visible=vortex.visible=false;birthLight.intensity=0;product.g.position.y=-1.61;completed=true;change('product')}
+      product.g.visible=time>=5.25;
+      compose(age,clamp((time-5.25)/2.25),reduced);
+      const after=time-7.5,impact=clamp(after/1.3);pulse.position.y=-2.09;
+      pulse.material.opacity=after>0?Math.pow(1-impact,2)*.38:0;pulse.scale.setScalar(1+impact*10);
+      if(p===1){cloud.visible=vortex.visible=false;birthLight.intensity=0;compose(age,1,reduced);completed=true;change('product')}
     }else if(phase==='product'){
-      cameraPosition.set(3.7,4.6,-14);cameraTarget.copy(roomTarget);product.g.visible=true;product.g.scale.setScalar(1.5);product.g.rotation.y=reduced?0:Math.sin(age*.35)*.035;
-
+      cameraPosition.copy(heroCamera);cameraTarget.copy(heroTarget);frameOffset=.215;product.g.visible=true;compose(age,1,reduced);pulse.material.opacity=0;
     }
   }
-  return {restart,update,action,advance,previous,cameraPosition,cameraTarget,shouldRender:()=>!(phase==='learning'||caseOpen),labelsVisible:()=>phase==='room'&&!caseOpen,dispose(){textures.forEach(t=>t.dispose())}};
+  return {restart,update,action,advance,previous,cameraPosition,cameraTarget,frameOffset:()=>frameOffset,shouldRender:()=>!(phase==='learning'||caseOpen),labelsVisible:()=>phase==='room'&&!caseOpen,dispose(){host.dispose();bridgeMaterial.dispose();bridgeGeometry.dispose();heroMaterials.forEach(m=>m.dispose());heroKey.shadow.map?.dispose();textures.forEach(t=>t.dispose())}};
 }

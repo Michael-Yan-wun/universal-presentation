@@ -33,3 +33,15 @@ These existing assets were extracted from the user's AIWin Pitch v5; they are no
 - `../pitch-mesh-anomaly.png`: normal mesh training/test samples; no defect annotation or accuracy claim is added.
 
 Official manufacturing context was also checked at https://www.aiwin.com.tw/cases/manufacturing (holes, nuts and bottle-cap inspection), but the page's illustrative collage is not presented as a customer-site photograph. The revised keynote prioritizes the user's existing case footage and screenshots.
+
+## AVS-553 product reveal
+
+Retrieved 2026-10-19 from APLEX's official [AVS-553 announcement](https://www.aplex.com/index.php/content/news_detail/140?lang=1) and [product page](https://www.aplex.com/index.php/product/list/machine_vision_system/avs_-_5_series/3609/ACS-553). The legacy product URL contains ACS-553, but the displayed product is AVS-553.
+
+Visual references:
+
+- https://www.aplex.com/images/1758779573.png
+- https://www.aplex.com/images/1758779683.png
+- https://www.aplex.com/images/1758779753.png
+
+`dist/avs553.js` is an original, code-native Three.js visual reconstruction of the chassis, cooling fins, I/O face, expansion covers and dual CRPS modules. No vendor photo or texture is embedded in the shipped model. The unit is rotated horizontally for the keynote's software-over-hardware composition. This is an appearance illustration, not installation guidance, a supported system configuration, a benchmark, or an endorsement of an AIWinOps bundle by APLEX. Moving fan blades, status LEDs, and light traces communicate operation conceptually.
