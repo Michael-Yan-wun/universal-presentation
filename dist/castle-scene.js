@@ -8,13 +8,13 @@ export function createCastleScene({group,brick,geometry,makeBrain,addLabel,agent
  const colors={sense:new THREE.Color('#63d8c5'),learn:new THREE.Color('#a4bbfa'),act:new THREE.Color('#c8a7f4')};
  const spareGeo=new Set(),spareMat=new Set();
  const ownGeo=g=>(spareGeo.add(g),g),ownMat=m=>(spareMat.add(m),m);
- let step=0,elapsed=0,focus=0;const shade=new THREE.Color(),dimColor=new THREE.Color('#0b1420');
+ let step=0,elapsed=0,focus=0,reveal=1;const shade=new THREE.Color(),dimColor=new THREE.Color('#0b1420');
  const smooth=x=>{x=THREE.MathUtils.clamp(x,0,1);return x*x*(3-2*x);};
  function register(root,layer,{moving=false,delay=0}={}){
   const unit={root,layer,home:root.position.clone(),scale:root.scale.clone(),moving,delay};units.push(unit);
   root.traverse(o=>{if(!o.material||Array.isArray(o.material))return;const source=o.material;o.material=ownMat(source.clone());const m=o.material;
    if(m.isMeshPhysicalMaterial){m.roughness=.27;m.metalness=.12;m.clearcoat=.48;m.clearcoatRoughness=.22;}
-   surfaces.push({material:m,layer,color:m.color?.clone(),opacity:m.opacity,emissive:m.emissive?.clone(),emissiveIntensity:m.emissiveIntensity||0});
+   surfaces.push({material:m,layer,transparent:m.transparent,depthWrite:m.depthWrite,color:m.color?.clone(),opacity:m.opacity,emissive:m.emissive?.clone(),emissiveIntensity:m.emissiveIntensity||0});
   });return unit;
  }
  function block(options,layer,delay=0){const o=brick(group,{detail:'hero',...options});o.castleManaged=true;register(o.g,layer,{moving:true,delay});return o;}
@@ -64,7 +64,8 @@ export function createCastleScene({group,brick,geometry,makeBrain,addLabel,agent
  function strength(layer){if(layer==='structure')return .72;if(step===0)return 1;if(step===1)return layer==='sense'?1:.28;if(step===2)return layer==='learn'?1:layer==='sense'?.6:.28;return layer==='act'?1:.83;}
  return {
   get step(){return step;},
-  reset(value=0){step=Math.max(0,Math.min(3,value));focus=step;elapsed=0;units.forEach(u=>{u.root.position.copy(u.home);if(u.moving)u.root.position.y+=2.2;u.root.scale.copy(u.scale);});},
+  reset(value=0,{assembled=false}={}){step=Math.max(0,Math.min(3,value));focus=step;elapsed=assembled?10:0;units.forEach(u=>{u.root.position.copy(u.home);if(u.moving&&!assembled)u.root.position.y+=2.2;u.root.scale.copy(u.scale);});},
+  setReveal(value){reveal=THREE.MathUtils.clamp(value,0,1);for(const s of surfaces){s.material.opacity=s.opacity*reveal;s.material.transparent=s.transparent||reveal<.999;s.material.depthWrite=s.depthWrite&&reveal>=.999;}},
   setStep(value){step=Math.max(0,Math.min(3,value));},
   view(aspect=1.5){const f=focus;return {x:1.8-.4*Math.sin(f*Math.PI/3),y:4.8-.6*Math.sin(f*Math.PI/3),z:(23.1-(step===1||step===2?1.0:0))*Math.max(1,1.36/aspect),targetY:step===1?.4:step===2?.9:1.15};},
   update(dt,time,reduced){
@@ -75,9 +76,9 @@ export function createCastleScene({group,brick,geometry,makeBrain,addLabel,agent
     u.root.position.x=u.home.x;u.root.position.z=u.home.z;u.root.position.y+=(u.home.y+lift+(u.moving?(1-p)*2.2:0)-u.root.position.y)*ease;
     const k=u.moving?.92+.08*p:1;u.root.scale.copy(u.scale).multiplyScalar(k);
    }
-   for(const s of surfaces){const k=strength(s.layer);if(s.color)s.material.color.lerp(shade.copy(s.color).lerp(dimColor,1-k),ease);s.material.opacity+=(s.opacity*(s.material.transparent?k:1)-s.material.opacity)*ease;if(s.emissive){s.material.emissive.copy(s.emissive);s.material.emissiveIntensity=s.emissiveIntensity;if(s.material.isMeshPhysicalMaterial&&s.layer!=='structure'){s.material.emissive.copy(s.color);s.material.emissiveIntensity=step>0&&k===1?.09:.015;}}}
-   for(const route of traces){const k=strength(route.layer);route.mat.opacity=.12+.24*k;route.dots.forEach((dot,i)=>{dot.material.opacity=k;dot.material.transparent=true;dot.position.copy(route.curve.getPoint((time*(reduced?0:.14)+i/route.dots.length+route.offset)%1));dot.visible=k>.4;});}
-   halo.material.opacity=reduced?.2:.16+Math.sin(time*.55)*.035;
+   for(const s of surfaces){const k=strength(s.layer);if(s.color)s.material.color.lerp(shade.copy(s.color).lerp(dimColor,1-k),ease);s.material.opacity+=(s.opacity*(s.transparent?k:1)*reveal-s.material.opacity)*ease;if(s.emissive){s.material.emissive.copy(s.emissive);s.material.emissiveIntensity=s.emissiveIntensity;if(s.material.isMeshPhysicalMaterial&&s.layer!=='structure'){s.material.emissive.copy(s.color);s.material.emissiveIntensity=step>0&&k===1?.09:.015;}}}
+   for(const route of traces){const k=strength(route.layer);route.mat.opacity=(.12+.24*k)*reveal;route.dots.forEach((dot,i)=>{dot.material.opacity=k*reveal;dot.material.transparent=true;dot.position.copy(route.curve.getPoint((time*(reduced?0:.14)+i/route.dots.length+route.offset)%1));dot.visible=k>.4;});}
+   halo.material.opacity=(reduced?.2:.16+Math.sin(time*.55)*.035)*reveal;arrow.material.transparent=reveal<1;arrow.material.opacity=reveal;
   },
   dispose(){for(const geo of spareGeo)geo.dispose();for(const mat of spareMat)mat.dispose();}
  };
