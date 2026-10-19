@@ -1,5 +1,5 @@
 import { createEdgeHost } from './edge-host.js?v=winedge-detail-1';
-import { createCompanyScene } from './company.js?v=company-lockup-6';
+import { createCompanyScene } from './company.js?v=company-five-products-20261019-87';
 import * as THREE from './vendor/three.module.js';
 import {stageView} from './stage-layout.js?v=winedge-launch-7';
 import { products, chapters, agents, palette } from './content.js?v=winedge-launch-7';

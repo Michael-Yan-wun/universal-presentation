@@ -2,7 +2,7 @@ import * as THREE from './vendor/three.module.js';
 
 const clamp=t=>Math.max(0,Math.min(1,t));
 const ease=t=>{t=clamp(t);return t*t*(3-2*t);};
-const START=18.7,ACCEL=.8,CRUISE=2.2,BRAKE=1.1,DISTANCE=4200;
+const START=22.0,ACCEL=.7,CRUISE=2.0,BRAKE=1.3,DISTANCE=4200;
 const MAX_SPEED=DISTANCE/(CRUISE+(ACCEL+BRAKE)/2);
 const integralEase=t=>t*t*t-.5*t*t*t*t;
 
@@ -28,14 +28,14 @@ function speedAt(time){
 export function createStarflight(scene){
   const root=new THREE.Group();root.name='anniversary-starflight';root.visible=false;scene.add(root);
   let seed=20162026;const random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
-  const flightCount=1240,farCount=130,count=flightCount+farCount;
+  const flightCount=1900,farCount=220,count=flightCount+farCount;
   const position=new Float32Array(count*3),color=new Float32Array(count*3),size=new Float32Array(count),layer=new Float32Array(count);
   for(let i=0;i<count;i++){
     const far=i>=flightCount;
     const x=(random()-.5)*(far?6500:4300),y=(random()-.5)*(far?4200:2800);
     const z=far?6900+random()*900:140+random()*7060;
     position.set([x,y,z],i*3);layer[i]=far?1:0;
-    const brilliance=.23+Math.pow(random(),2.4)*.64,temperature=random();
+    const brilliance=.29+Math.pow(random(),2.4)*.65,temperature=random();
     color.set([brilliance*(.74+.2*temperature),brilliance*(.84+.12*temperature),brilliance],i*3);
     size[i]=far?.62+random()*.4:.72+random()*.6;
   }
@@ -85,7 +85,7 @@ export function createStarflight(scene){
     const p=position.subarray(i*3,i*3+3),c=color.subarray(i*3,i*3+3);
     tailPosition.set(p,i*6);tailPosition.set(p,i*6+3);tailColor.set(c,i*6);tailColor.set(c,i*6+3);
     end[i*2]=0;end[i*2+1]=1;
-    const cap=i%31===0?48:16+random()*24;tailLimit[i*2]=tailLimit[i*2+1]=cap;
+    const cap=i%43===0?38:12+random()*18;tailLimit[i*2]=tailLimit[i*2+1]=cap;
   }
   const tailGeometry=new THREE.BufferGeometry();
   tailGeometry.setAttribute('position',new THREE.BufferAttribute(tailPosition,3));
@@ -120,14 +120,14 @@ export function createStarflight(scene){
   const tails=new THREE.LineSegments(tailGeometry,tailMaterial);tails.frustumCulled=false;tails.renderOrder=0;root.add(tails);
 
   function update(time,view,camera){
-    root.visible=time>=START;if(!root.visible)return;
+    root.visible=time>=19.4;if(!root.visible)return;
     root.position.copy(camera.position);root.quaternion.copy(camera.quaternion);
     uniforms.travel.value=travelAt(time);uniforms.speed.value=speedAt(time);
-    uniforms.opacity.value=ease((time-START)/.75);
+    uniforms.opacity.value=ease((time-19.4)/1.0);
     uniforms.viewport.value.set(Math.max(1,view.width),Math.max(1,view.height));
     uniforms.pixelRatio.value=Math.min(globalThis.devicePixelRatio||1,2);
     // The shaders use camera-local coordinates directly. Retain the shared
     // projection matrix so wide and narrow screens keep identical true depth.
   }
-  return {update,distanceAt:travelAt};
+  return {update,distanceAt:travelAt,root};
 }

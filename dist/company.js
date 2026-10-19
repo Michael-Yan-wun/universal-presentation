@@ -7,13 +7,14 @@ export const companyProducts = [
   { id:'aiwinops', name:'AIWinOps', label:'AI 影像辨識', color:productColors.aiwinops.main, ink:productColors.aiwinops.text, size:[1506,1045], crop:[140,65,1363,1000], description:'從影像中辨識關鍵資訊，讓 AI 理解看見的世界。' },
   { id:'numops', name:'NumOps', label:'智慧數據 AI', color:productColors.numops.main, ink:productColors.numops.text, size:[1539,1022], crop:[160,44,1380,1003], description:'探索資料中的規律，讓數據成為企業決策的依據。' },
   { id:'winchat', name:'WinChat', label:'企業知識中樞', color:productColors.winchat.main, ink:productColors.winchat.text, size:[1672,941], crop:[267,47,1405,931], description:'串聯企業知識，透過對話取得資訊、理解問題。' },
-  { id:'winedge', name:'WinEdge', label:'邊緣 AI 推論', color:productColors.winedge.main, ink:productColors.winedge.text, size:[1444,1089], crop:[100,72,1342,1051], description:'把 AI 推論帶到現場，連接資料、影像與應用。' },
+  { id:'winedge-n', name:'WinEdge-N', label:'數據邊緣 AI', color:productColors.winedge.main, ink:productColors.winedge.text, size:[446,297], crop:[0,0,446,297], image:'winedge-n-interface.png', description:'在現場接收與分析設備數據，連接監控、AI 推論與回饋。' },
+  { id:'winedge-v', name:'WinEdge-V', label:'影像邊緣 AI', color:productColors.winedge.main, ink:productColors.winedge.text, size:[587,358], crop:[0,0,587,358], image:'winedge-v-interface.png', description:'在現場管理影像任務，串接取像、AI 推論與檢測應用。' },
 ];
 const capabilities = companyProducts;
-const asset = (id,kind='cutout-v1') => `./assets/company-products/${id}-${kind}.png`;
+const asset = (id,kind='cutout-v1') => `./assets/company-products/${companyProducts.find(item=>item.id===id)?.image||`${id}-${kind}.png`}`;
 
 export const companyLayouts = [
-  { id: 'stage', name: '品牌展台', tagline: 'ONE PLATFORM. FOUR POSSIBILITIES.' },
+  { id: 'stage', name: '品牌展台', tagline: 'ONE PLATFORM. FIVE POSSIBILITIES.' },
   { id: 'orbit', name: '懸浮星軌', tagline: 'CONNECTED BY INTELLIGENCE.' },
   { id: 'steps', name: '進化階梯', tagline: 'BUILDING THE NEXT POSSIBILITY.' },
 ];
@@ -24,11 +25,11 @@ export function companyHTML() {
     <div class="story-copy"><h2>企業 AI 導入專家</h2>
       <p>深耕智慧製造、半導體與企業 AI 應用，<br>協助企業加速數位轉型，創造營運價值。</p></div>
     <dl class="company-metrics" aria-label="公司實績">
-      <div><dt>AI 落地案例</dt><dd>150<span>+</span></dd></div>
+      <div><dt>AI 落地案例</dt><dd>200<span>+</span></dd></div>
       <div><dt>產業服務經驗</dt><dd>30<span>+</span></dd></div>
       <div><dt>項國家專利</dt><dd>6</dd></div>
     </dl>
-    <div class="company-markets"><span>跨足海外市場</span><strong>越南<i>·</i>韓國<i>·</i>泰國</strong></div>`;
+    <div class="company-markets"><span>跨足海外市場</span><strong>越南<i>·</i>韓國<i>·</i>泰國<i>·</i>日本</strong></div>`;
 }
 
 // One entrance timeline, replayed on chapter entry and cancelled on chapter exit.
@@ -71,7 +72,7 @@ export function companyStageHTML() {
           <img class="company-platform-symbol" src="${asset('winhub')}" alt="" aria-hidden="true" width="1491" height="1055">
           <img class="company-platform-wordmark" src="${asset('winhub')}" alt="" aria-hidden="true" width="1491" height="1055">
         </span>
-        <span class="company-platform-description"><strong>融合式 AI 平台</strong><small>四項產品 · 一個完整平台 <b>↗</b></small></span>
+        <span class="company-platform-description"><strong>融合式 AI 平台</strong><small>五項產品 · 一個完整平台 <b>↗</b></small></span>
       </button>
       <small class="company-explore-hint">點選產品，探索更多</small>
     </div>`;
@@ -84,7 +85,7 @@ export function companyProductHTML(id) {
     <div class="company-product-heading"><p class="eyebrow">${overview?'WINHUB.AI / PRODUCT PLATFORM':'WINHUB.AI / '+p.name.toUpperCase()}</p>
       <h2 id="case-heading">${overview?'WinHub.AI':p.name}<span>${overview?'融合式 AI 平台':p.label}</span></h2>
       <p>${overview?'視覺辨識、數據分析、知識中樞與邊緣運算，串起企業 AI 的完整應用。':p.description}</p></div>
-    <div class="company-product-visual ${overview?'is-overview':''}">${overview?`<div class="company-product-overview" aria-label="WinHub.AI 四項產品">${companyProducts.map(item=>`<article style="--product-color:${item.color};--product-ink:${item.ink}"><img src="${asset(item.id)}" alt="${item.name} 產品介面"><strong>${item.name}</strong><span>${item.label}</span></article>`).join('')}</div>`:`<img src="${asset(id)}" alt="${p.name} 產品展示">`}</div>
+    <div class="company-product-visual ${overview?'is-overview':''}">${overview?`<div class="company-product-overview" aria-label="WinHub.AI 五項產品">${companyProducts.map(item=>`<article style="--product-color:${item.color};--product-ink:${item.ink}"><img src="${asset(item.id)}" alt="${item.name} 產品介面"><strong>${item.name}</strong><span>${item.label}</span></article>`).join('')}</div>`:`<img src="${asset(id)}" alt="${p.name} 產品展示">`}</div>
     <nav class="company-product-tabs" aria-label="產品圖片">${[{id:'winhub',name:'平台全貌'},...companyProducts].map(item=>`<button data-company-product="${item.id}" aria-pressed="${item.id===id}">${item.name}</button>`).join('')}</nav>
     <a class="company-original-link" href="${asset(id,'original')}" target="_blank" rel="noopener">查看原始素材 ↗</a>
   </div>`;
@@ -135,8 +136,9 @@ export function createCompanyScene({ group, brick, addLabel, hits }) {
 
   // Selected design: a machined oval deck, beveled plinths and recessed edge lighting.
   const stage=newVariant('stage',[
-    {pos:[-5.7,.12,.62],angle:.055}, {pos:[-1.9,.46,-.32],angle:.015},
-    {pos:[1.9,.46,-.32],angle:-.015}, {pos:[5.7,.12,.62],angle:-.055},
+    {pos:[-6.4,.12,.62],angle:.055}, {pos:[-3.2,.36,-.08],angle:.025},
+    {pos:[0,.46,-.32],angle:0}, {pos:[3.2,.36,-.08],angle:-.025},
+    {pos:[6.4,.12,.62],angle:-.055},
   ]);
   const deckFinish=keep(new THREE.MeshPhysicalMaterial({color:'#24344b',metalness:.36,roughness:.38,clearcoat:.4}));
   const wallFinish=keep(new THREE.MeshPhysicalMaterial({color:'#304154',metalness:.56,roughness:.3,clearcoat:.35}));
@@ -189,19 +191,26 @@ export function createCompanyScene({ group, brick, addLabel, hits }) {
     const product=companyProducts[i];
     const plinth=new THREE.Group();stage.stage.add(plinth);plinth.position.set(p.pos[0],0,p.pos[2]);plinth.rotation.y=p.angle;
     const top=p.pos[1]-.58,h=top+1.24;
-    mesh(plinth,roundedPlinth(3.53,2.85,h),satin,[0,-1.24+h/2,0]);
-    mesh(plinth,roundedPlinth(3.58,2.90,.09),wallFinish,[0,top,0]);
+    mesh(plinth,roundedPlinth(2.84,2.85,h),satin,[0,-1.24+h/2,0]);
+    mesh(plinth,roundedPlinth(2.89,2.90,.09),wallFinish,[0,top,0]);
     const trim=keep(new THREE.MeshBasicMaterial({color:capabilities[i].color,toneMapped:false}));
     const trimMesh=mesh(plinth,new THREE.BoxGeometry(1.95,.035,.018),trim,[0,top-.14,1.46]);
     // Alpha cutouts preserve a quiet, open stage; the texture crop removes transparent padding.
     const [iw,ih]=product.size,[left,upper,right,lower]=product.crop;
-    const w=3.46,monitorHeight=w*(lower-upper)/(right-left);
+    const w=2.78,monitorHeight=w*(lower-upper)/(right-left);
     const texture=keep(new THREE.TextureLoader().load(asset(product.id)));
     texture.colorSpace=THREE.SRGBColorSpace;
     texture.offset.set(left/iw,1-lower/ih);texture.repeat.set((right-left)/iw,(lower-upper)/ih);
     const material=keep(new THREE.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.55,side:THREE.DoubleSide,toneMapped:false}));
     const monitorGroup=new THREE.Group();stage.stage.add(monitorGroup);monitorGroup.position.set(...p.pos);
-    const monitor=mesh(monitorGroup,new THREE.PlaneGeometry(w,monitorHeight),material,[0,monitorHeight/2-.49,0]);
+    // User-supplied interface captures sit in a physical screen bezel like the existing product displays.
+    if(product.image){
+      const frame=mesh(monitorGroup,new THREE.BoxGeometry(w+.12,monitorHeight+.12,.12),footFinish,[0,monitorHeight/2-.49,-.035]);
+      frame.castShadow=true;
+      mesh(monitorGroup,new THREE.BoxGeometry(.13,.2,.1),satin,[0,-.62,0]);
+      mesh(monitorGroup,new THREE.BoxGeometry(.85,.05,.38),satin,[0,-.72,0]);
+    }
+    const monitor=mesh(monitorGroup,new THREE.PlaneGeometry(w,monitorHeight),material,[0,monitorHeight/2-.49,product.image?.035:0]);
     monitor.castShadow=monitor.receiveShadow=false;monitor.userData.id='company-'+product.id;hits.push(monitor);
     const button=addLabel(plinth,new THREE.Vector3(0,top-.27,1.6),product.name,'company-'+product.id,product.ink,'company-product-label','company');
     button.innerHTML=`<strong>${product.name}</strong><small>${product.label}</small>`;
@@ -225,8 +234,8 @@ export function createCompanyScene({ group, brick, addLabel, hits }) {
 
   // 02: independent capabilities float on orbital paths around one central hub.
   const orbit=newVariant('orbit',[
-    {pos:[-4.8,1,-.5],angle:.2}, {pos:[4.8,1,-.5],angle:-.2},
-    {pos:[-3.45,-1.22,1],angle:.12}, {pos:[3.45,-1.22,1],angle:-.12},
+    {pos:[-5.4,1,-.7],angle:.2}, {pos:[0,2,-1.3],angle:0}, {pos:[5.4,1,-.7],angle:-.2},
+    {pos:[-3.6,-1.22,1.3],angle:.12}, {pos:[3.6,-1.22,1.3],angle:-.12},
   ]);
   mesh(orbit.stage,new THREE.CylinderGeometry(1.8,2,.38,72),metal,[0,-.45,0]);
   ring(orbit.stage,1.82,-.24,gold,.025);
@@ -241,15 +250,15 @@ export function createCompanyScene({ group, brick, addLabel, hits }) {
     const bead=mesh(orbit.stage,new THREE.SphereGeometry(.055,10,8),i%2?blue:gold,[0,0,0]);orbit.pulses.push({bead,curve,offset:i*.25});
   });
 
-  // 03: four generous plinths rise diagonally; each capability has its own space.
+  // 03: five product plinths rise diagonally; each capability has its own space.
   const steps=newVariant('steps',[
-    {pos:[-5.1,-1.45,1.2],angle:.03}, {pos:[-1.7,-.65,.4],angle:.03},
-    {pos:[1.7,.15,-.4],angle:.03}, {pos:[5.1,.95,-1.2],angle:.03},
+    {pos:[-6.4,-1.45,1.2],angle:.03}, {pos:[-3.2,-.85,.6],angle:.03},
+    {pos:[0,-.25,0],angle:.03}, {pos:[3.2,.35,-.6],angle:.03}, {pos:[6.4,.95,-1.2],angle:.03},
   ]);
   steps.poses.forEach((p,i)=>{
     const top=p.pos[1]-.65,h=top+2.65;
-    mesh(steps.stage,new THREE.BoxGeometry(3.25,h,3.1),metal,[p.pos[0],-2.65+h/2,p.pos[2]]);
-    mesh(steps.stage,new THREE.BoxGeometry(3.28,.035,3.13),i%2?blue:gold,[p.pos[0],top-.02,p.pos[2]]);
+    mesh(steps.stage,new THREE.BoxGeometry(3.05,h,3.1),metal,[p.pos[0],-2.65+h/2,p.pos[2]]);
+    mesh(steps.stage,new THREE.BoxGeometry(3.08,.035,3.13),i%2?blue:gold,[p.pos[0],top-.02,p.pos[2]]);
     label(steps.stage,`0${i+1}`,'',[p.pos[0],top-.33,p.pos[2]+1.58],.75);
   });
   line(steps.stage,steps.poses.map(p=>new THREE.Vector3(p.pos[0],p.pos[1]-1.0,p.pos[2]+1.65)),'#d8ad73',.55);
@@ -290,7 +299,7 @@ export function createCompanyScene({ group, brick, addLabel, hits }) {
         b.g.position.y-=.62*(1-reveal);
         b.g.position.y+=b.hover*.16;
         b.g.scale.setScalar(.92+.08*reveal+.018*b.hover);
-        b.g.rotation.y=v.poses[i].angle+(i-1.5)*.075*(1-reveal);
+        b.g.rotation.y=v.poses[i].angle+(i-(companyProducts.length-1)/2)*.075*(1-reveal);
         b.material.opacity=smooth(progress/.6);
         b.material.alphaTest=Math.max(.0001,.55*b.material.opacity);
         b.trimMesh.scale.x=.08+.92*reveal;

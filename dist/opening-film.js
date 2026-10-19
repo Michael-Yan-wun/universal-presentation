@@ -5,10 +5,9 @@ const smooth=(a,b,t)=>THREE.MathUtils.smoothstep(t,a,b);
 
 // A light aperture reveals a volumetric star flight, then a sunlit Earth.
 // Stars are drawn at the canvas resolution; no enlarged images or blur passes.
-export function createOpeningFilm(canvas) {
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
-  renderer.setClearColor('#01030a');
-  renderer.outputColorSpace=THREE.SRGBColorSpace;
+export function createOpeningFilm(canvas,{sharedRenderer=null,showAperture=true,showSun=true,showBackdrop=true,showEarth=true,deterministic=false}={}) {
+  const renderer=sharedRenderer??new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
+  if(!sharedRenderer){renderer.setClearColor('#01030a');renderer.outputColorSpace=THREE.SRGBColorSpace;}
   const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(48,1,.1,1400);
   const maps=[],geometries=[],materials=[],pending=[];
   const loader=new THREE.TextureLoader();
@@ -23,12 +22,12 @@ export function createOpeningFilm(canvas) {
   const dayMap=load('./assets/universe/earth-day.jpg'),nightMap=load('./assets/universe/earth-night.png');
   function mesh(geometry,material,parent=scene){const object=new THREE.Mesh(geometry,material);parent.add(object);geometries.push(geometry);materials.push(material);return object;}
   const screenVertex='varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}';
-  const backdrop=mesh(new THREE.PlaneGeometry(2,2),new THREE.ShaderMaterial({depthTest:false,depthWrite:false,
-    vertexShader:screenVertex,fragmentShader:`varying vec2 vUv;void main(){
+  const backdrop=mesh(new THREE.PlaneGeometry(2,2),new THREE.ShaderMaterial({depthTest:false,depthWrite:false,uniforms:{opacity:{value:1}},
+    vertexShader:screenVertex,fragmentShader:`varying vec2 vUv;uniform float opacity;void main(){
       float glow=exp(-length((vUv-vec2(.5,.52))*vec2(1.,1.5))*4.);
-      gl_FragColor=vec4(vec3(.002,.005,.012)+vec3(.014,.028,.052)*glow,1.);
+      gl_FragColor=vec4(vec3(.002,.005,.012)+vec3(.014,.028,.052)*glow,opacity);
     }`}));
-  backdrop.frustumCulled=false;backdrop.renderOrder=-20;
+  backdrop.frustumCulled=false;backdrop.renderOrder=-20;backdrop.visible=showBackdrop;
 
   let seed=27491;
   const random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
@@ -101,19 +100,19 @@ export function createOpeningFilm(canvas) {
   sun.position.z=-14;sun.renderOrder=3;
   const earth=new THREE.Group();scene.add(earth);
   const earthVertex=`varying vec2 vUv;varying vec3 vNormal;varying vec3 vWorld;void main(){vUv=uv;vNormal=normalize(mat3(modelMatrix)*normal);vec4 world=modelMatrix*vec4(position,1.);vWorld=world.xyz;gl_Position=projectionMatrix*viewMatrix*world;}`;
-  const earthMaterial=new THREE.ShaderMaterial({uniforms:{dayMap:{value:dayMap},nightMap:{value:nightMap}},
-    vertexShader:earthVertex,fragmentShader:`uniform sampler2D dayMap;uniform sampler2D nightMap;varying vec2 vUv;varying vec3 vNormal;varying vec3 vWorld;
+  const earthMaterial=new THREE.ShaderMaterial({uniforms:{dayMap:{value:dayMap},nightMap:{value:nightMap},opacity:{value:1}},transparent:!!sharedRenderer,
+    vertexShader:earthVertex,fragmentShader:`uniform sampler2D dayMap;uniform sampler2D nightMap;uniform float opacity;varying vec2 vUv;varying vec3 vNormal;varying vec3 vWorld;
       void main(){vec3 n=normalize(vNormal),view=normalize(cameraPosition-vWorld);float light=dot(n,normalize(vec3(.45,.72,.4)));
         float day=smoothstep(-.18,.22,light);vec3 ground=texture2D(dayMap,vUv).rgb;
         vec3 city=texture2D(nightMap,vUv).rgb;
         float rim=pow(1.-max(dot(n,view),0.),4.);
         vec3 color=ground*(.025+day*max(light,.07)*1.6)+city*(1.-day)*vec3(1.5,.95,.5)+vec3(.04,.19,.4)*rim;
-        gl_FragColor=vec4(color,1.);
+        gl_FragColor=vec4(color,opacity);
         #include <colorspace_fragment>
       }`});
   const globe=mesh(new THREE.SphereGeometry(1,128,96),earthMaterial,earth);globe.rotation.set(.13,2.1,-.2);
-  mesh(new THREE.SphereGeometry(1.014,96,64),new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:THREE.BackSide,
-    vertexShader:earthVertex,fragmentShader:'varying vec3 vNormal;varying vec3 vWorld;void main(){float rim=pow(1.-abs(dot(normalize(vNormal),normalize(cameraPosition-vWorld))),3.);gl_FragColor=vec4(.17,.45,.88,rim*.55);}'}),earth);
+  const atmosphere=mesh(new THREE.SphereGeometry(1.014,96,64),new THREE.ShaderMaterial({uniforms:{opacity:{value:1}},transparent:true,depthWrite:false,side:THREE.BackSide,
+    vertexShader:earthVertex,fragmentShader:'uniform float opacity;varying vec3 vNormal;varying vec3 vWorld;void main(){float rim=pow(1.-abs(dot(normalize(vNormal),normalize(cameraPosition-vWorld))),3.);gl_FragColor=vec4(.17,.45,.88,rim*.55*opacity);}'}),earth);
 
 
   const apertureUniforms={time:{value:0},aspect:{value:1},height:{value:720}};
@@ -147,36 +146,54 @@ export function createOpeningFilm(canvas) {
     apertureUniforms.aspect.value=aspect;apertureUniforms.height.value=height;
     canvas.dataset.renderResolution=`${canvas.width} × ${canvas.height}`;
   }
-  function render(t){
+  // Absolute travel lets the ceremony seek/replay the shared film without a catch-up frame.
+  function distanceAt(t){
+    const integral=u=>u*u*u-.5*u*u*u*u;
+    let cruise=0;
+    if(t>1.3&&t<3.4)cruise=2.1*integral((t-1.3)/2.1);
+    else if(t>=3.4&&t<5.1)cruise=1.05+t-3.4;
+    else if(t>=5.1&&t<6.45){const u=(t-5.1)/1.35;cruise=2.75+1.35*(u-integral(u));}
+    else if(t>=6.45)cruise=3.425;
+    return 3*Math.max(0,t)+230*cruise;
+  }
+  function render(t,{opacity=1,earthPlacement=null}={}){
     if(t<lastTime){travel=0;lastTime=0;}
     const dt=Math.max(0,Math.min(t-lastTime,.06));lastTime=t;
     const acceleration=smooth(1.3,3.4,t),deceleration=1-smooth(5.1,6.45,t);
     const cruise=acceleration*deceleration,speed=3+230*cruise;
-    travel+=speed*dt;
+    travel=deterministic?distanceAt(t):travel+speed*dt;
     camera.fov=48+30*smooth(1.4,3.5,t)-26*smooth(5.2,6.6,t);
     camera.position.set(Math.sin(t*.8)*1.35*cruise,Math.sin(t*.55)*.42*cruise,0);
     camera.rotation.set(Math.sin(t*.4)*.005*cruise,Math.sin(t*.37)*.012*cruise,Math.sin(t*.5)*.012*cruise);
     camera.updateProjectionMatrix();
     flightUniforms.travel.value=travel;flightUniforms.speed.value=speed;
-    flightUniforms.opacity.value=(.14+.95*smooth(1.2,2.7,t))*(1-smooth(6.,6.7,t));
-    flight.visible=t<6.75;skyOpacity.value=.6-.3*cruise;
-    apertureUniforms.time.value=t;aperture.visible=t<2.35;
+    flightUniforms.opacity.value=(.14+.95*smooth(1.2,2.7,t))*(1-smooth(6.,6.7,t))*opacity;
+    flight.visible=t<6.75;skyOpacity.value=(.6-.3*cruise)*opacity;backdrop.material.uniforms.opacity.value=opacity;
+    apertureUniforms.time.value=t;aperture.visible=showAperture&&t<2.35;
 
     const approach=smooth(6.,8.6,t),unit=28*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));
     // A narrow preview panel needs a lower horizon so the brand stays on dark sky.
     const compact=1-smooth(1.1,1.45,aspect);
-    earth.visible=t>6.;earth.position.set((.04+aspect*.59*approach)*unit,(-.1-(.57+.33*compact)*approach)*unit,-28);
+    earth.visible=showEarth&&t>6.;earth.position.set((.04+aspect*.59*approach)*unit,(-.1-(.57+.33*compact)*approach)*unit,-28);
     earth.scale.setScalar((.006+(1.02-.42*compact)*Math.pow(approach,2.2))*unit);
+    if(earthPlacement){
+      const destination=smooth(5.7,8.7,t);
+      earth.visible=showEarth&&t>5.7;
+      earth.position.set((earthPlacement.x-.5)*2*aspect*unit,(.5-THREE.MathUtils.lerp(.88,earthPlacement.y,destination))*2*unit,-28);
+      earth.scale.setScalar(earthPlacement.radius*2*THREE.MathUtils.lerp(.55,1,destination)*unit);
+      earthMaterial.uniforms.opacity.value=smooth(5.7,6.4,t)*opacity;
+      atmosphere.material.uniforms.opacity.value=earthMaterial.uniforms.opacity.value;
+    }
     globe.rotation.y=2.1+Math.max(0,t-6.)*.045;
     const sunUnit=14*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));
     sun.position.set((-.05+aspect*.94*approach)*sunUnit,(.51-.23*approach)*sunUnit,-14);
-    sun.scale.setScalar(1.5*sunUnit);sun.material.uniforms.opacity.value=smooth(5.9,6.8,t)*2.1*(1-smooth(cues.sunEnd-.6,cues.sunEnd,t));
+    sun.scale.setScalar(1.5*sunUnit);sun.visible=showSun;sun.material.uniforms.opacity.value=showSun?smooth(5.9,6.8,t)*2.1*(1-smooth(cues.sunEnd-.6,cues.sunEnd,t)):0;
     canvas.dataset.filmPhase=t<5.9?'flight':t<cues.sunEnd?'sunrise':'settled';
     canvas.dataset.sunOpacity=sun.material.uniforms.opacity.value.toFixed(3);
     renderer.render(scene,camera);
   }
   return {ready:Promise.all(pending),resize,render,dispose(){
     geometries.forEach(geometry=>geometry.dispose());materials.forEach(material=>material.dispose());
-    maps.forEach(texture=>texture.dispose());renderer.dispose();
+    maps.forEach(texture=>texture.dispose());if(!sharedRenderer)renderer.dispose();
   }};
 }

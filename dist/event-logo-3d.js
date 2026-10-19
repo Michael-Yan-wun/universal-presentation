@@ -1,9 +1,9 @@
-import {createCosmicTen} from './event-cosmic-ten.js?v=starflight-20261019-45';
+import {createCosmicTen} from './event-cosmic-ten.js?v=event-cinematic-passage-20261019-85';
 import * as THREE from './vendor/three.module.js';
 
 // A single, finite studio shot. The event controller owns its clock and replay.
 export const LOGO_REVEAL_SECONDS=20;
-let renderer,scene,camera,group,finishLight,cosmicTen,ready=false,failed=false,previousHost;
+let renderer,scene,camera,group,finishLight,cosmicTen,ready=false,failed=false,sceneDirty=true,previousHost;
 const pieces=[],lights=[];
 const clamp=t=>Math.max(0,Math.min(1,t));
 const ease=t=>{t=clamp(t);return t*t*(3-2*t);};
@@ -61,7 +61,7 @@ function craftedMaterial(color,side=false,textFace=false){
 async function init(){
   const abort=new AbortController(),timeout=setTimeout(()=>abort.abort(),6500);
   try{
-    const [data,tenData]=await Promise.all([fetch('./assets/aiwin-logo-smooth.json?v=starflight-20261019-45',{signal:abort.signal}).then(r=>{if(!r.ok)throw Error('Logo unavailable');return r.json();}),fetch('./assets/anniversary-ten-contours.json?v=starflight-20261019-45',{signal:abort.signal}).then(r=>{if(!r.ok)throw Error('Anniversary unavailable');return r.json();})]);
+    const [data,tenData,lettering]=await Promise.all([fetch('./assets/aiwin-logo-smooth.json?v=starflight-20261019-45',{signal:abort.signal}).then(r=>{if(!r.ok)throw Error('Logo unavailable');return r.json();}),fetch('./assets/anniversary-ten-contours.json?v=starflight-20261019-45',{signal:abort.signal}).then(r=>{if(!r.ok)throw Error('Anniversary unavailable');return r.json();}),fetch('./assets/ai-universe-lettering-bold.json?v=universe-celebration-20261019-60',{signal:abort.signal}).then(r=>{if(!r.ok)throw Error('Universe lettering unavailable');return r.json();})]);
     renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
     renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.setClearColor(0x000000,0);
     renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
@@ -92,7 +92,8 @@ async function init(){
       const mesh=new THREE.Mesh(geometry,[face,side]);group.add(mesh);
       pieces.push({mesh,face,side,start,duration,material:component.material,top:224-bounds.top+bevel,bottom:224-bounds.bottom-bevel});
     }
-    cosmicTen=createCosmicTen(scene,tenData,renderer);
+    cosmicTen=createCosmicTen(scene,tenData,renderer,lettering);
+    cosmicTen.texturesReady.then(()=>{sceneDirty=true;});
     ready=true;
   }catch(error){failed=true;console.warn('Logo reveal uses still fallback',error);}
   finally{clearTimeout(timeout);}
@@ -135,9 +136,9 @@ export function drawLogo3D(host,time){
   const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;
   const size=renderer.getSize(new THREE.Vector2());
   const resized=size.x!==w||size.y!==h;
-  if(time>28.5&&!resized)return;
+  if(time>39.5&&!resized&&!sceneDirty)return;
   if(resized){renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
-  time=Math.min(time,28.5);
+  time=Math.min(time,39.5);
   // Keep the original broad carving composition; carry the lens ahead a little.
   const sculptTime=time*1.08,shot=composition(time*1.12);
   const passage=ease((time-18.7)/1.5),logoFade=1-ease((time-19.1)/1.0);
@@ -168,6 +169,10 @@ export function drawLogo3D(host,time){
     }
   }
   group.visible=logoFade>.001;
+  cosmicTen.configureCamera(time,camera);
   cosmicTen.update(time,{width:w,height:h},camera,root.querySelector('.event-ten'),renderer.getPixelRatio());
-  renderer.render(scene,camera);
+  const passageRendered=cosmicTen.renderPassage(time,{width:w,height:h});
+  const autoClear=renderer.autoClear;
+  if(passageRendered){renderer.autoClear=false;renderer.clearDepth();}
+  renderer.render(scene,camera);renderer.autoClear=autoClear;sceneDirty=false;
 }
