@@ -41,7 +41,7 @@ export function companyHistoryHTML(){
     </div>
     ${stageHTML(companyHistory[0], 0)}
     <div class="heritage-transition" data-heritage-reveal>
-      ${Array.from({length:3},()=>'<svg class="heritage-stage-arrow" viewBox="0 0 84 28" aria-hidden="true" focusable="false"><path d="M5 3 42 13 79 3M5 14 42 24 79 14"/></svg>').join('')}
+      <svg class="heritage-stage-arrow" viewBox="0 0 180 28" aria-hidden="true" focusable="false"><path d="M6 4 90 24 174 4"/></svg>
       <span>從技術研發走向 AI 平台整合</span>
     </div>
     ${stageHTML(companyHistory[1], 1)}
