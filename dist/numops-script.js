@@ -1,0 +1,20 @@
+// Speaker-controlled beats. Timing is rehearsal guidance, never an auto-advance timer.
+export const numOpsScript = [
+ [
+  {scene:'screen',asset:'prepare',title:'準備好資料，學習才有起點。',subtitle:'設備・時間・目標 / 資料預處理',seconds:40,note:'用放大的 NumOps 官方畫面說明資料來源、預處理方式與資料集。平台支援資料清理、轉換與特徵工程；不是在台上操作正式系統。'},
+  {scene:'tasks',title:'一份數據，不只一種答案。',subtitle:'依工作目標，選擇學習方式。',seconds:40,note:'以三個問題帶出能力：判斷狀態對應分類、異常偵測；預測變化對應回歸、時間序列；發現相似性對應分群。專家系統留到後面用不同畫面展示。圖形為能力示意，沒有客戶效能數據。'}
+ ],
+ [
+  {scene:'automl',title:'把反覆嘗試，交給 AutoML。',subtitle:'多模型訓練 → 比較 → 選擇',seconds:45,note:'資料與預測目標送入 AutoML，候選模型分路訓練再匯回比較。這是建模流程動畫，不是即時訓練或速度保證；沒有捏造準確率。'},
+  {scene:'screen',asset:'analysis',title:'模型好不好，用結果說話。',subtitle:'模型排行 · 評估指標 · 特徵重要性',seconds:45,note:'展示官方模型排行榜與評估入口。截圖數字是官網示範資料，不是本次客戶結果，不將指標泛化為效能承諾。依任務檢視測試集與評估指標。'},
+  {scene:'expert',title:'數據會學習，經驗也能留下。',subtitle:'AutoML ＋ 專家系統',seconds:40,note:'資料走模型訓練，老師傅經驗走規則庫。歷史資料不足時可先建立專家規則，不代表無資料就能訓練出有效機器學習模型。兩條路依場域組合使用。'}
+ ],
+ [
+  {scene:'oven',title:'把製程經驗，變成控制依據。',subtitle:'實際應用 / 智慧烤箱溫控',seconds:40,note:'沿用使用者 Pitch v5 第 34 頁案例：27 個風門與 15 個溫度點，結合 NumOps 與 WinEdge-N。右側動畫呈現多點量測與調整流程，非即時控制或節能成效實測。'},
+  {scene:'waterops',title:'讓領域專業，成為現場的 AI。',subtitle:'合作實證 / GSD × AIWin',seconds:90,note:'WaterOps 由 GSD 基士德與慧穩共同開發，結合水處理工程、操作經驗與數據 AutoML。先講合作的兩種專業，再指向矽品中科廠硼廢水智能精準加藥案例：GSD 協助導入 WaterOps，2026 年 6 月 5 日官方公布氯化鋇 BaCl₂ 用量減少 45%、過氧化氫 H₂O₂ 減少 24%。這是該案例的藥劑用量降幅，不是全部成本、全平台效能或所有客戶的保證。矽品獲環境部 2026 淨水永續獎水處理卓越獎，獲獎主體是矽品。底部動畫為平台流程示意，串起水質資料、AutoML 與環工知識、現場調控及成效檢視。收束：產品提供可重用的能力，夥伴讓能力真正進入產業。'},
+  {scene:'deploy',title:'學到的規律，回到設備旁。',subtitle:'模型 → WinEdge-N → 現場回饋',seconds:40,note:'完成訓練與驗證後依授權部署至 WinEdge-N；亦可透過 API 或批次預測使用。現場新資料供後續檢視與再訓練，沒有宣稱無人審核的自動重訓。下一步將這些能力融合，揭曉 NumOps。'}
+ ]
+];
+export const numOpsBeatCounts=numOpsScript.map(group=>group.length);
+export const numOpsTravelSeconds=.65;
+export const numOpsBeat=state=>numOpsScript[state.selected]?.[state.beat||0];

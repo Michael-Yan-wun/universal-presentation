@@ -86,3 +86,19 @@
 .wc-mission-frame[data-reveal="0"] .wc-mission-goal{height:clamp(190px,24vh,260px);transform:translateY(45%)}
 .wc-mission-frame[data-reveal="0"] .wc-mission-goal h2{font-size:clamp(39px,3.8vw,74px);line-height:1.3}
 .wc-mission-frame[data-reveal="0"] .wc-goal-orb{width:clamp(90px,9vw,175px);height:clamp(90px,9vw,175px)}
+/* One centered exhibition: shared architecture, paired deployment captions. */
+#experience[data-product=chat][data-winchat-layout=hero] #scene,
+#experience[data-product=chat][data-product-phase=fusing] #scene{inset:0;pointer-events:none}
+#experience[data-product=chat] .wc-product-reveal{inset:0;z-index:3}
+.wc-product-reveal>header{position:absolute;top:1.5%;left:5%;right:5%;text-align:center}
+.wc-product-reveal>header>p{font-size:clamp(11px,.83vw,16px);letter-spacing:.24em;color:#bfa7d6;margin:0 0 18px}
+#experience[data-product=chat] .wc-product-reveal h1{font-size:clamp(36px,3.2vw,63px);letter-spacing:-.035em;font-weight:450;line-height:1.25;color:#eee8f6;margin:0}
+.wc-product-reveal .wc-reveal-light{inset:22% 14% 10%;background:radial-gradient(ellipse,#aa7fcb20,transparent 67%)}
+.wc-hardware-options{position:absolute;left:27%;right:29%;bottom:.5%;display:grid;grid-template-columns:1fr 1fr;gap:0;z-index:4;animation:wc-stage-enter 1s .2s both;text-align:center}
+.wc-hardware-options article>span{display:flex;align-items:center;justify-content:center;gap:12px;font-size:clamp(11px,.83vw,17px);letter-spacing:.1em;color:#b4a4c9}
+.wc-hardware-options article>span i{display:block;width:22px;height:1px;background:#b9a0cf65}
+.wc-hardware-options h2{font-size:clamp(25px,2vw,40px);font-weight:450;letter-spacing:-.035em;margin:10px 0 7px;color:#eee6f8;white-space:nowrap}
+.wc-hardware-options p{font-size:clamp(14px,1vw,20px);color:#a99db9;margin:0}
+.wc-hardware-note{position:absolute;right:4%;bottom:1%;font-size:clamp(9px,.63vw,13px);color:#81758d}
+@media(max-height:800px){.wc-product-reveal>header>p{margin-bottom:12px}.wc-hardware-options h2{margin:7px 0 5px}}
+@media(prefers-reduced-motion:reduce){.wc-hardware-options{animation:none}}

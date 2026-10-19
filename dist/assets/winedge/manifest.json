@@ -1,0 +1,62 @@
+[
+  {
+    "file": "dashboard-designer.png",
+    "original": "所見即所得的產線儀表板設計.png",
+    "width": 2555,
+    "height": 1288
+  },
+  {
+    "file": "ai-model-nodes.png",
+    "original": "AI 視覺與數據推論內建與並行.png",
+    "width": 2555,
+    "height": 1288
+  },
+  {
+    "file": "industrial-connectors.png",
+    "original": "工業現場一站式串接.png",
+    "width": 2555,
+    "height": 1288
+  },
+  {
+    "file": "plugin-catalog.png",
+    "original": "外掛式擴充架構（Plugin）.png",
+    "width": 2555,
+    "height": 1288
+  },
+  {
+    "file": "workflow-editor.png",
+    "original": "視覺化工作流程編排.png",
+    "width": 2555,
+    "height": 1288
+  },
+  {
+    "file": "node-hot-update.png",
+    "original": "熱更新與單節點暫停.png",
+    "width": 2555,
+    "height": 1288
+  },
+  {
+    "file": "execution-interval.png",
+    "original": "節點級通道與執行節奏控制2.png",
+    "width": 2555,
+    "height": 1288
+  },
+  {
+    "file": "input-channels.png",
+    "original": "節點級通道與執行節奏控制3.png",
+    "width": 2555,
+    "height": 1288
+  },
+  {
+    "file": "execution-schedule.png",
+    "original": "節點級通道與執行節奏控制1.png",
+    "width": 2555,
+    "height": 1288
+  },
+  {
+    "file": "live-preview.png",
+    "original": "邊設計、邊預覽、邊驗證.png",
+    "width": 2555,
+    "height": 1288
+  }
+]

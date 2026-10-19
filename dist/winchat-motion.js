@@ -1,5 +1,5 @@
 import {winChatBrain} from './winchat-brain.js?v=winchat-launch-1';
-import {winChatTravelSeconds} from './winchat-script.js?v=winchat-launch-1';
+import {winChatTravelSeconds} from './winchat-script.js?v=keynote-flow-1';
 
 // Coordinates in the SVG's own viewBox. Camera movement follows the region,
 // rather than scaling every topic around the same center.
@@ -74,10 +74,12 @@ export function createWinChatStage({root,story,detail}){
  function render(state,ui){
   const selecting=state.phase==='selecting';
   const returning=state.phase==='overview'&&previous?.phase==='focus';
-  if((selecting||returning)&&previous&&!reduced())travel(state,ui,returning);
+  if((selecting&&previous?.phase==='overview'||returning)&&previous&&!reduced())travel(state,ui,returning);
   else{
    if(active&&!(state.phase==='focus'&&previous?.phase==='selecting'))stop();
+   const changed=detail.dataset.winchatView!==ui.key;
    paint(state,ui);
+   if(changed&&!reduced()&&state.phase!=='fusing'&&state.phase!=='born')detail.firstElementChild?.animate([{opacity:.15,transform:'translateX(24px)'},{opacity:1,transform:'none'}],{duration:500,easing:'cubic-bezier(.16,1,.3,1)'});
   }
   previous={...state};
  }

@@ -36,14 +36,14 @@ const growthCopy={
  numeric:{order:2,verb:'感知 / 觸覺',headline:'不只看見，也感受每一次變化。',description:'感測器帶回溫度、震動與設備訊號。<br>WinEdge-N 連接資料、執行推論，讓現場可以被理解。',tags:['感測器 × PLC','Modbus · MC Protocol · Database','數據邊緣推論']},
  vision:{order:3,verb:'學習 / 視覺規律',headline:'像走進學校，開始學會分辨。',description:'依專案整理影像，標記正確與異常的特徵。<br>透過訓練、驗證與修正，把一次經驗變成可重複的能力。',tags:['分專案管理','影像標註','模型訓練與驗證'],pipeline:['ORGANIZE','LABEL','LEARN','DEPLOY']},
  analytics:{order:4,verb:'學習 / 數據規律',headline:'從看見變化，到讀懂規律。',description:'把設備訊號、製程數據與專家經驗放在一起。<br>NumOps 協助分析與建模，再交回 WinEdge-N 運作。',tags:['數據分析','專家規則','預測與製程判讀'],pipeline:['DATA','PATTERN','MODEL','FEEDBACK']},
- chat:{order:5,verb:'思考 / 記憶與行動',headline:'有了知識，還要知道怎麼做。',description:'RAG 找到企業記憶，Agent 串起任務與工具。<br>Skill 承載可重複使用的工作方法，讓知識接上行動。',tags:['RAG · 有來源的記憶','Agent · 任務與工具','Skill · 可重用的方法'],pipeline:['RAG','AGENT','SKILL','ACTION']}
+ chat:{order:5,verb:'思考 / 記憶與行動',headline:'有了知識，還要知道怎麼做。',description:'RAG 找到企業記憶，Agent 串起任務與工具。<br>SKILL 承載可重複使用的工作方法，讓知識接上行動。',tags:['RAG · 有來源的記憶','Agent · 任務與工具','SKILL · 可重用的方法'],pipeline:['RAG','AGENT','SKILL','ACTION']}
 };
 const growthNotes={
  visual:'在感知世界中展開三款相機，讓影像匯入搭載 WinEdge-V 的 Edge 硬體，再接到數據感知。',
  numeric:'緊接影像感知，透過 Modbus、MC Protocol、Database 接收設備數字；搭載 WinEdge-N 的 Edge 硬體把資料帶進現場判讀，直接接到實戰案例。',
  vision:'五個影像案例逐案搭配硬體，再講專案整理、標註、訓練與驗證；全部經驗積木旋轉融合，誕生 AIWinOps。',
  analytics:'將資料放回情境、分析模式與專家規則、回到現場驗證，三塊經驗融合成 NumOps。銜接 WinEdge-N，形成學習與回饋的迴路。',
- chat:'依序深入 RAG 的企業記憶、Agent 的任務協作、Skill 的可重用方法，三塊能力融合為 WinChat，再進入完整智慧身體。'
+ chat:'從 Agent 統籌的角度，深入 RAG 的企業記憶與 SKILL 的可重用方法，讓知識與能力融合為 WinChat，再進入完整智慧身體。'
 };
 for(const p of products)Object.assign(p,growthCopy[p.id],{note:growthNotes[p.id],uiColor:productInk[p.id]});
 const productChapter=id=>{const p=products.find(p=>p.id===id);return {slug:p.id,kind:'product',accent:p.uiColor,label:p.name,product:p,stage:p.order<=2?'sense':p.order<=4?'learn':'think',note:p.note+' 本次以人的成長作為敘事比喻，產品介紹順序不等同上市年份。'}};
@@ -51,19 +51,21 @@ export const chapters = [
  {slug:'intro',kind:'intro',accent:'#dc946f',label:'開場',stage:'intro',note:'十年經驗，積累成功。如果公司的成長像一個人，我們如何從感知世界，走到理解、思考與行動？'},
  {slug:'company',kind:'company',accent:'#eda76f',label:'公司介紹',stage:'company',note:'慧穩科技 AIWin 是企業 AI 導入專家，深耕智慧製造、半導體與企業 AI 應用。依本次提供的公司簡介，累積 150+ AI 落地案例、30+ 產業服務經驗與 6 項國家專利，並跨足越南、韓國、泰國市場。WinHub.AI 融合視覺辨識、數據分析、知識中樞與邊緣運算。從這些現場經驗出發，接下來用生命的成長，說明 AI 如何感知、學習與行動。'},
  {slug:'company-history',kind:'chronicle',accent:'#f08200',label:'公司沿革',stage:'company-history',note:'依使用者提供的公司沿革資料，分為 2016–2020 扎根與產品化、2021–2025 平台與國際化。先從慧穩創立、跨域專案與專利，說到 AI SaaS 模式；再帶出 WinHub.AI、資本挹注、多模態平台與海外市場。年份沿用原資料，不將後續產品學習比喻視為上市年份。'},
+ {slug:'castle',kind:'castle',accent:productInk.unified,label:'智慧城堡',stage:'overview',note:'四段手動推進：全貌、感知、學習、思考與行動。先讓觀眾看見十年累積的完整結果：現場設備是基礎，WinEdge 連接影像與數據，AIWinOps 與 NumOps 學會判斷，WinChat Agent 運用 RAG 與 SKILL，組合不同領域智慧。這裡是能力全貌；新品功能留在後段發表。轉場：這座城堡不是一天蓋成的。如果把它想成一個生命，它先學會感知，再從專案中學習，最後能思考與行動。接下來回到每一塊能力的起點。'},
  {slug:'first-contact',kind:'growth',accent:'#8cbbd7',label:'感知世界',stage:'sense',note:'像嬰兒第一次用眼睛與雙手接觸世界。感知不只有相機：鏡頭、光源與取像決定輸入的品質，串流與前處理整理畫面；感測器、PLC、資料庫與通訊帶回物理變化及設備脈絡。WinEdge-V 與 WinEdge-N 接收這些輸入，在現場串起流程、推論與回饋。接著依序展開影像入口與數據入口，兩塊 WinEdge 都由 Edge 硬體搭載；數據入口以 Modbus、MC Protocol、Database 接入，不再經過獨立三段式產品介紹。六個入口是概念說明，配置依現場而定。這是成長比喻，不是產品上市時間軸。'},
- {slug:'decade',kind:'history',accent:'#92a8c8',label:'從經驗中學習',stage:'experience',note:'承接前面的生命體：有了影像與數據的感知，就像孩子開始上學，在十年的不同專案中累積知識與判斷經驗。將現場資料依專案整理、標註，再反覆訓練與驗證，讓模型逐步學會判斷。先看五個影像案例影片，再逐案看硬體如何接收影像、在 WinEdge-V 上推論並輸出結果。五案完成後，全部經驗積木形成龍捲風，誕生 AIWinOps；硬體留下，連成現場蒐集、訓練、部署與回饋的迴路。完成後進入 NumOps，繼續學習數據中的規律。'},
+ {slug:'decade',kind:'history',accent:'#92a8c8',label:'從經驗中學習',stage:'experience',note:'承接前面的生命體：有了影像與數據的感知，就像孩子開始上學，在十年的不同專案中累積知識與判斷經驗。將現場資料依專案整理、標註，再反覆訓練與驗證，讓模型逐步學會判斷。直接走進五個案例積木，影片同頁呈現硬體取像、WinEdge-V 推論與現場結果，再經過整理、標註、任務、訓練與驗證五段學習。五案完成後，全部經驗積木形成龍捲風，誕生 AIWinOps；硬體留下，連成現場蒐集、訓練、部署與回饋的迴路。完成後進入 NumOps，繼續學習數據中的規律。'},
  productChapter('analytics'),productChapter('chat'),
  {slug:'connected-intelligence',kind:'body',accent:'#a5c9d1',label:'協作成形',stage:'connect',note:'眼睛與觸覺接收資訊，AIWinOps 與 NumOps 學會規律，WinChat 串起記憶、任務與技能。設備與執行端像肢體，資料通道像神經。所有部位開始協作；但數據與影像還分開，為新品發佈留下問題。'},
  {slug:'winedge',kind:'launch',accent:productInk.unified,label:'WinEdge 新品',stage:'evolve',note:'完整的身體，不會把看見的與感受到的分開。揭曉 WinEdge：最貼近現場的 AI 平台。整合 WinEdge-N 與 WinEdge-V，依製造業、機台、Agent、儀表板與 Robot 等現場需求，模組化組合各式 AI 應用。名稱與定位依使用者本次確認，不加入未提供的硬體規格或效能承諾。'},
- {slug:'castle',kind:'castle',accent:productInk.unified,label:'智慧城堡',stage:'evolve',note:'WinEdge 統一現場入口，AIWinOps 與 NumOps 提供學習能力，WinChat 的 RAG、Agent、Skill 串起知識與行動，再依領域組成不同 AI 大腦。模組化的智慧身體，可以長出不同的專業組合。'},
  ...combinations.map(c=>({slug:c.id,kind:'case',accent:products.find(p=>p.id===c.products[0]).uiColor,label:c.title,stage:'practice',combination:c,note:c.note})),
  {slug:'closing',kind:'closing',accent:'#a8c4df',label:'封底',stage:'closing',note:'下一個十年，與你同行。感謝一路同行的夥伴；讓每一次累積，成為下一個智慧新章。'}
 ];
+// Navigation follows the narrative order; combination cases share one chapter entry.
+export const chapterNavigation=chapters.filter(c=>c.kind!=='case'||c.slug==='inspection').map(c=>({slug:c.slug,title:({'intro':'序章','decade':'實戰與學習','analytics':'數據規律','chat':'知識與行動','inspection':'組合實績'})[c.slug]||c.label}));
 export const senseRoutes={visual:'cameras',numeric:'data'};
 export const chapterFor=slug=>chapters.findIndex(c=>c.slug===(senseRoutes[slug]?'first-contact':slug==='one-more-thing'?'winedge':slug));
 export const resolveChapterRoute=slug=>({index:chapterFor(slug),senseMode:senseRoutes[slug]});
-export const growthStages=[{id:'sense',title:'感知',sub:'眼睛與觸覺'},{id:'experience',title:'實戰',sub:'接觸真實問題'},{id:'learn',title:'學習',sub:'辨識與理解規律'},{id:'think',title:'思考',sub:'記憶、任務與技能'},{id:'connect',title:'協作',sub:'神經與肢體連結'},{id:'evolve',title:'進化',sub:'WinEdge'}];
+export const growthStages=[{id:'overview',title:'十年累積 · 智慧全貌',sub:'先看全貌，再走進每塊能力'},{id:'sense',title:'感知',sub:'眼睛與觸覺'},{id:'experience',title:'實戰',sub:'接觸真實問題'},{id:'learn',title:'學習',sub:'辨識與理解規律'},{id:'think',title:'思考',sub:'記憶、任務與技能'},{id:'connect',title:'協作',sub:'神經與肢體連結'},{id:'evolve',title:'進化',sub:'WinEdge'}];
 const fieldLinks=[
  {input:'瓶蓋影像',device:'相機與取像設備',output:'品質結果與檢測紀錄',feedback:'現場的新樣本，回到專案中持續標註與驗證。'},
  {input:'人員與場域影像',device:'現場攝影機',output:'事件畫面與風險提示',feedback:'將不同場域的情境留下，讓模型學習環境差異。'},
