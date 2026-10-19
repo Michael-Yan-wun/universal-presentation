@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createWinEdgeLaunch,launchFeatures,launchCaseStep,launchSummaryStep,launchLastStep} from '../dist/winedge-launch.js';
 import {ecosystemHTML,ecosystemNote} from '../dist/winedge-ecosystem.js';
+import {productBeats} from '../dist/winedge-product-tour.js';
+import {launchChapters} from '../dist/winedge-launch.js';
 
 test('the keynote closes with a partner invitation after cases and the full bento',t=>{
  const media=globalThis.matchMedia,observer=globalThis.ResizeObserver;
@@ -11,6 +13,8 @@ test('the keynote closes with a partner invitation after cases and the full bent
  let state;const launch=createWinEdgeLaunch({container,onChange:s=>state=s});launch.start();assert.equal(state.mode,'hero');
  for(let i=1;i<=launchLastStep;i++){
   assert.equal(launch.next(),true);assert.equal(state.step,i);
+  const count=productBeats[launchChapters[i-1]?.id]?.length||1;
+  for(let b=1;b<count;b++){launch.next();assert.equal(state.step,i);assert.equal(state.beat,b);}
   if(i===launchCaseStep)assert.equal(state.mode,'cases');
   if(i===launchSummaryStep){assert.equal(state.mode,'summary');assert.equal((container.innerHTML.match(/<article class="wl-tile /g)||[]).length,launchFeatures.length);}
  }

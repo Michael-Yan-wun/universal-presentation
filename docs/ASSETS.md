@@ -123,3 +123,12 @@ Three.js 0.180.0：MIT，授權見 [Three.js MIT 授權](../dist/vendor/THREE-LI
 - 依據使用者提供的「截圖 2026-10-09 下午2.31.01.png」，整理 2016–2025 年里程碑；原始參考保留於 `docs/design-archive/company-history-reference.png`。
 - 以可編輯 HTML 文字重新排版，逐年保留成立、專案、專利、SaaS、WinHub.AI、資本、平台及海外市場的重點，不把後續的產品成長故事當作上市年表。
 - 新頁位於 `#company-history`，背景沿用精簡深空銀河。線性圖示以 SVG 繪製，未新增第三方圖片或頁首 Logo。
+
+
+### WinEdge 實際產品介面（2026-10-19）
+
+- 使用者提供 `winedge-screenshot.zip`，共 10 張 2555 × 1288 PNG，收錄至 `dist/assets/winedge/`，排除 macOS metadata；英文檔名對應見該目錄 `manifest.json`。
+- 保留原始 PNG 位元組；網頁以 SVG viewBox 與 clipPath 節選重要區域，沒有重繪介面、變更數值或生成替代截圖。
+- 三主題共六幕手動展示，包含流程、通訊與模型、執行設定、預覽與維運、看板、Plugin / Agent。流程頁節選三個實際節點放大；圖解連線屬舞台動畫，非產品操作錄影。
+- Plugin 截圖聚焦左側節點目錄；原圖中央連線中斷狀態沒有被改成成功。模型目錄聚焦 AIWin 與 NumOps 節點，不突出原圖的單一 SAM 模型名稱。
+- 詳細對照與範圍見 [WinEdge CREDITS](../dist/assets/winedge/CREDITS.md)。
