@@ -11,7 +11,7 @@ function harness(t){
  const container={innerHTML:'',addEventListener(){},querySelectorAll(){return[]},querySelector(){return null}};
  const launch=createWinEdgeLaunch({container});return {container,launch};
 }
-test('three stories hold six real-product scenes with reversible previous/next navigation',t=>{
+test('three stories hold six scenes with reversible previous/next navigation',t=>{
  const {container,launch}=harness(t);launch.start();
  const expected=['workflow','libraries','timing','preview','dashboard','extensions'];
  for(const id of expected){assert.equal(launch.next(),true);assert.match(container.innerHTML,new RegExp(`data-beat="${id}"`));}
@@ -20,7 +20,7 @@ test('three stories hold six real-product scenes with reversible previous/next n
  launch.next();launch.next();launch.stop();assert.equal(launch.next(),false);launch.start();assert.equal(launch.state().beat,0);
  launch.start({atEnd:true});assert.equal(launch.state().current,launchLastStep);assert.equal(launch.next(),false);
 });
-test('all ten unchanged original captures appear in the tour without extra UI controls',()=>{
+test('selected original captures stay unmodified in the tour without extra UI controls',()=>{
  let html='';for(const [i,c] of launchChapters.entries())for(let b=0;b<productBeats[c.id].length;b++)html+=productTourHTML(c,i+1,b,'');
  for(const name of productScreens){
   assert.ok(html.includes(`/${name}.png`),name);
@@ -33,6 +33,12 @@ test('all ten unchanged original captures appear in the tour without extra UI co
  for(const match of html.matchAll(/class="we-screen" viewBox="([\d ]+)"/g)){
   const [x,y,w,h]=match[1].split(' ').map(Number);assert.ok(x>=0&&y>=0&&w>0&&h>0&&x+w<=2555&&y+h<=1288);
  }
+});
+test('rhythm scene explains the field outcome without configuration panels',()=>{
+ const html=productTourHTML(launchChapters[0],1,2,'');
+ assert.match(html,/讓 AI，跟上現場節奏/);
+ for(const term of ['相機影像','設備數據','資料對齊','AI 判斷','回應現場','即時反應','固定間隔','定時執行'])assert.ok(html.includes(term),term);
+ assert.doesNotMatch(html,/execution-interval|execution-schedule|input-channels|channel_size|backpressure|tolerance_interval|cron/);
 });
 test('leaving during an animated transition cannot paint an obsolete product screen',async t=>{
  const media=globalThis.matchMedia,observer=globalThis.ResizeObserver;

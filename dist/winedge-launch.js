@@ -1,4 +1,5 @@
-import {productBeats,productTourHTML,productScreens} from './winedge-product-tour.js?v=winedge-screens-1';
+import {productBeats,productTourHTML,productScreens} from './winedge-product-tour.js?v=winedge-connected-1';
+import {mountWorkflowConnections} from './winedge-workflow-links.js?v=winedge-connected-1';
 import {ecosystemHTML,ecosystemNote} from './winedge-ecosystem.js?v=ecosystem-1';
 // Presenter-controlled product launch. Product claims come from the supplied launch brief.
 export const launchFeatures = [
@@ -80,7 +81,7 @@ function heroHTML(){return `<section class="wl-hero wl-slide"><div class="wl-her
 function casesHTML(){return `<section class="wl-cases wl-slide"><header><div><p class="wl-eyebrow">BUILT FROM REAL EXPERIENCE</p><h1>從真實現場，走向整合。</h1></div><p>影像、數據與知識。<br>每一份實戰，都是新平台的起點。</p></header><div class="wl-case-grid"><article class="wl-case-main"><div class="wl-case-film"><video muted loop playsinline preload="metadata" poster="./assets/vision/caps.jpg" aria-label="瓶蓋瑕疵檢測應用展示影片"><source src="./assets/vision/caps.mp4" type="video/mp4"></video><button class="wl-video-play" hidden aria-label="播放瓶蓋檢測影片">播放案例影片 ▷</button><span class="wl-case-badge">VISION / 應用展示</span></div><div class="wl-case-copy"><span>01 / 食品飲料</span><h2>瓶蓋瑕疵檢測</h2><p>從產線影像辨識瓶蓋品質，<br>將瑕疵判讀整理成可追蹤的檢測結果。</p></div></article><article class="wl-case-side oven"><div class="wl-case-image"><img src="./assets/pitch-oven-temperature.png" alt="Pitch 中智慧烤箱溫控的多點溫度曲線"/></div><div class="wl-case-copy"><span>02 / DATA</span><h2>智慧烤箱溫控</h2><p>27 個風門 × 15 個溫度點<br>NumOps ＋ WinEdge-N</p></div></article><article class="wl-case-side knowledge"><div class="wl-case-image"><img src="./assets/pitch-winchat.png" alt="WinChat 企業知識問答的產品畫面"/></div><div class="wl-case-copy"><span>03 / KNOWLEDGE</span><h2>企業知識問答</h2><p>文件知識 × 來源引用<br>WinChat RAG</p></div></article></div><p class="wl-case-provenance">既有產品與專案展示｜AIWin Pitch v5 · p.46 / p.34 / p.20、38</p></section>`}
 
 export function createWinEdgeLaunch({container,productStage,onChange=()=>{}}){
- let current=0,beat=0,active=false,busy=false,generation=0,animations=[];
+ let current=0,beat=0,active=false,busy=false,generation=0,animations=[],disposeConnections=()=>{};
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const mode=()=>current===0?'hero':current===launchCaseStep?'cases':current===launchSummaryStep?'summary':current===launchLastStep?'ecosystem':'feature';
  function fitProduct(){
@@ -102,7 +103,9 @@ export function createWinEdgeLaunch({container,productStage,onChange=()=>{}}){
  function stopMedia(){container.querySelectorAll('.wl-root video').forEach(v=>{v.pause();v.removeAttribute('src');v.querySelectorAll('source').forEach(s=>s.removeAttribute('src'));v.load()})}
  function playMedia(){const v=container.querySelector('.wl-root video'),button=container.querySelector('.wl-video-play');if(!v)return;v.play().then(()=>{if(button?.isConnected)button.hidden=true}).catch(()=>{if(button?.isConnected)button.hidden=false})}
  function render(){
+  disposeConnections();
   container.innerHTML=`<div class="wl-root" data-mode="${mode()}"><div class="wl-content" aria-live="polite" aria-atomic="true">${current===0?heroHTML():current===launchCaseStep?casesHTML():current===launchSummaryStep?summaryHTML():current===launchLastStep?ecosystemHTML():featureHTML(launchChapters[current-1],current,beat)}</div><div class="wl-transit" aria-hidden="true"></div></div>`;
+  disposeConnections=mountWorkflowConnections(container);
   if(current===launchCaseStep&&!reduced)playMedia();
   else if(current===launchCaseStep)container.querySelector('.wl-video-play').hidden=false;
  }
@@ -116,5 +119,5 @@ export function createWinEdgeLaunch({container,productStage,onChange=()=>{}}){
   animations=[];busy=false;notify();return true;
  }
  container.addEventListener('click',e=>{if(active&&e.target.closest('.wl-video-play'))playMedia()});
- return {start({atEnd=false}={}){cancel();stopMedia();active=true;current=atEnd?launchLastStep:0;beat=0;render();notify();if(typeof Image!=='undefined')productScreens.forEach(name=>{const image=new Image();image.src=`./assets/winedge/${name}.png`})},stop(){active=false;cancel();stopMedia();fitProduct();container.querySelectorAll('.wl-root').forEach(e=>e.remove())},next(){if(!active)return false;if(busy)return true;if(current===launchLastStep)return false;if(beat+1<beatCount(current))show(current,beat+1);else show(current+1);return true},previous(){if(!active||current===0&&!busy)return false;if(!busy){if(beat>0)show(current,beat-1);else show(current-1,beatCount(current-1)-1)}return true},state:()=>({current,beat,active,busy})};
+ return {start({atEnd=false}={}){cancel();stopMedia();active=true;current=atEnd?launchLastStep:0;beat=0;render();notify();if(typeof Image!=='undefined')productScreens.forEach(name=>{const image=new Image();image.src=`./assets/winedge/${name}.png`})},stop(){active=false;cancel();disposeConnections();stopMedia();fitProduct();container.querySelectorAll('.wl-root').forEach(e=>e.remove())},next(){if(!active)return false;if(busy)return true;if(current===launchLastStep)return false;if(beat+1<beatCount(current))show(current,beat+1);else show(current+1);return true},previous(){if(!active||current===0&&!busy)return false;if(!busy){if(beat>0)show(current,beat-1);else show(current-1,beatCount(current-1)-1)}return true},state:()=>({current,beat,active,busy})};
 }

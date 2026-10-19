@@ -129,6 +129,6 @@ Three.js 0.180.0：MIT，授權見 [Three.js MIT 授權](../dist/vendor/THREE-LI
 
 - 使用者提供 `winedge-screenshot.zip`，共 10 張 2555 × 1288 PNG，收錄至 `dist/assets/winedge/`，排除 macOS metadata；英文檔名對應見該目錄 `manifest.json`。
 - 保留原始 PNG 位元組；網頁以 SVG viewBox 與 clipPath 節選重要區域，沒有重繪介面、變更數值或生成替代截圖。
-- 三主題共六幕手動展示，包含流程、通訊與模型、執行設定、預覽與維運、看板、Plugin / Agent。流程頁節選三個實際節點放大；圖解連線屬舞台動畫，非產品操作錄影。
+- 三主題共六幕手動展示，包含流程、通訊與模型、節奏控制示意、預覽與維運、看板、Plugin / Agent。流程頁節選三個實際節點放大，動畫直接連到輸出／輸入端口。七張原圖用於舞台，三張細部設定原圖留作技術補充；連線與節奏示意屬舞台動畫，非產品操作錄影。
 - Plugin 截圖聚焦左側節點目錄；原圖中央連線中斷狀態沒有被改成成功。模型目錄聚焦 AIWin 與 NumOps 節點，不突出原圖的單一 SAM 模型名稱。
 - 詳細對照與範圍見 [WinEdge CREDITS](../dist/assets/winedge/CREDITS.md)。
