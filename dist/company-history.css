@@ -36,9 +36,9 @@
 .heritage-platform-logo{position:relative;display:block;flex:none;width:100px;height:66px;overflow:hidden}
 .heritage-platform-logo img{position:absolute;width:143px;height:101px;max-width:none;left:-21px;top:-19px;object-fit:contain}
 .heritage-platform{color:var(--type-platform,#79c5dd)}
-.heritage-transition{display:flex;align-items:center;gap:30px;color:#95a5b8;font-size:21px;letter-spacing:3px;line-height:1.5}
-.heritage-transition::before,.heritage-transition::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,#aa815255)}
-.heritage-transition::after{background:linear-gradient(90deg,#aa815255,transparent)}
+.heritage-transition{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:56px;row-gap:4px;align-content:center;justify-items:center;color:#b8c4d2;font-size:21px;letter-spacing:3px;line-height:1.5}
+.heritage-stage-arrow{display:block;width:84px;height:28px;fill:none;stroke:var(--heritage-orange);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;opacity:.95}
+.heritage-transition>span{grid-column:2;white-space:nowrap}
 .heritage-summary{margin:0;align-self:end;text-align:center;font-size:27px;letter-spacing:3px;line-height:1.5;color:#d7e0e9}
 /* Preserve the complete slide on small displays instead of switching to a scrolling timeline. */
 @media(max-width:800px){

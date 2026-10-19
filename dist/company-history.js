@@ -40,7 +40,10 @@ export function companyHistoryHTML(){
       <p class="heritage-intent">從技術深耕到全球布局</p>
     </div>
     ${stageHTML(companyHistory[0], 0)}
-    <div class="heritage-transition" data-heritage-reveal><span>從技術研發走向 AI 平台整合</span></div>
+    <div class="heritage-transition" data-heritage-reveal>
+      ${Array.from({length:3},()=>'<svg class="heritage-stage-arrow" viewBox="0 0 84 28" aria-hidden="true" focusable="false"><path d="M5 3 42 13 79 3M5 14 42 24 79 14"/></svg>').join('')}
+      <span>從技術研發走向 AI 平台整合</span>
+    </div>
     ${stageHTML(companyHistory[1], 1)}
     <p class="heritage-summary" data-heritage-reveal>十年技術累積，持續推動企業 AI 落地。</p>
   </div>`;
