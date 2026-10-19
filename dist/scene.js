@@ -1,6 +1,7 @@
-import {createCastleScene} from './castle-scene.js?v=castle-living-2';
+import {createCastleAscent} from './castle-ascent.js?v=castle-modular-20261020-94';
+import {createCastleScene} from './castle-scene.js?v=castle-modular-20261020-94';
 import { createEdgeHost } from './edge-host.js?v=winedge-detail-1';
-import { createCompanyScene } from './company.js?v=company-lockup-6';
+import { createCompanyScene } from './company.js?v=company-five-products-20261019-87';
 import * as THREE from './vendor/three.module.js';
 import {stageView} from './stage-layout.js?v=winedge-launch-7';
 import { products, chapters, agents, palette } from './content.js?v=keynote-flow-1';
@@ -9,7 +10,7 @@ import {createGrowthScene} from './growth-scene.js?v=keynote-flow-1';
 import {createProductJourney} from './product-journey.js?v=winchat-integrated-1';
 import { createAnniversary } from './anniversary.js?v=cosmic-opening-1';
 
-export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>{},onProductStage=()=>{},onSenseStage=()=>{}) {
+export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>{},onProductStage=()=>{},onSenseStage=()=>{},onCastlePhase=()=>{}) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true, powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
@@ -45,7 +46,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     const o={g,home:new THREE.Vector3(...pos),goal:new THREE.Vector3(...pos),targetScale:scale,id,name,w,h,d};bricks.push(o);
     if(label)addLabel(g,new THREE.Vector3(0,h/2+.8,0),name,id,color,'product-label');return o;
   }
-  function addLabel(group,anchor,text,id,color,cls='',scope='castle'){const el=document.createElement(cls==='ct-domain-label'||scope==='body'?'div':'button');el.className='model-label '+cls;el.style.setProperty('--label-color',color);el.innerHTML=`<i></i><span>${text}</span>`;el.setAttribute('aria-label',scope==='body'?text:`探索 ${text}`);if(scope!=='body')el.onclick=()=>onSelect(id);labelLayer.appendChild(el);labels.push({group,anchor,el,parent:group.parent,scope});return el}
+  function addLabel(group,anchor,text,id,color,cls='',scope='castle'){const el=document.createElement(cls==='ct-domain-label'||cls==='ct-ascent-label'||scope==='body'?'div':'button');el.className='model-label '+cls;el.style.setProperty('--label-color',color);el.innerHTML=`<i></i><span>${text}</span>`;el.setAttribute('aria-label',scope==='body'?text:`探索 ${text}`);if(scope!=='body')el.onclick=()=>onSelect(id);labelLayer.appendChild(el);labels.push({group,anchor,el,parent:group.parent,scope});return el}
   const launchHost=createEdgeHost({parent:groups.launch,brick,addLabel:()=>{},id:'launch-core',detail:'hero',name:'WinEdge',subtitle:'VISION / DATA / AGENT',color:palette.unified,pos:[0,0,0]});
   // Match the reference: a stepped arch, close seams, solid warm gold and a physical deck.
   const ten=[],goldPalette=['#f3b93d','#f9cc68','#c88920','#dfa02a','#ebb137'];
@@ -65,7 +66,9 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     const shellMat=new THREE.MeshPhysicalMaterial({color,transparent:true,opacity:.16,roughness:.4,depthWrite:false});for(const side of [-1,1]){const shell=new THREE.Mesh(new THREE.SphereGeometry(1,24,16),shellMat);shell.position.x=side*.27;shell.scale.set(.35,.55,.43);brain.add(shell)}
     brains.push({brain,nodes,lines});return brain;
   }
-  const castle=createCastleScene({group:groups.castle,brick,geometry,makeBrain,addLabel,agents});
+  const castleWorld=new THREE.Group();groups.castle.add(castleWorld);
+  const castle=createCastleScene({group:castleWorld,brick,geometry,makeBrain,addLabel,agents});
+  const castleAscent=createCastleAscent({group:groups.castle,castleGroup:castleWorld,castle,geometry,makeTitleTexture:printTexture,onPhase:onCastlePhase});
   const comboBricks=products.map(p=>brick(groups.case,{id:p.id,name:p.name,sub:p.role,color:p.color,cols:4,rows:2,h:1.25}));
   const agentBrick=brick(groups.case,{id:'ecosystem',name:'AI Agent',sub:'DOMAIN INTELLIGENCE',color:palette.stone,cols:4,rows:2,h:1.25});comboBricks.push(agentBrick);
   const caseBrain=makeBrain(groups.case,'#c2d3e7',.8);caseBrain.position.set(5.8,3.7,0);
@@ -97,7 +100,7 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     if(kind==='history')historyWall.restart({atEnd});
     if(kind==='growth')growth.reset();
     if(kind==='product')productJourney.reset(chapters[index].product.id,{atEnd});
-    if(kind==='castle'){castle.reset();angle=0;const view=castle.view(aspect);camera.position.set(view.x+.8,view.y+.4,view.z+1);target.set(0,view.targetY,0);}
+    if(kind==='castle'){castleAscent.reset({atEnd});angle=0;const view=atEnd?castle.view(aspect):castleAscent.view(aspect);camera.position.set(view.x,view.y,view.z);target.set(0,view.targetY,0);}
     if(kind==='launch'){angle=0;launchMode='hero';const view=stageView(kind,aspect);camera.position.set(view.x,view.y,view.z);target.set(0,view.targetY,0);}
     if(kind==='case'){const ids=chapters[index].combination.products;comboBricks.forEach((o,i)=>{const id=i<5?products[i].id:'domain',j=ids.indexOf(id);o.g.visible=j>=0;o.goal.set((j-(ids.length-1)/2)*5.8,2.1,0);o.targetScale=1.03;if(j>=0)o.g.position.set(o.goal.x,6,-3)});caseBrain.visible=ids.includes('domain')}
     labels.forEach(l=>l.el.hidden=kind!==l.scope);resize();
@@ -106,15 +109,15 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
 
   function setInspect(on){inspect=on}
   function animate(ms){raf=requestAnimationFrame(animate);if(document.hidden||openingOccluded||kind==='closing'||kind==='chronicle'||kind==='launch'&&['feature','cases','ecosystem'].includes(launchMode)){last=ms;return;}const dt=Math.min((ms-last)/1000,.05)||.016;last=ms;age+=dt;const t=ms*.001,e=reduced?1:1-Math.exp(-dt*4.6);
-    const view=(kind==='product'?productJourney.view(aspect):null)||(kind==='castle'?castle.view(aspect):stageView(kind,aspect,{phase:productJourney.phase(),exploded,inspect,companyLayout}));
+    const view=(kind==='product'?productJourney.view(aspect):null)||(kind==='castle'?(castleAscent.phase==='castle'?castle.view(aspect):castleAscent.view(aspect)):stageView(kind,aspect,{phase:productJourney.phase(),exploded,inspect,companyLayout}));
     if(kind==='history'){historyWall.update(age,reduced,dt);camera.position.copy(historyWall.cameraPosition);target.copy(historyWall.cameraTarget);camera.lookAt(target);const w=container.clientWidth,h=container.clientHeight;camera.setViewOffset(w,h,-w*historyWall.frameOffset(),0,w,h);rig.rotation.y=0;}else{
     if(kind==='product'&&productJourney.frameOffset()){const w=container.clientWidth,h=container.clientHeight;camera.setViewOffset(w,h,-w*productJourney.frameOffset(),0,w,h);}else if(camera.view?.enabled)camera.clearViewOffset();
     const introTime=introClock??age;const openingDolly=kind==='intro'&&!reduced?1-THREE.MathUtils.smootherstep(introTime,0,3.5):0;
     const dolly=kind==='company'&&companyLayout==='stage'&&!reduced?companyScene.entrance():0;
-    camGoal.set(view.x+1.8*dolly+3*openingDolly,view.y+.65*dolly+1.5*openingDolly,view.z+1.5*dolly+4*openingDolly);camera.position.lerp(camGoal,e);look.set(0,view.targetY,0);target.lerp(look,e);camera.lookAt(target);angle+=(angleGoal-angle)*e;rig.rotation.y=angle+(reduced||kind==='company'?0:Math.sin(t*.2)*(kind==='intro'?.012:.035));}
+    camGoal.set(view.x+1.8*dolly+3*openingDolly,view.y+.65*dolly+1.5*openingDolly,view.z+1.5*dolly+4*openingDolly);camera.position.lerp(camGoal,e);look.set(0,view.targetY,0);target.lerp(look,e);camera.lookAt(target);angle+=(angleGoal-angle)*e;rig.rotation.y=angle+(reduced||kind==='company'||kind==='castle'?0:Math.sin(t*.2)*(kind==='intro'?.012:.035));}
     for(const o of bricks){if(!visible(o.g)||o.historyManaged||o.companyManaged||o.journeyManaged||o.senseManaged||o.introManaged||o.castleManaged)continue;o.g.position.lerp(o.goal,e);o.g.scale.lerp(v.setScalar(o.targetScale),e)}
-    if(!reduced){brains.forEach(({brain,nodes},i)=>{if(visible(brain)){brain.rotation.y=Math.sin(t*.45+i)*.18;nodes.material.opacity=.65+.35*Math.sin(t*1.6+i)}})}
-    if(kind==='castle')castle.update(dt,t,reduced);
+    if(!reduced){brains.forEach(({brain,nodes},i)=>{if(visible(brain)&&!(kind==='castle'&&castleAscent.phase!=='castle')){brain.rotation.y=Math.sin(t*.45+i)*.18;nodes.material.opacity=.65+.35*Math.sin(t*1.6+i)}})}
+    if(kind==='castle'){castleAscent.update(dt,t,reduced);if(castleWorld.visible)castle.update(dt,t,reduced);}
     if(kind==='company')companyScene.update(age,reduced);
     if(kind==='launch'){launchHost.update(age,reduced?1:Math.min(1,age/1.6),reduced);if(launchMode==='summary')launchHost.root.scale.multiplyScalar(2.15);}
     if(kind==='intro'){
@@ -128,5 +131,5 @@ export function createScene(container, labelLayer, onSelect, onHistoryStage=()=>
     const r=container.getBoundingClientRect(),lr=labelLayer.getBoundingClientRect();labels.forEach(l=>{l.el.hidden=kind!==l.scope||!visible(l.group)||(l.scope==='history'&&!historyWall.labelsVisible())||(l.scope==='product'&&!productJourney.labelsVisible());if(l.el.hidden)return;v.copy(l.anchor);l.group.localToWorld(v);v.project(camera);l.el.style.left=`${(v.x*.5+.5)*r.width+r.left-lr.left}px`;l.el.style.top=`${(-v.y*.5+.5)*r.height+r.top-lr.top}px`});
   }
   camera.position.set(5,6,24);setChapter(0);raf=requestAnimationFrame(animate);
-  return {setOpeningOccluded(value){openingOccluded=value;},setIntroTime(time){introClock=time;if(time>=20){age=4;introClock=null;}},setChapter,setExploded,setCastleStep(value){castle.setStep(value);},setInspect,setLaunchMode(mode){launchMode=mode;resize();},setCompanyLayout(id){companyLayout=id;angleGoal=0;companyScene.setLayout(id);},senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();window.removeEventListener('resize',resize);anniversary.dispose();companyScene.dispose();historyWall.dispose();productJourney.dispose();castle.dispose();renderer.dispose()}};
+  return {setOpeningOccluded(value){openingOccluded=value;},setIntroTime(time){introClock=time;if(time>=20){age=4;introClock=null;}},setChapter,setExploded,setCastleStep(value){castle.setStep(value);},castleAscentAction(){return castleAscent.advance(reduced);},resetCastleAscent(){castleAscent.reset();},setInspect,setLaunchMode(mode){launchMode=mode;resize();},setCompanyLayout(id){companyLayout=id;angleGoal=0;companyScene.setLayout(id);},senseAction:growth.action,productAction:productJourney.action,productPhase:productJourney.phase,historyAction:historyWall.action,historyAdvance:historyWall.advance,historyPrevious:historyWall.previous,dispose(){cancelAnimationFrame(raf);observer.disconnect();window.removeEventListener('resize',resize);anniversary.dispose();companyScene.dispose();historyWall.dispose();productJourney.dispose();castleAscent.dispose();castle.dispose();renderer.dispose()}};
 }

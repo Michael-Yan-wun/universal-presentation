@@ -6,8 +6,7 @@
 /* Display the original orange and gray logo without recoloring. */
 #opening-brand { position:absolute; z-index:3; left:34%; top:45%; width:clamp(210px,36vh,280px); opacity:0; transform:translate(-50%,-50%); transform-origin:center; will-change:transform,opacity; }
 #opening-brand img { position:relative; z-index:2; display:block; width:100%; height:auto; }
-#cover-brand-logo { display:none; flex:none; width:44px; height:auto; filter:none; }
-body:has(#experience[data-kind=intro]) #cover-brand-logo { display:block; }
+#cover-brand-logo { display:block; flex:none; width:44px; height:auto; filter:none; }
 #opening-skip { position:fixed; z-index:32; right:4.5%; bottom:37px; border:1px solid #b1c4e43b; border-radius:30px; padding:10px 16px; background:#030915b8; color:#c6d2e5; font-size:11px; letter-spacing:.06em; }
 #opening-skip span { margin-left:13px; font-size:9px; color:#a4b4cb; }
 #opening-skip:hover { background:#152338; color:white; }
