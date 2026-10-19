@@ -1,8 +1,8 @@
-import {visionCurriculum} from './aiwinops-keynote.js?v=vision-keynote-1';
+import {visionCurriculum} from './aiwinops-keynote.js?v=castle-first-1';
 import * as THREE from './vendor/three.module.js';
 import {createFieldKit} from './field-kit.js?v=learning-life-1';
 import {createLearningLife} from './learning-life.js?v=learning-life-1';
-import { historyCases, visionCases, palette } from './content.js?v=company-history-15';
+import { historyCases, visionCases, palette } from './content.js?v=castle-first-1';
 
 // A presenter-controlled journey. The moat is reserved until all disciplines have stories.
 export function createHistoryWall({group, brick, renderer, geometry, addLabel, onStage}) {

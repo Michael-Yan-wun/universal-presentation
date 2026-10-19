@@ -1,5 +1,5 @@
-import {visionLessonHTML,visionHardwareHTML} from './aiwinops-keynote.js?v=vision-keynote-1';
-import { historyCases, visionCases } from './content.js?v=company-history-15';
+import {visionLessonHTML,visionHardwareHTML} from './aiwinops-keynote.js?v=castle-first-1';
+import { historyCases, visionCases } from './content.js?v=castle-first-1';
 const eyebrow=text=>`<p class="eyebrow"><span class="eyebrow-line"></span>${text}</p>`;
 const button=(action,text,secondary=false)=>secondary?`<button class="text-button" data-history="${action}">${text} <span>↶</span></button>`:'';
 export function historyOverview(completed=false){
@@ -8,7 +8,7 @@ export function historyOverview(completed=false){
 export function historyRoomAction(canFuse){return canFuse?button('fuse','把經驗化為訓練'):'<div class="vision-fields"><span>品質</span><span>工安</span><span>計數</span><span>SOP</span><span>組裝</span></div>'}
 export function historyUI(state){
  const {phase,completed,selected,canFuse=false}=state;
- const route=`<div class="history-route"><span class="active">01 / VISION</span><i></i><span>02 / DATA</span><i></i><span>03 / LLM</span><i></i><span>AI 護城河</span></div>`;
+ const route=`<div class="history-route"><span class="active">01 / VISION</span><i></i><span>02 / DATA</span><i></i><span>03 / LLM</span><i></i><span>智慧成形</span></div>`;
  if(phase==='overview')return {story:historyOverview(completed),detail:`<div class="history-overview-caption"><span>EVERY PROJECT, A LESSON. EVERY LESSON, A BUILDING BLOCK.</span><strong>${completed?'影像經驗，已沉澱成 AIWinOps。':'一次次實戰，讓智慧逐步成長。'}</strong></div>${route}`};
  if(phase==='entering')return {story:'',detail:'<div class="history-transition vision-entry"><p class="vision-entry-kicker">A DECADE OF LEARNING TO SEE</p><div class="vision-wordmark" data-text="VISION"><span>VISION</span></div><p class="vision-entry-subtitle">從看見，到學會辨識。</p><div class="vision-entry-rule"></div></div>'};
  if(phase==='returning')return {story:'',detail:'<div class="history-transition returning"><span>EXPERIENCE BECOMES CAPABILITY</span></div>'};

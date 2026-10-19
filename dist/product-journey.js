@@ -2,7 +2,7 @@ import {numOpsBeatCounts,numOpsTravelSeconds} from './numops-script.js?v=waterop
 import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './winchat-script.js?v=winchat-launch-1';
 import * as THREE from './vendor/three.module.js';
 import {journeyStage as layout} from './stage-layout.js?v=company-stage-2';
-import {products} from './content.js?v=company-history-15';
+import {products} from './content.js?v=castle-first-1';
 import {createFieldKit} from './field-kit.js?v=learning-life-1';
 export const productStories={
  analytics:{title:'經驗多了，<br>開始找出規律。',bridge:'像在學校學會推理，把訊號與經驗整理成方法。',topics:[
