@@ -51,7 +51,7 @@ export function createAVS530(parent){
  return {...k,chassis};
 }
 
-export function createDGXSpark(parent){
+export function createDGXSpark(parent,{plinth=true}={}){
  const k=sculpture(parent,'dgx-spark'),{root,round,rect,batch,black,steel}=k;
  const champagne=k.mat('#bea678',.72,.27),rim=k.mat('#d5c39a',.68,.28);
  // Rounded square top, finely perforated gold front, vertical corner insets.
@@ -66,11 +66,11 @@ export function createDGXSpark(parent){
  round(root,.6,.035,.18,.035,steel,.95,.55,-1.05);
  for(let i=0;i<4;i++){round(root,.27,.12,.06,.045,black,-1+i*.5,-.02,-1.79);}
  rect(root,.4,.3,.035,black,1.1,-.02,-1.79);
- k.plinth(root,4.4,4.2,-.81,'#c8af81');
+ if(plinth)k.plinth(root,4.4,4.2,-.81,'#c8af81');
  return k;
 }
 
-export function createRTXWorkstation(parent){
+export function createRTXWorkstation(parent,{plinth=true}={}){
  const k=sculpture(parent,'rtx-pro-workstation'),{root,rect,round,disc,screw,fan,batch,box,dark,black,silver,steel,glow}=k;
  // Original tower with a side cutaway. One illustrated RTX PRO 6000 card.
  const body=new THREE.Group();body.name='workstation-cutaway';body.rotation.y=-.43;root.add(body);
@@ -100,17 +100,38 @@ export function createRTXWorkstation(parent){
  const vents=[];for(let y=0;y<28;y++)for(let z=0;z<17;z++)vents.push([1.394,-1.6+y*.12,-1.4+z*.16]);batch(body,new THREE.CircleGeometry(.022,8),black,vents,[0,Math.PI/2,0]);
  disc(body,.06,.025,glow,.85,2.25,1.89);
  for(const x of[-.8,.8])rect(body,.38,.16,2.9,black,x,-2.5,0);
- k.plinth(root,3.65,4.5,-2.72,'#b29acd');
+ if(plinth)k.plinth(root,3.65,4.5,-2.72,'#b29acd');
  return k;
 }
 
 export function createProductHardware(parent,id){
  const root=new THREE.Group();root.name=`${id}-hardware`;root.visible=false;parent.add(root);
- const models=id==='analytics'?[createAVS530(root)]:[createDGXSpark(root),createRTXWorkstation(root)];
- if(id==='chat'){models[0].root.position.set(-3.8,-1.63,.5);models[0].root.scale.setScalar(1.1);models[0].root.rotation.y=.1;models[1].root.position.set(3.25,-.17,-.4);models[1].root.scale.setScalar(.92);
-  models[0].route(root,[[-1.75,2.4,0],[-2.75,1.8,0],[-3.8,1.2,0],[-3.8,-.8,0]],'#c3a6dd');
-  models[0].route(root,[[1.75,2.4,0],[2.6,2.55,-.4],[3.25,2.5,-.4],[3.25,2.1,-.4]],'#c3a6dd');
-  const front=new THREE.PointLight(0xe3dfed,16,14,2);front.position.set(3,2,6);root.add(front);}
+ const models=id==='analytics'?[createAVS530(root)]:[createDGXSpark(root,{plinth:false}),createRTXWorkstation(root,{plinth:false})];
+ let stage=null;
+ if(id==='chat'){
+  // A single exhibition deck ties the two deployment options to one platform.
+  stage=sculpture(root,'winchat-shared-stage');
+  const metal=stage.mat('#363445',.64,.32),edge=stage.mat('#b7a3d2',.55,.25);
+  stage.round(stage.root,12.6,.32,6.05,.22,metal,0,-2.83,0);
+  stage.round(stage.root,12.9,.12,6.2,.24,stage.black,0,-3.06,0);
+  stage.rect(stage.root,12.05,.035,.035,edge,0,-2.65,2.98);
+  // A raised matching pedestal gives the compact machine visual presence.
+  stage.round(stage.root,4.65,1.62,4.65,.14,metal,-3.25,-1.84,.12);
+  stage.round(stage.root,4.75,.075,4.75,.15,stage.steel,-3.25,-.99,.12);
+  stage.rect(stage.root,4.28,.025,.025,edge,-3.25,-1.04,2.5);
+  models[0].root.position.set(-3.25,-.25,.12);models[0].root.scale.setScalar(1.06);
+  models[0].root.rotation.y=.025;
+  models[1].root.position.set(3,-.47,-.35);models[1].root.scale.setScalar(.86);
+  // Recessed routes stay on the common deck; no dangling visual connectors.
+  for(const side of[-1,1])stage.route(stage.root,[[0,-2.65,2.65],[side*1.25,-2.65,2.65],[side*4.9,-2.65,2.65],[side*5.65,-2.65,1.9],[side*5.65,-2.65,-1.6]],'#c0a6e1');
+  // Fine architectural uprights carry the software layer behind both machines.
+  for(const x of[-5.4,5.4]){
+   stage.round(stage.root,.055,5.2,.055,.02,edge,x,-.08,-1.9);
+   stage.route(stage.root,[[x,-2.6,-1.9],[x,0,-1.9],[x,2.52,-1.9],[x*.45,2.52,-1.9]],'#cdb8e5');
+  }
+  stage.rect(stage.root,10.8,.035,.055,edge,0,2.52,-1.9);
+  const front=new THREE.PointLight(0xeee8fa,20,16,2);front.position.set(1,2,6);root.add(front);
+ }
  const light=new THREE.PointLight(id==='chat'?0xd5c0ed:0xb2cbef,5,14,2);light.position.set(-2,5,4);root.add(light);
- return {root,models,update(time,progress=1,reduced=false){const p=THREE.MathUtils.clamp(progress,0,1),k=1-(1-p)**3;root.visible=p>0;root.position.y=-2.1*(1-k);models.forEach(m=>m.update(time,reduced));},dispose(){models.forEach(m=>m.dispose());}};
+ return {root,models,update(time,progress=1,reduced=false){const p=THREE.MathUtils.clamp(progress,0,1),k=1-(1-p)**3;root.visible=p>0;root.position.y=-2.1*(1-k);models.forEach(m=>m.update(time,reduced));stage?.update(time,reduced);},dispose(){models.forEach(m=>m.dispose());stage?.dispose();}};
 }

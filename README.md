@@ -25,7 +25,7 @@ AIWinOps 最後的產品畫面已加入參考 APLEX AVS-553 的 Three.js 工業�
 產品最後一幕保留積木融合，再帶出各自的運算硬體；沿用原本上一段／下一段，不增加講解頁數。
 
 - **NumOps：APLEX AVS-530**。無風扇工業電腦，銀色散熱鰭片、前面板 LAN／USB／COM 與電源端子。部署圖同步標示 WinEdge-N 搭載 AVS-530。
-- **WinChat：兩種部署選擇**。小團隊使用 NVIDIA DGX Spark；大型部署呈現搭載 RTX PRO 6000 的工作站。共同的 WinChat 積木以流動訊號連向兩台主機。
+- **WinChat：兩種部署選擇**。小團隊使用 NVIDIA DGX Spark；大型部署呈現搭載 RTX PRO 6000 的工作站。以中央 WinChat 積木、共用展台與兩台主機形成完整構圖；Spark 使用抬高展座，兩種部署名稱對齊各自主機，訊號沿共同底座與背架流動。
 - `dist/product-hardware.js` 提供原生 Three.js 幾何模型、風扇與訊號動畫；`product-journey.js` 管理融合、返回和重播。模型不依賴外部貼圖或 CDN。
 - 硬體搭配依本次產品規劃；工作站為原創剖面示意，RTX PRO 6000 是內部顯示卡，未宣稱特定 OEM 主機、模型容量、並行人數或測試效能。
 - 官方外觀參考記錄於 [NumOps 素材來源](dist/assets/numops/CREDITS.md#avs-530-hardware) 與 [WinChat 素材來源](dist/assets/winchat/CREDITS.md#hardware-deployment)。

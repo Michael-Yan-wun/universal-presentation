@@ -21,7 +21,7 @@ function screen(asset){
  return frame(`<div class="wc-product-cinema"><div class="wc-window-bar"><span class="wc-window-dots"><i></i><i></i><i></i></span><strong>WinChat <span>/ ${a.label}</span></strong><span>PRODUCT EXPERIENCE</span></div><div class="wc-camera-viewport"><div class="wc-camera-image" style="--source-ratio:${a.ratio}"><img src="./assets/winchat/${asset}.webp" alt="${a.alt}" loading="eager" decoding="sync"/><span class="wc-source-highlight" aria-hidden="true"></span></div><div class="wc-cinema-focus" aria-hidden="true"><span></span><strong></strong><i></i></div></div></div>`,'official','wc-screen-frame');
 }
 function hero(){
- return `<section class="wc-product-reveal"><div class="wc-reveal-light"></div><p>MEMORY. REASONING. ACTION.</p><h1>WinChat<span>讓企業知識，<br>成為工作的力量。</span></h1><div class="wc-reveal-formula"><span>Agent</span><b>←</b><span>RAG</span><b>·</b><span>SKILL</span></div><footer><span>從小團隊，到企業部署。</span></footer></section><div class="wc-hardware-options"><article><span>小團隊</span><h2>NVIDIA DGX Spark</h2><p>小巧桌上型 AI 主機</p></article><article><span>企業部署</span><h2>RTX PRO 6000</h2><p>大型 AI 工作站</p></article></div><small class="wc-hardware-note">工作站外觀為配置示意</small>`;
+ return `<section class="wc-product-reveal"><div class="wc-reveal-light"></div><header><p>WINCHAT / ENTERPRISE AI</p><h1>從小團隊，到企業部署。</h1></header></section><div class="wc-hardware-options"><article><span>01 <i></i> 小團隊</span><h2>NVIDIA DGX Spark</h2><p>小巧桌上型 AI 主機</p></article><article><span>02 <i></i> 企業部署</span><h2>RTX PRO 6000</h2><p>大型 AI 工作站</p></article></div><small class="wc-hardware-note">工作站外觀為配置示意</small>`;
 }
 export function winChatKeynote(state,helpers){
  if(state.phase==='born'){

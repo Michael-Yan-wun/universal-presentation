@@ -3,7 +3,7 @@ import {winChatBeatCounts,winChatFinalBeats,winChatTravelSeconds} from './wincha
 import * as THREE from './vendor/three.module.js';
 import {journeyStage as layout} from './stage-layout.js?v=company-stage-2';
 import {products} from './content.js?v=keynote-flow-1';
-import {createProductHardware} from './product-hardware.js?v=product-hardware-1';
+import {createProductHardware} from './product-hardware.js?v=winchat-integrated-1';
 import {createFieldKit} from './field-kit.js?v=learning-life-1';
 export const productStories={
  analytics:{title:'經驗多了，<br>開始找出規律。',bridge:'像在學校學會推理，把訊號與經驗整理成方法。',topics:[
@@ -55,14 +55,14 @@ export function createProductJourney({group,brick,addLabel,onStage}){
  }
 
  function reveal(r,age,p,reduced){
-  const k=ease(p),scale=id==='chat'?1.04:1.16,y=id==='chat'?3.4:1.65;
-  r.born.g.visible=p>0;r.born.g.scale.setScalar(scale*(.85+.15*k));r.born.g.position.set(0,y+(1-k)*1.9,0);r.born.g.rotation.set(0,reduced?0:Math.sin(age*.25)*.025,0);r.hardware.update(age,p,reduced);
+  const k=ease(p),scale=id==='chat'?1.32:1.16,y=id==='chat'?3.0:1.65;
+  r.born.g.visible=p>0;r.born.g.scale.setScalar(scale*(.85+.15*k));r.born.g.position.set(0,y+(1-k)*1.9,id==='chat'?-1.1:0);r.born.g.rotation.set(0,reduced?0:Math.sin(age*.25)*.025,0);r.hardware.update(age,p,reduced);
  }
- function view(aspect){if(!['fusing','born'].includes(phase))return null;return {x:id==='chat'?3.1:4.9,y:id==='chat'?4.3:5.4,z:(id==='chat'?22:19.6)*Math.max(1,1.45/aspect),targetY:id==='chat'?-.15:-.5};}
+ function view(aspect){if(!['fusing','born'].includes(phase))return null;return {x:id==='chat'?2.4:4.9,y:id==='chat'?5.2:5.4,z:(id==='chat'?23.5:19.6)*Math.max(1,1.45/aspect),targetY:id==='chat'?.65:-.5};}
  function update(age,reduced,dt){clock+=dt;const r=roots[id];if(!r)return;
  if(phase==='selecting'){const p=reduced?1:clamp(clock/travelSeconds()),k=ease(p);r.pieces.forEach(({o},i)=>{const target=i===selected?V(0,layout.focusY,2.0):V((i-1)*layout.spread,-.95,-2.6);o.g.position.lerpVectors(from[i],target,k);o.g.position.y+=Math.sin(p*Math.PI)*.8;o.g.scale.setScalar(i===selected?layout.overviewScale+k*(layout.focusScale-layout.overviewScale):layout.overviewScale-k*.46)});if(p===1){if(beat===counts()[selected]-1)visited.add(selected);change('focus')}}
  if(phase==='fusing'){const p=reduced?1:clamp(clock/4.6),k=ease(clamp(p/.76));r.pieces.forEach(({o},i)=>{const a=i*2.09+p*6.2,rad=(1-k)*3.5;o.g.visible=false;o.g.position.lerpVectors(from[i],V(Math.cos(a)*rad,Math.sin(p*Math.PI)*2,Math.sin(a)*rad),ease(clamp(p/.3)));o.g.scale.setScalar((1-k)*1.2+.05);o.g.rotation.y=a});reveal(r,age,clamp((p-.73)/.27),reduced);if(p===1)change('born')}
  if(phase==='born'){reveal(r,age,1,reduced);r.kit.group.visible=false;r.pieces.forEach(({o})=>o.g.visible=false)}else r.kit.group.visible=false;
  }
- return {reset,action,update,view,frameOffset:()=>['fusing','born'].includes(phase)?.2:0,dispose(){Object.values(roots).forEach(r=>r.hardware.dispose());},phase:()=>phase,labelsVisible:()=>phase==='overview'};
+ return {reset,action,update,view,frameOffset:()=>id==='analytics'&&['fusing','born'].includes(phase)?.2:0,dispose(){Object.values(roots).forEach(r=>r.hardware.dispose());},phase:()=>phase,labelsVisible:()=>phase==='overview'};
 }
